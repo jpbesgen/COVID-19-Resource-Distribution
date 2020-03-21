@@ -1,0 +1,26 @@
+.jumbotron {
+    border-radius: 0;
+    margin: 0px;
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+}
+
+.professional-image {
+    width: 30%;
+}
+
+.side-profile {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border:1px solid black; */
+}
+    .side-profile-photo {
+        width: 65%;
+        margin: .7rem 0 2rem 0;
+    }

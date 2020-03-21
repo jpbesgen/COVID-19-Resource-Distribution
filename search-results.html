@@ -1,88 +1,144 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./search-results.css">
 
-    <title>Covid-19 Resource Matching</title>
-  </head>
-  <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
-      <div class="container-fluid text-center">
-        <a class="navbar-brand" href="./index.html"><img src="./img/logo.png" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a class="nav-link" href="link1">Link 1</a></li>
-            <li class="nav-item"><a class="nav-link" href="link2">Link 2</a></li>
-            <li class="nav-item"><a class="nav-link" href="link3">Link 3</a></li>
-            <li class="nav-item"><a class="nav-link" href="link4">Link 4</a></li>
-            <button type="button" class="btn btn-outline-dark btn-lg">Donate Now</button>
-          </ul>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/search-results.css">
+
+  <title>Covid-19 Resource Matching</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
+    <div class="container-fluid text-center">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#My Profile?"><img src="./img/logo.png" /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <!-- Right side of Navbar -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Navigation Links -->
+          <li class="nav-item active"><a class="nav-link" href="./index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./search-results.html">Items</a></li>
+          <li class="nav-item"><a class="nav-link" href="#Google OAuth Log-in?">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="./index.html">Sign Up</a></li>
+          <!-- Donation Button -->
+          <a href="./donate.html"><button type="button" class="btn btn-outline-dark btn-lg">Donate Now</button></a>
+        </ul>
       </div>
-    </nav>
-
-    <div class="container-fluid padding">
-        <div class="row">
-            <div class="col-3 sidebar">
-                <h4>Geographic Region</h4>
-                <h4>Maker Rating</h4>
-                <h4>Placeholder</h4>
-                <h4>Placeholder</h4>
-            </div>
-            <div class="col-9">
-                <div class="col-12">
-                    <div class="col-6 col-xs-12">
-                        <h6>Cant find what you're looking for?</h6>
-                    </div>
-                    <div class="col-6 col-xs-12">
-                        <button type="button" class="btn btn-outline-dark btn-lg">Make a Production Proposal</button>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="col-7 col-xs-12">
-                        <p>Search Bar</p>
-                    </div>
-                    <div class="col-3 col-xs-6">
-                        <p>Categories</p>
-                    </div>
-                    <div class="col-2 col-xs-6">
-                        <p>Sort By</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+  </nav>
 
-    <!--Footer-->
-    <footer>
-        <div class="container-fluid padding">
-          <div class="row text-center">
-            <div class="col-12">
-              <h3 class="display-8">Contact Us</h3>
-              <hr class="dark" />
-            </div>
-            <div class="col-xs-12 col-6">
-              Phone Number:
-            </div>
-            <div class="col-xs-12 col-6">
-              Email:
-            </div>
+  <div class="container-fluid padding content-body" style="border:1px solid black">
+    <div class="row">
+      <!-- Horizontal Filter Bar -->
+      <div class="col-3 sidebar" style="border:1px solid black">
+        <!-- Filters -->
+        <h4>Geographic Region</h4>
+        <h4>Maker Rating</h4>
+        <h4>Placeholder</h4>
+        <h4>Placeholder</h4>
+      </div>
+      <div class="col-9" style="border:1px solid black">
+        <div class="row" style="border:1px solid black">
+          <div class="col-6 col-xs-12" style="border:1px solid black">
+            <h6>Cant find what you're looking for?</h6>
+          </div>
+          <div class="col-6 col-xs-12" style="border:1px solid black">
+            <a href="./proposal.html">
+              <button type="button" class="btn btn-outline-dark btn-lg">Make a Production Proposal</button>
+                </a>
           </div>
         </div>
-    </footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js" ></script>
-  </body>
+        <div class="row" style="border:1px solid black">
+          <div class="col-7 col-xs-12" style="border:1px solid black">
+            <p>Search Bar</p>
+          </div>
+          <div class="col-3 col-xs-6" style="border:1px solid black">
+            <p>Categories</p>
+          </div>
+          <div class="col-2 col-xs-6" style="border:1px solid black">
+            <p>Sort By</p>
+          </div>
+        </div>
+        <div class="row" style="border:1px solid black">
+          <!-- Item -->
+          <div class="media">
+            <img class="mr-3" src="./img/team1.png" alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Item Title</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+              odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+              fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+            <a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">Order</button></a>
+          </div>
+          <!-- Item -->
+          <div class="media">
+            <img class="mr-3" src="./img/team1.png" alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Item Title</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+              odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+              fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+            <a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">Order</button></a>
+          </div>
+          <!-- Item -->
+          <div class="media">
+            <img class="mr-3" src="./img/team1.png" alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Item Title</h5>
+              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+              odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+              fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+            <a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">Order</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container-fluid padding">
+      <div class="row text-center">
+        <div class="col-12">
+          <!-- Header Text -->
+          <h3 class="display-8">Contact Us</h3>
+          <!-- Horizontal Rule -->
+          <hr class="dark" />
+        </div>
+        <div class="col-xs-12 col-6">
+          Phone Number:
+        </div>
+        <div class="col-xs-12 col-6">
+          Email:
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <!-- Popper.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap js -->
+  <script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+</body>
+
 </html>
