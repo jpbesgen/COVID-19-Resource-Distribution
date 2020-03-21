@@ -1,0 +1,13 @@
+.container-fluid {
+    height: 100%;
+}
+    .row {
+        height: 100%;
+    }
+
+.sidebar {
+    background-color: green;
+    height: 100%;
+
+}
+
