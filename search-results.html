@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/search-results.css" />
@@ -49,26 +49,69 @@
 		</div>
 	</nav>
 
-	<div class="container-fluid padding content-body" style="border:1px solid black">
+	<div class="container-fluid padding content-body">
 		<div class="row">
-			<!-- Horizontal Filter Bar -->
-			<div class="col-3 sidebar" style="border:1px solid black">
-				<!-- Filters -->
+			<div class="col-6 col-xs-12 text-center">
+				<h5 class="lead m-3">Cant find what you're looking for?</h5>
+			</div>
+			<!-- Production Proposal Button -->
+			<div class="col-6 col-xs-12 p-1">
+				<a href="./proposal.html">
+					<button type="button" class="btn btn-outline-dark btn-lg btn-block">
+						Make a Production Proposal
+					</button>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<!-- Search Bar -->
+			<div class="col-7 col-xs-12 p-1">
+				<input class="form-control" type="text" placeholder="Search" aria-label="Search" />
+			</div>
+			<!-- Category Dropdown -->
+			<div class="col-3 col-xs-6 p-1">
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
+						id="dropdownCategories" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+						Categories
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownCategories">
+						<p class="dropdown-item mt-0 mb-0">PPE</p>
+						<p class="dropdown-item mt-0 mb-0">Medical Parts</p>
+						<p class="dropdown-item mt-0 mb-0">Hardware</p>
+						<p class="dropdown-item mt-0 mb-0">Lab Equipment</p>
+						<p class="dropdown-item mt-0 mb-0">Other</p>
+					</div>
+				</div>
+			</div>
+			<!-- Sort Dropdown -->
+			<div class="col-2 col-xs-6 p-1">
+				<div class="dropdown">
+					<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
+						id="dropdownSort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Sort By
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownSort">
+						<p class="dropdown-item mt-0 mb-0">Price</p>
+						<p class="dropdown-item mt-0 mb-0">Distance</p>
+						<p class="dropdown-item mt-0 mb-0">Quantity</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-3 sidebar">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Quick Find</li>
 					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action">
+						<button type="button" class="list-group-item list-group-item-action" data-filter=".mask">
 							Masks
 						</button>
 					</li>
 					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action">
+						<button type="button" class="list-group-item list-group-item-action" data-filter=".ventilator">
 							Ventilators
-						</button>
-					</li>
-					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action">
-							Hand Sanitizer
 						</button>
 					</li>
 					<li class="list-group-item">
@@ -78,104 +121,8 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-9" style="border:1px solid black">
-				<!-- Row -->
-				<div class="row align-items-center" style="border:1px solid black">
-					<div class="col-6 col-xs-12 text-center" style="border:1px solid black">
-						<h5 class="p-1">Cant find what you're looking for?</h5>
-					</div>
-					<!-- Production Proposal Button -->
-					<div class="col-6 col-xs-12 p-1" style="border:1px solid black">
-						<a href="./proposal.html">
-							<button type="button" class="btn btn-outline-dark btn-lg btn-block">
-								Make a Production Proposal
-							</button>
-						</a>
-					</div>
-				</div>
-				<!-- Row -->
-				<div class="row" style="border:1px solid black">
-					<!-- Search Bar -->
-					<div class="col-7 col-xs-12 p-1" style="border:1px solid black">
-						<input class="form-control" type="text" placeholder="Search" aria-label="Search" />
-					</div>
-					<!-- Category Dropdown -->
-					<div class="col-3 col-xs-6 p-1" style="border:1px solid black">
-						<div class="dropdown">
-							<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
-								id="dropdownCategories" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">
-								Categories
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownCategories">
-								<p class="dropdown-item mt-0 mb-0">Category 1</p>
-								<p class="dropdown-item mt-0 mb-0">Category 2</p>
-								<p class="dropdown-item mt-0 mb-0">Category 3</p>
-							</div>
-						</div>
-					</div>
-					<!-- Sort Dropdown -->
-					<div class="col-2 col-xs-6 p-1" style="border:1px solid black">
-						<div class="dropdown">
-							<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
-								id="dropdownSort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Sort By
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownSort">
-								<p class="dropdown-item mt-0 mb-0">Price</p>
-								<p class="dropdown-item mt-0 mb-0">Distance</p>
-								<p class="dropdown-item mt-0 mb-0">Quantity</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row" style="border:1px solid black">
-					<!-- Item -->
-					<div class="media">
-						<img class="mr-3" src="./img/team1.png" alt="Generic placeholder image" />
-						<div class="media-body">
-							<h5 class="mt-0">Item Title</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-							vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-							nisi vulputate fringilla. Donec lacinia congue felis in
-							faucibus.
-						</div>
-						<a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Order
-							</button></a>
-					</div>
-					<!-- Item -->
-					<div class="media">
-						<img class="mr-3" src="./img/team1.png" alt="Generic placeholder image" />
-						<div class="media-body">
-							<h5 class="mt-0">Item Title</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-							vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-							nisi vulputate fringilla. Donec lacinia congue felis in
-							faucibus.
-						</div>
-						<a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Order
-							</button></a>
-					</div>
-					<!-- Item -->
-					<div class="media">
-						<img class="mr-3" src="./img/team1.png" alt="Generic placeholder image" />
-						<div class="media-body">
-							<h5 class="mt-0">Item Title</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-							vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-							nisi vulputate fringilla. Donec lacinia congue felis in
-							faucibus.
-						</div>
-						<a href="./order-page.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Order
-							</button></a>
-					</div>
-				</div>
+			<div class="col-9 fill grid" id="grid">
+
 			</div>
 		</div>
 	</div>
@@ -211,6 +158,10 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+	<script src="./search-results.js"></script>
 </body>
 
 </html>

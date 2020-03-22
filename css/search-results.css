@@ -1,28 +1,43 @@
 .content-body {
 	height: 100%;
-	border: 1px solid black;
+	width: 100%;
 }
 .sidebar {
 	height: 100%;
 	padding: 21.1px;
 	display: flex;
-	font-size: 22px;
+	font-size: 26px;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid black;
 }
 .sidebar h4 {
 	padding: 30px 0px;
-	border: 1px solid black;
 }
 
 .media {
-	padding: 2.3px;
 	border: 1px solid black;
+	margin: 0;
+	padding: 10px;
 }
 .media img {
 	width: 10%;
+	padding: .3rem;
+}
+
+.fill {
 	height: 100%;
-	padding: 5px;
+	width: 100%;
+	/* border:1px solid black; */
+}
+#item-grid {
+	height: 100%;
+	width: 100%;
+}
+.grid-item {
+	width: 100%;
+}
+.order-button {
+	margin: 20%;
+	margin-right: 1rem;
 }

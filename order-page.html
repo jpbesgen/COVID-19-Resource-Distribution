@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/order-page.css" />
@@ -53,15 +53,19 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-3 col-xs-12">
-					<div class="side-profile">
-						<h3 class="hei">Maker Profile</h3>
-						<img class="side-profile-photo" src="./img/team1.png" alt="Generic placeholder image" />
-						<p>Summary and Info</p>
+					<div class="card mb-5" style="width: 18rem;">
+						<img src="./img/team1.png" class="card-img-top" alt="Maker">
+						<div class="card-body">
+						  <h5 class="card-title">Maker Profile</h5>
+						  <p class="card-text">Description.</p>
+						</div>
 					</div>
-					<div class="side-profile">
-						<h3>Product Info</h3>
-						<img class="side-profile-photo" src="./img/team1.png" alt="Generic placeholder image" />
-						<p>Summary and Info</p>
+					<div class="card mb-4" style="width: 18rem;">
+						<img src="./img/team1.png" class="card-img-top" alt="Maker">
+						<div class="card-body">
+						  <h5 class="card-title">Item Description</h5>
+						  <p class="card-text">Description.</p>
+						</div>
 					</div>
 				</div>
 				<div class="col-9 col-xs-12">
@@ -82,7 +86,7 @@
 			<div class="row">
 				<!-- Cancel -->
 				<div class="form-group col-6">
-					<a href="./search-results.html"><button type="reset" class="btn btn-block">Cancel</button></a>
+					<a href="./search-results.html"><button type="reset" class="btn btn-primary btn-block">Cancel</button></a>
 				</div>
 				<!-- Submit Order -->
 				<div class="form-group col-6">
