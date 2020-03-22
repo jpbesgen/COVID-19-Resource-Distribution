@@ -8,9 +8,8 @@
 	<link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" />
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/order-page.css" />
-
-	<title>Covid-19 Resource Distribution</title>
+	<link rel="stylesheet" href="./css/donate.css" />
+	<title>Covid-19 Resource Matching</title>
 </head>
 
 <body>
@@ -33,10 +32,10 @@
 						<a class="nav-link" href="./search-results.html">Items</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#Google OAuth Log-in?">Login</a>
+						<a class="nav-link" href="./login.html">Login</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./sign-up.html">Sign Up</a>
+					<li class="nav-item active">
+						<a class="nav-link" href="./index.html">Sign Up</a>
 					</li>
 					<!-- Donation Button -->
 					<li class="nav-item">
@@ -49,44 +48,27 @@
 		</div>
 	</nav>
 
-	<div class="jumbotron">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-3 col-xs-12">
-					<div class="side-profile">
-						<h3 class="hei">Maker Profile</h3>
-						<img class="side-profile-photo" src="./img/team1.png" alt="Generic placeholder image" />
-						<p>Summary and Info</p>
-					</div>
-					<div class="side-profile">
-						<h3>Product Info</h3>
-						<img class="side-profile-photo" src="./img/team1.png" alt="Generic placeholder image" />
-						<p>Summary and Info</p>
-					</div>
-				</div>
-				<div class="col-9 col-xs-12">
-					<h3>Medical Professional Profile</h3>
-					<div class="media">
-						<img class="mr-3 professional-image" src="./img/team1.png" alt="Generic placeholder image" />
-						<div class="media-body">
-							<h5 class="mt-0">A Title</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-							vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-							nisi vulputate fringilla. Donec lacinia congue felis in
-							faucibus.
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<!-- Cancel -->
-				<div class="form-group col-6">
-					<a href="./search-results.html"><button type="reset" class="btn btn-block">Cancel</button></a>
-				</div>
-				<!-- Submit Order -->
-				<div class="form-group col-6">
-					<input type="submit" class="form-control" id="submitOrder" />
+	<!-- Slider -->
+	<div id="slider" class="carousel slide" data-ride="carousel">
+		<ul class="carousel-indicators">
+			<!-- Number of Images -->
+			<li data-target="#slider" data-slide-to="0" class="active"></li>
+		</ul>
+		<div class="carousel-inner">
+			<!-- First Carousel Picture -->
+			<div class="carousel-item active">
+				<img src="./img/background.png" />
+				<div class="carousel-caption">
+					<h1 class="display-2">I am a</h1>
+					<a href="./maker-authorization.html"><button type="button"
+							class="btn btn-primary btn-lg btn-block m-3">
+							Maker
+						</button></a>
+					<a href="./medical-authorization.html">
+						<button type="button" class="btn btn-primary btn-lg btn-block m-3">
+							Medical Professional
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>

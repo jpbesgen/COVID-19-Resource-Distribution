@@ -8,23 +8,23 @@
 	<link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.min.css" />
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/proposal.css" />
+	<link rel="stylesheet" href="./css/maker-login.css" />
 	<title>Covid-19 Resource Matching</title>
 </head>
 
 <body>
-	<!-- Navbar -->
+	<!--Navbar-->
 	<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
 		<div class="container-fluid text-center">
-			<!-- Logo -->
+			<!--Logo-->
 			<a class="navbar-brand" href="#My Profile?"><img src="./img/logo.png" /></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<!-- Right side of Navbar -->
+				<!--Right side of Navbar-->
 				<ul class="navbar-nav ml-auto">
-					<!-- Navigation Links -->
+					<!--Navigation Links-->
 					<li class="nav-item">
 						<a class="nav-link" href="./index.html">Home</a>
 					</li>
@@ -34,10 +34,10 @@
 					<li class="nav-item">
 						<a class="nav-link" href="./login.html">Login</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="./sign-up.html">Sign Up</a>
 					</li>
-					<!-- Donation Button -->
+					<!--Donation Button-->
 					<li class="nav-item">
 						<a href="./donate.html"><button type="button" class="btn btn-outline-dark btn-lg">
 								Donate Now
@@ -48,57 +48,82 @@
 		</div>
 	</nav>
 
+	<!-- Content Body -->
 	<div class="jumbotron">
 		<div class="row">
 			<!-- Summary Text -->
-			<div class="col-2 col-xs-12 order-xs-last">
-				Proposal Form!
+			<div class="col-4 col-xs-12 order-xs-last">
+				Hello There Maker!
 			</div>
 			<!-- Form -->
-			<div class="col-10 col-xs-12 order-xs-first">
-				<form>
+			<div class="col-8 col-xs-12 order-xs-first">
+				<form action="/add" method="POST">
 					<!-- Row -->
 					<div class="form-row">
-						<!-- Name of Item -->
-						<div class="form-group col-xs-12 col-4">
-							<label for="inputItem">What do you Need?</label>
-							<input type="text" class="form-control" id="inputItem" placeholder="Name of Item" />
-						</div>
-						<!-- Category -->
-						<div class="form-group col-xs-8 col-4">
-							<label for="inputCategory">Category</label>
-							<input type="text" class="form-control" id="inputCategory" placeholder="Category" />
-						</div>
-						<!-- Deadline -->
-						<div class="form-group col-xs-4 col-4">
-							<label for="inputDeadline">When do you need it by?</label>
-							<input type="date" class="form-control" id="inputDeadline"
-								placeholder="When do you need it by?" />
-						</div>
-					</div>
-					<!-- Row -->
-					<div class="form-row">
-						<!-- Additional Comments -->
-						<div class="form-group col-12">
-							<label for="inputComments">Additional Comments and Description</label>
-							<input type="textarea" class="form-control" id="inputComments"
-								placeholder="Additional Comments and Description" />
-						</div>
-					</div>
-					<!-- Row -->
-					<div class="form-row">
-						<!-- Photo Upload -->
+						<!-- First Name -->
 						<div class="form-group col-xs-12 col-6">
-							<label for="inputPhoto">Upload Photo (Optional)</label>
-							<input type="file" class="form-control" id="inputPhoto" placeholder="Photo" min="0"
-								max="120" />
+							<label for="inputFirstName">First Name</label>
+							<input type="text" class="form-control" id="inputFirstName" placeholder="First Name" />
 						</div>
-						<!-- Inventory -->
+						<!-- Last Name -->
 						<div class="form-group col-xs-12 col-md-6">
-							<label for="inputInventory">How Much do you Need?</label>
-							<input type="number" class="form-control" id="inputInventory" placeholder="# Units"
-								min="0" />
+							<label for="inputLastName">Last Name</label>
+							<input type="text" class="form-control" id="inputLastName" placeholder="Last Name" />
 						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Email Address -->
+						<div class="form-group col-12">
+							<label for="inputEmail">Email Address</label>
+							<input type="email" class="form-control" id="inputEmail" placeholder="Email Address" />
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Phone Number -->
+						<div class="form-group col-12">
+							<label for="inputPhone">Phone Number (###)-###-####</label>
+							<input type="tel" class="form-control" id="inputPhone"
+								pattern="([0-9]{3})-[0-9]{2}-[0-9]{3}" placeholder="(###) ###-####" />
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Years of Experience -->
+						<div class="form-group col-xs-12 col-6">
+							<label for="inputExperience">Years of Experience</label>
+							<input type="number" class="form-control" id="inputExperience"
+								placeholder="Years of Experience" min="0" max="120" />
+						</div>
+						<!-- Location -->
+						<div class="form-group col-xs-12 col-md-6">
+							<label for="inputLocation">Location</label>
+							<input type="text" class="form-control" id="inputLocation" placeholder="Location" />
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Materials -->
+						<div class="form-group col-12">
+							<label for="inputMaterials">Materials</label>
+							<input type="text" class="form-control" id="inputMaterials" placeholder="Materials" />
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Hours/Week -->
+						<div class="form-group col-12">
+							<label for="inputHours">Available Hours/Week</label>
+							<input type="number" class="form-control" id="inputHours" placeholder="Available Hours/Week"
+								min="0" max="168" />
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="form-row">
+						<!-- Pay -->
+						<input type="checkbox" class="form-check-input" id="checkPay" />
+						<label class="form-check-label" for="checkPay">Would you like to be Paid?</label>
 					</div>
 					<!-- Row -->
 					<div class="form-row justify-content-center">
