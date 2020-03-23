@@ -83,12 +83,39 @@ const data = new Promise(res => res({
               <h5 class="mt-0">${gridItem.name} - quantity: ${gridItem.quantity}</h5>
               ${gridItem.description}
           </div>
-          <a href="./order-page.html">
-              <button type="button" class="btn btn-outline-dark btn-lg order-button">
+              <button type="button" class="btn btn-outline-dark btn-lg order-button" data-toggle="modal" data-target="#orderModal">
                   Order
-              </button>
-          </a>
-      <div>`
+              </button>        
+      <div>
+
+      <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Your Order: ${gridItem.name}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="card mb-4" style="width: 100%;">
+						<img src="${gridItem.image}" class="card-img-top" alt="Item" style="width: 100%;">
+						<div class="card-body">
+						  <h5 class="card-title">${gridItem.name} - ${gridItem.quantity}</h5>
+						  <p class="card-text">${gridItem.description}</p>
+						</div>
+          </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+      `
         );
 
         // append items to grid
