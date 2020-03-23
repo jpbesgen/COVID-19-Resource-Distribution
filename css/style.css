@@ -15,6 +15,10 @@ body {
 .nav-link {
 	font-size: 1.1em;
 }
+.navbar img{
+	max-width: 100px;
+	max-height: 50px;
+}
 
 .carousel-inner img {
 	width: 100%;
@@ -43,12 +47,12 @@ body {
 }
 
 .btn-primary {
-	background-color: #6648b1;
-	border: 1px solid #563d7c;
+	background-color: #343a40;
+	border-color: #343a40;
 }
 .btn-primary:hover {
-	background-color: green;
-	border: 1px solid #563d7c;
+	background-color: rgb(0, 4, 37);
+	border-color: #343a40;
 }
 
 footer {

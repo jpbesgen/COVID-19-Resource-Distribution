@@ -9,8 +9,8 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/search-results.css" />
-
-	<title>Covid-19 Resource Matching</title>
+	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
+	<title>Resource-19</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 	<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
 		<div class="container-fluid text-center">
 			<!-- Logo -->
-			<a class="navbar-brand" href="#My Profile?"><img src="./img/logo.png" /></a>
+			<a class="navbar-brand" href="./index.html"><img src="./img/logo.png" /> Resource-19</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -56,7 +56,7 @@
 			</div>
 			<!-- Production Proposal Button -->
 			<div class="col-6 col-xs-12 p-1">
-				<a href="./proposal.html">
+				<a href="https://forms.gle/vdWaFCfnL8Y8sFYWA" target="_blank">
 					<button type="button" class="btn btn-outline-dark btn-lg btn-block">
 						Make a Production Proposal
 					</button>
@@ -76,12 +76,12 @@
 						aria-expanded="false">
 						Categories
 					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownCategories">
-						<p class="dropdown-item mt-0 mb-0">PPE</p>
-						<p class="dropdown-item mt-0 mb-0">Medical Parts</p>
-						<p class="dropdown-item mt-0 mb-0">Hardware</p>
-						<p class="dropdown-item mt-0 mb-0">Lab Equipment</p>
-						<p class="dropdown-item mt-0 mb-0">Other</p>
+					<div class="dropdown-menu button-group filters-button-group" aria-labelledby="dropdownCategories">
+						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".PPE">PPE</button>
+						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".medical-parts">Medical Parts</button>
+						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".hardware">Hardware</button>
+						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".lan-equipment">Lab Equipment</button>
+						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".other">Other</button>
 					</div>
 				</div>
 			</div>
@@ -101,9 +101,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-3 sidebar">
+			<div class="col-3 sidebar button-group filters-button-group">
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Quick Find</li>
+					<li class="list-group-item">
+						<button type="button" class="list-group-item list-group-item-action" data-filter="*">
+							All
+						</button>
+					</li>
 					<li class="list-group-item">
 						<button type="button" class="list-group-item list-group-item-action" data-filter=".mask">
 							Masks
@@ -115,13 +120,13 @@
 						</button>
 					</li>
 					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action">
+						<button type="button" class="list-group-item list-group-item-action" data-filter=".other">
 							Other
 						</button>
 					</li>
 				</ul>
 			</div>
-			<div class="col-9 fill grid" id="grid">
+			<div class="col-9" id="grid">
 
 			</div>
 		</div>
@@ -158,7 +163,7 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-
+	<!-- Isotope js -->
 	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
 	<script src="./search-results.js"></script>
