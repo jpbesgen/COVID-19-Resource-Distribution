@@ -2,59 +2,104 @@ html,
 body {
 	height: 100%;
 	width: 100%;
-	color: #222;
 	min-height: 100%;
+	/* background-color: #b0d7d7; */
+	/* background: linear-gradient(180deg, #B0D7D7 64.58%, rgba(207, 231, 231, 0.61) 89.58%, rgba(255, 255, 255, 0) 100%); */
+	background: #b0d7d7;
+	margin-bottom: 200px;
 }
 
 .navbar {
 	padding: 0.8rem;
+	color: white;
 }
 .navbar-nav li {
 	padding-right: 20px;
 }
 .nav-link {
-	font-size: 1.1em;
+	font-size: 1.5em;
+	color: white!important;
 }
 .navbar img{
 	max-width: 302px;
 }
 
-.carousel-inner img {
-	width: 100%;
-	height: 100%;
-}
-.carousel-caption {
-	position: absolute;
-	text-align: center;
-	top: 50%;
-	transform: translateY(-50%);
-}
-.carousel-caption h1 {
-	font-size: 500%;
-	text-transform: uppercase;
-	text-shadow: 1px 1px 10px #000;
-}
-.carousel-caption h3 {
-	font-size: 200%;
-	font-weight: 500;
-	text-shadow: 1px 1px 10px #000;
-	padding-bottom: 1rem;
+.navbar-logo {
+	display: inline-block;
+	padding-top: 0.3125rem;
+	padding-bottom: 0.3125rem;
+	margin-right: 1rem;
+	font-size: 1.25rem;
+	line-height: inherit;
+	white-space: nowrap;
+	width: 15px;
 }
 
-.about {
-	padding: 1.72rem;
+.navbar-custom {
+	color: white;
+	background-color: #7a98af!important;
+}
+
+/* First section of homepage */
+.homepage-one {
+	padding-top: 50px;
+	background-color: #b0d7d7;
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+.homepage.about {
+	background-color: #7a98af;
+	color: white;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.homepage.about.h1 {
+	padding-top: 35px;
+	font-size: 48px;
+	font-family: "Acumin Variable Concept";
+}
+
+.homepage.about.p {
+	font-size: 20px;
+	padding-bottom: 35px;
+}
+
+
+.homepage-intro {
+	padding-top: 20px;
+	color: #3b628b;
+	font-size: 24px;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.container {
+	padding-top: 50px;
 }
 
 .btn-primary {
-	background-color: #343a40;
-	border-color: #343a40;
-}
-.btn-primary:hover {
-	background-color: rgb(0, 4, 37);
-	border-color: #343a40;
+	background-color: white;
+	border-color: white;
+	color: #3b628b;
+	font-size: 18px;
+	margin-top: 10px;
 }
 
-footer {
-	background-color: grey;
-	padding: 1.2rem;
+.btn-lg {
+	height: 4em;
+}
+
+.btn-primary:hover {
+	background-color: #7a98af;
+	border-color: #7a98af;
+}
+
+.airtable-embed {
+	padding-top: 30px;
+}
+
+.footer {
+	background-color: #7a98af;
 }
