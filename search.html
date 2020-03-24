@@ -8,16 +8,106 @@
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/search.css" />
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
 </head>
 
 <body>
-	<!-- Navbar -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-2 sidebar">
+				<div class="logo-div">
+					<a href="./index.html">
+						<img src="./img/logo-white.png" alt="Resource 19 Logo" class="logo" />
+					</a>
+				</div>
+				<div class="filter">
+					<h3>Filter By:</h3>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Location<h5>
+					<input type="text" class="form-control paremeter-extension" placeholder="City">
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Maker Rating<h5>
+					<!-- Dropdown Menu for Maker Rating -->
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							# of Stars
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item">Option 1</a>
+							<a class="dropdown-item">Option 2</a>
+							<a class="dropdown-item">Option 3</a>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Delivery Option<h5>
+					<!-- Dropdown Menu for Delivery Options -->
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item">Option 1</a>
+							<a class="dropdown-item">Option 2</a>
+							<a class="dropdown-item">Option 3</a>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Quantity<h5>
+					<!-- Dropdown Menu for Quantity -->
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							# of Pieces
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item">Option 1</a>
+							<a class="dropdown-item">Option 2</a>
+							<a class="dropdown-item">Option 3</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-10">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-6 col-5 add">
+							<p>For Medical Professionals: Can’t find what you’re looking for?</p>
+							<a href="./proposal.html">
+								<button type="button" class="btn btn-primary btn-sm btn-block top-add proposal">Make a Production Proposal</button>
+							</a>
+						</div>
+						<div class="col-xs-6 col-4 add">
+							<p>For Makers: Have resources to offer?</p>
+							<a href="./listing.html">
+								<button type="button" class="btn btn-primary btn-sm btn-block top-add listing">Make a Listing</button>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<!-- Airtable database entries -->
+						<iframe class="airtable-embed" src="https://airtable.com/embed/shrJVz7WeoS0ByQ9W?backgroundColor=transparent" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+						<!-- <iframe class="airtable-embed" src="https://airtable.com/embed/shr0gEzJhBjOSS5xN?backgroundColor=pink&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
+						<!-- <iframe class="airtable-embed" src="https://airtable.com/embed/shrdF3yr1ZD7eh4XG?backgroundColor=pink&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Navbar -->
 	<nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light">
 		<div class="container-fluid text-center">
-			<!-- Logo -->
-			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" height="50" width="50" /></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -25,7 +115,7 @@
 				<!-- Right side of Navbar -->
 				<ul class="navbar-nav ml-auto">
 					<!-- Navigation Links -->
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="./index.html">Home</a>
 					</li>
 					<li class="nav-item">
@@ -40,12 +130,7 @@
 				</ul>
 			</div>
 		</div>
-    </nav>
-    
-    <!-- Airtable database entries -->
-    <iframe class="airtable-embed" src="https://airtable.com/embed/shrJVz7WeoS0ByQ9W?backgroundColor=transparent" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-    <!-- <iframe class="airtable-embed" src="https://airtable.com/embed/shr0gEzJhBjOSS5xN?backgroundColor=pink&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
-    <!-- <iframe class="airtable-embed" src="https://airtable.com/embed/shrdF3yr1ZD7eh4XG?backgroundColor=pink&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
+	</nav>
 
 	<!-- JavaScript -->
 	<!-- jQuery -->

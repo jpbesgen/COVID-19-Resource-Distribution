@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
 	height: 100%;
 	width: 100%;
 	min-height: 100%;
@@ -7,78 +6,10 @@ body {
 	/* background: linear-gradient(180deg, #B0D7D7 64.58%, rgba(207, 231, 231, 0.61) 89.58%, rgba(255, 255, 255, 0) 100%); */
 	background: #b0d7d7;
 	margin-bottom: 200px;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
-.navbar {
-	padding: 0.8rem;
-	color: white;
-}
-.navbar-nav li {
-	padding-right: 20px;
-}
-.nav-link {
-	font-size: 1.5em;
-	color: white!important;
-}
-.navbar img{
-	max-width: 302px;
-}
-
-.navbar-logo {
-	display: inline-block;
-	padding-top: 0.3125rem;
-	padding-bottom: 0.3125rem;
-	margin-right: 1rem;
-	font-size: 1.25rem;
-	line-height: inherit;
-	white-space: nowrap;
-	width: 15px;
-}
-
-.navbar-custom {
-	color: white;
-	background-color: #7a98af!important;
-}
-
-/* First section of homepage */
-.homepage-one {
-	padding-top: 50px;
-	background-color: #b0d7d7;
-	text-align: center;
-	padding-bottom: 50px;
-}
-
-.homepage.about {
-	background-color: #7a98af;
-	color: white;
-	padding-left: 100px;
-	padding-right: 100px;
-}
-
-.homepage.about.h1 {
-	padding-top: 35px;
-	font-size: 48px;
-	font-family: "Acumin Variable Concept";
-}
-
-.homepage.about.p {
-	font-size: 20px;
-	padding-bottom: 35px;
-}
-
-
-.homepage-intro {
-	padding-top: 20px;
-	color: #3b628b;
-	font-size: 24px;
-	padding-left: 20%;
-	padding-right: 20%;
-}
-
-.container {
-	padding-top: 50px;
-}
-
+/* Button Styling */
 .btn-primary {
 	background-color: white;
 	border-color: white;
@@ -86,9 +17,91 @@ body {
 	font-size: 18px;
 	margin-top: 10px;
 }
+	.btn-primary:hover {
+		background-color: #7a98af;
+		border-color: #7a98af;
+	}
+	.btn-lg {
+		height: 4em;
+	}
 
-.btn-lg {
-	height: 4em;
+/* Navbar */
+.navbar {
+	padding: 0.8rem;
+	color: white;
+}
+	.navbar-custom {
+		color: white;
+		background-color: #7a98af!important;
+	}
+	.navbar img{
+		max-width: 302px;
+	}
+		.navbar-logo {
+			display: inline-block;
+			padding-top: 0.3125rem;
+			padding-bottom: 0.3125rem;
+			margin-right: 1rem;
+			font-size: 1.25rem;
+			line-height: inherit;
+			white-space: nowrap;
+			width: 15px;
+		}
+	.navbar-nav li {
+		padding-right: 20px;
+	}
+		.nav-link {
+			font-size: 1.5em;
+			color: white!important;
+		}
+		.nav-link:hover {
+			color: #b0d7d7!important;
+		}
+		.active {
+			color: #3B628B!important;
+		}
+
+/* First section of homepage */
+.homepage-one {
+	padding-top: 98px;
+	background-color: #b0d7d7;
+	text-align: center;
+	padding-bottom: 105px;
+}
+	.search-bar {
+		margin: 31px auto 0 auto;
+		width: 35%;
+	}
+
+.about {
+	background-color: #7a98af;
+	color: white;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+	.about h1 {
+		padding-top: 55px;
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 67px;
+		font-weight: 300;
+	}
+	.about p {
+		font-size: 24px;
+		padding-bottom: 55px;
+		font-weight: 300;
+	}
+
+
+.homepage-intro {
+	padding-top: 25px;
+	color: #3b628b;
+	font-size: 28px;
+	padding-left: 22%;
+	padding-right: 22%;
+}
+
+.container {
+	padding-top: 50px;
 }
 
 .btn-primary:hover {
@@ -100,6 +113,20 @@ body {
 	padding-top: 30px;
 }
 
-.footer {
-	background-color: #7a98af;
+.bottom {
+	margin-bottom: 100px;
+	margin-top: 70px;
 }
+	.choice {
+		font-size: 24px;
+		line-height: 24px;
+		color: #3B628B;
+	}
+		.profession-button {
+			width: 80%;
+			margin: auto;
+		}
+
+/* .footer {
+	background-color: #7a98af;
+} */

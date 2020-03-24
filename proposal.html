@@ -8,82 +8,52 @@
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/maker-login.css" />
+	<link rel="stylesheet" href="./css/about.css" />
+	<link rel="stylesheet" href="./css/form.css" />
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
 </head>
 
 <body>
-	<!--Navbar-->
-	<nav class="navbar navbar-expand-md sticky-top navbar-light bg-light">
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light">
 		<div class="container-fluid text-center">
-			<!--Logo-->
-			<a class="navbar-brand" href="./index.html"><img src="./img/logo.png" /></a>
+			<!-- Logo -->
+			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" height="50" width="50" /></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<!--Right side of Navbar-->
+				<!-- Right side of Navbar -->
 				<ul class="navbar-nav ml-auto">
-					<!--Navigation Links-->
-					<li class="nav-item">
+					<!-- Navigation Links -->
+					<li class="nav-item active">
 						<a class="nav-link" href="./index.html">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="./search-results.html">Items</a>
+						<a class="nav-link" href="./about.html">About Us</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="./login.html">Login</a>
+						<a class="nav-link" href="./faq.html">FAQ</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="./sign-up.html">Sign Up</a>
-					</li>
-					<!--Donation Button-->
-					<li class="nav-item">
-						<a href="./donate.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Donate Now
-							</button></a>
+						<a class="nav-link" href="./contact.html">Contact</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+    <section>
+		<h1>Make a Production Proposal</h1>
+		<p class="subtitle">If you couldn’t find the part you need in the current search results, then follow the steps below to create a request for the part or item that you are searching for. This will notify the community and help find a maker who is able to craft your request.</p>
+	</section>
 
-	<!-- Content Body -->
-	<div class="jumbotron">
-		<div class="row full">
-			<!-- Summary Text -->
-			<div class="col-4 col-xs-12 order-xs-last">
-				Proposal Form!
-			</div>
-			<div class="col-8 col-xs-12">
-				<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezdSuI1HW0rhY1HEYB5g-depMjvmYLQh3mtTmVIARGIi7dFQ/viewform?embedded=true" width="100%" height="95%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>			
-				<a href="./search-results.html"><button type="button" class="btn btn-outline-dark btn-block mt-4">Continue</button></a>
-			</div>
-		</div>
+	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
+	<div class="form">
+		<iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/shrEhaofL4rX2B5O4?backgroundColor=pink" frameborder="0" onmousewheel="" width="70%" height="600" style="background: transparent; border: 1px solid #ccc;"></iframe>
 	</div>
-
-	<!-- Footer -->
-	<footer>
-		<div class="container-fluid padding">
-			<div class="row text-center">
-				<div class="col-12">
-					<!-- Header Text -->
-					<h3 class="display-8">Contact Us</h3>
-					<!-- Horizontal Rule -->
-					<hr class="dark" />
-				</div>
-				<div class="col-xs-12 col-6">
-					Phone Number:
-				</div>
-				<div class="col-xs-12 col-6">
-					Email:
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<!-- JavaScript -->
+    <!-- JavaScript -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

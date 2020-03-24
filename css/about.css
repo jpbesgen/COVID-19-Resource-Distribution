@@ -1,0 +1,31 @@
+html, body {
+    background-color: #7a98af;
+    margin-bottom: 0px;
+}
+body {
+    background-color: white;
+    height: 101%;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 74px;
+    margin-left: 4.24%;
+    margin-top: 52px;
+    color: #3B628B;
+}
+    .subtitle {
+        font-weight: 300;
+        font-size: 28px;
+        margin-left: 4.24%;
+        margin-right: 18.4%;
+        color: #3B628B;
+
+    }
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
