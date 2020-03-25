@@ -20,7 +20,16 @@ h1 {
         margin-left: 4.24%;
         margin-right: 18.4%;
         color: #3B628B;
-
+    }
+    .text {
+        color: black;
+        margin-left: 4.24%;
+        margin-right: 8.4%;
+        font-size: 28px;
+        font-weight: 300;
+    }
+    .bold {
+        font-weight: 400;
     }
 
 .form {
