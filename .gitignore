@@ -1,5 +1,6 @@
 # General things to ignore
 .DS_Store
+*/.DS_Store
 .idea
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
