@@ -28,4 +28,23 @@ h1 {
     justify-content: center;
     margin-bottom: 24px;
 }
+.airtable {
+    width: 70%;
+    height: 600px;
+}
 
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    body {
+        height: 100%;
+    }
+    h1 {
+        font-size: 68px;
+    }
+    .subtitle {
+        margin-right: 6.4%;
+    }
+  }
