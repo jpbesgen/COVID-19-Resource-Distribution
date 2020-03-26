@@ -9,23 +9,23 @@ body {
 
 h1 {
     font-weight: 300;
-    font-size: 74px;
-    margin-left: 4.24%;
+    font-size: 3.5rem;
+    margin-left: 9.25%;
     margin-top: 52px;
     color: #3B628B;
 }
     .subtitle {
         font-weight: 300;
-        font-size: 28px;
-        margin-left: 4.24%;
+        font-size: 1.4rem;
+        margin-left: 9.25%;
         margin-right: 18.4%;
         color: #3B628B;
     }
     .text {
         color: black;
-        margin-left: 4.24%;
+        margin-left: 9.25%;
         margin-right: 8.4%;
-        font-size: 28px;
+        font-size: 1.25rem;
         font-weight: 300;
     }
     .bold {
@@ -51,9 +51,12 @@ h1 {
         height: 100%;
     }
     h1 {
-        font-size: 68px;
+        font-size: 3rem;
     }
-    .subtitle {
-        margin-right: 6.4%;
-    }
+        .subtitle {
+            margin-right: 6.4%;
+        }
+        .text {
+            font-size: 1rem;
+        }
   }

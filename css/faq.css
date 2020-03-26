@@ -3,21 +3,21 @@ body {
 }
 
 .faq-box {
-    margin: 0px 9.65% 54.72px 9.65%;
+    margin: 0px 9.25% 54.72px 9.25%;
     color: #000000;
 }
     .first {
         margin-top: 28px;
     }
     .question {
-        font-size: 40px;
+        font-size: 1.7rem;
     }
     .answer {
-        font-size: 24px;
+        font-size: 1.25rem;
         font-weight: 300;
     }
         .answer-start {
-            font-size: 40px;
+            font-size: 1.5rem;
             font-weight: 400;
         }
 
@@ -28,5 +28,12 @@ and (-webkit-min-device-pixel-ratio: 3)
 and (orientation: portrait) { 
     body {
         height: 605%;
+    }
+
+    .question {
+        font-size: 1.3rem;
+    }
+    .answer {
+        font-size: 1rem;
     }
 }
