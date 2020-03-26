@@ -4,7 +4,11 @@ html, body {
 }
 body {
     background-color: white;
-    height: 101%;
+}
+
+.body-content {
+    background-color: white;
+    padding-bottom: 3rem;
 }
 
 h1 {
@@ -41,22 +45,3 @@ h1 {
     width: 70%;
     height: 600px;
 }
-
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
-    body {
-        height: 100%;
-    }
-    h1 {
-        font-size: 3rem;
-    }
-        .subtitle {
-            margin-right: 6.4%;
-        }
-        .text {
-            font-size: 1rem;
-        }
-  }
