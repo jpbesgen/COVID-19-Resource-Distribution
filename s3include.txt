@@ -7,6 +7,8 @@ listing.html
 login.html
 maker-form-airtable.html
 medical-form-airtable.html
+makerspace.html
+makerspace-submission.html
 order-page.html
 proposal.html
 search.html
