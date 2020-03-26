@@ -6,6 +6,12 @@ body {
     background-color: white;
     height: 101%;
 }
+h1 {
+    font-size: 41px;
+    color: #3B628B;
+    font-weight: 300;
+    margin: 2rem 0 0 3rem;
+}
 h3 {
     font-size: 24px;
     color: white;
@@ -20,6 +26,12 @@ hr {
     margin-bottom: 17px;
 }
 
+.description {
+    margin: 1rem 1rem 1rem 3rem;
+    font-size: 24px;
+    color: #000000;
+    font-weight: 300;
+}
 .sidebar {
     background-color: #7a98af;
     width: 100%;
@@ -76,8 +88,7 @@ hr {
         width: 64%;
     }
 
-.navbar {
-    padding: 0.2rem;
-    color: white;
+.airtable-embed {
+    margin: 0 1rem 3rem 1rem;
 }
     

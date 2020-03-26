@@ -13,16 +13,17 @@ and (-webkit-min-device-pixel-ratio: 2) {
       width: 85%;
   }
   .homepage-one {
-      padding-top: 48px;
-      padding-bottom: 63px;
+      padding-top: 34px;
+      padding-bottom:29px;
   }
       .homepage-intro {
-          padding-top: 17px;
-          padding-left: 5%;
-          padding-right: 5%;
+          padding-top: .7rem;
+          font-size: 18px;
+          padding-left: 1rem;
+          padding-right: 1rem;
       }
       .search-bar {
-          width: 60%;
+          width: 78%;
       }
   
   .about {
