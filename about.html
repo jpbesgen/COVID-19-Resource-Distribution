@@ -8,12 +8,22 @@
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet"href="./css/style-phone.css">
+	<link rel="stylesheet" href="./css/style-phone.css">
 	<link rel="stylesheet" href="./css/about.css" />
-	<link rel="stylesheet" href="./css/about-phone.css">
+	<link rel="stylesheet" href="./css/about-page.css" />
+	<link rel="stylesheet" href="./css/form.css" />
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-161941609-1');
+	</script>
 </head>
 
 <body> 
@@ -21,7 +31,7 @@
 	<nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light">
 		<div class="container-fluid text-center">
 			<!-- Logo -->
-			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" height="50" width="50" /></a>
+			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" class="logo" /></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -30,10 +40,13 @@
 				<ul class="navbar-nav ml-auto">
 					<!-- Navigation Links -->
 					<li class="nav-item">
-						<a class="nav-link" href="./index.html">Home</a>
+						<a class="nav-link active" href="./index.html">Home</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="./about.html">About Us</a>
+						<a class="nav-link" href="./makerspace.html">Open Source Designs</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./about.html">About Us</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="./faq.html">FAQ</a>
@@ -41,12 +54,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="./contact.html">Contact</a>
 					</li>
-					<!-- Donation Button -->
-					<!-- <li class="nav-item">
-						<a href="./donate.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Donate Now
-							</button></a>
-					</li> -->
 				</ul>
 			</div>
 		</div>
