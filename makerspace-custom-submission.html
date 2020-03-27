@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/style-phone.css">
+	<link rel="stylesheet" href="./css/about.css" />
+	<link rel="stylesheet" href="./css/form.css" />
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
+	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
+	<title>Resource-19</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-161941609-1');
+	</script>
+</head>
+
+<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light">
+		<div class="container-fluid text-center">
+			<!-- Logo -->
+			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" class="logo" /></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<!-- Right side of Navbar -->
+				<ul class="navbar-nav ml-auto">
+					<!-- Navigation Links -->
+					<li class="nav-item">
+						<a class="nav-link active" href="./index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./makerspace.html">Open Source Designs</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./about.html">About Us</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./faq.html">FAQ</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./contact.html">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+    <section>
+		<h1>Submit a design!</h1>
+		<p class="subtitle">If you have a open source design to contribute to the makerspace, please submit it here!</p>
+	</section>
+
+	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
+    <style>
+        .form {
+            flex-direction: column;
+            width: 50%;
+        }
+    </style>
+    <div class="form">
+        <label for="name">Name</label>
+        <input id="submission_name" name="name" type="text" />
+
+        <label for="category">Category</label>
+        <span>Type of medical supply. If category not present, select "Other"</span>
+        <select name="category" id="submission_category">
+            <option value="n95">N95</option>
+            <option value="surgicalMask">Surgical Mask</option>
+            <option value="ventilator">Ventilator</option>
+            <option value="ventilatorParts">Ventilator Parts</option>
+            <option value="faceShield">Face Shield</option>
+            <option value="hospitalGown">Hospital Gown</option>
+            <option value="handSanitizer">Hand Sanitizer</option>
+            <option value="disposableBooties">Disposable Booties</option>
+            <option value="miscParts">Misc Parts</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="description">Description</label>
+        <input id="submission_description" name="description" type="text"/>
+
+        <label for="certified">Certified</label>
+        <span>Certification will be qualified as having the design certified by the NIH, CDC, ECDC, or on equivalent organization. In progress will indicate the design is in process of approval but has not yet reached it. </span>
+        <select name="certified" id="submission_certified">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="inProgress">In Progress</option>
+        </select>
+
+        <label for="difficulty">Difficulty Level</label>
+        <span>(1 Being Easy and 5 Being Hard)</span>
+        <input type="number" max="5" min="1" name="difficulty" id="submission_difficulty"/>
+    
+        <label for="links">Links</label>
+        <span>Links separated by commas</span>
+        <input type="text" name="links" id="submission_links"/>
+
+        <label for="3d">3D Printer Required?</label>
+        <select id="submission_3d" name="3d">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <label for="attachments">Attachments</label>
+        <span>Intended for Pictures, CAD files, etc...</span>
+        <input type="file" name="attachments" id="submission_attachments" multiple/>
+
+        <label for="credit">Credit</label>
+        <span>Give credit where credit is due. Who made this design possible?</span>
+        <input type="text" name="credit" id="submission_credit"/>
+
+        <input type="button" value="Submit" id="submission_submit"/>
+
+    </div>
+    <!-- JavaScript -->
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<!-- Popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<!-- Bootstrap js -->
+    <script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
+
+    <script src="./database.js"></script>
+	<script>
+
+        document.getElementById("submission_submit").addEventListener("click", (e) => {
+            try {
+                handleSubmission(e)
+            } catch(err) {
+                console.log(err)
+            }
+        });
+
+        function handleSubmission(event) {
+            // Get all values
+            let name = document.getElementById("submission_name"),
+                category = document.getElementById("submission_category"),
+                description = document.getElementById("submission_description"),
+                certified = document.getElementById("submission_certified"),
+                difficulty = document.getElementById("submission_difficulty"),
+                links = document.getElementById("submission_links"),
+                threed = document.getElementById("submission_3d"),
+                attachments = document.getElementById("submission_attachments"),
+                credit = document.getElementById("submission_credit"),
+                design = {};
+
+            name = name.value;
+            if(name == null || name.trim() == "") throw new Error("Invalid Name");
+            design["name"] = name;
+            
+            category = category.value;
+            if(category == null) throw new Error("Invalid Category");
+            design["category"] = category;
+
+            description = description.value;
+            if(description == null || description.trim() == "") throw new Error("Invalid Description");
+            design["description"] = description;
+            design["notes"] = "";
+
+            certified = certified.value;
+            if(certified == null) throw new Error("Invalid Certified");
+            design["certified"] = certified;
+
+            difficulty = difficulty.value;
+            if(difficulty == null) throw new Error("Invalid difficulty");
+            design["difficulty"] = difficulty;
+
+            links = links.value.split(",").map((l) => {
+                return l.trim()
+            });
+            design["links"] = links;
+
+            threed = threed.value;
+            if(threed == null) throw new Error("Invalid 3d");
+            threed = (threed == "true") ? true : false;
+            design["printerRequired"] = threed;
+
+            credit = credit.value;
+            if(credit == null) throw new Error("Inavlid Credit")
+            design["credit"] = credit;
+            
+
+            let attachmentPromises = []
+            if(attachments.files.length < 1) throw new Error("Not Enough Attachments");
+            for(let i = 0; i < attachments.files.length; i++) {
+                let file = attachments.files[i];
+                attachmentPromises.push(new Promise((resolve, reject) => {
+                    let filePut = storageRef.child("Attachments/" + file.name).put(file);
+                    filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                    (snapshot) => {
+                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload is ' + progress + '% done');
+                    },
+                    (error) => {
+                        console.log(error);
+                    },
+                    () => {
+                        filePut.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                            console.log('File available at', downloadURL);
+                            resolve(downloadURL)
+                        });
+                    });
+                }));
+            }
+
+            Promise.all(attachmentPromises).then((attachmentUrls) => {
+                console.log(attachmentUrls)
+                design["attachments"] = attachmentUrls;
+                design["upvotes"] = 0;
+                design["approved"] = true;
+
+                let design_ref = db.collection("Designs").doc().id;
+                console.log(design_ref);
+                design["id"] = design_ref;
+                db.collection("Designs").doc(design_ref).set(design);
+            });
+        }
+
+
+
+    </script>
+</body>
+
+</html>
