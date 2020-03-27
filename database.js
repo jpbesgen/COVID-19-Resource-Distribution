@@ -19,7 +19,83 @@ let storageRef = firebase.storage();
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
 function renderDesigns(designs) {
-    console.log(designs)
+    console.log(designs);
+    $(document).ready(() => {
+
+    // const $grid = $('#grid').isotope({
+    //   itemSelector: '.grid-item'
+    // });
+
+    // $('.filters-button-group').on( 'click', 'button', function() {
+    //   const filterValue = $( this ).attr('data-filter');
+    //   console.log(filterValue);
+    //   console.log($grid);
+    //   // use filterFn if matches value
+    //   // filterValue = filterFns[ filterValue ] || filterValue;
+    //   $grid.isotope({ filter: filterValue });
+    // });
+
+    fillGrid = async () => {
+      // This is where the api call goes
+      const response = await designs;
+      var keys = designs.keys();
+      console.log(keys)
+      keys.forEach(gridItem => {
+        // this is where jQuery steps in  
+        // var $items = $(
+        $('#grid').append(
+          `
+          <div class="card ${gridItem.type} ${gridItem.category} grid-item">
+            <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title text-dark">${gridItem.name}</h5>
+              <p class="card-text">${gridItem.category}</p>
+              <p class="card-text">${gridItem.description}</p>
+              <p class="card-text">${gridItem.certified}</p>
+              <hr style="border-top: 1px solid black;margin: 0;" />
+              <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">
+                  <button class="btn btn-block" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
+                </li>
+                <li class="list-group-item"><button class="btn btn-block">upvote</button></li>
+                <li class="list-group-item"><button class="btn btn-block">downvote</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
+                  <p class="card-text">${gridItem.category}</p>
+                  <p class="card-text">${gridItem.description}</p>
+                  <p class="card-text">${gridItem.certified}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          `
+        );
+
+        // append items to grid
+        // $grid.append( $items )
+            // .isotope( 'appended', $items );
+      })
+
+    }
+
+    fillGrid()
+  })
 }
 
 // handleDesigns
