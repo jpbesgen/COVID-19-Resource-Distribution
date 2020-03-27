@@ -1,0 +1,135 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+	background: #b0d7d7;
+	margin-bottom: 200px;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Button Styling */
+.btn-primary {
+	background-color: white;
+	border-color: white;
+	color: #3b628b;
+	font-size: 18px;
+	margin-top: 10px;
+}
+	.btn-primary:hover {
+		background-color: #7a98af;
+		border-color: #7a98af;
+	}
+	.btn-lg {
+		height: 4em;
+	}
+
+/* Navbar */
+.navbar {
+	padding: 0.8rem;
+	color: white;
+}
+	.navbar-custom {
+		color: white;
+		background-color: #7a98af!important;
+	}
+	.navbar img{
+		height: 50px;
+		width: 50px;
+	}
+		.navbar-logo {
+			display: inline-block;
+			padding-top: 0.3125rem;
+			padding-bottom: 0.3125rem;
+			margin-right: 1rem;
+			font-size: 1.25rem;
+			line-height: inherit;
+			white-space: nowrap;
+			width: 15px;
+		}
+	.navbar-nav li {
+		padding-right: 20px;
+	}
+		.nav-link {
+			font-size: 1.4rem;
+			color: white!important;
+		}
+		.nav-link:hover {
+			color: #b0d7d7!important;
+		}
+		.active {
+			color: #3B628B!important;
+		}
+
+/* First section of homepage */
+.homepage-logo {
+	width: 40%;
+}
+.homepage-one {
+	padding-top: 98px;
+	background-color: #b0d7d7;
+	text-align: center;
+	padding-bottom: 105px;
+}
+	.homepage-intro {
+		padding-top: 25px;
+		color: #3b628b;
+		font-size: 28px;
+		padding-left: 22%;
+		padding-right: 22%;
+	}
+	.search-bar {
+		margin: 31px auto 0 auto;
+		width: 35%;
+	}
+
+.about {
+	background-color: #7a98af;
+	color: white;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+	.about h1 {
+		padding-top: 55px;
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 67px;
+		font-weight: 300;
+	}
+	.about p {
+		font-size: 24px;
+		padding-bottom: 55px;
+		font-weight: 300;
+	}
+
+.container {
+	padding-top: 50px;
+}
+
+.btn-primary:hover {
+	background-color: #7a98af;
+	border-color: #7a98af;
+}
+
+.airtable-embed {
+	padding-top: 30px;
+}
+
+.bottom {
+	margin-bottom: 100px;
+	margin-top: 70px;
+}
+	.choice {
+		font-size: 24px;
+		line-height: 24px;
+		color: #3B628B;
+	}
+		.profession-button {
+			width: 80%;
+			margin: auto;
+		}
+	.divider {
+		width: 10%;
+	}
+
+/* .footer {
+	background-color: #7a98af;
+} */

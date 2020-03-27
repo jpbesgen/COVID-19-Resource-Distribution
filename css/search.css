@@ -1,0 +1,94 @@
+html, body {
+    background-color: #7a98af;
+    margin-bottom: 0px;
+}
+body {
+    background-color: white;
+    height: 101%;
+}
+h1 {
+    font-size: 41px;
+    color: #3B628B;
+    font-weight: 300;
+    margin: 2rem 0 0 3rem;
+}
+h3 {
+    font-size: 24px;
+    color: white;
+} 
+h5 {
+    font-size: 20px;
+    color: white;
+}
+hr {
+    border-top: 1px solid white;
+    margin-top: 17px;
+    margin-bottom: 17px;
+}
+
+.description {
+    margin: 1rem 1rem 1rem 3rem;
+    font-size: 1.25rem;
+    color: #000000;
+    font-weight: 300;
+}
+.sidebar {
+    background-color: #7a98af;
+    width: 100%;
+    height: 100%;
+    /* HEIGHT TOGGLER */
+    padding-bottom: 13.3%;
+}
+    .logo-div {
+        margin-top: 34px;
+        margin-bottom: 37px;
+        display: flex;
+        justify-content: center;
+    }
+        .logo {
+            width: 205px;
+        }
+    .filter {
+        width: 100%;
+        margin-left: 22px;
+    }
+        .filter hr{
+            margin-top: 8.93px;
+        }
+    .parameter {
+        width: 100%;
+        margin-left: 37px;
+    }
+        .paremeter-extension {
+            width: 70%;
+            color: #959595;
+        }
+        .btn-primary {
+            color: #959595;
+        }
+            .btn-primary:hover {
+                background-color: #B0D7D7;
+                border-color: #7A98AF;
+            }
+    
+.add {
+    margin: 24px 0px 18px 40px;
+    color: #7A98AF;
+    font-size: 16px;
+}
+.top-add {
+    background-color: #7a98af;
+    color: white;
+    border-radius: 5px;
+}
+    .proposal {
+        width: 88%;
+    }
+    .listing {
+        width: 64%;
+    }
+
+.airtable-embed {
+    margin: 0 1rem 3rem 1rem;
+}
+    

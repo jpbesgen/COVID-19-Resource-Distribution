@@ -1,0 +1,47 @@
+html, body {
+    background-color: #7a98af;
+    margin-bottom: 0px;
+}
+body {
+    background-color: white;
+}
+
+.body-content {
+    background-color: white;
+    padding-bottom: 3rem;
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 3.5rem;
+    margin-left: 9.25%;
+    margin-top: 52px;
+    color: #3B628B;
+}
+    .subtitle {
+        font-weight: 300;
+        font-size: 1.4rem;
+        margin-left: 9.25%;
+        margin-right: 18.4%;
+        color: #3B628B;
+    }
+    .text {
+        color: black;
+        margin-left: 9.25%;
+        margin-right: 8.4%;
+        font-size: 1.25rem;
+        font-weight: 300;
+    }
+    .bold {
+        font-weight: 400;
+    }
+
+.form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.airtable {
+    width: 70%;
+    height: 600px;
+}

@@ -1,0 +1,14 @@
+body {
+    height: 100%;
+    padding-left: 1rem;
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and ((-webkit-min-device-pixel-ratio: 3) or (-webkit-min-device-pixel-ratio: 2))
+  and (orientation: portrait) { 
+    body {
+        height: 100%;
+    }
+}
