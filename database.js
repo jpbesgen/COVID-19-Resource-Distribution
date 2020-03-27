@@ -38,9 +38,7 @@ function renderDesigns(designs) {
     fillGrid = async () => {
       // This is where the api call goes
       const response = await designs;
-      var keys = designs.keys();
-      console.log(keys)
-      keys.forEach(gridItem => {
+      designs.forEach(gridItem => {
         // this is where jQuery steps in  
         // var $items = $(
         $('#grid').append(
