@@ -103,12 +103,10 @@ hr {
 .card-columns {
     column-count: 4;
 }
-    .card {
+    /* .card {
         width: 20%;
-    }
+    } */
 
-.card-body {
-    margin-bottom: 0;
-    padding-bottom: 0;
-
+.modal-title {
+    color: black;
 }
