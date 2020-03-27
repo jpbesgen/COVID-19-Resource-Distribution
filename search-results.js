@@ -102,6 +102,11 @@ const data = new Promise(res => res({
               <h5 class="card-title text-dark">${gridItem.name} - quantity: ${gridItem.quantity}</h5>
               <p class="card-title text-dark">Quantity: ${gridItem.quantity}</p>
               <p class="card-text">${gridItem.description}</p>
+              <hr style="border-top: 1px solid black;margin: 0;" />
+              <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item"><button class="btn btn-block">upvote</button></li>
+                <li class="list-group-item"><button class="btn btn-block">downvote</button></li>
+              </ul>
             </div>
           </div>
           `
