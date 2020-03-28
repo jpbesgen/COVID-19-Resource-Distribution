@@ -22,18 +22,18 @@ function renderDesigns(designs) {
     console.log(designs);
     $(document).ready(() => {
 
-    // const $grid = $('#grid').isotope({
-    //   itemSelector: '.grid-item'
-    // });
+    const $grid = $('#grid').isotope({
+      itemSelector: '.grid-item'
+    });
 
-    // $('.filters-button-group').on( 'click', 'button', function() {
-    //   const filterValue = $( this ).attr('data-filter');
-    //   console.log(filterValue);
-    //   console.log($grid);
-    //   // use filterFn if matches value
-    //   // filterValue = filterFns[ filterValue ] || filterValue;
-    //   $grid.isotope({ filter: filterValue });
-    // });
+    $('.filters-button-group').on( 'click', 'button', function() {
+      const filterValue = $( this ).attr('data-filter');
+      console.log(filterValue);
+      console.log($grid);
+      // use filterFn if matches value
+      // filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+    });
 
     fillGrid = async () => {
       designs.forEach(gridItem => {
@@ -90,8 +90,8 @@ function renderDesigns(designs) {
             `
             );
             // append items to grid
-            // $grid.append( $items )
-                // .isotope( 'appended', $items );
+            $grid.append( $items )
+                .isotope( 'appended', $items );
         }
         })
     }
