@@ -1,6 +1,3 @@
-let db = firebase.firestore();
-let storageRef = firebase.storage().ref();
-
 // TODO:
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
@@ -85,7 +82,7 @@ function renderDesigns(designs) {
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-xs-12 col-6">
-                                <img class="modal-img" src="${gridItem.attachments[0]}" alt="Modal item cap" />
+                                <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" />
                             </div>
                             <div class="col-xs-12 col-6">
                                 <div class="community">
@@ -199,5 +196,10 @@ function downvote(design_id) {
 }
 
 function addComment(design_id) {
+    let comment_value = document.getElementById(design_id + "-comment-input");
+    let ref = db.collection("Comments").doc().id;
+}
 
+function isAuthenticated() {
+    return firebase.auth().user != null;
 }

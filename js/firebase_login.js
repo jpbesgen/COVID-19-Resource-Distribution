@@ -1,5 +1,5 @@
 // Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+var ui = new firebaseui.auth.AuthUI(auth);
 
 var uiConfig = {
 	callbacks: {
@@ -10,15 +10,21 @@ var uiConfig = {
 			
 			// Check if new user, create profile
 			console.log(authResult);
-			let db = firebase.firestore();
-			db.collection("Users").doc(authResult.uid).get().then((snapshot) => {
-				console.log(snapshot.data())
+			db.collection("Users").doc(authResult.user.uid).set({
+				name: authResult.user.displayName,
+				email: authResult.user.email,
+				emailVerified: authResult.user.emailVerified,
+				phone: authResult.user.phoneNumber,
+				uid: authResult.user.uid,
+				photoUrl: authResult.user.photoURL,
+				lastLogin: Date.now(),
+				comments: [],
+				designs: [],
+			}).then(() => {
+				location.assign("/index.html");
 			}).catch((error) => {
 				console.log(error);
-				db.collection("Users").doc(authResult.uid).set({
-					uid: authResult.uid
-				});
-			});
+			})
 			
 			return true;
 		},
@@ -30,7 +36,7 @@ var uiConfig = {
 	},
 	// Will use popup for IDP Providers sign-in flow instead of the default, redirect.
 	signInFlow: 'popup',
-	signInSuccessUrl: '/index.html',
+	signInSuccessUrl: '',
 	signInOptions: [
 		// Leave the lines as is for the providers you want to offer your users.
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
