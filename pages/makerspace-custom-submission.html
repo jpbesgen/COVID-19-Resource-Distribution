@@ -166,6 +166,7 @@
                 handleSubmission(e)
             } catch(err) {
                 console.log(err)
+                alert(err.message);
             }
         });
 
@@ -184,7 +185,7 @@
                 design = {};
 
             name = name.value;
-            if(name == null || name.trim() == "") throw new Error("Invalid Name");
+            if(name == null || name.trim() == "") throw new Error("Please enter the name of your design!");
             design["name"] = name;
             
             category = category.value;
@@ -192,7 +193,7 @@
             design["category"] = category;
 
             description = description.value;
-            if(description == null || description.trim() == "") throw new Error("Invalid Description");
+            if(description == null || description.trim() == "") throw new Error("Please enter a description for your design!");
             design["description"] = description;
             design["notes"] = "";
 
@@ -201,7 +202,7 @@
             design["certified"] = certified;
 
             difficulty = difficulty.value;
-            if(difficulty == null) throw new Error("Invalid difficulty");
+            if(difficulty == null) throw new Error("Please specify a difficulty for your design!");
             design["difficulty"] = difficulty;
 
             links = links.value.split(",").map((l) => {
@@ -215,12 +216,12 @@
             design["printerRequired"] = threed;
 
             credit = credit.value;
-            if(credit == null) throw new Error("Inavlid Credit")
+            if(credit == null) throw new Error("Credit is null")
             design["credit"] = credit;
 
 
             let imagePromises = []
-            if(images.files.length < 1) throw new Error("Not Enough Attachments");
+            if(images.files.length < 1) throw new Error("Please upload at least one photo!");
             for(let i = 0; i < images.files.length; i++) {
                 let file = images.files[i];
                 imagePromises.push(new Promise((resolve, reject) => {
@@ -247,7 +248,7 @@
 
 
             let attachmentPromises = []
-            if(attachments.files.length < 1) throw new Error("Not Enough Attachments");
+            //if(attachments.files.length < 1) throw new Error("Not Enough Attachments");
             for(let i = 0; i < attachments.files.length; i++) {
                 let file = attachments.files[i];
                 console.log(file);
@@ -279,6 +280,14 @@
                 design["attachments"] = res[1];
                 design["upvotes"] = 0;
                 design["approved"] = true;
+                
+                if(isAuthenticated()) {
+                    design["user"] = auth.user.displayName;
+                    design["uid"] = auth.user.uid;
+                } else {
+                    design["user"] = "Anonymous"
+                    design["uid"] = null;
+                }
 
                 let design_ref = db.collection("Designs").doc().id;
                 console.log(design_ref);

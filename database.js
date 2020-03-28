@@ -2,7 +2,6 @@
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
 function renderDesigns(designs) {
-    console.log(designs);
     $(document).ready(() => {
 
     // const $grid = $('#grid').isotope({
@@ -19,8 +18,10 @@ function renderDesigns(designs) {
     // });
 
     fillGrid = async () => {
-      designs.forEach(gridItem => {
-        console.log(designs);
+        let grid = document.getElementById("grid");
+        if(grid == null) return;
+        grid.innerHTML = "";
+        designs.forEach(gridItem => {
         // this is where jQuery steps in  
         // var $items = $(
         let description = gridItem.description;
@@ -196,8 +197,63 @@ function downvote(design_id) {
 }
 
 function addComment(design_id) {
+    if(!isAuthenticated()) {
+        alert("Please login to post a comment!");
+        return;
+    }
     let comment_value = document.getElementById(design_id + "-comment-input");
-    let ref = db.collection("Comments").doc().id;
+    let comment_id = db.collection("Comments").doc().id;
+
+    db.collection("Comments").doc(ref).set({
+        content: comment_value,
+        author: auth.user.displayName,
+        uid: auth.user.uid,
+        id: comment_id,
+        design: design_id,
+        time: Date.now()
+    });
+
+    db.collection("Users").doc(auth.user.uid).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.comments.push(comment_id);
+        db.collection("Users").doc(auth.user.uid).set(doc);
+    });
+
+    db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.comments.push(comment_id);
+        db.collection("Designs").doc(design_id).set(doc);
+    });
+}
+
+function removeComment(comment_id) {
+    db.collection("Comments").doc(comment_id).get().then((snapshot) => {
+        let doc = snapshot.data(),
+            design_id = doc.design,
+            uid = doc.uid;
+        
+        db.collection("Users").doc(uid).get().then((user) => {
+            user = user.data();
+            for(let i = user.comments.length - 1; i >= 0; i--) {
+                if(user.comments[i] == comment_id) {
+                    user.comments.splice(i, 1);
+                    break;
+                }
+            }
+            db.collection("Users").doc(uid).set(user);
+        });
+
+        db.collection("Designs").doc(design_id).get().then((design) => {
+            design = design.data();
+            for(let i = design.comments.length - 1; i >= 0; i--) {
+                if(design.comments[i] == comment_id) {
+                    design.comments.splice(i, 1);
+                    break;
+                }
+            }
+            db.collection("Designs").doc(design_id).set(design);
+        });
+    });
 }
 
 function isAuthenticated() {
