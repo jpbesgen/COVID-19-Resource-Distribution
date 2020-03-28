@@ -2,6 +2,7 @@
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
 function renderDesigns(designs) {
+    console.log(designs);
     $(document).ready(() => {
 
     // const $grid = $('#grid').isotope({
@@ -51,6 +52,24 @@ function renderDesigns(designs) {
             })
         }
 
+        let comments = ``,
+            { retrievedComments } = gridItem;
+        if(retrievedComments != null && retrievedComments.length > 0) {
+            retrievedComments.forEach((comment) => {
+                comments += `<p class="modal-text" id="${comment.id}-comment">${comment.content} <b>from ${comment.author}</b></p>`;
+                if(comment != retrievedComments[retrievedComments.length - 1]) {
+                    comments += `<br/>`;
+                }
+            });
+        }
+
+        let addCommentDisplay = 
+        `
+            <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
+            <small class="form-text text-muted">from ${getUser().displayName}</small>
+            <input class="btn" onClick="addComment('${gridItem.id}')" style="border:1px solid black" value="Make a Comment"/>
+        `;
+
         if (gridItem.approved){
             $('#grid').append(
             `
@@ -93,9 +112,8 @@ function renderDesigns(designs) {
                                     </div>
                                     <div class="comments">
                                         <h3 class="community-title">Comments</h3>
-                                        <small class="form-text text-muted">Username</small>
-                                        <p class="community-text">${gridItem.comments}</p>
-                                        <button class="btn" style="border:1px solid black">Make a Comment</button>
+                                        <p class="community-text">${comments}</p>
+                                        ${getUser() == null ? "" : addCommentDisplay}
                                     </div>
                                 </div>
                             </div>
@@ -211,26 +229,33 @@ function addComment(design_id) {
         alert("Please login to post a comment!");
         return;
     }
-    let comment_value = document.getElementById(design_id + "-comment-input");
+    let comment_value = document.getElementById(design_id + "-comment-input").value;
     let comment_id = db.collection("Comments").doc().id;
 
-    db.collection("Comments").doc(ref).set({
+    let user = getUser();
+    db.collection("Comments").doc(comment_id).set({
         content: comment_value,
-        author: auth.user.displayName,
-        uid: auth.user.uid,
+        author: user.displayName,
+        uid: user.uid,
         id: comment_id,
         design: design_id,
         time: Date.now()
     });
 
-    db.collection("Users").doc(auth.user.uid).get().then((snapshot) => {
+    db.collection("Users").doc(user.uid).get().then((snapshot) => {
         let doc = snapshot.data();
+        if(doc.comments == null) {
+            doc.comments = [];
+        }
         doc.comments.push(comment_id);
-        db.collection("Users").doc(auth.user.uid).set(doc);
+        db.collection("Users").doc(user.uid).set(doc);
     });
 
     db.collection("Designs").doc(design_id).get().then((snapshot) => {
         let doc = snapshot.data();
+        if(doc.comments == null) {
+            doc.comments = [];
+        }
         doc.comments.push(comment_id);
         db.collection("Designs").doc(design_id).set(doc);
     });
@@ -267,5 +292,10 @@ function removeComment(comment_id) {
 }
 
 function isAuthenticated() {
-    return firebase.auth().user != null;
+    return auth.user != null || auth.currentUser != null;
+}
+
+// Assumes isAuthenticated() == True
+function getUser() {
+    return auth.user == null ? auth.currentUser : auth.user;
 }
