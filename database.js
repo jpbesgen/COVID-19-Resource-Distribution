@@ -60,8 +60,8 @@ function renderDesigns(designs) {
 
                 </div>
                 <div class="btn-group">
-                    <button class="btn">Upvote</button>
-                    <button class="btn">Downvote</button> 
+                    <button onClick="upvote(${gridItem.id})" class="btn">Upvote</button>
+                    <button onClick="downvote(${gridItem.id})"class="btn">Downvote</button> 
                 </div>               
             </div>
 
@@ -149,5 +149,18 @@ db.collection("Designs").onSnapshot((querySnapshot) => {
     console.log(error);
 });
 
+function upvote(design_id) {
+    db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.upvotes += 1;
+        db.collection("Designs").doc(design_id).set(doc);
+    });
+}
 
-
+function downvote(design_id) {
+    db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
+        db.collection("Designs").doc(design_id).set(doc);
+    });
+}
