@@ -73,8 +73,8 @@ function renderDesigns(designs) {
                 </div>               
             </div>
 
-            <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+           <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
@@ -83,11 +83,31 @@ function renderDesigns(designs) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img class="card-img-top" src="${gridItem.images[0].url}" alt="Card image cap">
-                        <p class="card-text">Category: ${gridItem.category}</p>
-                        <p class="card-text">${gridItem.description}</p>
-                        <p class="card-text">3D printer Required: ${gridItem.printerRequired}</p>
-                        <p class="card-text">Certified: ${gridItem.certified}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-6">
+                                <img class="modal-img" src="${gridItem.attachments[0]}" alt="Modal item cap" />
+                            </div>
+                            <div class="col-xs-12 col-6">
+                                <div class="community">
+                                    <div class="votes">
+                                        <h3 class="community-title">Community Score</h3>
+                                        <p class="community-text">${gridItem.upvotes} Upvotes</p>
+                                    </div>
+                                    <div class="comments">
+                                        <h3 class="community-title">Comments</h3>
+                                        <small class="form-text text-muted">Username</small>
+                                        <p class="community-text">${gridItem.comments}</p>
+                                        <button class="btn" style="border:1px solid black">Make a Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="modal-text"><b>Category</b><br />${gridItem.category}</p>
+                        <p class="modal-text"><b>Description</b><br />${gridItem.description}</p>
+                        <p class="modal-text"><b>3D Printer Required</b><br />${gridItem.printerRequired}</p>
+                        <p class="modal-text"><b>Certified</b><br /> ${gridItem.certified}</p>
+                        <p class="modal-text"><b>Difficulty Level</b><br /> ${gridItem.difficulty}</p>
+                        <p class="modal-text"><b>Credit</b><br /> ${gridItem.credit}</p>
                         Links: ${links}
                         Attachments: ${downloads}
                     </div>
