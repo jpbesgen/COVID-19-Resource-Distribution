@@ -66,7 +66,7 @@ function renderDesigns(designs) {
         let addCommentDisplay = 
         `
             <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
-            <small class="form-text text-muted">from ${getUser() ? getUser().displayName : 'Anonymous'}</small>
+            <small class="form-text text-muted">from ${getUser() == null ? "" : getUser().displayName}</small>
             <input class="btn" onClick="addComment('${gridItem.id}')" style="border:1px solid black" value="Make a Comment"/>
         `;
 
