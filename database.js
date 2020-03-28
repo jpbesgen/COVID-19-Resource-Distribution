@@ -177,10 +177,16 @@ function listenForDesigns() {
         console.log(error);
     });
 }
-listenForDesigns();
+
+if(document.getElementById("grid") != null) {
+    listenForDesigns();
+}
 
 function upvote(design_id) {
-    console.log(design_id)
+    if(!isAuthenticated()) {
+        alert("Please login to vote on submissions!");
+        return;
+    }
     db.collection("Designs").doc(design_id).get().then((snapshot) => {
         let doc = snapshot.data();
         doc.upvotes += 1;
@@ -189,6 +195,10 @@ function upvote(design_id) {
 }
 
 function downvote(design_id) {
+    if(!isAuthenticated()) {
+        alert("Please login to vote on submissions!");
+        return;
+    }
     db.collection("Designs").doc(design_id).get().then((snapshot) => {
         let doc = snapshot.data();
         doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
