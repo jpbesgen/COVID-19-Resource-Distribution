@@ -113,6 +113,14 @@
 
         <div class="form-row">
             <div class="form-group col-12">
+                <label for="images">Images</label>
+                <p>Intended for Pictures (JPG, PNG)</p>
+                <input class=".form-control-file." type="file" name="images" id="submission_images" multiple/>
+            </div>
+        </div>	
+
+        <div class="form-row">
+            <div class="form-group col-12">
                 <label for="attachments">Attachments</label>
                 <p>Intended for Pictures, CAD files, etc...</p>
                 <input class=".form-control-file." type="file" name="attachments" id="submission_attachments" multiple/>
@@ -130,7 +138,7 @@
         <div class="form-row justify-content-center">	
             <!-- Submit -->	
             <div class="form-group col-6">	
-                <input type="submit" class="form-control submit" id="inputHours" />	
+                <input type="button" value="Submit" class="form-control submit" id="submission_submit" />	
             </div>	
         </div>	
     </form>
@@ -154,6 +162,8 @@
 		https://firebase.google.com/docs/web/setup#available-libraries -->
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+
 
     <script src="../database.js"></script>
 	<script>
@@ -175,6 +185,7 @@
                 difficulty = document.getElementById("submission_difficulty"),
                 links = document.getElementById("submission_links"),
                 threed = document.getElementById("submission_3d"),
+                images = document.getElementById("submission_images"),
                 attachments = document.getElementById("submission_attachments"),
                 credit = document.getElementById("submission_credit"),
                 design = {};
@@ -213,12 +224,40 @@
             credit = credit.value;
             if(credit == null) throw new Error("Inavlid Credit")
             design["credit"] = credit;
-            
+
+
+            let imagePromises = []
+            if(images.files.length < 1) throw new Error("Not Enough Attachments");
+            for(let i = 0; i < images.files.length; i++) {
+                let file = images.files[i];
+                imagePromises.push(new Promise((resolve, reject) => {
+                    let filePut = storageRef.child("Attachments/" + file.name).put(file);
+                    filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                    (snapshot) => {
+                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload is ' + progress + '% done');
+                    },
+                    (error) => {
+                        console.log(error);
+                    },
+                    () => {
+                        filePut.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                            console.log('File available at', downloadURL);
+                            resolve({
+                                name: file.name,
+                                url: downloadURL
+                            });
+                        });
+                    });
+                }));
+            }
+
 
             let attachmentPromises = []
             if(attachments.files.length < 1) throw new Error("Not Enough Attachments");
             for(let i = 0; i < attachments.files.length; i++) {
                 let file = attachments.files[i];
+                console.log(file);
                 attachmentPromises.push(new Promise((resolve, reject) => {
                     let filePut = storageRef.child("Attachments/" + file.name).put(file);
                     filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -232,15 +271,19 @@
                     () => {
                         filePut.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                             console.log('File available at', downloadURL);
-                            resolve(downloadURL)
+                            resolve({
+                                name: file.name,
+                                url: downloadURL
+                            });
                         });
                     });
                 }));
             }
 
-            Promise.all(attachmentPromises).then((attachmentUrls) => {
-                console.log(attachmentUrls)
-                design["attachments"] = attachmentUrls;
+            Promise.all([Promise.all(imagePromises), Promise.all(attachmentPromises)]).then((res) => {
+                console.log(res)
+                design["images"] = res[0];
+                design["attachments"] = res[1];
                 design["upvotes"] = 0;
                 design["approved"] = true;
 
@@ -248,7 +291,13 @@
                 console.log(design_ref);
                 design["id"] = design_ref;
                 db.collection("Designs").doc(design_ref).set(design);
+                submissionSuccess();
             });
+
+        }
+
+        function submissionSuccess() {
+            console.log("Submission Success");
         }
     </script>
 </body>

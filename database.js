@@ -1,17 +1,3 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyC7XCt0Yzaiob53UaJHJLzh_Kx5esfp8uA",
-    authDomain: "resource19-9fdaa.firebaseapp.com",
-    databaseURL: "https://resource19-9fdaa.firebaseio.com",
-    projectId: "resource19-9fdaa",
-    storageBucket: "resource19-9fdaa.appspot.com",
-    messagingSenderId: "103851964611",
-    appId: "1:103851964611:web:ecb245ed14e7a168598a76",
-    measurementId: "G-FSB5CVSSPV",
-    storageBucket: "gs://resource19-9fdaa.appspot.com"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 let db = firebase.firestore();
 let storageRef = firebase.storage().ref();
 
@@ -45,12 +31,34 @@ function renderDesigns(designs) {
             description = description.substring(0, 56);
             description +=  "...";
         }
+
+        // create downloadable links
+        let downloads = ``;
+        if(gridItem.attachments != null && gridItem.attachments.length > 0) {
+            gridItem.attachments.forEach((attachment) => {
+                downloads += `<a href="${attachment.url}" target="_blank" download> ${attachment.name}</a>`;
+                if(attachment != gridItem.attachments[gridItem.attachments.length - 1]) {
+                    downloads += `,`
+                }
+            });
+        }
+        
+        let links = ``;
+        if(gridItem.links != null && gridItem.links.length > 0) {
+            gridItem.links.forEach((link) => {
+                links += `<a href="${link}" target="_blank"> ${link}</a>`;
+                if(link != gridItem.links[gridItem.links.length - 1]) {
+                    links += `,`
+                }
+            })
+        }
+
         if (gridItem.approved){
             $('#grid').append(
             `
             <div class="card ${gridItem.type} ${gridItem.category} grid-item">
             <h5 class="card-header text-dark">${gridItem.name}</h5>
-                <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Item Attachment 0" />
+                <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
                 <div class="card-body">
                     <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
                     <p class="card-text item-description">${description}</p>
@@ -60,8 +68,8 @@ function renderDesigns(designs) {
 
                 </div>
                 <div class="btn-group">
-                    <button onClick="upvote(${gridItem.id})" class="btn">Upvote</button>
-                    <button onClick="downvote(${gridItem.id})"class="btn">Downvote</button> 
+                    <button onClick="upvote('${gridItem.id}')" class="btn">Upvote</button>
+                    <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button> 
                 </div>               
             </div>
 
@@ -75,12 +83,13 @@ function renderDesigns(designs) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
+                        <img class="card-img-top" src="${gridItem.images[0].url}" alt="Card image cap">
                         <p class="card-text">Category: ${gridItem.category}</p>
                         <p class="card-text">${gridItem.description}</p>
                         <p class="card-text">3D printer Required: ${gridItem.printerRequired}</p>
                         <p class="card-text">Certified: ${gridItem.certified}</p>
-                        <p class="card-text">Comments: ${gridItem.comments}</p>
+                        Links: ${links}
+                        Attachments: ${downloads}
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -143,14 +152,17 @@ async function fetchCommentsForDesign(doc) {
 
 
 // Creates a listener that updates the designs whenever there is a change
-
-db.collection("Designs").onSnapshot((querySnapshot) => {
-    handleDesigns(querySnapshot).then(renderDesigns);
-}, (error) => {
-    console.log(error);
-});
+function listenForDesigns() {
+    db.collection("Designs").onSnapshot((querySnapshot) => {
+        handleDesigns(querySnapshot).then(renderDesigns);
+    }, (error) => {
+        console.log(error);
+    });
+}
+listenForDesigns();
 
 function upvote(design_id) {
+    console.log(design_id)
     db.collection("Designs").doc(design_id).get().then((snapshot) => {
         let doc = snapshot.data();
         doc.upvotes += 1;
@@ -164,4 +176,8 @@ function downvote(design_id) {
         doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
         db.collection("Designs").doc(design_id).set(doc);
     });
+}
+
+function addComment(design_id) {
+
 }

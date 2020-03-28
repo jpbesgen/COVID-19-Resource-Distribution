@@ -7,6 +7,19 @@ var uiConfig = {
 			// User successfully signed in.
 			// Return type determines whether we continue the redirect automatically
 			// or whether we leave that to developer to handle.
+			
+			// Check if new user, create profile
+			console.log(authResult);
+			let db = firebase.firestore();
+			db.collection("Users").doc(authResult.uid).get().then((snapshot) => {
+				console.log(snapshot.data())
+			}).catch((error) => {
+				console.log(error);
+				db.collection("Users").doc(authResult.uid).set({
+					uid: authResult.uid
+				});
+			});
+			
 			return true;
 		},
 		uiShown: function() {
