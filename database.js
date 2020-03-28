@@ -5,18 +5,22 @@ function renderDesigns(designs) {
     console.log(designs);
     $(document).ready(() => {
 
-    // const $grid = $('#grid').isotope({
-    //   itemSelector: '.grid-item'
-    // });
+    const $grid = $('#grid').isotope({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      masonry: {
+        columnWidth: 30
+      }
+    });
 
-    // $('.filters-button-group').on( 'click', 'button', function() {
-    //   const filterValue = $( this ).attr('data-filter');
-    //   console.log(filterValue);
-    //   console.log($grid);
-    //   // use filterFn if matches value
-    //   // filterValue = filterFns[ filterValue ] || filterValue;
-    //   $grid.isotope({ filter: filterValue });
-    // });
+    $('.dropdown-menu').on( 'click', 'button', function() {
+      const filterValue = $( this ).attr('data-filter');
+      console.log(filterValue);
+      console.log($grid);
+      // use filterFn if matches value
+      // filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+    });
 
     fillGrid = async () => {
         let grid = document.getElementById("grid");
@@ -26,8 +30,8 @@ function renderDesigns(designs) {
         // this is where jQuery steps in  
         // var $items = $(
         let description = gridItem.description;
-        if (description.length > 55) {
-            description = description.substring(0, 56);
+        if (description.length > 140) {
+            description = description.substring(0, 141);
             description +=  "...";
         }
 
@@ -66,30 +70,39 @@ function renderDesigns(designs) {
         let addCommentDisplay = 
         `
             <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
-            <small class="form-text text-muted">from ${getUser() ? getUser().displayName : 'Anonymous'}</small>
+            <small class="form-text text-muted">from ${getUser() == null ? "" : getUser().displayName}</small>
             <input class="btn" onClick="addComment('${gridItem.id}')" style="border:1px solid black" value="Make a Comment"/>
         `;
 
         if (gridItem.approved){
-            $('#grid').append(
-                `
-                    <div class="card ${gridItem.type} ${gridItem.category} grid-item">
-                    <h5 class="card-header text-dark">${gridItem.name}</h5>
-                        <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
-                        <div class="card-body">
-                            <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
-                            <p class="card-text item-description">${description}</p>
-                            <p class="card-text"><b>3D printer Required:</b> ${gridItem.printerRequired}</p>
-                            <p class="card-text"><b>Certified:</b> ${gridItem.certified}</p>
-                            <button class="btn btn-block card-text" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
-        
-                        </div>
-                        <div class="btn-group">
-                            <button onClick="upvote('${gridItem.id}')" class="btn">Upvote</button>
-                            <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button> 
-                        </div>               
-                    </div>
-        
+            var $items = $(
+            `
+            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
+            <h5 class="card-header text-dark">${gridItem.name}</h5>
+                <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
+                <div class="card-body">
+                    <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
+                    <p class="card-text item-description">${description}</p>
+                    <p class="card-text"><b>3D printer Required:</b> ${gridItem.printerRequired}</p>
+                    <p class="card-text"><b>Certified:</b> ${gridItem.certified}</p>
+                    <button class="btn btn-block card-text" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
+
+                </div>
+                <div class="btn-group">
+                    <button onClick="upvote('${gridItem.id}')" class="btn">Upvote</button>
+                    <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button> 
+                </div>               
+            </div>
+
+           <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>        
                    <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -142,6 +155,7 @@ function renderDesigns(designs) {
                     </div>
                 `
             );
+            console.log($items);
             // append items to grid
             // $grid.append( $items )
                 // .isotope( 'appended', $items );
@@ -160,8 +174,11 @@ function renderDesigns(designs) {
                 autoplay: true,
                 autoplayTimeout: 5000,
             });
+
+            $grid.append( $items )
+                .isotope( 'appended', $items );
         }
-    })}
+    })};
 
     fillGrid()
   })
