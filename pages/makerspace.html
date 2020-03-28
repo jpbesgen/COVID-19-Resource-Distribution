@@ -19,7 +19,6 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
-
 		gtag('config', 'UA-161941609-1');
 	</script>
 	<!-- jQuery -->
@@ -33,6 +32,8 @@
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 	<script src="../js/firebase_init.js"></script>
+	<link rel="stylesheet" href="../owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="../owlcarousel/owl.theme.default.min.css">
 </head>
 
 <body>
@@ -52,17 +53,17 @@
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Location<h5>
+					<h5>Location</h5>
 					<input type="text" class="form-control paremeter-extension" placeholder="City">
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Maker Rating<h5>
+					<h5>Maker Rating</h5>
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							# of Stars
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 							<a class="dropdown-item">Option 1</a>
 							<a class="dropdown-item">Option 2</a>
 							<a class="dropdown-item">Option 3</a>
@@ -71,12 +72,12 @@
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Delivery Option<h5>
+					<h5>Delivery Option</h5>
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
 							<a class="dropdown-item">Option 1</a>
 							<a class="dropdown-item">Option 2</a>
 							<a class="dropdown-item">Option 3</a>
@@ -85,12 +86,12 @@
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Quantity<h5>
+					<h5>Quantity</h5>
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							# of Pieces
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
 							<a class="dropdown-item">Option 1</a>
 							<a class="dropdown-item">Option 2</a>
 							<a class="dropdown-item">Option 3</a>
@@ -127,7 +128,7 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-
+	<script src="../owlcarousel/owl.carousel.min.js"></script>
 	<script src="../database.js"></script>
 </body>
 
