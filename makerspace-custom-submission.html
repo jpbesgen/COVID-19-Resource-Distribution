@@ -9,8 +9,8 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/style-phone.css">
-	<link rel="stylesheet" href="./css/about.css" />
-	<link rel="stylesheet" href="./css/form.css" />
+    <link rel="stylesheet" href="./css/about.css" />
+    <link rel="stylesheet" href="./css/about-phone.css" />
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -64,67 +64,94 @@
 	</section>
 
 	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
-    <style>
-        .form {
-            flex-direction: column;
-            width: 50%;
-        }
-    </style>
-    <div class="form">
-        <label for="name">Name</label>
-        <input id="submission_name" name="name" type="text" />
-
-        <label for="category">Category</label>
-        <span>Type of medical supply. If category not present, select "Other"</span>
-        <select name="category" id="submission_category">
-            <option value="n95">N95</option>
-            <option value="surgicalMask">Surgical Mask</option>
-            <option value="ventilator">Ventilator</option>
-            <option value="ventilatorParts">Ventilator Parts</option>
-            <option value="faceShield">Face Shield</option>
-            <option value="hospitalGown">Hospital Gown</option>
-            <option value="handSanitizer">Hand Sanitizer</option>
-            <option value="disposableBooties">Disposable Booties</option>
-            <option value="miscParts">Misc Parts</option>
-            <option value="other">Other</option>
-        </select>
-
-        <label for="description">Description</label>
-        <input id="submission_description" name="description" type="text"/>
-
-        <label for="certified">Certified</label>
-        <span>Certification will be qualified as having the design certified by the NIH, CDC, ECDC, or on equivalent organization. In progress will indicate the design is in process of approval but has not yet reached it. </span>
-        <select name="certified" id="submission_certified">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-            <option value="inProgress">In Progress</option>
-        </select>
-
-        <label for="difficulty">Difficulty Level</label>
-        <span>(1 Being Easy and 5 Being Hard)</span>
-        <input type="number" max="5" min="1" name="difficulty" id="submission_difficulty"/>
     
-        <label for="links">Links</label>
-        <span>Links separated by commas</span>
-        <input type="text" name="links" id="submission_links"/>
+    <form class="form">
+        <div class="form-row">	
+            <div class="form-group col-xs-12 col-6">	
+                <label for="name">Design Name</label>
+                <input  class="form-control" placeholder="Design Name" id="submission_name" name="name" type="text" />
+            </div>	
+            <div class="form-group col-xs-12 col-6">	
+                <label for="category">Category</label>
+                <select class="form-control" name="category" id="submission_category">
+                    <option value="n95">N95</option>
+                    <option value="surgicalMask">Surgical Mask</option>
+                    <option value="ventilator">Ventilator</option>
+                    <option value="ventilatorParts">Ventilator Parts</option>
+                    <option value="faceShield">Face Shield</option>
+                    <option value="hospitalGown">Hospital Gown</option>
+                    <option value="handSanitizer">Hand Sanitizer</option>
+                    <option value="disposableBooties">Disposable Booties</option>
+                    <option value="miscParts">Misc Parts</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>	
+        </div>	
 
-        <label for="3d">3D Printer Required?</label>
-        <select id="submission_3d" name="3d">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-        </select>
+        <div class="form-row">		
+            <div class="form-group col-12">
+                <label for="description">Description</label>
+                <input class="form-control" placeholder="Description" id="submission_description" name="description" type="textarea"/>
+            </div>
+        </div>	
+        
+        <div class="form-row">		
+            <div class="form-group col-12">
+                <label for="certified">Certified</label>
+                <p>Certification will be qualified as having the design certified by the NIH, CDC, ECDC, or on equivalent organization. In progress will indicate the design is in process of approval but has not yet reached it. </p>
+                <select class="form-control" name="certified" id="submission_certified">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                    <option value="inProgress">In Progress</option>
+                </select>
+            </div>
+        </div>	
 
-        <label for="attachments">Attachments</label>
-        <span>Intended for Pictures, CAD files, etc...</span>
-        <input type="file" name="attachments" id="submission_attachments" multiple/>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="difficulty">Difficulty Level (1 Being Easy and 5 Being Hard)</label>
+                <input class="form-control" type="number" max="5" min="1" name="difficulty" id="submission_difficulty"/>
+            </div>
+            <div class="form-group col-6">
+                <label for="3d">3D Printer Required?</label>
+                <select class="form-control" id="submission_3d" name="3d">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        </div>	
 
-        <label for="credit">Credit</label>
-        <span>Give credit where credit is due. Who made this design possible?</span>
-        <input type="text" name="credit" id="submission_credit"/>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="links">Links (Links separated by commas)</label>
+                <input class="form-control" type="text" name="links" id="submission_links"/>
+            </div>
+        </div>	
 
-        <input type="button" value="Submit" id="submission_submit"/>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="attachments">Attachments</label>
+                <p>Intended for Pictures, CAD files, etc...</p>
+                <input class="form-control" type="file" name="attachments" id="submission_attachments" multiple/>
+            </div>
+        </div>	
 
-    </div>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="credit">Credit</label>
+                <p>Give credit where credit is due. Who made this design possible?</p>
+                <input class="form-control" type="text" name="credit" id="submission_credit"/>
+            </div>
+        </div>	
+
+        <div class="form-row justify-content-center">	
+            <!-- Submit -->	
+            <div class="form-group col-6">	
+                <input type="submit" class="form-control submit" id="inputHours" />	
+            </div>	
+        </div>	
+    </form>
+
     <!-- JavaScript -->
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
