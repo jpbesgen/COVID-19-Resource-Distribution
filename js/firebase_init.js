@@ -6,7 +6,12 @@ var firebaseConfig = {
     storageBucket: "resource19-9fdaa.appspot.com",
     messagingSenderId: "103851964611",
     appId: "1:103851964611:web:ecb245ed14e7a168598a76",
-    measurementId: "G-FSB5CVSSPV"
+    measurementId: "G-FSB5CVSSPV",
+    storageBucket: "gs://resource19-9fdaa.appspot.com"
 };
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+
+let db = firebase.firestore();
+let storageRef = firebase.storage().ref();
+let auth = firebase.auth();

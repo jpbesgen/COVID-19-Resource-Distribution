@@ -83,12 +83,13 @@ p {
     background-color: #7a98af;
     color: white;
     border-radius: 5px;
+    margin-left: 3rem;
 }
     .proposal {
         width: 88%;
     }
     .listing {
-        width: 64%;
+        width: 54%;
     }
 
 .body-content {
@@ -146,6 +147,36 @@ p {
         border: 1px solid #3B628B;
     }
 
-.modal-title {
-    color: black;
+.modal-header {
+    border-bottom: 2px solid #3B628B;
+    padding: 0;
+    padding: .5rem 1.5rem 0 1.5rem;
 }
+    .modal-title {
+        color: #3B628B;
+        font-size: 64px;
+        font-weight: 300;
+    }
+.modal-body {
+    padding: 2rem 3rem 0 3rem;
+}
+    .modal-img {
+        width: 100%;
+    }
+    .community-title {
+        font-size: 20px;
+        font-weight: 300;
+        color: #3B628B;
+    }
+    .community-text {
+        font-size: 20px;
+        font-weight: 300;
+        color: #000000;
+    }
+    .modal-text {
+        font-size: 20px;
+        font-weight: 300;
+        color: #000000;
+        margin: 1rem 0;
+        padding: 0;
+    }

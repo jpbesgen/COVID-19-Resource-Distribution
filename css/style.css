@@ -2,7 +2,7 @@ html, body {
 	height: 100%;
 	width: 100%;
 	min-height: 100%;
-	background: #b0d7d7;
+	background: #7a98af;
 	margin-bottom: 200px;
 	font-family: 'Josefin Sans', sans-serif;
 }
@@ -58,7 +58,7 @@ html, body {
 		padding-right: 20px;
 	}
 		.nav-link {
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			color: white!important;
 		}
 		.nav-link:hover {
