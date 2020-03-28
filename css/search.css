@@ -146,5 +146,8 @@ p {
     }
 
 .modal-title {
-    color: black;
+    color: #3B628B;
+    font-size: 64px;
+    font-weight: 300;
+    margin-bottom: 2px solid #3B628B;
 }
