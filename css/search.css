@@ -118,7 +118,6 @@ p {
         padding-left: .8rem;
         margin: 0;
         width: 10rem;
-
     }
     .card-body {
         padding: .8rem;
@@ -131,6 +130,10 @@ p {
             margin: .4rem 0;
             padding: 0;
         }
+            .item-description {
+                line-height: 1.2;
+                height: 4.5rem;
+            }
     .btn-group {
         width: 100%;
         border-top: 2px solid #3B628B;
