@@ -215,9 +215,7 @@
             threed = (threed == "true") ? true : false;
             design["printerRequired"] = threed;
 
-            credit = credit.value;
-            if(credit == null) throw new Error("Credit is null")
-            design["credit"] = credit;
+            design["credit"] = credit.value || null;
 
 
             let imagePromises = []
@@ -276,14 +274,14 @@
 
             Promise.all([Promise.all(imagePromises), Promise.all(attachmentPromises)]).then((res) => {
                 console.log(res)
-                design["images"] = res[0];
-                design["attachments"] = res[1];
+                design["images"] = res[0] || [];
+                design["attachments"] = res[1] || [];
                 design["upvotes"] = 0;
                 design["approved"] = true;
                 
                 if(isAuthenticated()) {
-                    design["user"] = auth.user.displayName;
-                    design["uid"] = auth.user.uid;
+                    design["user"] = getUser().displayName;
+                    design["uid"] = getUser().uid;
                 } else {
                     design["user"] = "Anonymous"
                     design["uid"] = null;

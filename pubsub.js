@@ -35,12 +35,19 @@ class ComponentManager {
         this.roots = {};
     }
 
-    addRootComponent() {
-
+    addRootComponent(component) {
+        this.roots[component.id] = component;
     }
 
     deleteComponent(id) {
-        
+        let root = this.getComponent(id);
+        if(root == null) return null;
+        if(root.parent == null) {
+            delete this.roots[component.id]
+        } else {
+            root.parent.removeChild(root);
+            delete root;
+        }
     }
 
     getComponent(id) {
@@ -92,11 +99,13 @@ class Component {
         this.parent = null;
         this.children = [];
         this.state = {};
-        this.id = id;
+        this.id = id || generateRandomId();
     }
 
     setState(s) {
-        this.state = s;
+        s.keys().forEach((key) => {
+            this.state[key] = s[key];
+        });
     }
 
     getState() {
@@ -115,4 +124,21 @@ class Component {
         this.children.push(component);
         component.parent = this;
     }
+
+    removeChild(component) {
+        for(let i = this.children.length - 1; i >= 0; i--) {
+            if(this.children[i].equals(component)) {
+                let child = this.children.splice(i, 1);
+                return child;
+            }
+        }
+    }
+
+    equals(component) {
+        return this.id == component.id;
+    }
+}
+
+function generateRandomId() {
+    return "kF" + Math.floor(Math.random() * 999999) + "tN" + Math.floor(Math.random() * 999999)
 }

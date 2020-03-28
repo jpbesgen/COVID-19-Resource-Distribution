@@ -63,6 +63,7 @@ function renderDesigns(designs) {
             });
         }
 
+        
         let addCommentDisplay = 
         `
             <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
