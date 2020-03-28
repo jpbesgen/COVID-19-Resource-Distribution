@@ -114,10 +114,9 @@ p {
         border-bottom: 2px solid #3B628B;
     }
     .card-img-top {
-        padding: .5rem;
-        padding-left: .8rem;
+        padding: .5rem .8rem;
         margin: 0;
-        width: 10rem;
+        height: 12rem;
     }
     .card-body {
         padding: .8rem;
