@@ -9,7 +9,7 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/style-phone.css">
-    <link rel="stylesheet" href="../css/search.css" />
+	<link rel="stylesheet" href="../css/search.css" />
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -37,14 +37,14 @@
 </head>
 
 <body>
-	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+<!-- Navbar -->
+<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
 
 	 <div class="container-fluid body-content">
 		<div class="row">
 			<div class="col-2 col-xs-3 sidebar">
 				<div class="logo-div">
-					<a href="./index.html">
+					<a href="../index.html">
 						<img src="../img/logo-white.png" alt="Resource 19 Logo" class="logo" />
 					</a>
 				</div>
@@ -69,7 +69,6 @@
 							<a class="dropdown-item">Option 3</a>
 						</div>
 					</div>
-					<hr />
 				</div>
 				<div class="parameter">
 					<h5>Delivery Option</h5>
@@ -83,7 +82,6 @@
 							<a class="dropdown-item">Option 3</a>
 						</div>
 					</div>
-					<hr />
 				</div>
 				<div class="parameter">
 					<h5>Quantity</h5>
@@ -115,21 +113,31 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
+</div>
 
-	<!-- JavaScript -->
-	<script>
-		// load html components
-		$("#navbar").load("../components/navbar.html");
-	</script>
-	<!-- Popper.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+<!-- JavaScript -->
+<script>
+	// load html components
+	$("#navbar").load("../components/navbar.html");
+</script>
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-	<!-- Bootstrap js -->
-	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-	<script src="../owlcarousel/owl.carousel.min.js"></script>
-	<script src="../database.js"></script>
+
+<!-- Bootstrap js -->
+<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>
+<script src="../owlcarousel/owl.carousel.min.js"></script>
+<script src="../database.js"></script>
 </body>
 
 </html>
