@@ -13,7 +13,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 let db = firebase.firestore();
-let storageRef = firebase.storage();
+let storageRef = firebase.storage().ref();
 
 // TODO:
 // Take the array of design data and format into a bootstrap card
