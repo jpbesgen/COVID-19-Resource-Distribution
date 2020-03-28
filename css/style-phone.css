@@ -2,19 +2,27 @@
 and (min-device-width: 320px) 
 and (max-device-width: 823px) 
 and (-webkit-min-device-pixel-ratio: 2) { 
-  .navbar {
+    .btn-sm {
+        font-size: 16px;
+	}
+    .navbar {
       padding: 0.4rem;
   }
       .navbar img{
           height: 40px;
           width: 40px;
       }
+      .search-bar {
+		width: 21rem;
+		margin: 6px 1.5rem 0 1.5rem;
+      }
+      
   .homepage-logo {
       width: 85%;
   }
   .homepage-one {
       padding-top: 34px;
-      padding-bottom:29px;
+      padding-bottom: 29px;
   }
       .homepage-intro {
           padding-top: .7rem;
@@ -57,10 +65,10 @@ and (-webkit-min-device-pixel-ratio: 2) {
               height: 58%;
           }
           .profession-button {
-              width: 100%;
+              width: 8.5rem;
           }
           .divider {
-              width: 5%;
+              width: 3rem;
           }
           .btn-lg {
               height: 8rem;

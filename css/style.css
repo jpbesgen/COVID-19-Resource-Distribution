@@ -12,7 +12,7 @@ html, body {
 	background-color: white;
 	border-color: white;
 	color: #3b628b;
-	font-size: 18px;
+	font-size: 16px;
 	margin-top: 10px;
 }
 	.btn-primary:hover {
@@ -21,6 +21,14 @@ html, body {
 	}
 	.btn-lg {
 		height: 4em;
+	}
+	.btn-sm {
+		font-size: 24px;
+		color: #7A98AF;
+	}
+	.btn-block {
+		padding: 1rem;
+		border-radius: 5px;
 	}
 
 /* Navbar */
@@ -74,12 +82,16 @@ html, body {
 		padding-top: 25px;
 		color: #3b628b;
 		font-size: 28px;
-		padding-left: 22%;
-		padding-right: 22%;
+		padding-left: 10%;
+		padding-right: 10%;
 	}
 	.search-bar {
-		margin: 31px auto 0 auto;
-		width: 35%;
+		width: 21rem;
+		margin: 31px 2rem 0 2rem;
+	}
+	.button-box {
+		display: flex;
+		justify-content: center;
 	}
 
 .about {

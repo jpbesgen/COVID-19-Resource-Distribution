@@ -25,6 +25,9 @@ hr {
     margin-top: 17px;
     margin-bottom: 17px;
 }
+p {
+    font-size: 1.6rem;
+}
 
 .description {
     margin: 1rem 1rem 1rem 3rem;
@@ -88,7 +91,25 @@ hr {
         width: 64%;
     }
 
+.body-content {
+    background-color: #7a98af;
+}
+.item-area {
+    background-color: white;
+    padding-bottom: 2rem;
+}
+
 .airtable-embed {
     margin: 0 1rem 3rem 1rem;
 }
-    
+
+.card-columns {
+    column-count: 4;
+}
+    /* .card {
+        width: 20%;
+    } */
+
+.modal-title {
+    color: black;
+}
