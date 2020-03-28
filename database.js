@@ -60,13 +60,13 @@ function renderDesigns(designs) {
 
                 </div>
                 <div class="btn-group">
-                    <button onClick="upvote(${gridItem.id})" class="btn">Upvote</button>
-                    <button onClick="downvote(${gridItem.id})"class="btn">Downvote</button> 
+                    <button class="btn">Upvote</button>
+                    <button class="btn">Downvote</button> 
                 </div>               
             </div>
 
-            <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+           <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
@@ -75,12 +75,31 @@ function renderDesigns(designs) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
-                        <p class="card-text">Category: ${gridItem.category}</p>
-                        <p class="card-text">${gridItem.description}</p>
-                        <p class="card-text">3D printer Required: ${gridItem.printerRequired}</p>
-                        <p class="card-text">Certified: ${gridItem.certified}</p>
-                        <p class="card-text">Comments: ${gridItem.comments}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-6">
+                                <img class="modal-img" src="${gridItem.attachments[0]}" alt="Modal item cap" />
+                            </div>
+                            <div class="col-xs-12 col-6">
+                                <div class="community">
+                                    <div class="votes">
+                                        <h3 class="community-title">Community Score</h3>
+                                        <p class="community-text">${gridItem.upvotes} Upvotes</p>
+                                    </div>
+                                    <div class="comments">
+                                        <h3 class="community-title">Comments</h3>
+                                        <small class="form-text text-muted">Username</small>
+                                        <p class="community-text">${gridItem.comments}</p>
+                                        <button class="btn" style="border:1px solid black">Make a Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="modal-text"><b>Category</b><br />${gridItem.category}</p>
+                        <p class="modal-text"><b>Description</b><br />${gridItem.description}</p>
+                        <p class="modal-text"><b>3D Printer Required</b><br />${gridItem.printerRequired}</p>
+                        <p class="modal-text"><b>Certified</b><br /> ${gridItem.certified}</p>
+                        <p class="modal-text"><b>Difficulty Level</b><br /> ${gridItem.difficulty}</p>
+                        <p class="modal-text"><b>Credit</b><br /> ${gridItem.credit}</p>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -150,18 +169,5 @@ db.collection("Designs").onSnapshot((querySnapshot) => {
     console.log(error);
 });
 
-function upvote(design_id) {
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes += 1;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
-}
 
-function downvote(design_id) {
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
-}
+
