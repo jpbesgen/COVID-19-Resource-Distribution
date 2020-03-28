@@ -116,7 +116,7 @@ function renderDesigns(designs) {
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-6">
-<!--                                        <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" />-->
+<!--                                        <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" /> -->
                                         <!-- CAROUSEL -->
                                         <div class="owl-carousel owl-theme">
                                             <div class="carousel-image" style="background-image: url('${gridItem.images[0].url}');" />
