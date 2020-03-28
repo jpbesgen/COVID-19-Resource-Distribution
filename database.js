@@ -5,18 +5,22 @@ function renderDesigns(designs) {
     console.log(designs);
     $(document).ready(() => {
 
-    // const $grid = $('#grid').isotope({
-    //   itemSelector: '.grid-item'
-    // });
+    const $grid = $('#grid').isotope({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      masonry: {
+        columnWidth: 30
+      }
+    });
 
-    // $('.filters-button-group').on( 'click', 'button', function() {
-    //   const filterValue = $( this ).attr('data-filter');
-    //   console.log(filterValue);
-    //   console.log($grid);
-    //   // use filterFn if matches value
-    //   // filterValue = filterFns[ filterValue ] || filterValue;
-    //   $grid.isotope({ filter: filterValue });
-    // });
+    $('.dropdown-menu').on( 'click', 'button', function() {
+      const filterValue = $( this ).attr('data-filter');
+      console.log(filterValue);
+      console.log($grid);
+      // use filterFn if matches value
+      // filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+    });
 
     fillGrid = async () => {
         let grid = document.getElementById("grid");
@@ -26,8 +30,8 @@ function renderDesigns(designs) {
         // this is where jQuery steps in  
         // var $items = $(
         let description = gridItem.description;
-        if (description.length > 55) {
-            description = description.substring(0, 56);
+        if (description.length > 140) {
+            description = description.substring(0, 141);
             description +=  "...";
         }
 
@@ -72,9 +76,9 @@ function renderDesigns(designs) {
         `;
 
         if (gridItem.approved){
-            $('#grid').append(
+            var $items = $(
             `
-            <div class="card ${gridItem.type} ${gridItem.category} grid-item">
+            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
             <h5 class="card-header text-dark">${gridItem.name}</h5>
                 <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
                 <div class="card-body">
@@ -99,49 +103,84 @@ function renderDesigns(designs) {
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-6">
-                                <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" />
+                    </div>        
+                   <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="col-xs-12 col-6">
-                                <div class="community">
-                                    <div class="votes">
-                                        <h3 class="community-title">Community Score</h3>
-                                        <p class="community-text">${gridItem.upvotes} Upvotes</p>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-6">
+<!--                                        <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" />-->
+                                        <!-- CAROUSEL -->
+                                        <div class="owl-carousel owl-theme">
+                                            <div class="carousel-image" style="background-image: url('${gridItem.images[0].url}');" />
+                                            <div class="carousel-image" style="background-image: url('https://via.placeholder.com/250x160');" />
+                                            <div class="carousel-image" style="background-image: url('https://via.placeholder.com/150x300');" />
+                                        </div>
+                                        <!-- END CAROUSEL -->
                                     </div>
-                                    <div class="comments">
-                                        <h3 class="community-title">Comments</h3>
-                                        <p class="community-text">${comments}</p>
-                                        ${getUser() == null ? "" : addCommentDisplay}
+                                    <div class="col-xs-12 col-6">
+                                        <div class="community">
+                                            <div class="votes">
+                                                <h3 class="community-title">Community Score</h3>
+                                                <p class="community-text">${gridItem.upvotes} Upvotes</p>
+                                            </div>
+                                            <div class="comments">
+                                                <h3 class="community-title">Comments</h3>
+                                                <p class="community-text">${comments}</p>
+                                                ${getUser() == null ? "" : addCommentDisplay}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <p class="modal-text"><b>Category</b><br />${gridItem.category}</p>
+                                <p class="modal-text"><b>Description</b><br />${gridItem.description}</p>
+                                <p class="modal-text"><b>3D Printer Required</b><br />${gridItem.printerRequired}</p>
+                                <p class="modal-text"><b>Certified</b><br /> ${gridItem.certified}</p>
+                                <p class="modal-text"><b>Difficulty Level</b><br /> ${gridItem.difficulty}</p>
+                                <p class="modal-text"><b>Credit</b><br /> ${gridItem.credit}</p>
+                                Links: ${links}
+                                Attachments: ${downloads}
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
-                        <p class="modal-text"><b>Category</b><br />${gridItem.category}</p>
-                        <p class="modal-text"><b>Description</b><br />${gridItem.description}</p>
-                        <p class="modal-text"><b>3D Printer Required</b><br />${gridItem.printerRequired}</p>
-                        <p class="modal-text"><b>Certified</b><br /> ${gridItem.certified}</p>
-                        <p class="modal-text"><b>Difficulty Level</b><br /> ${gridItem.difficulty}</p>
-                        <p class="modal-text"><b>Credit</b><br /> ${gridItem.credit}</p>
-                        Links: ${links}
-                        Attachments: ${downloads}
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            `
+                `
             );
+            console.log($items);
             // append items to grid
             // $grid.append( $items )
                 // .isotope( 'appended', $items );
+
+            // enable carousel
+            $(".owl-carousel").owlCarousel({
+                items: 1,
+                margin: 10,
+                autoHeight: true,
+                nav: true,
+                loop: true,
+                lazyLoadEager: 1,
+                lazyLoad: false,
+                autoplayHoverPause: true,
+                navText: "<>",
+                autoplay: true,
+                autoplayTimeout: 5000,
+            });
+
+            $grid.append( $items )
+                .isotope( 'appended', $items );
         }
-        })
-    }
+    })};
+
     fillGrid()
   })
 }

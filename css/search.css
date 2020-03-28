@@ -136,6 +136,7 @@ p {
             .item-description {
                 line-height: 1.2;
                 height: 4.5rem;
+                font-size: 14px;
             }
     .btn-group {
         width: 100%;
@@ -179,3 +180,10 @@ p {
         margin: 1rem 0;
         padding: 0;
     }
+
+.carousel-image {
+    height: 300px;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position: center;
+}

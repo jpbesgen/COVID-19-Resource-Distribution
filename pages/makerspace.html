@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/style-phone.css">
     <link rel="stylesheet" href="../css/search.css" />
+	<link rel="stylesheet" href="../lib/owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="../lib/owlcarousel/owl.theme.default.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -33,6 +35,8 @@
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 	<script src="../js/firebase_init.js"></script>
+	<!-- Isotope sorting and filtering -->
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 </head>
 
 <body>
@@ -52,48 +56,47 @@
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Location<h5>
-					<input type="text" class="form-control paremeter-extension" placeholder="City">
-					<hr />
-				</div>
-				<div class="parameter">
-					<h5>Maker Rating<h5>
+					<h5>Category</h5>
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							# of Stars
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
-						</div>
-					</div>
-					<hr />
-				</div>
-				<div class="parameter">
-					<h5>Delivery Option<h5>
-					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".n95">N95</button>
+							<button class="dropdown-item" data-filter=".surgical-mask">Surgical Mask</button>
+							<button class="dropdown-item" data-filter=".face-shield">Face Shield</button>
+							<button class="dropdown-item" data-filter=".hospital-gown">Hospital Gown</button>
+							<button class="dropdown-item" data-filter=".goggle">Goggle</button>
+							<button class="dropdown-item" data-filter=".ventilator">Ventilator</button>
+							<button class="dropdown-item" data-filter=".ventilator-part">Ventilator Part</button>
+							<button class="dropdown-item" data-filter=".other">Other</button>
 						</div>
 					</div>
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Quantity<h5>
+					<h5>Certification</h5>
 					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							# of Pieces
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".certified-yes">Only Certified</button>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>3D Printer Needed</h5>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+							<button class="dropdown-item" data-filter=".printer-true">Yes</button>
+							<button class="dropdown-item" data-filter="*">No</button>
 						</div>
 					</div>
 				</div>
@@ -127,7 +130,7 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-
+	<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="../database.js"></script>
 </body>
 
