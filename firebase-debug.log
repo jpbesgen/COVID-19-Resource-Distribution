@@ -1,0 +1,30 @@
+[debug] [2020-03-28T20:26:29.488Z] ----------------------------------------------------------------------
+[debug] [2020-03-28T20:26:29.490Z] Command:       /Users/amadrzyk/.nvm/versions/node/v12.13.0/bin/node /usr/local/bin/firebase serve
+[debug] [2020-03-28T20:26:29.490Z] CLI Version:   7.16.1
+[debug] [2020-03-28T20:26:29.490Z] Platform:      darwin
+[debug] [2020-03-28T20:26:29.490Z] Node Version:  v12.13.0
+[debug] [2020-03-28T20:26:29.491Z] Time:          Sat Mar 28 2020 13:26:29 GMT-0700 (Pacific Daylight Time)
+[debug] [2020-03-28T20:26:29.491Z] ----------------------------------------------------------------------
+[debug] [2020-03-28T20:26:29.491Z] 
+[debug] [2020-03-28T20:26:29.497Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-28T20:26:29.497Z] > authorizing via signed-in user
+[debug] [2020-03-28T20:26:29.497Z] [iam] checking project resource19-9fdaa for permissions ["firebase.projects.get"]
+[debug] [2020-03-28T20:26:29.499Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-28T20:26:29.499Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-28T20:26:29.625Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-28T20:26:29.636Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/resource19-9fdaa:testIamPermissions  
+
+[debug] [2020-03-28T20:26:29.739Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-28T20:26:29.740Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/resource19-9fdaa  
+ 
+[debug] [2020-03-28T20:26:29.891Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/amadrzyk/Projects/COVID-19-Resource-Distribution'...
+[info] 
+[debug] [2020-03-28T20:26:29.893Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/resource19-9fdaa/webApps/-/config  
+ 
+[debug] [2020-03-28T20:26:30.318Z] <<< HTTP RESPONSE 200
+[warn] ⚠  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting: Serving hosting files from: ./
+[info] ✔  hosting: Local server: http://localhost:5005
