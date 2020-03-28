@@ -26,6 +26,7 @@ function renderDesigns(designs) {
         let grid = document.getElementById("grid");
         if(grid == null) return;
         grid.innerHTML = "";
+        designs.sort((a, b) => (a.upvotes > b.upvotes) ? -1 : 1);
         designs.forEach(gridItem => {
         // this is where jQuery steps in  
         // var $items = $(
