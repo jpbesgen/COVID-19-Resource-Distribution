@@ -39,6 +39,11 @@ function renderDesigns(designs) {
       designs.forEach(gridItem => {
         // this is where jQuery steps in  
         // var $items = $(
+        let description = gridItem.description;
+        if (description.length > 55) {
+            description = description.substring(0, 56);
+            description +=  "...";
+        }
         if (gridItem.approved){
             $('#grid').append(
             `
@@ -47,7 +52,7 @@ function renderDesigns(designs) {
                 <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Item Attachment 0" />
                 <div class="card-body">
                     <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
-                    <p class="card-text">${gridItem.description}</p>
+                    <p class="card-text item-description">${description}</p>
                     <p class="card-text"><b>3D printer Required:</b> ${gridItem.printerRequired}</p>
                     <p class="card-text"><b>Certified:</b> ${gridItem.certified}</p>
                     <button class="btn btn-block card-text" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
