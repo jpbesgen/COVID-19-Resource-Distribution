@@ -23,10 +23,14 @@ function renderDesigns(designs) {
     $(document).ready(() => {
 
     const $grid = $('#grid').isotope({
-      itemSelector: '.grid-item'
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      masonry: {
+        columnWidth: 30
+      }
     });
 
-    $('.filters-button-group').on( 'click', 'button', function() {
+    $('.dropdown-menu').on( 'click', 'button', function() {
       const filterValue = $( this ).attr('data-filter');
       console.log(filterValue);
       console.log($grid);
@@ -41,14 +45,14 @@ function renderDesigns(designs) {
         // this is where jQuery steps in  
         // var $items = $(
         let description = gridItem.description;
-        if (description.length > 55) {
-            description = description.substring(0, 56);
+        if (description.length > 140) {
+            description = description.substring(0, 141);
             description +=  "...";
         }
         if (gridItem.approved){
-            $('#grid').append(
+            var $items = $(
             `
-            <div class="card ${gridItem.type} ${gridItem.category} grid-item">
+            <div class="grid-item card ${gridItem.type} ${gridItem.category}" style="width: 18em;">
             <h5 class="card-header text-dark">${gridItem.name}</h5>
                 <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Item Attachment 0" />
                 <div class="card-body">

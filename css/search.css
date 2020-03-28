@@ -135,6 +135,7 @@ p {
             .item-description {
                 line-height: 1.2;
                 height: 4.5rem;
+                font-size: 14px;
             }
     .btn-group {
         width: 100%;

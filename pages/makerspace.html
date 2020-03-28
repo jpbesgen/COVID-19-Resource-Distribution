@@ -9,7 +9,7 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/style-phone.css">
-    <link rel="stylesheet" href="../css/search.css" />
+	<link rel="stylesheet" href="../css/search.css" />
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -31,6 +31,8 @@
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
 	<script src="../js/firebase_init.js"></script>
+	<!-- Isotope sorting and filtering -->
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 </head>
 
 <body>
@@ -50,48 +52,47 @@
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Location<h5>
-					<input type="text" class="form-control paremeter-extension" placeholder="City">
-					<hr />
-				</div>
-				<div class="parameter">
-					<h5>Maker Rating<h5>
-					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							# of Stars
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
-						</div>
-					</div>
-					<hr />
-				</div>
-				<div class="parameter">
-					<h5>Delivery Option<h5>
+					<h5>Category<h5>
 					<div class="dropdown">
 						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".n95">N95</button>
+							<button class="dropdown-item" data-filter=".surgical-mask">Surgical Mask</button>
+							<button class="dropdown-item" data-filter=".face-shield">Face Shield</button>
+							<button class="dropdown-item" data-filter=".hospital-gown">Hospital Gown</button>
+							<button class="dropdown-item" data-filter=".goggle">Goggle</button>
+							<button class="dropdown-item" data-filter=".ventilator">Ventilator</button>
+							<button class="dropdown-item" data-filter=".ventilator-part">Ventilator Part</button>
+							<button class="dropdown-item" data-filter=".other">Other</button>
 						</div>
 					</div>
 					<hr />
 				</div>
 				<div class="parameter">
-					<h5>Quantity<h5>
+					<h5>Certification<h5>
 					<div class="dropdown">
 						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							# of Pieces
+							Select
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Option 1</a>
-							<a class="dropdown-item">Option 2</a>
-							<a class="dropdown-item">Option 3</a>
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".certified">Only Certified</button>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>3D Printer Needed<h5>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<button class="dropdown-item" data-filter="*">Yes</button>
+							<button class="dropdown-item" data-filter="*.printerNeeded">No</button>
 						</div>
 					</div>
 				</div>
