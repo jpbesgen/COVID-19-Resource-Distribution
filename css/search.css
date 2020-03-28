@@ -116,7 +116,10 @@ p {
     .card-img-top {
         padding: .5rem .8rem;
         margin: 0;
-        height: 12rem;
+        height: 10rem;
+        width: auto;
+        max-width: 16.5rem;
+        margin: auto;
     }
     .card-body {
         padding: .8rem;

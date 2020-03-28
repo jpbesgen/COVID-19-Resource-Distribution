@@ -7,27 +7,39 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/style-phone.css">
-    <link rel="stylesheet" href="./css/about.css" />
-    <link rel="stylesheet" href="./css/about-phone.css" />
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../css/style-phone.css">
+    <link rel="stylesheet" href="../css/about.css" />
+    <link rel="stylesheet" href="../css/about-phone.css" />
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
-	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
+	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
 	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-	gtag('config', 'UA-161941609-1');
+		gtag('config', 'UA-161941609-1');
 	</script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous"></script>
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="../js/firebase_init.js"></script>
 </head>
 
 <body>
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+    <nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+
 
     <section>
 		<h1>Submit a design!</h1>
@@ -124,16 +136,16 @@
     </form>
 
     <!-- JavaScript -->
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script>
+		// load html components
+		$("#navbar").load("../components/navbar.html");
+	</script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
-    <script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
@@ -143,7 +155,7 @@
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 
-    <script src="./database.js"></script>
+    <script src="../database.js"></script>
 	<script>
 
         document.getElementById("submission_submit").addEventListener("click", (e) => {
@@ -238,9 +250,6 @@
                 db.collection("Designs").doc(design_ref).set(design);
             });
         }
-
-
-
     </script>
 </body>
 

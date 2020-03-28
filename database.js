@@ -37,6 +37,7 @@ function renderDesigns(designs) {
 
     fillGrid = async () => {
       designs.forEach(gridItem => {
+        console.log(designs);
         // this is where jQuery steps in  
         // var $items = $(
         let description = gridItem.description;
