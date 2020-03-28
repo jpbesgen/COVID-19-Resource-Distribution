@@ -1,0 +1,57 @@
+<div class="container-fluid text-center">
+    <!-- Logo -->
+    <a class="navbar-brand" href="../index.html"><img src="../img/maskmanwhite.png" class="logo" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <!-- Right side of Navbar -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Navigation Links -->
+            <li class="nav-item">
+                <a class="nav-link active" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/makerspace.html">Open Source Designs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/faq.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../pages/contact.html">Contact</a>
+            </li>
+            <li class="nav-item" id="navLoginLink">
+                <a class="nav-link" href="../pages/login.html" id="loginLink">Log In</a>
+            </li>
+            <li class="nav-item" id="navLogoutLink" style="display: none;">
+                <img id="prof-img" src="../img/transparent_img.png" style="border-radius: 50%;"/>
+                <a class="nav-link" href="#" id="logoutLink">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user) {
+            $('#prof-img').attr("src", user.photoURL); // replace img with prof pic
+            $('#navLoginLink').hide();
+            $('#navLogoutLink').css("display", "flex");
+        }
+    });
+
+    $('#logoutLink').click(() => {
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            console.log('User Logged Out!');
+            $('#navLogoutLink').css("display", "none");
+            $('#navLoginLink').show();
+        }).catch(function(error) {
+            // An error happened.
+            console.log(error);
+        });
+    })
+</script>

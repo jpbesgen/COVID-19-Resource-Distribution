@@ -7,68 +7,47 @@
 	<!-- Bootstrap CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/style-phone.css">
-	<link rel="stylesheet" href="./css/order-page.css" />
-	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/style-phone.css">
+	<link rel="stylesheet" href="../../css/order-page.css" />
+	<link rel='icon' href='../../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
 	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-161941609-1');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-161941609-1');
 	</script>
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous"></script>
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="../../js/firebase_init.js"></script>
 </head>
 
 <body>
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-md navbar-light navbar-custom bg-light">
-		<div class="container-fluid text-center">
-			<!-- Logo -->
-			<a class="navbar-brand" href="./index.html"><img src="./img/maskmanwhite.png" class="logo" /></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<!-- Right side of Navbar -->
-				<ul class="navbar-nav ml-auto">
-					<!-- Navigation Links -->
-					<li class="nav-item">
-						<a class="nav-link active" href="./index.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./makerspace.html">Open Source Designs</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./about.html">About Us</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./faq.html">FAQ</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./contact.html">Contact</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
 
 	<div class="jumbotron">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-3 col-xs-12">
 					<div class="card mb-5" style="width: 18rem;">
-						<img src="./img/team1.png" class="card-img-top" alt="Maker">
+						<img src="../../img/team1.png" class="card-img-top" alt="Maker">
 						<div class="card-body">
 						  <h5 class="card-title">Maker Profile</h5>
 						  <p class="card-text">Description.</p>
 						</div>
 					</div>
 					<div class="card mb-4" style="width: 18rem;">
-						<img src="./img/team1.png" class="card-img-top" alt="Maker">
+						<img src="../../img/team1.png" class="card-img-top" alt="Maker">
 						<div class="card-body">
 						  <h5 class="card-title">Item Description</h5>
 						  <p class="card-text">Description.</p>
@@ -78,7 +57,7 @@
 				<div class="col-9 col-xs-12">
 					<h3>Medical Professional Profile</h3>
 					<div class="media">
-						<img class="mr-3 professional-image" src="./img/team1.png" alt="Generic placeholder image" />
+						<img class="mr-3 professional-image" src="../../img/team1.png" alt="Generic placeholder image" />
 						<div class="media-body">
 							<h5 class="mt-0">A Title</h5>
 							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
@@ -93,7 +72,7 @@
 			<div class="row">
 				<!-- Cancel -->
 				<div class="form-group col-6">
-					<a href="./search-results.html"><button type="reset" class="btn btn-primary btn-block">Cancel</button></a>
+					<a href="../search/search-results.html"><button type="reset" class="btn btn-primary btn-block">Cancel</button></a>
 				</div>
 				<!-- Submit Order -->
 				<div class="form-group col-6">
@@ -124,16 +103,16 @@
 	</footer>
 
 	<!-- JavaScript -->
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script>
+		// load html components
+		$("#navbar").load("../../components/navbar.html");
+	</script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
-	<script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+	<script src="../../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
