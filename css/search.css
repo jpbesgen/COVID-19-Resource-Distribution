@@ -25,6 +25,9 @@ hr {
     margin-top: 17px;
     margin-bottom: 17px;
 }
+p {
+    font-size: 1.6rem;
+}
 
 .description {
     margin: 1rem 1rem 1rem 3rem;
