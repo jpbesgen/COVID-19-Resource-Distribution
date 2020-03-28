@@ -3,3 +3,9 @@
     font-weight: 400;
     color: #3B628B;
 }
+.btn {
+    border: 1px solid #3B628B;
+    width: 30%;
+    font-size: 24px;
+    color: #7A98AF;
+}

@@ -83,12 +83,13 @@ p {
     background-color: #7a98af;
     color: white;
     border-radius: 5px;
+    margin-left: 3rem;
 }
     .proposal {
         width: 88%;
     }
     .listing {
-        width: 64%;
+        width: 54%;
     }
 
 .body-content {
