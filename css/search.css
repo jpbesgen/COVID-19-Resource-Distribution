@@ -106,9 +106,39 @@ p {
 .card-columns {
     column-count: 4;
 }
-    /* .card {
-        width: 20%;
-    } */
+    .card-header {
+        font-size: 36px;
+        font-weight: 300;
+        background-color: white;
+        padding: .3rem 0 0 .7rem;
+        border-bottom: 2px solid #3B628B;
+    }
+    .card-img-top {
+        padding: .5rem;
+        padding-left: .8rem;
+        margin: 0;
+        width: 10rem;
+
+    }
+    .card-body {
+        padding: .8rem;
+        padding-top: 0;
+    }
+        .card-text {
+            font-size: 20px;
+            font-weight: 300;
+            color: #000000;
+            margin: .4rem 0;
+            padding: 0;
+        }
+    .btn-group {
+        width: 100%;
+        border-top: 2px solid #3B628B;
+    }
+    .btn-block {
+        margin-top: .7rem;
+        border: 1px solid #3B628B;
+    }
 
 .modal-title {
     color: black;

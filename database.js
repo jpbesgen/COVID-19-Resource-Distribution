@@ -36,8 +36,6 @@ function renderDesigns(designs) {
     // });
 
     fillGrid = async () => {
-      // This is where the api call goes
-      const response = await designs;
       designs.forEach(gridItem => {
         // this is where jQuery steps in  
         // var $items = $(
@@ -45,22 +43,20 @@ function renderDesigns(designs) {
             $('#grid').append(
             `
             <div class="card ${gridItem.type} ${gridItem.category} grid-item">
-                <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
+            <h5 class="card-header text-dark">${gridItem.name}</h5>
+                <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Item Attachment 0" />
                 <div class="card-body">
-                <h5 class="card-title text-dark">${gridItem.name}</h5>
-                <p class="card-text">${gridItem.category}</p>
-                <p class="card-text">${gridItem.description}</p>
-                <p class="card-text">${gridItem.printerRequired}</p>
-                <p class="card-text">${gridItem.certified}</p>
-                <hr style="border-top: 1px solid black;margin: 0;" />
-                <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item">
-                    <button class="btn btn-block" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
-                    </li>
-                    <li class="list-group-item"><button class="btn btn-block">upvote</button></li>
-                    <li class="list-group-item"><button class="btn btn-block">downvote</button></li>
-                </ul>
+                    <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
+                    <p class="card-text">${gridItem.description}</p>
+                    <p class="card-text"><b>3D printer Required:</b> ${gridItem.printerRequired}</p>
+                    <p class="card-text"><b>Certified:</b> ${gridItem.certified}</p>
+                    <button class="btn btn-block card-text" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
+
                 </div>
+                <div class="btn-group">
+                    <button class="btn">Upvote</button>
+                    <button class="btn">Downvote</button> 
+                </div>               
             </div>
 
             <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
@@ -74,9 +70,10 @@ function renderDesigns(designs) {
                     </div>
                     <div class="modal-body">
                     <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Card image cap">
-                    <p class="card-text">${gridItem.category}</p>
+                    <p class="card-text">Category: ${gridItem.category}</p>
                     <p class="card-text">${gridItem.description}</p>
-                    <p class="card-text">${gridItem.certified}</p>
+                    <p class="card-text">3D printer Required: ${gridItem.printerRequired}</p>
+                    <p class="card-text">Certified: ${gridItem.certified}</p>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
