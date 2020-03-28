@@ -52,7 +52,7 @@ function renderDesigns(designs) {
         if (gridItem.approved){
             var $items = $(
             `
-            <div class="grid-item card ${gridItem.type} ${gridItem.category}" style="width: 18em;">
+            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
             <h5 class="card-header text-dark">${gridItem.name}</h5>
                 <img class="card-img-top" src="${gridItem.attachments[0]}" alt="Item Attachment 0" />
                 <div class="card-body">
@@ -93,6 +93,7 @@ function renderDesigns(designs) {
             </div>
             `
             );
+            console.log($items);
             // append items to grid
             $grid.append( $items )
                 .isotope( 'appended', $items );
