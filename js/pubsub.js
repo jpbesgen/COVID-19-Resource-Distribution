@@ -3,7 +3,7 @@ class PubSub {
         this.events = {};
     }
 
-    subscribe(event_name, fn) {
+    on(event_name, fn) {
         if(this.events[event_name] == null) {
             this.events[event_name] = [];
         }
@@ -22,7 +22,9 @@ class PubSub {
     }
 
     publish(event_name, data={}) {
+        console.log(event_name);
         if(this.events[event_name] == null) return;
+        console.log("exist");
         this.events[event_name].forEach((fn) => {
             fn(data);
         });
@@ -32,11 +34,15 @@ let EventStore = new PubSub();
 
 class ComponentManager {
     constructor() {
-        this.roots = {};
+        this.roots = []; // {};
+
+        this.addRootComponent = this.addRootComponent.bind(this);
+        this.renderAll = this.renderAll.bind(this);
     }
 
     addRootComponent(component) {
-        this.roots[component.id] = component;
+        this.roots.push(component);
+        //this.roots[component.id] = component;
     }
 
     deleteComponent(id) {
@@ -46,7 +52,6 @@ class ComponentManager {
             delete this.roots[component.id]
         } else {
             root.parent.removeChild(root);
-            delete root;
         }
     }
 
@@ -71,7 +76,7 @@ class ComponentManager {
             vclosed = [];
         while(vopen.length > 0) {
             let child = vopen.shift();
-            child.render();
+            child.display();
             vclosed.push(child);
             child.children.forEach((c) => vopen.push(c))
         }
@@ -80,11 +85,11 @@ class ComponentManager {
 
     renderAll() {
         let vclosed = [];
-        this.roots.keys().forEach((key) => {
-            let vopen = [this.roots[key]];
+        this.roots.forEach((component) => {
+            let vopen = [component];
             while(vopen.length > 0) {
-                let child = vopen.shift();
-                child.render();
+                let child = vopen.pop();
+                child.update();
                 vclosed.push(child);
                 child.children.forEach((c) => vopen.push(c))
             }
@@ -99,7 +104,13 @@ class Component {
         this.parent = null;
         this.children = [];
         this.state = {};
+        this.props = {};
         this.id = id || generateRandomId();
+        this.changed = true;
+    }
+
+    pushProps(newProps) {
+        this.props = newProps;
     }
 
     setState(s) {
@@ -113,11 +124,17 @@ class Component {
     }
 
     update() {
+        if(this.changed) this.display();
+        this.changed = false;
+    }
+
+    // Should return an html string like `<p>content</p>`
+    render() {
 
     }
 
-    render() {
-
+    display() {
+        document.getElementById(this.id).innerHTML = this.render();
     }
 
     addChild(component) {
