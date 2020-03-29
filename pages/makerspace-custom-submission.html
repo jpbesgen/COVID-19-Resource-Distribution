@@ -49,14 +49,14 @@
 	</section>
 
 	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
-    
+
     <form class="form">
-        <div class="form-row">	
-            <div class="form-group col-xs-12 col-6">	
+        <div class="form-row">
+            <div class="form-group col-xs-12 col-6">
                 <label for="name">Design Name</label>
                 <input  class="form-control" placeholder="Design Name" id="submission_name" name="name" type="text" />
-            </div>	
-            <div class="form-group col-xs-12 col-6">	
+            </div>
+            <div class="form-group col-xs-12 col-6">
                 <label for="category">Category</label>
                 <select class="form-control" name="category" id="submission_category">
                     <option value="n95">N95</option>
@@ -69,17 +69,17 @@
                     <option value="disposableBooties">Disposable Booties</option>
                     <option value="other">Other</option>
                 </select>
-            </div>	
-        </div>	
+            </div>
+        </div>
 
-        <div class="form-row">		
+        <div class="form-row">
             <div class="form-group col-12">
                 <label for="description">Description</label>
                 <textarea class="form-control" placeholder="Description" id="submission_description" name="description"></textarea>
             </div>
-        </div>	
-        
-        <div class="form-row">		
+        </div>
+
+        <div class="form-row">
             <div class="form-group col-12">
                 <label for="certified">Certified</label>
                 <p>Certification will be qualified as having the design certified by the NIH, CDC, ECDC, or on equivalent organization. In progress will indicate the design is in process of approval but has not yet reached it. </p>
@@ -89,7 +89,7 @@
                     <option value="inProgress">In Progress</option>
                 </select>
             </div>
-        </div>	
+        </div>
 
         <div class="form-row">
             <div class="form-group col-12">
@@ -98,25 +98,25 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-6">
+            <div class="form-group col-xs-12 col-6">
                 <label for="difficulty">Difficulty Level (1 Being Easy and 5 Being Hard)</label>
                 <input class="form-control" type="number" max="5" min="1" name="difficulty" id="submission_difficulty"/>
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-xs-12 col-6">
                 <label for="3d">3D Printer Required?</label>
                 <select class="form-control" id="submission_3d" name="3d">
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
             </div>
-        </div>	
+        </div>
 
         <div class="form-row">
             <div class="form-group col-12">
                 <label for="links">Links (Links separated by commas)</label>
                 <textarea class="form-control" placeholder="Links" type="text" name="links" id="submission_links"></textarea>
             </div>
-        </div>	
+        </div>
 
         <div class="form-row">
             <div class="form-group col-12">
@@ -124,7 +124,7 @@
                 <p>Intended for Pictures (JPG, PNG)</p>
                 <input class=".form-control-file." type="file" name="images" id="submission_images" multiple/>
             </div>
-        </div>	
+        </div>
 
         <div class="form-row">
             <div class="form-group col-12">
@@ -132,7 +132,7 @@
                 <p>Intended for PDFs, CAD files, etc...</p>
                 <input class=".form-control-file." type="file" name="attachments" id="submission_attachments" multiple/>
             </div>
-        </div>	
+        </div>
 
         <div class="form-row">
             <div class="form-group col-12">
@@ -140,14 +140,14 @@
                 <p>Give credit where credit is due. Who made this design possible?</p>
                 <input class="form-control" type="text" name="credit" id="submission_credit"/>
             </div>
-        </div>	
+        </div>
 
-        <div class="form-row justify-content-center">	
-            <!-- Submit -->	
-            <div class="form-group col-6">	
-                <input type="button" value="Submit" class="form-control submit" id="submission_submit" />	
-            </div>	
-        </div>	
+        <div class="form-row justify-content-center">
+            <!-- Submit -->
+            <div class="form-group col-6">
+                <input type="button" value="Submit" class="form-control submit" id="submission_submit" />
+            </div>
+        </div>
     </form>
 
     <style>
@@ -213,7 +213,7 @@
             name = name.value;
             if(name == null || name.trim() == "") throw new Error("Please enter the name of your design!");
             design["name"] = name;
-            
+
             category = category.value;
             if(category == null) throw new Error("Invalid Category");
             design["category"] = category;
