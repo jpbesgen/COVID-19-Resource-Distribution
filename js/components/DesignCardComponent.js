@@ -82,10 +82,40 @@ class DesignCardComponent extends Component {
     render() {
         let { design } = this.props;
 
+        // shorten description
         let description = design.description;
         if (description.length > 140) {
             description = description.substring(0, 141);
             description +=  "...";
+        }
+
+        // shorten title if necessary
+        let name = design.name;
+        if (name.length > 14) {
+            name = name.substring(0, 14);
+            name +=  "...";
+        }
+
+        // media queries for modal title formatting
+        const mq1 = window.matchMedia( "(max-width: 480px)" );
+        const mq2 = window.matchMedia( "(min-width: 1000px)" );
+
+        let cutoff = 0;
+        if (mq2.matches) {
+          cutoff = 25;
+        } else {
+          cutoff = 13;
+        }
+
+        let modalName = "";
+        let wordsInName = design.name.split(" ");
+        for (let i = 0; i < wordsInName.length; i++) {
+          if (wordsInName[i].length > cutoff) {
+            modalName += wordsInName[i].substring(0, cutoff - 4) + "...";
+          } else {
+            modalName += wordsInName[i];
+          }
+          modalName += " ";
         }
 
         // create downloadable links
@@ -99,7 +129,7 @@ class DesignCardComponent extends Component {
                 }
             });
         }
-        
+
         let links = ``;
         if(design.links != null && design.links.length > 0) {
             links = `Links: `
@@ -161,7 +191,7 @@ class DesignCardComponent extends Component {
         }
 
         return `
-            <h5 class="card-header text-dark">${design.name}</h5>
+            <h5 class="card-header text-dark">${name}</h5>
             <img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
             <div class="card-body">
                 <figure class="figure">
@@ -179,14 +209,14 @@ class DesignCardComponent extends Component {
                 <span class="btn" id="${this.cardfront_upvotes_id}">${design.upvotes}</span>
                 <button id="downvote-btn-${design.id}" class="btn">
                     <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
-                </button> 
+                </button>
             </div>
-            
+
             <div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="${design.id}ModalLabel">${design.name}</h5>
+                            <h5 class="modal-title" id="${design.id}ModalLabel">${modalName}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
