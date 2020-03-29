@@ -30,17 +30,49 @@ p {
 }
 
 .description {
-    margin: 1rem 1rem 1rem 3rem;
+    margin: 1rem 2rem 1rem 3rem;
     font-size: 1.25rem;
     color: #000000;
     font-weight: 300;
 }
-.sidebar {
+
+.text {
+    margin-bottom: 2rem;
+    margin-right: 3rem;
+}
+.sidebar-button {
+    font-size: 20px;
+}
+.first-button {
+    margin-left: 3rem;
+}
+.closebtn {
+    margin-top: 1.5rem;
+    font-size: 24px;
+}
+
+.body-content {
     background-color: #7a98af;
+    height: 100%;
+}
+.item-area {
+    background-color: white;
+    padding-bottom: 2rem;
+}
+.row {
+    height: 100%;
+}
+.sidebar {
+    background-color: #99ADC3;
     width: 100%;
     height: 100%;
-    /* HEIGHT TOGGLER */
-    padding-bottom: 13.3%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
 }
     .logo-div {
         margin-top: 34px;
@@ -74,6 +106,9 @@ p {
                 border-color: #7A98AF;
             }
     
+#main {
+    transition: margin-left .5s;
+    }
 .add {
     margin: 24px 0px 18px 40px;
     color: #7A98AF;
@@ -92,18 +127,13 @@ p {
         width: 54%;
     }
 
-.body-content {
-    background-color: #7a98af;
-}
-.item-area {
-    background-color: white;
-    padding-bottom: 2rem;
-}
-
 .airtable-embed {
     margin: 0 1rem 3rem 1rem;
 }
 
+#card {
+    width: 23%;
+}
 .card-columns {
     column-count: 4;
 }
@@ -119,7 +149,7 @@ p {
         margin: 0;
         height: 10rem;
         width: auto;
-        max-width: 16.5rem;
+        max-width: 100%;
         margin: auto;
     }
     .card-body {

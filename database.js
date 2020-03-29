@@ -77,9 +77,9 @@ function renderDesigns(designs) {
 
         if (gridItem.approved){
             var $items = $(
-                `
-            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
-            <h5 class="card-header text-dark">${gridItem.name}</h5>
+            `
+            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired} item-card">
+                <h5 class="card-header text-dark">${gridItem.name}</h5>
                 <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
                 <div class="card-body">
                     <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
@@ -93,6 +93,7 @@ function renderDesigns(designs) {
                     <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button> 
                 </div>               
             </div>
+
            <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
