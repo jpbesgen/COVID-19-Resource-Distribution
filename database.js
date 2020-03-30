@@ -78,7 +78,7 @@ function renderDesigns(designs) {
         if (gridItem.approved){
             var $items = $(
             `
-            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired} item-card">
+            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}">
                 <h5 class="card-header text-dark">${gridItem.name}</h5>
                 <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
                 <div class="card-body">

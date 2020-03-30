@@ -64,7 +64,6 @@ p {
 }
 .sidebar {
     background-color: #99ADC3;
-    width: 100%;
     height: 100%;
     width: 0;
     position: fixed;
