@@ -1,4 +1,6 @@
-let designCards = {};
+let designCards = {},
+    latestSnapshot = null,
+    initialRendered = false;
 
 // TODO:
 // Take the array of design data and format into a bootstrap card
@@ -59,12 +61,10 @@ function renderDesigns(designs) {
 
     fillGrid().then(() => {
         ComponentTree.renderAll().then(() => {
-            setTimeout(() => {
-                var el = document; // This can be your element on which to trigger the event
-                if (window.CustomEvent) {
-
-                }
-            }, 1000);
+            if(!initialRendered) {
+                handleDesigns(latestSnapshot).then(renderDesigns);
+            }
+            initialRendered = true;
         });
         // enable carousel
         $(".owl-carousel").owlCarousel({
@@ -130,6 +130,7 @@ async function fetchCommentsForDesign(doc) {
 // Creates a listener that updates the designs whenever there is a change
 function listenForDesigns() {
     db.collection("Designs").onSnapshot((querySnapshot) => {
+        latestSnapshot = querySnapshot;
         handleDesigns(querySnapshot).then(renderDesigns);
     }, (error) => {
         console.log(error);
@@ -239,3 +240,9 @@ function isAuthenticated() {
 function getUser() {
     return auth.user == null ? auth.currentUser : auth.user;
 }
+
+/*
+
+
+
+*/
