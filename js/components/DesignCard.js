@@ -3,7 +3,7 @@ class CommentsComponent extends Component {
         super(id || null);
         this.props = props;
         this.handleCommentsChange = this.handleCommentsChange.bind(this);
-        EventStore.on("CommentsChange", this.handleCommentsChange);
+        EventStore.on("CommentsChange-" + this.id, this.handleCommentsChange);
     }
 
     handleCommentsChange(data) {
@@ -42,7 +42,9 @@ class CommentsComponent extends Component {
             ${addCommentDisplay}
         `;
 
-        return content;
+        return {
+            content
+        };
     }
 }
 
@@ -51,7 +53,7 @@ class UpvotesComponent extends Component {
         super(id);
         this.props = props;
         this.handleUpvotesChange = this.handleUpvotesChange.bind(this);
-        EventStore.on("UpvotesChange", this.handleUpvotesChange);
+        EventStore.on("UpvotesChange-" + this.id, this.handleUpvotesChange);
     }
 
     handleUpvotesChange(data) {
@@ -69,7 +71,9 @@ class UpvotesComponent extends Component {
         `
             ${upvotes} Upvotes
         `;
-        return content;
+        return {
+            content
+        }
     }
 }
 
@@ -107,7 +111,7 @@ class DesignCard extends Component {
             // check comments
             if(newDesign.comments != design.comments) {
                 let { retrievedComments } = newDesign;
-                EventStore.publish("CommentsChange", {
+                EventStore.publish("CommentsChange-" + this.comments_id, {
                     comments: retrievedComments
                 });
             }
@@ -115,7 +119,7 @@ class DesignCard extends Component {
             // check upvotes
             if(newDesign.upvotes != design.upvotes) {
                 let { upvotes } = newDesign;
-                EventStore.publish("UpvotesChange", {
+                EventStore.publish("UpvotesChange-" + this.upvotes_id, {
                     upvotes
                 });
             }
@@ -162,6 +166,18 @@ class DesignCard extends Component {
             });
         }
 
+        function afterCall() {
+                console.log("aftercall");
+                $('#details-tab-' + design.id + ' a').on('click', function (e) {
+                    console.log(this);
+                    e.preventDefault()
+                    $('#details-tab-' + design.id + ' a').tab('show')
+                })
+                $('#comments-tab-' + design.id + ' a').on('click', function (e) {
+                    e.preventDefault()
+                    $('comments-tab-' + design.id + ' a').tab('show')
+                })
+        }
 
         let content = `
 	<h5 class="card-header text-dark">${design.name}</h5>
@@ -204,29 +220,43 @@ class DesignCard extends Component {
 							<h3 class="community-title">Community Score</h3>
 							<p id="${this.upvotes_id}" class="community-text">${design.upvotes} Upvotes</p>
 						</div>
-						<div id="${this.comments_id}" class="comments">
-						</div>
 					</div>
 				</div>
-			</div>
-				<p class="modal-text"><b>Category</b><br />${design.category}</p>
-				<p class="modal-text"><b>Description</b><br />${design.description}</p>
-				<p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
-                <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
-                ${design.certified == "yes" ? 
-                `
-                    <p class="modal-text">
-                        <b>Certification Link</b>
-                        <br />
-                        <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
-                    </p>` : 
-                    ``
-                }
-				<p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
-				<p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
-                Links: ${links}
-                <br/>
-				Attachments: ${downloads}
+            </div>
+            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                <li class="nav-item" id="details-tab-${design.id}">
+                    <a class="nav-link active" id="details-tab-link" data-toggle="tab" href="#details-page-${design.id}" role="tab" aria-controls="details-page-${design.id}" aria-selected="true">Details</a>
+                </li>
+                <li class="nav-item" id="comments-tab-${design.id}">
+                    <a class="nav-link" id="comments-tab-link" data-toggle="tab" href="#comments-page-${design.id}" role="tab" aria-controls="comments-page-${design.id}" aria-selected="false">Comments</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="tab-content-${design.id}">
+                <div class="tab-pane fade show active" id="details-page-${design.id}" role="tabpanel" aria-labelledby="details">
+                    <p class="modal-text"><b>Category</b><br />${design.category}</p>
+                    <p class="modal-text"><b>Description</b><br />${design.description}</p>
+                    <p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
+                    <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
+                    ${design.certifiedLink != null && design.certified == "yes" ? 
+                    `
+                        <p class="modal-text">
+                            <b>Certification Link</b>
+                            <br />
+                            <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
+                        </p>` : 
+                        ``
+                    }
+                    <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
+                    <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
+                    Links: ${links}
+                    <br/>
+                    Attachments: ${downloads}
+                </div>
+                <div class="tab-pane fade" id="comments-page-${design.id}" role="tabpanel" aria-labelledby="comments">
+                    <div id="${this.comments_id}" class="comments">
+                    </div>
+                </div>
+            </div>
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -235,6 +265,9 @@ class DesignCard extends Component {
     </div>
         `;
 
-        return content;
+        return {
+            content,
+            afterCall: afterCall(design)
+        }
     }
 }

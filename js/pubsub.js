@@ -135,7 +135,9 @@ class Component {
     }
 
     display() {
-        document.getElementById(this.id).innerHTML = this.render();
+        let rendered = this.render();
+        document.getElementById(this.id).innerHTML = rendered.content;
+        if(rendered.afterCall != null) rendered.afterCall();
     }
 
     addChild(component) {
