@@ -187,3 +187,12 @@ p {
     background-size:contain;
     background-position: center;
 }
+
+.comment-divider {
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.comments-container {
+    height: 200px;
+    overflow: scroll;
+}

@@ -62,7 +62,7 @@ function renderDesigns(designs) {
             retrievedComments.forEach((comment) => {
                 comments += `<p class="modal-text" id="${comment.id}-comment">${comment.content} <b>from ${comment.author}</b></p>`;
                 if(comment != retrievedComments[retrievedComments.length - 1]) {
-                    comments += `<br/>`;
+                    comments += `<hr class="comment-divider"/>`;
                 }
             });
         }
@@ -122,7 +122,9 @@ function renderDesigns(designs) {
                                     </div>
                                     <div class="comments">
                                         <h3 class="community-title">Comments</h3>
-                                        <p class="community-text">${comments}</p>
+                                        <div class="comments-container">
+                                            <p class="community-text">${comments}</p>
+                                        </div>
                                         ${getUser() == null ? "" : addCommentDisplay}
                                     </div>
                                 </div>
