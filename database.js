@@ -233,8 +233,12 @@ function hasUpvoted(design_id) {
   let user = getUser();
   db.collection("Users").doc(user.uid).get().then((snapshot) => {
       let doc = snapshot.data();
-      if(doc.upvotes != null) {
-          return doc.upvotes.includes(design_id);
+      if(doc.upvotes == null) {
+        return false;
+      }
+      if(doc.upvotes.includes(design_id)) {
+        console.log("has upvoted");
+        return true;
       } else {
         return false;
       }
@@ -245,8 +249,12 @@ function hasDownvoted(design_id) {
   let user = getUser();
   db.collection("Users").doc(user.uid).get().then((snapshot) => {
       let doc = snapshot.data();
-      if(doc.downvotes != null) {
-          return doc.downvotes.includes(design_id);
+      if(doc.downvotes == null) {
+        return false;
+      }
+      if(doc.downvotes.includes(design_id)) {
+        console.log("has downvoted");
+        return true;
       } else {
         return false;
       }
@@ -260,26 +268,28 @@ function upvote(design_id) {
     }
 
     // check if user has already voted on this design
-    if(!hasUpvoted() && !hasDownvoted()) {
-      // update user's upvotes array
-      db.collection("Users").doc(user.uid).get().then((snapshot) => {
-          let doc = snapshot.data();
-          if(doc.upvotes == null) {
-              doc.upvotes = [];
-          }
-          doc.upvotes.push(design_id);
-          db.collection("Users").doc(user.uid).set(doc);
-      });
-      // update design's upvote count
-      db.collection("Designs").doc(design_id).get().then((snapshot) => {
-          let doc = snapshot.data();
-          doc.upvotes += 1;
-          db.collection("Designs").doc(design_id).set(doc);
-      });
-    } else {
+    if(hasUpvoted(design_id) || hasDownvoted(design_id)) {
+      console.log("already voted");
       alert("You've already voted on this design!");
       return;
     }
+
+    let user = getUser();
+    // update user's upvotes array
+    db.collection("Users").doc(user.uid).get().then((snapshot) => {
+        let doc = snapshot.data();
+        if(doc.upvotes == null) {
+            doc.upvotes = [];
+        }
+        doc.upvotes.push(design_id);
+        db.collection("Users").doc(user.uid).set(doc);
+    });
+    // update design's upvote count
+    db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.upvotes += 1;
+        db.collection("Designs").doc(design_id).set(doc);
+    });
 }
 
 function downvote(design_id) {
@@ -289,26 +299,28 @@ function downvote(design_id) {
     }
 
     // check if user has already voted on this design
-    if(!hasUpvoted() and !hasDownvoted()) {
-      // update user's downvotes array
-      db.collection("Users").doc(user.uid).get().then((snapshot) => {
-          let doc = snapshot.data();
-          if(doc.upvotes == null) {
-              doc.upvotes = [];
-          }
-          doc.upvotes.push(design_id);
-          db.collection("Users").doc(user.uid).set(doc);
-      });
-      // update design's upvote count
-      db.collection("Designs").doc(design_id).get().then((snapshot) => {
-          let doc = snapshot.data();
-          doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-          db.collection("Designs").doc(design_id).set(doc);
-      });
-    } else {
+    if(hasUpvoted(design_id) || hasDownvoted(design_id)) {
+      console.log("already voted");
       alert("You've already voted on this design!");
       return;
     }
+
+    let user = getUser();
+    // update user's downvotes array
+    db.collection("Users").doc(user.uid).get().then((snapshot) => {
+        let doc = snapshot.data();
+        if(doc.downvotes == null) {
+            doc.downvotes = [];
+        }
+        doc.downvotes.push(design_id);
+        db.collection("Users").doc(user.uid).set(doc);
+    });
+    // update design's upvote count
+    db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
+        db.collection("Designs").doc(design_id).set(doc);
+    });
 }
 
 function addComment(design_id) {
