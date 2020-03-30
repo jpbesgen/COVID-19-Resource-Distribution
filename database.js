@@ -27,7 +27,7 @@ function renderDesigns(designs) {
         if(grid == null) return;
         grid.innerHTML = "";
         designs.forEach(gridItem => {
-        // this is where jQuery steps in  
+        // this is where jQuery steps in
         // var $items = $(
         let description = gridItem.description;
         if (description.length > 140) {
@@ -45,7 +45,7 @@ function renderDesigns(designs) {
                 }
             });
         }
-        
+
         let links = ``;
         if(gridItem.links != null && gridItem.links.length > 0) {
             gridItem.links.forEach((link) => {
@@ -67,8 +67,8 @@ function renderDesigns(designs) {
             });
         }
 
-        
-        let addCommentDisplay = 
+
+        let addCommentDisplay =
         `
             <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
             <small class="form-text text-muted">from ${getUser() == null ? "" : getUser().displayName}</small>
@@ -90,8 +90,8 @@ function renderDesigns(designs) {
                 </div>
                 <div class="btn-group">
                     <button onClick="upvote('${gridItem.id}')" class="btn">Upvote</button>
-                    <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button> 
-                </div>               
+                    <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button>
+                </div>
             </div>
            <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
@@ -193,7 +193,7 @@ async function handleDesigns(querySnapshot) {
             });
         })
     }
-    
+
     let commentFetches = []
     querySnapshot.forEach((snapshot) => {
         let doc = snapshot.data()
@@ -229,16 +229,57 @@ if(document.getElementById("grid") != null) {
     listenForDesigns();
 }
 
+function hasUpvoted(design_id) {
+  let user = getUser();
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      if(doc.upvotes != null) {
+          return doc.upvotes.includes(design_id);
+      } else {
+        return false;
+      }
+  });
+}
+
+function hasDownvoted(design_id) {
+  let user = getUser();
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      if(doc.downvotes != null) {
+          return doc.downvotes.includes(design_id);
+      } else {
+        return false;
+      }
+  });
+}
+
 function upvote(design_id) {
     if(!isAuthenticated()) {
         alert("Please login to vote on submissions!");
         return;
     }
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes += 1;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
+
+    // check if user has already voted on this design
+    if(!hasUpvoted() && !hasDownvoted()) {
+      // update user's upvotes array
+      db.collection("Users").doc(user.uid).get().then((snapshot) => {
+          let doc = snapshot.data();
+          if(doc.upvotes == null) {
+              doc.upvotes = [];
+          }
+          doc.upvotes.push(design_id);
+          db.collection("Users").doc(user.uid).set(doc);
+      });
+      // update design's upvote count
+      db.collection("Designs").doc(design_id).get().then((snapshot) => {
+          let doc = snapshot.data();
+          doc.upvotes += 1;
+          db.collection("Designs").doc(design_id).set(doc);
+      });
+    } else {
+      alert("You've already voted on this design!");
+      return;
+    }
 }
 
 function downvote(design_id) {
@@ -246,11 +287,28 @@ function downvote(design_id) {
         alert("Please login to vote on submissions!");
         return;
     }
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
+
+    // check if user has already voted on this design
+    if(!hasUpvoted() and !hasDownvoted()) {
+      // update user's downvotes array
+      db.collection("Users").doc(user.uid).get().then((snapshot) => {
+          let doc = snapshot.data();
+          if(doc.upvotes == null) {
+              doc.upvotes = [];
+          }
+          doc.upvotes.push(design_id);
+          db.collection("Users").doc(user.uid).set(doc);
+      });
+      // update design's upvote count
+      db.collection("Designs").doc(design_id).get().then((snapshot) => {
+          let doc = snapshot.data();
+          doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
+          db.collection("Designs").doc(design_id).set(doc);
+      });
+    } else {
+      alert("You've already voted on this design!");
+      return;
+    }
 }
 
 function addComment(design_id) {
@@ -295,7 +353,7 @@ function removeComment(comment_id) {
         let doc = snapshot.data(),
             design_id = doc.design,
             uid = doc.uid;
-        
+
         db.collection("Users").doc(uid).get().then((user) => {
             user = user.data();
             for(let i = user.comments.length - 1; i >= 0; i--) {
