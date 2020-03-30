@@ -167,16 +167,16 @@ class DesignCard extends Component {
         }
 
         function afterCall() {
-                console.log("aftercall");
-                $('#details-tab-' + design.id + ' a').on('click', function (e) {
-                    console.log(this);
-                    e.preventDefault()
-                    $('#details-tab-' + design.id + ' a').tab('show')
-                })
-                $('#comments-tab-' + design.id + ' a').on('click', function (e) {
-                    e.preventDefault()
-                    $('comments-tab-' + design.id + ' a').tab('show')
-                })
+            console.log("aftercall");
+            $('#details-tab-' + design.id + ' a').on('click', function (e) {
+                e.preventDefault()
+                $('#details-tab-' + design.id + ' a').tab('show')
+                $('.nav-link').show();
+            })
+            $('#comments-tab-' + design.id + ' a').on('click', function (e) {
+                e.preventDefault()
+                $('comments-tab-' + design.id + ' a').tab('show')
+            })
         }
 
         let content = `
@@ -223,12 +223,13 @@ class DesignCard extends Component {
 					</div>
 				</div>
             </div>
-            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+            <br/>
+            <ul class="nav nav-tabs nav-justified navbar-dark bg-dark" id="myTab" role="tablist">
                 <li class="nav-item" id="details-tab-${design.id}">
-                    <a class="nav-link active" id="details-tab-link" data-toggle="tab" href="#details-page-${design.id}" role="tab" aria-controls="details-page-${design.id}" aria-selected="true">Details</a>
+                    <a class="nav-link active show" id="details-tab-link" data-toggle="tab" href="#details-page-${design.id}" role="tab" aria-controls="details-page-${design.id}" aria-selected="true">Details</a>
                 </li>
                 <li class="nav-item" id="comments-tab-${design.id}">
-                    <a class="nav-link" id="comments-tab-link" data-toggle="tab" href="#comments-page-${design.id}" role="tab" aria-controls="comments-page-${design.id}" aria-selected="false">Comments</a>
+                    <a class="nav-link show" id="comments-tab-link" data-toggle="tab" href="#comments-page-${design.id}" role="tab" aria-controls="comments-page-${design.id}" aria-selected="false">Comments</a>
                 </li>
             </ul>
             <div class="tab-content" id="tab-content-${design.id}">
