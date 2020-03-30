@@ -22,9 +22,7 @@ class PubSub {
     }
 
     publish(event_name, data={}) {
-        console.log(event_name);
         if(this.events[event_name] == null) return;
-        console.log("exist");
         this.events[event_name].forEach((fn) => {
             fn(data);
         });

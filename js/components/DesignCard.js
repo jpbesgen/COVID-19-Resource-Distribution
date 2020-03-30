@@ -60,16 +60,41 @@ class UpvotesComponent extends Component {
         let { upvotes } = data;
         this.props.upvotes = upvotes;
         this.changed = true;
-        console.log(upvotes);
         this.update();
     }
 
     render() {
         let { upvotes } = this.props;
-        console.log("RENDERING: " + upvotes);
         let content = 
         `
             ${upvotes} Upvotes
+        `;
+        return {
+            content
+        }
+    }
+}
+
+class CardfrontUpvotesComponent extends Component {
+    constructor(id, props) {
+        super(id);
+        this.props = props;
+        this.handleUpvotesChange = this.handleUpvotesChange.bind(this);
+        EventStore.on("UpvotesChange-" + this.id, this.handleUpvotesChange);
+    }
+
+    handleUpvotesChange(data) {
+        let { upvotes } = data;
+        this.props.upvotes = upvotes;
+        this.changed = true;
+        this.update();
+    }
+
+    render() {
+        let { upvotes } = this.props;
+        let content = 
+        `
+            ${upvotes}
         `;
         return {
             content
@@ -89,6 +114,7 @@ class DesignCard extends Component {
 
         this.comments_id = "comments-" + this.props.design.id;
         this.upvotes_id = "upvotes-" + this.props.design.id;
+        this.cardfront_upvotes_id = "cardfront-upvotes-" + this.props.design.id;
 
         let commentDisplay = new CommentsComponent(this.comments_id, {
             comments: retrievedComments
@@ -96,9 +122,13 @@ class DesignCard extends Component {
         let upvotesDisplay = new UpvotesComponent(this.upvotes_id, {
             upvotes
         });
+        let cardfrontUpvotesDisplay = new CardfrontUpvotesComponent(this.cardfront_upvotes_id, {
+            upvotes
+        });
 
         this.addChild(commentDisplay);
         this.addChild(upvotesDisplay);
+        this.addChild(cardfrontUpvotesDisplay);
 
         ComponentTree.addRootComponent(this);
     }
@@ -120,6 +150,9 @@ class DesignCard extends Component {
             if(newDesign.upvotes != design.upvotes) {
                 let { upvotes } = newDesign;
                 EventStore.publish("UpvotesChange-" + this.upvotes_id, {
+                    upvotes
+                });
+                EventStore.publish("UpvotesChange-" + this.cardfront_upvotes_id, {
                     upvotes
                 });
             }
@@ -167,7 +200,6 @@ class DesignCard extends Component {
         }
 
         function afterCall() {
-            console.log("aftercall");
             $('#details-tab-' + design.id + ' a').on('click', function (e) {
                 e.preventDefault()
                 $('#details-tab-' + design.id + ' a').tab('show')
@@ -179,19 +211,68 @@ class DesignCard extends Component {
             })
         }
 
+        let certification = ``;
+        if(design.certified == "yes") {
+            certification = `<span class="badge badge-success">Certified</span>`;
+        } else if(design.certified == "no") {
+            certification = `<span class="badge badge-danger">Uncertified</span>`;
+        } else {
+            certification = `<span class="badge badge-warning">Certification In Progress</span>`;
+        }
+
+        let printerRequired = design.printerRequired ? `<span class="badge badge-primary">3D Printer Required</span>` : ``;
+
+        let categoryDisplayName = ``;
+        switch(design.category) {
+            case "n95":
+                categoryDisplayName = `N95 Mask`;
+                break;
+            case "surgicalMask":
+                categoryDisplayName = `Surgical Mask`;
+                break;
+            case "ventilator":
+                categoryDisplayName = `Ventilator`;
+                break;
+            case "ventilatorParts":
+                categoryDisplayName = `Ventilator Parts`;
+                break;
+            case "faceShield":
+                categoryDisplayName = `Face Shield`;
+                break;
+            case "hospitalGown":
+                categoryDisplayName = `Hospital Gown`;
+                break;
+            case "handSanitizer":
+                categoryDisplayName = `Hand Sanitizer`;
+                break;
+            case "disposableBooties":
+                categoryDisplayName = `Disposable Booties`;
+                break;
+            default:
+                categoryDisplayName = `Other`;
+                break;
+        }
+        
         let content = `
 	<h5 class="card-header text-dark">${design.name}</h5>
 	<img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
-	<div class="card-body">
-		<p class="card-text"><b>Category:</b> ${design.category}</p>
+    <div class="card-body">
+        <figure class="figure">
+            <div class="text-info">${categoryDisplayName}</div>
+        </figure>
 		<p class="card-text item-description">${description}</p>
-		<p class="card-text"><b>3D printer Required:</b> ${design.printerRequired}</p>
-        <p class="card-text"><b>Certified:</b> ${design.certified}</p>
+		${printerRequired}
+        ${certification}
 		<button class="btn btn-block card-text" data-toggle="modal" data-target="#${design.id}">See More</button>
 	</div>
-	<div class="btn-group">
-		<button onClick="upvote('${design.id}')" class="btn">Upvote</button>
-		<button onClick="downvote('${design.id}')" class="btn">Downvote</button> 
+    <div class="btn-group">
+        <button onClick="upvote('${design.id}')" class="btn">
+            <img src="../img/arrow-dropdown.png"/>
+        </button>
+        <span class="btn" id="${this.cardfront_upvotes_id}">${design.upvotes}</span>
+        <button onClick="downvote('${design.id}')" class="btn">
+            <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
+        </button> 
     </div>
 
     
