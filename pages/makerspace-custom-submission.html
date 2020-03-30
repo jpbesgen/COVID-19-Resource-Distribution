@@ -166,17 +166,21 @@
 
     <script src="../database.js"></script>
 	<script>
-
+        let processing = false;
         document.getElementById("submission_submit").addEventListener("click", (e) => {
             try {
-                handleSubmission(e)
+                if(!processing) {
+                    handleSubmission(e)
+                }
             } catch(err) {
                 console.log(err)
                 alert(err.message);
+                processing = false;
             }
         });
 
         function handleSubmission(event) {
+            processing = true;
             // Get all values
             let name = document.getElementById("submission_name"),
                 category = document.getElementById("submission_category"),
@@ -301,14 +305,16 @@
                 let design_ref = db.collection("Designs").doc().id;
                 console.log(design_ref);
                 design["id"] = design_ref;
-                db.collection("Designs").doc(design_ref).set(design);
-                submissionSuccess();
+                db.collection("Designs").doc(design_ref).set(design).then(() => {
+                    submissionSuccess();
+                });
             });
 
         }
 
         function submissionSuccess() {
-            console.log("Submission Success");
+            process = false;
+            location.assign("./submission-succesful.html");
         }
     </script>
 </body>
