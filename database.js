@@ -44,6 +44,7 @@ function renderDesigns(designs) {
             var $items = $(
             `
                 <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
+                
                 </div>
             `);
             // append items to grid
@@ -57,8 +58,14 @@ function renderDesigns(designs) {
     }
 
     fillGrid().then(() => {
-        ComponentTree.renderAll();
+        ComponentTree.renderAll().then(() => {
+            setTimeout(() => {
+                var el = document; // This can be your element on which to trigger the event
+                if (window.CustomEvent) {
 
+                }
+            }, 1000);
+        });
         // enable carousel
         $(".owl-carousel").owlCarousel({
             items: 1,
@@ -73,6 +80,7 @@ function renderDesigns(designs) {
             autoplay: true,
             autoplayTimeout: 5000,
         });
+
     });
   });
 }

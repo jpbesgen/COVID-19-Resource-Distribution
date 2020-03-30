@@ -34,15 +34,14 @@ let EventStore = new PubSub();
 
 class ComponentManager {
     constructor() {
-        this.roots = []; // {};
+        this.roots = {};
 
         this.addRootComponent = this.addRootComponent.bind(this);
         this.renderAll = this.renderAll.bind(this);
     }
 
     addRootComponent(component) {
-        this.roots.push(component);
-        //this.roots[component.id] = component;
+        this.roots[component.id] = component;
     }
 
     deleteComponent(id) {
@@ -84,17 +83,19 @@ class ComponentManager {
     }
 
     renderAll() {
-        let vclosed = [];
-        this.roots.forEach((component) => {
-            let vopen = [component];
-            while(vopen.length > 0) {
-                let child = vopen.pop();
-                child.update();
-                vclosed.push(child);
-                child.children.forEach((c) => vopen.push(c))
-            }
+        return new Promise((resolve, reject) => {
+            let vclosed = [];
+            Object.keys(this.roots).forEach((key) => {
+                let vopen = [this.roots[key]];
+                while(vopen.length > 0) {
+                    let child = vopen.pop();
+                    child.update();
+                    vclosed.push(child);
+                    child.children.forEach((c) => vopen.push(c))
+                }
+            });
+            resolve(vclosed);
         });
-        return vclosed;
     }
 }
 let ComponentTree = new ComponentManager();

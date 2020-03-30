@@ -85,12 +85,18 @@
                 <label for="certified">Certified</label>
                 <p>Certification will be qualified as having the design certified by the NIH, CDC, ECDC, or on equivalent organization. In progress will indicate the design is in process of approval but has not yet reached it. </p>
                 <select class="form-control" name="certified" id="submission_certified">
-                    <option value="yes">Yes</option>
                     <option value="no">No</option>
+                    <option value="yes">Yes</option>
                     <option value="inProgress">In Progress</option>
                 </select>
             </div>
         </div>	
+
+        <div class="form-row">
+            <div class="form-group col-12">
+                <input class="form-control" placeholder="If certified, please provide link to prove certification." type="text" name="certified_link" id="submission_certified_link"/>
+            </div>
+        </div>
 
         <div class="form-row">
             <div class="form-group col-6">
@@ -176,6 +182,7 @@
                 category = document.getElementById("submission_category"),
                 description = document.getElementById("submission_description"),
                 certified = document.getElementById("submission_certified"),
+                certifiedLink = document.getElementById("submission_certified_link"),
                 difficulty = document.getElementById("submission_difficulty"),
                 links = document.getElementById("submission_links"),
                 threed = document.getElementById("submission_3d"),
@@ -200,6 +207,10 @@
             certified = certified.value;
             if(certified == null) throw new Error("Invalid Certified");
             design["certified"] = certified;
+
+            certifiedLink = certifiedLink.value;
+            if(certified == "yes" && (certifiedLink == null || certifiedLink.trim() == "")) throw new Error("Please provide a link to your certification!");
+            design["certifiedLink"] = certified ? certifiedLink : null;
 
             difficulty = difficulty.value;
             if(difficulty == null) throw new Error("Please specify a difficulty for your design!");

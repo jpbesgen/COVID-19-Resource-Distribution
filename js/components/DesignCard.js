@@ -155,6 +155,14 @@ class DesignCard extends Component {
             })
         }
 
+        let images = ``;
+        if(design.images != null && design.images.length > 0) {
+            design.images.forEach((image) => {
+                images += `<div class="carousel-image" style="background-image: url('${image.url}');"></div>`;
+            });
+        }
+
+
         let content = `
 	<h5 class="card-header text-dark">${design.name}</h5>
 	<img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
@@ -162,13 +170,15 @@ class DesignCard extends Component {
 		<p class="card-text"><b>Category:</b> ${design.category}</p>
 		<p class="card-text item-description">${description}</p>
 		<p class="card-text"><b>3D printer Required:</b> ${design.printerRequired}</p>
-		<p class="card-text"><b>Certified:</b> ${design.certified}</p>
+        <p class="card-text"><b>Certified:</b> ${design.certified}</p>
 		<button class="btn btn-block card-text" data-toggle="modal" data-target="#${design.id}">See More</button>
 	</div>
 	<div class="btn-group">
 		<button onClick="upvote('${design.id}')" class="btn">Upvote</button>
 		<button onClick="downvote('${design.id}')" class="btn">Downvote</button> 
-	</div>      
+    </div>
+
+    
 	<div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 	<div class="modal-content">
@@ -184,9 +194,7 @@ class DesignCard extends Component {
 <!--                                <img class="modal-img" src="${design.images[0].url}" alt="Modal item cap" />-->
 					<!-- CAROUSEL -->
 					<div class="owl-carousel owl-theme">
-						<div class="carousel-image" style="background-image: url('${design.images[0].url}');"></div>
-						<div class="carousel-image" style="background-image: url('https://via.placeholder.com/250x160');"></div>
-						<div class="carousel-image" style="background-image: url('https://via.placeholder.com/150x300');"></div>
+						${images}
 					</div>
 					<!-- END CAROUSEL -->
 				</div>
@@ -204,7 +212,16 @@ class DesignCard extends Component {
 				<p class="modal-text"><b>Category</b><br />${design.category}</p>
 				<p class="modal-text"><b>Description</b><br />${design.description}</p>
 				<p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
-				<p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
+                <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
+                ${design.certified == "yes" ? 
+                `
+                    <p class="modal-text">
+                        <b>Certification Link</b>
+                        <br />
+                        <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
+                    </p>` : 
+                    ``
+                }
 				<p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
 				<p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
                 Links: ${links}
@@ -215,7 +232,7 @@ class DesignCard extends Component {
 		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		</div>
 	</div>
-	</div>
+    </div>
         `;
 
         return content;
