@@ -174,6 +174,7 @@ class DesignCard extends Component {
         // create downloadable links
         let downloads = ``;
         if(design.attachments != null && design.attachments.length > 0) {
+            downloads = `Attachments: `
             design.attachments.forEach((attachment) => {
                 downloads += `<a href="${attachment.url}" target="_blank" download> ${attachment.name}</a>`;
                 if(attachment != design.attachments[design.attachments.length - 1]) {
@@ -184,6 +185,7 @@ class DesignCard extends Component {
         
         let links = ``;
         if(design.links != null && design.links.length > 0) {
+            links = `Links: `
             design.links.forEach((link) => {
                 links += `<a href="${link}" target="_blank"> ${link}</a>`;
                 if(link != design.links[design.links.length - 1]) {
@@ -252,7 +254,7 @@ class DesignCard extends Component {
                 categoryDisplayName = `Other`;
                 break;
         }
-        
+
         let content = `
 	<h5 class="card-header text-dark">${design.name}</h5>
 	<img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
@@ -330,9 +332,9 @@ class DesignCard extends Component {
                     }
                     <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
                     <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
-                    Links: ${links}
+                    ${links}
                     <br/>
-                    Attachments: ${downloads}
+                    ${downloads}
                 </div>
                 <div class="tab-pane fade" id="comments-page-${design.id}" role="tabpanel" aria-labelledby="comments">
                     <div id="${this.comments_id}" class="comments">
