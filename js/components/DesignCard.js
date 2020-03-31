@@ -211,7 +211,9 @@ class DesignCard extends Component {
                 e.preventDefault()
                 $('comments-tab-' + design.id + ' a').tab('show')
             })
+            $('#' + this.comments_id).html("test")
         }
+        afterCall = afterCall.bind(this);
 
         let certification = ``;
         if(design.certified == "yes") {
@@ -351,7 +353,7 @@ class DesignCard extends Component {
 
         return {
             content,
-            afterCall: afterCall(design)
+            afterCall,
         }
     }
 }
