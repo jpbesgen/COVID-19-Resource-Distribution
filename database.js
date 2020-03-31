@@ -84,19 +84,6 @@ function renderDesigns(designs) {
             let design_id = commentView.attr("id");
             design_id = design_id.substr(design_id.indexOf('-') + 1)
 
-            // fetch comments
-            let comments = await fetchCommentsForDesignById(design_id);
-            if (comments.length > 0){
-                comments = comments.map(comment => {
-                    return {
-                        fullname: comment.author,
-                        content: comment.content,
-                        created: comment.time,
-                        id: comment.id
-                    }
-                });
-            }
-
             // display comment view
             commentView.comments({
                 // functionalities
@@ -109,14 +96,58 @@ function renderDesigns(designs) {
                 enableHashtags: false,
                 enablePinging: false,
                 postCommentOnEnter: true,
+                readOnly: !isAuthenticated(),
 
                 // user data
-                profilePictureURL: getProfileUrl,
+                profilePictureURL: getProfileUrl(),
 
                 // callbacks
-                getComments: function(success, error) {
+                getComments: async function(success, error) {
+                    // fetch comments
+                    let comments = await fetchCommentsForDesignById(design_id);
+                    if (comments.length > 0){
+                        comments = comments.map(comment => {
+                            return {
+                                fullname: comment.author,
+                                content: comment.content,
+                                created: comment.time,
+                                id: comment.id
+                            }
+                        });
+                    }
                     success(comments);
-                }
+                },
+                // TODO
+                // postComment: function(commentJSON, success, error) {
+                //     $.ajax({
+                //         type: 'post',
+                //         url: '/api/comments/',
+                //         data: commentJSON,
+                //         success: function(comment) {
+                //             success(comment)
+                //         },
+                //         error: error
+                //     });
+                // },
+                // putComment: function(commentJSON, success, error) {
+                //     $.ajax({
+                //         type: 'put',
+                //         url: '/api/comments/' + commentJSON.id,
+                //         data: commentJSON,
+                //         success: function(comment) {
+                //             success(comment)
+                //         },
+                //         error: error
+                //     });
+                // },
+                // deleteComment: function(commentJSON, success, error) {
+                //     $.ajax({
+                //         type: 'delete',
+                //         url: '/api/comments/' + commentJSON.id,
+                //         success: success,
+                //         error: error
+                //     });
+                // }
             });
         })
     });
@@ -314,5 +345,5 @@ function getProfileUrl() {
     let user = getUser();
     return user.photoURL == null
         ? 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
-        : auth.currentUser.photoURL;
+        : user.photoURL;
 }
