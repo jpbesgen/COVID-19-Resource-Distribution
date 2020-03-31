@@ -261,66 +261,121 @@ function hasDownvoted(design_id) {
   });
 }
 
-function upvote(design_id) {
-    if(!isAuthenticated()) {
-        alert("Please login to vote on submissions!");
-        return;
-    }
-
-    // check if user has already voted on this design
-    if(hasUpvoted(design_id) || hasDownvoted(design_id)) {
-      console.log("already voted");
-      alert("You've already voted on this design!");
+function handleUpvote(design_id) {
+  if(!isAuthenticated()) {
+      alert("Please login to vote on submissions!");
       return;
-    }
+  }
 
-    let user = getUser();
-    // update user's upvotes array
-    db.collection("Users").doc(user.uid).get().then((snapshot) => {
-        let doc = snapshot.data();
-        if(doc.upvotes == null) {
-            doc.upvotes = [];
+  let user = getUser();
+
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      // check if user has already downvoted this design
+      if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
+        console.log("has downvoted");
+        // remove design from downvotes
+        while(doc.downvotes.includes(design_id)) {
+          const index = doc.downvotes.indexOf(design_id);
+          if (index > -1) {
+            doc.downvotes.splice(index, 1);
+          }
         }
-        doc.upvotes.push(design_id);
-        db.collection("Users").doc(user.uid).set(doc);
-    });
-    // update design's upvote count
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes += 1;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
+      } else if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
+        console.log("has upvoted");
+        alert("You cannot upvote a design more than once!");
+        return;
+      }
+      db.collection("Users").doc(user.uid).set(doc);
+      // increment upvote count by 1 and add design_id to user's upvotes
+      upvoteDesign(design_id);
+      return;
+  });
+}
+
+function upvoteDesign(design_id) {
+  let user = getUser();
+
+  // update user's upvotes array
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      if(doc.upvotes == null) {
+          doc.upvotes = [];
+      }
+      doc.upvotes.push(design_id);
+      console.log("added to user's upvotes");
+      db.collection("Users").doc(user.uid).set(doc);
+  });
+  // update design's upvote count
+  db.collection("Designs").doc(design_id).get().then((snapshot) => {
+      let doc = snapshot.data();
+      doc.upvotes += 1;
+      console.log("added to design's upvotes");
+      db.collection("Designs").doc(design_id).set(doc);
+  });
+}
+
+function upvote(design_id) {
+    handleUpvote(design_id);
+}
+
+function handleDownvote(design_id) {
+  if(!isAuthenticated()) {
+      alert("Please login to vote on submissions!");
+      return;
+  }
+
+  let user = getUser();
+
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      // check if user has already upvoted this design
+      if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
+        console.log("has downvoted");
+        // remove from downvotes and then upvote
+        while(doc.upvotes.includes(design_id)) {
+          const index = doc.upvotes.indexOf(design_id);
+          if (index > -1) {
+            doc.upvotes.splice(index, 1);
+          }
+        }
+      }
+      if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
+        console.log("has downvoted");
+        alert("You cannot downvote a design more than once!");
+        return;
+      }
+      db.collection("Users").doc(user.uid).set(doc);
+      // increment upvote count by -1 and add design_id to user's downvotes
+      downvoteDesign(design_id);
+      return;
+  });
+}
+
+function downvoteDesign(design_id) {
+  let user = getUser();
+
+  // update user's downvotes array
+  db.collection("Users").doc(user.uid).get().then((snapshot) => {
+      let doc = snapshot.data();
+      if(doc.downvotes == null) {
+          doc.downvotes = [];
+      }
+      doc.downvotes.push(design_id);
+      console.log("added to user's downvotes");
+      db.collection("Users").doc(user.uid).set(doc);
+  });
+  // update design's upvote count
+  db.collection("Designs").doc(design_id).get().then((snapshot) => {
+      let doc = snapshot.data();
+      doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
+      console.log("subtracted from design's upvotes");
+      db.collection("Designs").doc(design_id).set(doc);
+  });
 }
 
 function downvote(design_id) {
-    if(!isAuthenticated()) {
-        alert("Please login to vote on submissions!");
-        return;
-    }
-
-    // check if user has already voted on this design
-    if(hasUpvoted(design_id) || hasDownvoted(design_id)) {
-      console.log("already voted");
-      alert("You've already voted on this design!");
-      return;
-    }
-
-    let user = getUser();
-    // update user's downvotes array
-    db.collection("Users").doc(user.uid).get().then((snapshot) => {
-        let doc = snapshot.data();
-        if(doc.downvotes == null) {
-            doc.downvotes = [];
-        }
-        doc.downvotes.push(design_id);
-        db.collection("Users").doc(user.uid).set(doc);
-    });
-    // update design's upvote count
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-        db.collection("Designs").doc(design_id).set(doc);
-    });
+    handleDownvote(design_id);
 }
 
 function addComment(design_id) {
