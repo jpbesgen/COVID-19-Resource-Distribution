@@ -14,33 +14,38 @@ class CommentsComponent extends Component {
     }
 
     render() {
-        let displayComments = ``,
-            { comments } = this.props,
-            parent_id = this.parent.props.design.id;
-        if(comments != null && comments.length > 0) {
-            comments.forEach((comment) => {
-                displayComments += `<p class="modal-text" id="comment-${comment.id}">${comment.content} <b>from ${comment.author}</b></p>`;
-                if(comment != comments[comments.length - 1]) {
-                    displayComments += `<br/>`;
-                }
-            });
-        }
+        let content =
+            `
+                <div id="commentview-${this.props.id}" style="padding: 20px"></div>
+            `;
 
-        let addCommentDisplay = getUser() == null ? "" : 
-        `
-            <input type="text" placeholder="Write a comment..." id="${parent_id}-comment-input"/>
-            <small class="form-text text-muted">from ${getUser().displayName}</small>
-            <input class="btn" onClick="addComment('${parent_id}')" style="border:1px solid black" value="Make a Comment"/>
-        `;
-
-        let content = 
-        `
-            <h4 class="community-title">Comments<?h3>
-            <p class="community-text">
-                ${displayComments}
-            </p>
-            ${addCommentDisplay}
-        `;
+        // let displayComments = ``,
+        //     { comments } = this.props,
+        //     parent_id = this.parent.props.design.id;
+        // if (comments != null && comments.length > 0) {
+        //     comments.forEach((comment) => {
+        //         displayComments += `<p class="modal-text" id="comment-${comment.id}">${comment.content} <b>from ${comment.author}</b></p>`;
+        //         if(comment != comments[comments.length - 1]) {
+        //             displayComments += `<br/>`;
+        //         }
+        //     });
+        // }
+        //
+        // let addCommentDisplay = getUser() == null ? "" :
+        // `
+        //     <input type="text" placeholder="Write a comment..." id="${parent_id}-comment-input"/>
+        //     <small class="form-text text-muted">from ${getUser().displayName}</small>
+        //     <input class="btn" onClick="addComment('${parent_id}')" style="border:1px solid black" value="Make a Comment"/>
+        // `;
+        //
+        // let content =
+        // `
+        //     <h4 class="community-title">Comments<?h3>
+        //     <p class="community-text">
+        //         ${displayComments}
+        //     </p>
+        //     ${addCommentDisplay}
+        // `;
 
         return {
             content
@@ -102,7 +107,6 @@ class CardfrontUpvotesComponent extends Component {
     }
 }
 
-
 class DesignCard extends Component {
     constructor(id, props) {
         super(id);
@@ -117,7 +121,8 @@ class DesignCard extends Component {
         this.cardfront_upvotes_id = "cardfront-upvotes-" + this.props.design.id;
 
         let commentDisplay = new CommentsComponent(this.comments_id, {
-            comments: retrievedComments
+            comments: retrievedComments,
+            id: this.props.design.id
         });
         let upvotesDisplay = new UpvotesComponent(this.upvotes_id, {
             upvotes
@@ -201,17 +206,19 @@ class DesignCard extends Component {
             });
         }
 
+        // add jquery commands here
         function afterCall() {
             $('#details-tab-' + design.id + ' a').on('click', function (e) {
                 e.preventDefault()
                 $('#details-tab-' + design.id + ' a').tab('show')
                 $('.nav-link').show();
-            })
+            });
             $('#comments-tab-' + design.id + ' a').on('click', function (e) {
                 e.preventDefault()
                 $('comments-tab-' + design.id + ' a').tab('show')
-            })
+            });
         }
+        afterCall = afterCall.bind(this);
 
         let certification = ``;
         if(design.certified == "yes") {
@@ -256,102 +263,101 @@ class DesignCard extends Component {
         }
 
         let content = `
-	<h5 class="card-header text-dark">${design.name}</h5>
-	<img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
-    <div class="card-body">
-        <figure class="figure">
-            <div class="text-info">${categoryDisplayName}</div>
-        </figure>
-		<p class="card-text item-description">${description}</p>
-		${printerRequired}
-        ${certification}
-		<button class="btn btn-block card-text" data-toggle="modal" data-target="#${design.id}">See More</button>
-	</div>
-    <div class="btn-group">
-        <button onClick="upvote('${design.id}')" class="btn">
-            <img src="../img/arrow-dropdown.png"/>
-        </button>
-        <span class="btn" id="${this.cardfront_upvotes_id}">${design.upvotes}</span>
-        <button onClick="downvote('${design.id}')" class="btn">
-            <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
-        </button> 
-    </div>
-
-    
-	<div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="${design.id}ModalLabel">${design.name}</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-xs-12 col-6">
-<!--                                <img class="modal-img" src="${design.images[0].url}" alt="Modal item cap" />-->
-					<!-- CAROUSEL -->
-					<div class="owl-carousel owl-theme">
-						${images}
-					</div>
-					<!-- END CAROUSEL -->
-				</div>
-				<div class="col-xs-12 col-6">
-					<div class="community">
-						<div class="votes">
-							<h3 class="community-title">Community Score</h3>
-							<p id="${this.upvotes_id}" class="community-text">${design.upvotes} Upvotes</p>
-						</div>
-					</div>
-				</div>
+            <h5 class="card-header text-dark">${design.name}</h5>
+            <img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
+            <div class="card-body">
+                <figure class="figure">
+                    <div class="text-info">${categoryDisplayName}</div>
+                </figure>
+                <p class="card-text item-description">${description}</p>
+                ${printerRequired}
+                ${certification}
+                <button class="btn btn-block card-text" data-toggle="modal" data-target="#${design.id}">See More</button>
             </div>
-            <br/>
-            <ul class="nav nav-tabs nav-justified navbar-dark bg-dark" id="myTab" role="tablist">
-                <li class="nav-item" id="details-tab-${design.id}">
-                    <a class="nav-link active show" id="details-tab-link" data-toggle="tab" href="#details-page-${design.id}" role="tab" aria-controls="details-page-${design.id}" aria-selected="true">Details</a>
-                </li>
-                <li class="nav-item" id="comments-tab-${design.id}">
-                    <a class="nav-link show" id="comments-tab-link" data-toggle="tab" href="#comments-page-${design.id}" role="tab" aria-controls="comments-page-${design.id}" aria-selected="false">Comments</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="tab-content-${design.id}">
-                <div class="tab-pane fade show active" id="details-page-${design.id}" role="tabpanel" aria-labelledby="details">
-                    <p class="modal-text"><b>Category</b><br />${design.category}</p>
-                    <p class="modal-text"><b>Description</b><br />${design.description}</p>
-                    <p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
-                    <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
-                    ${design.certifiedLink != null && design.certified == "yes" ? 
-                    `
-                        <p class="modal-text">
-                            <b>Certification Link</b>
-                            <br />
-                            <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
-                        </p>` : 
-                        ``
-                    }
-                    <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
-                    <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
-                    ${links}
-                    <br/>
-                    ${downloads}
+            <div class="btn-group">
+                <button onClick="upvote('${design.id}')" class="btn">
+                    <img src="../img/arrow-dropdown.png"/>
+                </button>
+                <span class="btn" id="${this.cardfront_upvotes_id}">${design.upvotes}</span>
+                <button onClick="downvote('${design.id}')" class="btn">
+                    <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
+                </button> 
+            </div>
+        
+            
+            <div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="${design.id}ModalLabel">${design.name}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="tab-pane fade" id="comments-page-${design.id}" role="tabpanel" aria-labelledby="comments">
-                    <div id="${this.comments_id}" class="comments">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-6">
+        <!--                                <img class="modal-img" src="${design.images[0].url}" alt="Modal item cap" />-->
+                            <!-- CAROUSEL -->
+                            <div class="owl-carousel owl-theme">
+                                ${images}
+                            </div>
+                            <!-- END CAROUSEL -->
+                        </div>
+                        <div class="col-xs-12 col-6">
+                            <div class="community">
+                                <div class="votes">
+                                    <h3 class="community-title">Community Score</h3>
+                                    <p id="${this.upvotes_id}" class="community-text">${design.upvotes} Upvotes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <ul class="nav nav-tabs nav-justified navbar-dark bg-dark" id="myTab" role="tablist">
+                        <li class="nav-item" id="details-tab-${design.id}">
+                            <a class="nav-link active show" id="details-tab-link" data-toggle="tab" href="#details-page-${design.id}" role="tab" aria-controls="details-page-${design.id}" aria-selected="true">Details</a>
+                        </li>
+                        <li class="nav-item" id="comments-tab-${design.id}">
+                            <a class="nav-link show" id="comments-tab-link" data-toggle="tab" href="#comments-page-${design.id}" role="tab" aria-controls="comments-page-${design.id}" aria-selected="false">Comments</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="tab-content-${design.id}">
+                        <div class="tab-pane fade show active" id="details-page-${design.id}" role="tabpanel" aria-labelledby="details">
+                            <p class="modal-text"><b>Category</b><br />${design.category}</p>
+                            <p class="modal-text"><b>Description</b><br />${design.description}</p>
+                            <p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
+                            <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
+                            ${design.certifiedLink != null && design.certified == "yes" ? 
+                            `
+                                <p class="modal-text">
+                                    <b>Certification Link</b>
+                                    <br />
+                                    <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
+                                </p>` : 
+                                ``
+                            }
+                            <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
+                            <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
+                            ${links}
+                            <br/>
+                            ${downloads}
+                        </div>
+                        <div class="tab-pane fade" id="comments-page-${design.id}" role="tabpanel" aria-labelledby="comments">
+                            <div id="${this.comments_id}" class="comments"> </div>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-		</div>
-		<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		</div>
-	</div>
-    </div>
+            </div>
         `;
 
         return {
             content,
-            afterCall: afterCall(design)
+            afterCall: afterCall(design, this.comments_id)
         }
     }
 }

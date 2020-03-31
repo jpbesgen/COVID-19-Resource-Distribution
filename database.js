@@ -45,15 +45,9 @@ function renderDesigns(designs) {
             // Create the container for each design to embed in
             var $items = $(
             `
-                <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
-                
-                </div>
+                <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;"></div>
             `);
             // append items to grid
-            // $grid.append( $items )
-                // .isotope( 'appended', $items );
-
-
             $grid.append( $items )
                 .isotope( 'appended', $items );
         });
@@ -66,6 +60,7 @@ function renderDesigns(designs) {
             }
             initialRendered = true;
         });
+
         // enable carousel
         $(".owl-carousel").owlCarousel({
             items: 1,
@@ -81,6 +76,49 @@ function renderDesigns(designs) {
             autoplayTimeout: 5000,
         });
 
+        // inject comment view into each
+        $('div[id^="commentview-"]').each(async (index, element) => {
+
+            // fetch design_id from selector
+            let commentView = $(element);
+            let design_id = commentView.attr("id");
+            design_id = design_id.substr(design_id.indexOf('-') + 1)
+
+            // fetch comments
+            let comments = await fetchCommentsForDesignById(design_id);
+            if (comments.length > 0){
+                comments = comments.map(comment => {
+                    return {
+                        fullname: comment.author,
+                        content: comment.content,
+                        created: comment.time,
+                        id: comment.id
+                    }
+                });
+            }
+
+            // display comment view
+            commentView.comments({
+                // functionalities
+                enableReplying: true,
+                enableEditing: true,
+                enableUpvoting: false,
+                enableDeleting: true,
+                enableDeletingCommentWithReplies: true,
+                enableAttachments: false,
+                enableHashtags: false,
+                enablePinging: false,
+                postCommentOnEnter: true,
+
+                // user data
+                profilePictureURL: getProfileUrl,
+
+                // callbacks
+                getComments: function(success, error) {
+                    success(comments);
+                }
+            });
+        })
     });
   });
 }
@@ -96,28 +134,28 @@ async function handleDesigns(querySnapshot) {
     function commentFetch(doc) {
         return new Promise((resolve, reject) => {
             fetchCommentsForDesign(doc).then((res) => {
-                doc.retrievedComments = []
+                doc.retrievedComments = [];
                 res.forEach((r) => {
                     doc.retrievedComments.push(r.data())
-                })
+                });
                 resolve(doc)
             });
         })
     }
     
-    let commentFetches = []
+    let commentFetches = [];
     querySnapshot.forEach((snapshot) => {
-        let doc = snapshot.data()
+        let doc = snapshot.data();
         commentFetches.push(commentFetch(doc))
-    })
+    });
 
     return Promise.all(commentFetches)
 }
 
 // Retrieves the comments for a specific design "doc"
 async function fetchCommentsForDesign(doc) {
-    let commentRefs = doc.comments
-    let comments = []
+    let commentRefs = doc.comments;
+    let comments = [];
     if(commentRefs != undefined && commentRefs != null) {
         commentRefs.forEach((ref) => {
             comments.push(db.collection("Comments").doc(ref).get())
@@ -126,6 +164,36 @@ async function fetchCommentsForDesign(doc) {
     return Promise.all(comments)
 }
 
+async function fetchCommentsForDesignById(design_id) {
+    // fetch comment ids array
+    let designCommentIDs = await new Promise((res, rej) => {
+        db.collection("Designs").doc(design_id).get().then((snapshot) => {
+            res(
+                snapshot.exists && snapshot.data().comments
+                    ? snapshot.data().comments
+                    : []
+            )
+        });
+    });
+
+    // fetch comment content for each ID
+    let finalComments = [];
+    for (const commentID of designCommentIDs){
+        let result = await new Promise((res, rej) => {
+            db.collection("Comments").doc(commentID).get().then(snapshot => {
+                res(
+                    snapshot.exists
+                        ? snapshot.data()
+                        : {}
+                );
+            })
+        });
+
+        finalComments.push(result);
+    }
+
+    return finalComments
+}
 
 // Creates a listener that updates the designs whenever there is a change
 function listenForDesigns() {
@@ -232,6 +300,7 @@ function removeComment(comment_id) {
     });
 }
 
+/******************************************************** AUTH *******************************************************/
 function isAuthenticated() {
     return auth.user != null || auth.currentUser != null;
 }
@@ -241,8 +310,9 @@ function getUser() {
     return auth.user == null ? auth.currentUser : auth.user;
 }
 
-/*
-
-
-
-*/
+function getProfileUrl() {
+    let user = getUser();
+    return user.photoURL == null
+        ? 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
+        : auth.currentUser.photoURL;
+}
