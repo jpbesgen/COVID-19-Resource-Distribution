@@ -229,38 +229,6 @@ if(document.getElementById("grid") != null) {
     listenForDesigns();
 }
 
-function hasUpvoted(design_id) {
-  let user = getUser();
-  db.collection("Users").doc(user.uid).get().then((snapshot) => {
-      let doc = snapshot.data();
-      if(doc.upvotes == null) {
-        return false;
-      }
-      if(doc.upvotes.includes(design_id)) {
-        console.log("has upvoted");
-        return true;
-      } else {
-        return false;
-      }
-  });
-}
-
-function hasDownvoted(design_id) {
-  let user = getUser();
-  db.collection("Users").doc(user.uid).get().then((snapshot) => {
-      let doc = snapshot.data();
-      if(doc.downvotes == null) {
-        return false;
-      }
-      if(doc.downvotes.includes(design_id)) {
-        console.log("has downvoted");
-        return true;
-      } else {
-        return false;
-      }
-  });
-}
-
 function handleUpvote(design_id) {
   if(!isAuthenticated()) {
       alert("Please login to vote on submissions!");
@@ -268,12 +236,11 @@ function handleUpvote(design_id) {
   }
 
   let user = getUser();
-
+  var increment = 1;
   db.collection("Users").doc(user.uid).get().then((snapshot) => {
       let doc = snapshot.data();
       // check if user has already downvoted this design
       if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
-        console.log("has downvoted");
         // remove design from downvotes
         while(doc.downvotes.includes(design_id)) {
           const index = doc.downvotes.indexOf(design_id);
@@ -281,19 +248,19 @@ function handleUpvote(design_id) {
             doc.downvotes.splice(index, 1);
           }
         }
+        increment += 1;
       } else if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
-        console.log("has upvoted");
         alert("You cannot upvote a design more than once!");
         return;
       }
       db.collection("Users").doc(user.uid).set(doc);
       // increment upvote count by 1 and add design_id to user's upvotes
-      upvoteDesign(design_id);
+      upvoteDesign(design_id, increment);
       return;
   });
 }
 
-function upvoteDesign(design_id) {
+function upvoteDesign(design_id, amount) {
   let user = getUser();
 
   // update user's upvotes array
@@ -303,14 +270,12 @@ function upvoteDesign(design_id) {
           doc.upvotes = [];
       }
       doc.upvotes.push(design_id);
-      console.log("added to user's upvotes");
       db.collection("Users").doc(user.uid).set(doc);
   });
   // update design's upvote count
   db.collection("Designs").doc(design_id).get().then((snapshot) => {
       let doc = snapshot.data();
-      doc.upvotes += 1;
-      console.log("added to design's upvotes");
+      doc.upvotes += amount;
       db.collection("Designs").doc(design_id).set(doc);
   });
 }
@@ -326,12 +291,11 @@ function handleDownvote(design_id) {
   }
 
   let user = getUser();
-
+  var increment = 1;
   db.collection("Users").doc(user.uid).get().then((snapshot) => {
       let doc = snapshot.data();
       // check if user has already upvoted this design
       if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
-        console.log("has downvoted");
         // remove from downvotes and then upvote
         while(doc.upvotes.includes(design_id)) {
           const index = doc.upvotes.indexOf(design_id);
@@ -339,20 +303,20 @@ function handleDownvote(design_id) {
             doc.upvotes.splice(index, 1);
           }
         }
+        increment += 1
       }
       if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
-        console.log("has downvoted");
         alert("You cannot downvote a design more than once!");
         return;
       }
       db.collection("Users").doc(user.uid).set(doc);
       // increment upvote count by -1 and add design_id to user's downvotes
-      downvoteDesign(design_id);
+      downvoteDesign(design_id, increment);
       return;
   });
 }
 
-function downvoteDesign(design_id) {
+function downvoteDesign(design_id, amount) {
   let user = getUser();
 
   // update user's downvotes array
@@ -362,14 +326,12 @@ function downvoteDesign(design_id) {
           doc.downvotes = [];
       }
       doc.downvotes.push(design_id);
-      console.log("added to user's downvotes");
       db.collection("Users").doc(user.uid).set(doc);
   });
   // update design's upvote count
   db.collection("Designs").doc(design_id).get().then((snapshot) => {
       let doc = snapshot.data();
-      doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-      console.log("subtracted from design's upvotes");
+      doc.upvotes = (doc.upvotes-amount) > 0 ? doc.upvotes - amount : 0;
       db.collection("Designs").doc(design_id).set(doc);
   });
 }
