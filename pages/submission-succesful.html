@@ -38,14 +38,9 @@
 	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
 
     <section>
-		<h1>Submit a design!</h1>
-		<p class="subtitle">If you have a open source design to contribute to the makerspace, please submit it here!</p>
+        <h1>Thank you for submitting a design!</h1>
+        <h6>Going back to the Makerspace...</h6>
 	</section>
-
-	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
-	<div classa="form">
-		<iframe class="airtable-embed" src="https://airtable.com/embed/shrCJ0ECfLjHb31Id?backgroundColor=teal" frameborder="0" onmousewheel="" width="82%" height="1066" style="background: transparent; border: 1px solid #ccc;"></iframe>
-	</div>
 
     <!-- JavaScript -->
 	<script>
@@ -57,7 +52,12 @@
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
-	<script src="../../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script>
+        setTimeout(() => {
+            location.assign("./makerspace.html");
+        }, 500);
+    </script>
 </body>
 
 </html>
