@@ -1,8 +1,12 @@
+let designCards = {},
+    latestSnapshot = null,
+    initialRendered = false;
+
 // TODO:
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
 function renderDesigns(designs) {
-    console.log(designs);
+    EventStore.publish("Designs", {designs});
     $(document).ready(() => {
 
     const $grid = $('#grid').isotope({
@@ -25,153 +29,60 @@ function renderDesigns(designs) {
     fillGrid = async () => {
         let grid = document.getElementById("grid");
         if(grid == null) return;
-        grid.innerHTML = "";
         designs.forEach(gridItem => {
-        // this is where jQuery steps in
-        // var $items = $(
-        let description = gridItem.description;
-        if (description.length > 140) {
-            description = description.substring(0, 141);
-            description +=  "...";
-        }
-
-        // create downloadable links
-        let downloads = ``;
-        if(gridItem.attachments != null && gridItem.attachments.length > 0) {
-            gridItem.attachments.forEach((attachment) => {
-                downloads += `<a href="${attachment.url}" target="_blank" download> ${attachment.name}</a>`;
-                if(attachment != gridItem.attachments[gridItem.attachments.length - 1]) {
-                    downloads += `,`
-                }
+            if(designCards[gridItem.id] != null) {
+                EventStore.publish("DesignCardChange-" + gridItem.id, {
+                    design: gridItem
+                });
+                return;
+            }
+            let design_id = "design-" + gridItem.id;
+            let newDesign = new DesignCard(design_id, {
+                design: gridItem,
             });
-        }
+            designCards[gridItem.id] = newDesign;
 
-        let links = ``;
-        if(gridItem.links != null && gridItem.links.length > 0) {
-            gridItem.links.forEach((link) => {
-                links += `<a href="${link}" target="_blank"> ${link}</a>`;
-                if(link != gridItem.links[gridItem.links.length - 1]) {
-                    links += `,`
-                }
-            })
-        }
-
-        let comments = ``,
-            { retrievedComments } = gridItem;
-        if(retrievedComments != null && retrievedComments.length > 0) {
-            retrievedComments.forEach((comment) => {
-                comments += `<p class="modal-text" id="${comment.id}-comment">${comment.content} <b>from ${comment.author}</b></p>`;
-                if(comment != retrievedComments[retrievedComments.length - 1]) {
-                    comments += `<br/>`;
-                }
-            });
-        }
-
-
-        let addCommentDisplay =
-        `
-            <input type="text" placeholder="Write a comment..." id="${gridItem.id}-comment-input"/>
-            <small class="form-text text-muted">from ${getUser() == null ? "" : getUser().displayName}</small>
-            <input class="btn" onClick="addComment('${gridItem.id}')" style="border:1px solid black" value="Make a Comment"/>
-        `;
-
-        if (gridItem.approved){
+            // Create the container for each design to embed in
             var $items = $(
-                `
-            <div class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
-            <h5 class="card-header text-dark">${gridItem.name}</h5>
-                <img class="card-img-top" src="${gridItem.images[0].url}" alt="Item Attachment 0" />
-                <div class="card-body">
-                    <p class="card-text"><b>Category:</b> ${gridItem.category}</p>
-                    <p class="card-text item-description">${description}</p>
-                    <p class="card-text"><b>3D printer Required:</b> ${gridItem.printerRequired}</p>
-                    <p class="card-text"><b>Certified:</b> ${gridItem.certified}</p>
-                    <button class="btn btn-block card-text" data-toggle="modal" data-target="#${gridItem.id}">See More</button>
+              `
+                <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
+                
                 </div>
-                <div class="btn-group">
-                    <button onClick="upvote('${gridItem.id}')" class="btn">Upvote</button>
-                    <button onClick="downvote('${gridItem.id}')" class="btn">Downvote</button>
-                </div>
-            </div>
-           <div class="modal fade" id="${gridItem.id}" tabindex="-1" role="dialog" aria-labelledby="${gridItem.id}ModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="${gridItem.id}ModalLabel">${gridItem.name}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-xs-12 col-6">
-<!--                                <img class="modal-img" src="${gridItem.images[0].url}" alt="Modal item cap" />-->
-                                <!-- CAROUSEL -->
-                                <div class="owl-carousel owl-theme">
-                                    <div class="carousel-image" style="background-image: url('${gridItem.images[0].url}');" />
-                                    <div class="carousel-image" style="background-image: url('https://via.placeholder.com/250x160');" />
-                                    <div class="carousel-image" style="background-image: url('https://via.placeholder.com/150x300');" />
-                                </div>
-                                <!-- END CAROUSEL -->
-                            </div>
-                            <div class="col-xs-12 col-6">
-                                <div class="community">
-                                    <div class="votes">
-                                        <h3 class="community-title">Community Score</h3>
-                                        <p class="community-text">${gridItem.upvotes} Upvotes</p>
-                                    </div>
-                                    <div class="comments">
-                                        <h3 class="community-title">Comments</h3>
-                                        <p class="community-text">${comments}</p>
-                                        ${getUser() == null ? "" : addCommentDisplay}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="modal-text"><b>Category</b><br />${gridItem.category}</p>
-                        <p class="modal-text"><b>Description</b><br />${gridItem.description}</p>
-                        <p class="modal-text"><b>3D Printer Required</b><br />${gridItem.printerRequired}</p>
-                        <p class="modal-text"><b>Certified</b><br /> ${gridItem.certified}</p>
-                        <p class="modal-text"><b>Difficulty Level</b><br /> ${gridItem.difficulty}</p>
-                        <p class="modal-text"><b>Credit</b><br /> ${gridItem.credit}</p>
-                        Links: ${links}
-                        Attachments: ${downloads}
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            `
-            );
-            console.log($items);
+            `);
             // append items to grid
             // $grid.append( $items )
                 // .isotope( 'appended', $items );
 
-            // enable carousel
-            $(".owl-carousel").owlCarousel({
-                items: 1,
-                margin: 10,
-                autoHeight: true,
-                nav: true,
-                loop: true,
-                lazyLoadEager: 1,
-                lazyLoad: false,
-                autoplayHoverPause: true,
-                navText: "<>",
-                autoplay: true,
-                autoplayTimeout: 5000,
-            });
 
             $grid.append( $items )
                 .isotope( 'appended', $items );
-        }
-    })};
+        });
+    }
 
-    fillGrid()
-  })
+    fillGrid().then(() => {
+        ComponentTree.renderAll().then(() => {
+            if(!initialRendered) {
+                handleDesigns(latestSnapshot).then(renderDesigns);
+            }
+            initialRendered = true;
+        });
+        // enable carousel
+        $(".owl-carousel").owlCarousel({
+            items: 1,
+            margin: 10,
+            autoHeight: true,
+            nav: true,
+            loop: true,
+            lazyLoadEager: 1,
+            lazyLoad: false,
+            autoplayHoverPause: true,
+            navText: "<>",
+            autoplay: true,
+            autoplayTimeout: 5000,
+        });
+
+    });
+  });
 }
 
 // handleDesigns
@@ -219,6 +130,7 @@ async function fetchCommentsForDesign(doc) {
 // Creates a listener that updates the designs whenever there is a change
 function listenForDesigns() {
     db.collection("Designs").onSnapshot((querySnapshot) => {
+        latestSnapshot = querySnapshot;
         handleDesigns(querySnapshot).then(renderDesigns);
     }, (error) => {
         console.log(error);

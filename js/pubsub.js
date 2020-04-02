@@ -3,7 +3,7 @@ class PubSub {
         this.events = {};
     }
 
-    subscribe(event_name, fn) {
+    on(event_name, fn) {
         if(this.events[event_name] == null) {
             this.events[event_name] = [];
         }
@@ -33,6 +33,9 @@ let EventStore = new PubSub();
 class ComponentManager {
     constructor() {
         this.roots = {};
+
+        this.addRootComponent = this.addRootComponent.bind(this);
+        this.renderAll = this.renderAll.bind(this);
     }
 
     addRootComponent(component) {
@@ -46,7 +49,6 @@ class ComponentManager {
             delete this.roots[component.id]
         } else {
             root.parent.removeChild(root);
-            delete root;
         }
     }
 
@@ -71,7 +73,7 @@ class ComponentManager {
             vclosed = [];
         while(vopen.length > 0) {
             let child = vopen.shift();
-            child.render();
+            child.display();
             vclosed.push(child);
             child.children.forEach((c) => vopen.push(c))
         }
@@ -79,17 +81,19 @@ class ComponentManager {
     }
 
     renderAll() {
-        let vclosed = [];
-        this.roots.keys().forEach((key) => {
-            let vopen = [this.roots[key]];
-            while(vopen.length > 0) {
-                let child = vopen.shift();
-                child.render();
-                vclosed.push(child);
-                child.children.forEach((c) => vopen.push(c))
-            }
+        return new Promise((resolve, reject) => {
+            let vclosed = [];
+            Object.keys(this.roots).forEach((key) => {
+                let vopen = [this.roots[key]];
+                while(vopen.length > 0) {
+                    let child = vopen.pop();
+                    child.update();
+                    vclosed.push(child);
+                    child.children.forEach((c) => vopen.push(c))
+                }
+            });
+            resolve(vclosed);
         });
-        return vclosed;
     }
 }
 let ComponentTree = new ComponentManager();
@@ -99,7 +103,13 @@ class Component {
         this.parent = null;
         this.children = [];
         this.state = {};
+        this.props = {};
         this.id = id || generateRandomId();
+        this.changed = true;
+    }
+
+    pushProps(newProps) {
+        this.props = newProps;
     }
 
     setState(s) {
@@ -113,11 +123,19 @@ class Component {
     }
 
     update() {
+        if(this.changed) this.display();
+        this.changed = false;
+    }
+
+    // Should return an html string like `<p>content</p>`
+    render() {
 
     }
 
-    render() {
-
+    display() {
+        let rendered = this.render();
+        document.getElementById(this.id).innerHTML = rendered.content;
+        if(rendered.afterCall != null) rendered.afterCall();
     }
 
     addChild(component) {
