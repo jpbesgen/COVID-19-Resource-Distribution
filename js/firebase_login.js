@@ -9,22 +9,7 @@ var uiConfig = {
 			// or whether we leave that to developer to handle.
 			
 			// Check if new user, create profile
-			console.log(authResult);
-			db.collection("Users").doc(authResult.user.uid).set({
-				name: authResult.user.displayName,
-				email: authResult.user.email,
-				emailVerified: authResult.user.emailVerified,
-				phone: authResult.user.phoneNumber,
-				uid: authResult.user.uid,
-				photoUrl: authResult.user.photoURL,
-				lastLogin: Date.now(),
-				comments: [],
-				designs: [],
-			}).then(() => {
-				location.assign("/index.html");
-			}).catch((error) => {
-				console.log(error);
-			})
+			EventStore.publish("UserAuthenticated", authResult);
 			
 			return true;
 		},
