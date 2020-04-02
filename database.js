@@ -37,10 +37,9 @@ function renderDesigns(designs) {
                 return;
             }
             let design_id = "design-" + gridItem.id;
-            let newDesign = new DesignCard(design_id, {
+            designCards[gridItem.id] = new DesignCard(design_id, {
                 design: gridItem,
             });
-            designCards[gridItem.id] = newDesign;
 
             // Create the container for each design to embed in
             var $items = $(
@@ -51,7 +50,7 @@ function renderDesigns(designs) {
             $grid.append( $items )
                 .isotope( 'appended', $items );
         });
-    }
+    };
 
     fillGrid().then(() => {
         ComponentTree.renderAll().then(() => {
@@ -87,7 +86,7 @@ function renderDesigns(designs) {
             // display comment view
             commentView.comments({
                 // functionalities
-                enableReplying: true,
+                enableReplying: false,
                 enableEditing: true,
                 enableUpvoting: false,
                 enableDeleting: true,
@@ -95,6 +94,7 @@ function renderDesigns(designs) {
                 enableAttachments: false,
                 enableHashtags: false,
                 enablePinging: false,
+                enableNavigation: true,
                 postCommentOnEnter: true,
                 readOnly: !isAuthenticated(),
 
@@ -103,6 +103,8 @@ function renderDesigns(designs) {
 
                 // callbacks
                 getComments: async function(success, error) {
+                    await setTimeout(5000);
+
                     // fetch comments
                     let comments = await fetchCommentsForDesignById(design_id);
                     if (comments.length > 0){
@@ -117,37 +119,39 @@ function renderDesigns(designs) {
                     }
                     success(comments);
                 },
-                // TODO
-                // postComment: function(commentJSON, success, error) {
-                //     $.ajax({
-                //         type: 'post',
-                //         url: '/api/comments/',
-                //         data: commentJSON,
-                //         success: function(comment) {
-                //             success(comment)
-                //         },
-                //         error: error
-                //     });
-                // },
-                // putComment: function(commentJSON, success, error) {
-                //     $.ajax({
-                //         type: 'put',
-                //         url: '/api/comments/' + commentJSON.id,
-                //         data: commentJSON,
-                //         success: function(comment) {
-                //             success(comment)
-                //         },
-                //         error: error
-                //     });
-                // },
-                // deleteComment: function(commentJSON, success, error) {
-                //     $.ajax({
-                //         type: 'delete',
-                //         url: '/api/comments/' + commentJSON.id,
-                //         success: success,
-                //         error: error
-                //     });
-                // }
+                postComment: async function(commentJSON, success, error) {
+                    const {content} = commentJSON;
+                    console.log(commentJSON);
+                    let {err} = addComment(design_id, content);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                },
+                putComment: function(commentJSON, success, error) {
+                    console.log(commentJSON);
+                    let id = commentJSON.id;
+                    let {err} = editComment(id, commentJSON.content, commentJSON.modified);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                },
+                deleteComment: function(commentJSON, success, error) {
+                    console.log(commentJSON);
+                    let id = commentJSON.id;
+                    let {err} = removeComment(id);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                }
             });
         })
     });
@@ -264,71 +268,98 @@ function downvote(design_id) {
     });
 }
 
-function addComment(design_id) {
+async function addComment(design_id, comment_value) {
     if(!isAuthenticated()) {
         alert("Please login to post a comment!");
         return;
     }
-    let comment_value = document.getElementById(design_id + "-comment-input").value;
-    let comment_id = db.collection("Comments").doc().id;
 
-    let user = getUser();
-    db.collection("Comments").doc(comment_id).set({
-        content: comment_value,
-        author: user.displayName,
-        uid: user.uid,
-        id: comment_id,
-        design: design_id,
-        time: Date.now()
-    });
+    try {
+        let comment_id = db.collection("Comments").doc().id;
+        let user = getUser();
 
-    db.collection("Users").doc(user.uid).get().then((snapshot) => {
-        let doc = snapshot.data();
-        if(doc.comments == null) {
+        // add comment
+        await db.collection("Comments").doc(comment_id).set({
+            content: comment_value,
+            author: user.displayName,
+            uid: user.uid,
+            id: comment_id,
+            design: design_id,
+            time: Date.now()
+        });
+
+        // add to users
+        let usersRef = await db.collection("Users").doc(user.uid).get();
+        let doc = usersRef.data();
+        if (doc.comments == null) {
             doc.comments = [];
         }
         doc.comments.push(comment_id);
-        db.collection("Users").doc(user.uid).set(doc);
-    });
+        await db.collection("Users").doc(user.uid).set(doc);
 
-    db.collection("Designs").doc(design_id).get().then((snapshot) => {
-        let doc = snapshot.data();
-        if(doc.comments == null) {
+        // add to designs
+        let designsRef = await db.collection("Designs").doc(design_id).get()
+        doc = designsRef.data();
+        if (doc.comments == null) {
             doc.comments = [];
         }
         doc.comments.push(comment_id);
-        db.collection("Designs").doc(design_id).set(doc);
-    });
+        await db.collection("Designs").doc(design_id).set(doc);
+
+        return {}
+
+    } catch (err) {
+        return {err}
+    }
 }
 
-function removeComment(comment_id) {
-    db.collection("Comments").doc(comment_id).get().then((snapshot) => {
-        let doc = snapshot.data(),
+async function removeComment(comment_id) {
+    try {
+        // set variables
+        let commentRef = await db.collection("Comments").doc(comment_id).get();
+        let doc = commentRef.data(),
             design_id = doc.design,
             uid = doc.uid;
-        
-        db.collection("Users").doc(uid).get().then((user) => {
-            user = user.data();
-            for(let i = user.comments.length - 1; i >= 0; i--) {
-                if(user.comments[i] == comment_id) {
-                    user.comments.splice(i, 1);
-                    break;
-                }
-            }
-            db.collection("Users").doc(uid).set(user);
-        });
 
-        db.collection("Designs").doc(design_id).get().then((design) => {
-            design = design.data();
-            for(let i = design.comments.length - 1; i >= 0; i--) {
-                if(design.comments[i] == comment_id) {
-                    design.comments.splice(i, 1);
-                    break;
-                }
+        // remove from users table
+        let usersRef = awaitdb.collection("Users").doc(uid).get();
+        let user = usersRef.data();
+        for (let i = user.comments.length - 1; i >= 0; i--) {
+            if (user.comments[i] === comment_id) {
+                user.comments.splice(i, 1);
+                break;
             }
-            db.collection("Designs").doc(design_id).set(design);
+        }
+        await db.collection("Users").doc(uid).set(user);
+
+        // remove from designs table
+        let designsRef = await db.collection("Designs").doc(design_id).get();
+        let design = designsRef.data();
+        for(let i = design.comments.length - 1; i >= 0; i--) {
+            if(design.comments[i] === comment_id) {
+                design.comments.splice(i, 1);
+                break;
+            }
+        }
+        await db.collection("Designs").doc(design_id).set(design);
+
+        return {}
+    } catch (err) {
+        return {err}
+    }
+}
+
+async function editComment(comment_id, newValue, newTimestamp) {
+    try {
+        let commentRef = await db.collection("Comments").doc(comment_id);
+        await commentRef.update({
+            content: newValue,
+            time: newTimestamp
         });
-    });
+        return {};
+    } catch (err) {
+        return {err};
+    }
 }
 
 /******************************************************** AUTH *******************************************************/
@@ -343,7 +374,7 @@ function getUser() {
 
 function getProfileUrl() {
     let user = getUser();
-    return user.photoURL == null
-        ? 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
-        : user.photoURL;
+    return user !== null && user.hasOwnProperty('photoURL')
+        ? user.photoURL
+        : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
 }

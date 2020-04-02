@@ -48,7 +48,7 @@ class CommentsComponent extends Component {
         // `;
 
         return {
-            content
+            content,
         };
     }
 }
@@ -357,7 +357,7 @@ class DesignCard extends Component {
 
         return {
             content,
-            afterCall: afterCall(design, this.comments_id)
+            afterCall: afterCall(design)
         }
     }
 }
