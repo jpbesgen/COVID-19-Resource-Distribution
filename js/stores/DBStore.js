@@ -172,12 +172,9 @@ class DatabaseStore {
             * and who wrote it, respectively.
         Assumes: design_id is a valid reference to a Design object
     */
-    addComment(design_id) {
+    addComment(design_id, comment_value) {
         // Check if the user is authenticated, if not throw an error
         if(!this.isAuthenticated()) throw new Error("Please login before making a comment!");
-        
-        // Assumes the comment content is coming in from an <input/> with id (design_id + "-comment-input")
-        let comment_value = document.getElementById(design_id + "-comment-input").value;
 
         // Creates a new id for the comment
         let comment_id = db.collection("Comments").doc().id;

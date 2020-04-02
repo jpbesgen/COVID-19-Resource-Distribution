@@ -15,12 +15,13 @@ class CommentsComponent extends Component {
     }
 
     afterCall() {
-        let parent_id = this.parent.props.design.id;
+        let parent_id = this.parent.props.design.id,
+            { commentContent } = this;
         $("#" + parent_id + "-comment-input").on("change", (e) => {
-            this.commentContent = e.value;
+            commentContent = e.target.value;
         });
         $("#" + parent_id + "-add-comment-btn").on("click", (e) => {
-            DBStore.addComment(parent_id, this.commentContent);
+            DBStore.addComment(parent_id, commentContent);
         });
     }
 
