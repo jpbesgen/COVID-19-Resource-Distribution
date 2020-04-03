@@ -150,6 +150,19 @@
         </div>	
     </form>
 
+    <style>
+        #loading-gif {
+            position: fixed;
+            top: 30vh;
+            left: 40vw;
+        }
+    </style>
+    <div id="loading-gif"></div>
+    <script>
+        $("#loading-gif").load("../components/loading-gif.html");
+        $("#loading-gif").hide();
+    </script>
+
     <!-- JavaScript -->
 	<script>
 		// load html components
@@ -162,24 +175,27 @@
 	<!-- Bootstrap js -->
 	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 
+    <script src="../js/models/PubSub.js"></script>
+    <script src="../js/stores/DBStore.js"></script>
 
-    <script src="../database.js"></script>
 	<script>
         let processing = false;
         document.getElementById("submission_submit").addEventListener("click", (e) => {
             try {
                 if(!processing) {
-                    handleSubmission(e)
+                    handleSubmission(e);
                 }
             } catch(err) {
                 console.log(err)
                 alert(err.message);
                 processing = false;
+                $("#loading-gif").hide();
             }
         });
 
         function handleSubmission(event) {
             processing = true;
+            $("#loading-gif").show();
             // Get all values
             let name = document.getElementById("submission_name"),
                 category = document.getElementById("submission_category"),
@@ -216,7 +232,7 @@
             design["certifiedLink"] = certified ? certifiedLink : null;
 
             difficulty = difficulty.value;
-            if(difficulty == null) throw new Error("Please specify a difficulty for your design!");
+            if(difficulty == null || difficulty.trim() == "") throw new Error("Please specify a difficulty for your design!");
             design["difficulty"] = difficulty;
 
             links = links.value.split(",").map((l) => {
@@ -236,26 +252,7 @@
             if(images.files.length < 1) throw new Error("Please upload at least one photo!");
             for(let i = 0; i < images.files.length; i++) {
                 let file = images.files[i];
-                imagePromises.push(new Promise((resolve, reject) => {
-                    let filePut = storageRef.child("Attachments/" + file.name).put(file);
-                    filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
-                    (snapshot) => {
-                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload is ' + progress + '% done');
-                    },
-                    (error) => {
-                        console.log(error);
-                    },
-                    () => {
-                        filePut.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                            console.log('File available at', downloadURL);
-                            resolve({
-                                name: file.name,
-                                url: downloadURL
-                            });
-                        });
-                    });
-                }));
+                imagePromises.push(DBStore.uploadFile(file, "Images/"));
             }
 
 
@@ -264,26 +261,7 @@
             for(let i = 0; i < attachments.files.length; i++) {
                 let file = attachments.files[i];
                 console.log(file);
-                attachmentPromises.push(new Promise((resolve, reject) => {
-                    let filePut = storageRef.child("Attachments/" + file.name).put(file);
-                    filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
-                    (snapshot) => {
-                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log('Upload is ' + progress + '% done');
-                    },
-                    (error) => {
-                        console.log(error);
-                    },
-                    () => {
-                        filePut.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                            console.log('File available at', downloadURL);
-                            resolve({
-                                name: file.name,
-                                url: downloadURL
-                            });
-                        });
-                    });
-                }));
+                attachmentPromises.push(DBStore.uploadFile(file, "Attachments/"));
             }
 
             Promise.all([Promise.all(imagePromises), Promise.all(attachmentPromises)]).then((res) => {
@@ -292,27 +270,22 @@
                 design["attachments"] = res[1] || [];
                 design["upvotes"] = 0;
                 design["approved"] = true;
-                
-                if(isAuthenticated()) {
-                    design["user"] = getUser().displayName;
-                    design["uid"] = getUser().uid;
-                } else {
-                    design["user"] = "Anonymous"
-                    design["uid"] = null;
-                }
 
-                let design_ref = db.collection("Designs").doc().id;
-                console.log(design_ref);
-                design["id"] = design_ref;
-                db.collection("Designs").doc(design_ref).set(design).then(() => {
+                DBStore.uploadDesign(design).then(() => {
                     submissionSuccess();
+                }).catch((error) => {
+                    alert(error);
+                    $("#loading-gif").hide();
                 });
+            }).catch((error) => {
+                console.log(error);
+                $("#loading-gif").hide();
             });
 
         }
 
         function submissionSuccess() {
-            process = false;
+            processing = false;
             location.assign("./submission-succesful.html");
         }
     </script>
