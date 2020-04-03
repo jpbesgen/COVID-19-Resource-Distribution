@@ -52,7 +52,7 @@ function renderDesigns(designs) {
         });
     };
 
-    fillGrid().then(() => {
+    fillGrid().then(async () => {
         ComponentTree.renderAll().then(() => {
             if(!initialRendered) {
                 handleDesigns(latestSnapshot).then(renderDesigns);
@@ -75,13 +75,16 @@ function renderDesigns(designs) {
             autoplayTimeout: 5000,
         });
 
+        // need this for next section
+        let currentUser = await getUser();
+
         // inject comment view into each
         $('div[id^="commentview-"]').each(async (index, element) => {
 
             // fetch design_id from selector
             let commentView = $(element);
             let design_id = commentView.attr("id");
-            design_id = design_id.substr(design_id.indexOf('-') + 1)
+            design_id = design_id.substr(design_id.indexOf('-') + 1);
 
             // display comment view
             commentView.comments({
@@ -99,7 +102,7 @@ function renderDesigns(designs) {
                 readOnly: !isAuthenticated(),
 
                 // user data
-                // profilePictureURL: getProfileUrl(),
+                profilePictureURL: getProfileUrl(),
 
                 refresh: function() {
                     commentView.addClass('rendered');
@@ -112,17 +115,15 @@ function renderDesigns(designs) {
                     // fetch comments
                     let comments = await fetchCommentsForDesignById(design_id);
                     if (comments.length > 0){
-                        comments = comments.map(async comment => {
-                            // let commenterUrl = await getProfileUrl(comment.uid);
-                            // console.log(commenterUrl);
+                        comments = comments.map(comment => {
                             return {
                                 id: comment.id,
                                 created: comment.time,
                                 modified: comment.modified || comment.time,
-                                fullname: comment.author,
                                 content: comment.content,
-                                // created_by_current_user: getUser().uid === comment.uid,
-                                // profile_picture_url:
+                                fullname: comment.author,
+                                created_by_current_user: currentUser.uid === comment.uid,
+                                profile_picture_url: 'https://lh3.googleusercontent.com/a-/AOh14GiyN0Bnek5AXf59FAm-SZIImDmS20CZX1jhWzKU5A'
                             }
                         });
                     }
@@ -131,13 +132,13 @@ function renderDesigns(designs) {
                 postComment: async function(commentJSON, success, error) {
                     const {content} = commentJSON;
                     console.log(commentJSON);
-                    // let {err} = addComment(design_id, content);
-                    //
-                    // if (err) {
-                    //     error(err)
-                    // } else {
-                    //     success(commentJSON);
-                    // }
+                    let {err} = addComment(design_id, content);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
                 },
                 putComment: function(commentJSON, success, error) {
                     console.log(commentJSON);
@@ -377,38 +378,13 @@ function isAuthenticated() {
 }
 
 // Assumes isAuthenticated() == True
-async function getUser(uid) {
-    if (uid == null)
-        return auth.user == null ? auth.currentUser : auth.user;
-
-    try {
-        let usersRef = await db.collection("Users").doc(uid).get();
-        return usersRef.exists ? usersRef.data() : null;
-    } catch (err) {
-        return {err};
-    }
+async function getUser() {
+    return auth.user == null ? auth.currentUser : auth.user;
 }
 
-async function getProfileUrl(uid) {
-    const defaultUrl = 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png';
-
-    // if no uid supplied, fetch own photo url
-    if (uid == null){
-        let user = getUser();
-        return user !== null && user.hasOwnProperty('photoURL')
-            ? user.photoURL
-            : defaultUrl
-    }
-
-    // uid supplied, fetch their url
-    let user = await getUser(uid);
-
-    if (user == null)
-        return defaultUrl;
-    if (user.err){
-        console.log(user.err);
-        return defaultUrl;
-    }
-
-    return user.hasOwnProperty('photoUrl') ? user.photoUrl : defaultUrl;
+async function getProfileUrl() {
+    let user = getUser();
+    return user !== null && user.hasOwnProperty('photoURL')
+        ? user.photoURL
+        : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
 }
