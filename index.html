@@ -69,7 +69,9 @@
 
 	<style> 
 		.carousel-card-hidden { 
-			display: none;
+			opacity: 0;
+			position: absolute;
+			left: 100vw;
 		} 
 		.carousel-card-header {
 			font-size: 1.4em;
@@ -87,6 +89,8 @@
 			padding: 1%;
 			max-height: 60vh;
 			overflow-y: scroll;
+			top: 20px;
+			transition: all 2s ease;
 		}
 		.carousel-card-img {
 			max-height: 10vh;
@@ -97,24 +101,30 @@
 			position: absolute;
 			right: -50vw;
 			opacity: 0;
+			transform: scale(0.7);
 		}
 		.presenting-card-1 {
+			position: absolute;
+			left: 5vw;
 			transform: scale(0.7);
 			opacity: 1;
-			transition: opacity 1s ease;
 		}
 		.presenting-card-2 {
+			position:absolute;
+			left: 30vw;
 			margin-top: auto;
 			opacity: 1;
-			transition: all 1s ease;
+			top: 0px;
 		}
 		.presenting-card-3 {
+			position: absolute;
 			transform: scale(0.7);
 			opacity: 1;
-			transition: opacity 1s ease;
+			left: 60vw;
 		}
 		.presenting-card-4 {
 			position: absolute;
+			transform: scale(0.7);
 			left: -50vw;
 			opacity: 0;
 		}
@@ -127,6 +137,7 @@
 			height: 100%;
 			margin: auto;
 			background-color: white;
+			position: relative;
 		}
 		#card-carousel-container {
 			width: 90vw;
@@ -137,6 +148,7 @@
 			align-items: center;
 			background-color: white;
 			margin: auto;
+			position: relative;
 		}
 		.carousel-btn {
 			width: 5%;
