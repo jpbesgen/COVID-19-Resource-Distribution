@@ -3,20 +3,29 @@ class DatabaseStore {
         this.designs = [];
         this.designCollectionSnapshot = null;
 
+        // handlers
         this.emitDesignsChange = this.emitDesignsChange.bind(this);
         this.handleDesignsChange = this.handleDesignsChange.bind(this);
+
+        // api
         this.fetchCommentsForDesign = this.fetchCommentsForDesign.bind(this);
+        this.fetchCommentsForDesignById = this.fetchCommentsForDesignById.bind(this);
         this.listenForDesignsChange = this.listenForDesignsChange.bind(this);
         this.addComment = this.addComment.bind(this);
+        this.editComment = this.editComment.bind(this);
         this.removeComment = this.removeComment.bind(this);
         this.handleUpvote = this.handleUpvote.bind(this);
         this.handleDownvote = this.handleDownvote.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
+        this.uploadDesign = this.uploadDesign.bind(this);
+
+        // users
         this.getDBUser = this.getDBUser.bind(this);
         this.getAuthUser = this.getAuthUser.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.handleUserAuthenticated = this.handleUserAuthenticated.bind(this);
-        this.uploadFile = this.uploadFile.bind(this);
-        this.uploadDesign = this.uploadDesign.bind(this);
+        this.getMyProfileUrl = this.getMyProfileUrl.bind(this);
+        this.getProfileUrl = this.getProfileUrl.bind(this);
     }
 
     async uploadDesign(design) {
@@ -25,7 +34,7 @@ class DatabaseStore {
             design["user"] = displayName;
             design["uid"] = uid;
         } else {
-            design["user"] = "Anonymous"
+            design["user"] = "Anonymous";
             design["uid"] = null;
         }
 
@@ -76,7 +85,7 @@ class DatabaseStore {
                 }).then(() => {
                     location.assign("/index.html");
                 }).catch((error) => {
-                    console.log(error);
+                    console.error(error);
                 });
             } else {
                 location.assign("/index.html");
@@ -99,11 +108,11 @@ class DatabaseStore {
         Parameters:
             * querySnapshot = Firestore object containing .data() for all designs
         Returns: none
-        Actions: 
+        Actions:
             * Fetches comments for designs, appends them, and calls emitDesignsChange
         Assumes: none
     */
-    handleDesignsChange(querySnapshot) {   
+    handleDesignsChange(querySnapshot) {
         let commentFetches = [];
         querySnapshot.forEach((snapshot) => {
             let doc = snapshot.data();
@@ -144,9 +153,48 @@ class DatabaseStore {
     }
 
     /*
+        Parameters:
+            * design_id = ID of a design for which to fetch the comments
+        Returns:
+            * A Promise whose resolution returns the list of Comment objects for this Design (not references)
+        Actions: none
+        Assumes: none
+    */
+    async fetchCommentsForDesignById(design_id) {
+        // fetch comment ids array
+        let designCommentIDs = await new Promise((res, rej) => {
+            db.collection("Designs").doc(design_id).get().then((snapshot) => {
+                res(
+                    snapshot.exists && snapshot.data().comments
+                        ? snapshot.data().comments
+                        : []
+                )
+            });
+        });
+
+        // fetch comment content for each ID
+        let finalComments = [];
+        for (const commentID of designCommentIDs){
+            let result = await new Promise((res, rej) => {
+                db.collection("Comments").doc(commentID).get().then(snapshot => {
+                    res(
+                        snapshot.exists
+                            ? snapshot.data()
+                            : {}
+                    );
+                })
+            });
+
+            finalComments.push(result);
+        }
+
+        return finalComments
+    }
+
+    /*
         Parameters: none
         Returns: none
-        Actions: 
+        Actions:
             * Creates an active listener on the Designs collection.
             * Emits a "DesignsChange" event everytime the listener is triggered
             * and pushes the Firebase Query Snapshot to the event store.
@@ -158,133 +206,167 @@ class DatabaseStore {
             this.designCollectionSnapshot = querySnapshot;
             this.handleDesignsChange(querySnapshot);
         }, (error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
     /*
-        Parameters: 
+        Parameters:
             * design_id = ID reference of the design where this comment is being made
         Returns: none
-        Actions: 
+        Actions:
             * Creates a Comment object in the database and creates references to this object
             * under the Design and User objects corresponding to where the comment came from
             * and who wrote it, respectively.
         Assumes: design_id is a valid reference to a Design object
     */
-    addComment(design_id, comment_value) {
+    async addComment(design_id, comment_value) {
         // Check if the user is authenticated, if not throw an error
         if(!this.isAuthenticated()) throw new Error("Please login before making a comment!");
 
-        // Creates a new id for the comment
-        let comment_id = db.collection("Comments").doc().id;
+        try {
+            // Creates a new id for the comment
+            let comment_id = db.collection("Comments").doc().id;
 
-        // Get a reference to the current user from auth
-        let user = this.getAuthUser();
+            // Get a reference to the current user from auth
+            let user = this.getAuthUser();
 
-        // Set the data for the comment in the Comments collection
-        // This document contains all data about this comment,
-        // Other documents merely reference this through the comment_id
-        /*
-            Comment {
-                content: STRING,    // What's said
-                author: STRING,     // Name of who said it
-                uid: STRING,        // ID of who said it (for database purposes)
-                id: STRING,         // ID of the comment, how it is referenced everywhere
-                design: STRING,     // ID of the design the comment is located, for DB referencing
-                time: NUMBER        // Time in milliseconds that this comment was made
-            }
+            // Set the data for the comment in the Comments collection
+            // This document contains all data about this comment,
+            // Other documents merely reference this through the comment_id
+            /*
+                Comment {
+                    content: STRING,    // What's said
+                    author: STRING,     // Name of who said it
+                    uid: STRING,        // ID of who said it (for database purposes)
+                    id: STRING,         // ID of the comment, how it is referenced everywhere
+                    design: STRING,     // ID of the design the comment is located, for DB referencing
+                    time: NUMBER        // Time in milliseconds that this comment was made
+                }
 
-            // Possible other attributes:
-                numLikes: NUMBER    // Number of people who liked this comment
-                threadId: STRING    // ID of the Thread reference for this comment
-                                    // Thread may be its own collection and data structure 
+                // Possible other attributes:
+                    numLikes: NUMBER    // Number of people who liked this comment
+                    threadId: STRING    // ID of the Thread reference for this comment
+                                        // Thread may be its own collection and data structure
 
-        */
-        db.collection("Comments").doc(comment_id).set({
-            content: comment_value,
-            author: user.displayName,
-            uid: user.uid,
-            id: comment_id,
-            design: design_id,
-            time: Date.now()
-        });
+            */
+            await db.collection("Comments").doc(comment_id).set({
+                id: comment_id,
+                time: Date.now(),
+                modified: Date.now(),
+                content: comment_value,
+                author: user.displayName,
+                uid: user.uid,
+                design: design_id,
+            });
 
 
-        // Access the User object for who posted the comment in the database
-        // First: retrieve the full User object using .get() and snapshot.data()
-        // Second: append the new comment reference to the list of the User's comments
-        // Third: push the newly updated User object back to the database .set()
-        db.collection("Users").doc(user.uid).get().then((snapshot) => {
-            let doc = snapshot.data();
-            if(doc.comments == null) {
+            // Access the User object for who posted the comment in the database
+            // First: retrieve the full User object using .get() and snapshot.data()
+            // Second: append the new comment reference to the list of the User's comments
+            // Third: push the newly updated User object back to the database .set()
+            let usersRef = await db.collection("Users").doc(user.uid).get();
+            let doc = usersRef.data();
+            if (doc.comments == null) {
                 doc.comments = [];
             }
             doc.comments.push(comment_id);
             db.collection("Users").doc(user.uid).set(doc);
-        });
 
-        // Access the Design object where the comment was posted in the database
-        // First: retrieve the full Design object using .get() and snapshot.data()
-        // Second: append the new comment reference to the list of the Design's comments
-        // Third: push the newly updated Design object back to the database .set()
-        db.collection("Designs").doc(design_id).get().then((snapshot) => {
-            let doc = snapshot.data();
+            // Access the Design object where the comment was posted in the database
+            // First: retrieve the full Design object using .get() and snapshot.data()
+            // Second: append the new comment reference to the list of the Design's comments
+            // Third: push the newly updated Design object back to the database .set()
+            let designsRef = await db.collection("Designs").doc(design_id).get();
+            doc = designsRef.data();
             if(doc.comments == null) {
                 doc.comments = [];
             }
             doc.comments.push(comment_id);
-            db.collection("Designs").doc(design_id).set(doc);
-        });
+            await db.collection("Designs").doc(design_id).set(doc);
+
+            return {}
+        } catch (err) {
+            console.error(err);
+            return {err}
+        }
     }
 
+    /*
+        Parameters:
+            * comment_id = ID reference to the Comment object in the database
+            * newValue = new comment text
+            * newTimestamp = timestamp to be used for when the comment was 'modified'
+        Returns: none
+        Actions:
+            * Edits the comment text and timestamp in the database.
+        Assumes: none
+    */
+    async editComment(comment_id, newValue, newTimestamp) {
+        try {
+            let commentRef = await db.collection("Comments").doc(comment_id);
+            await commentRef.update({
+                content: newValue,
+                modified: newTimestamp
+            });
+            return {};
+        } catch (err) {
+            console.error(err);
+            return {err};
+        }
+    }
 
     /*
         Parameters:
             * comment_id = ID reference to the Comment object in the database
         Returns: none
-        Actions: 
+        Actions:
             * Removes the comment reference from the corresponding User and Design objects
             * in the database, effectively deleting it from display.
         Assumes: none
     */
-    removeComment(comment_id) {
+    async removeComment(comment_id) {
         // Check if the user is authenticated, if not throw an error
         if(!this.isAuthenticated()) throw new Error("Please login to remove your comments!");
 
-        // Access the Comment object in the databse using the comment_id
-        // First: Get references to the Design and User objects in the database
-        // Second: Remove the comment reference from the list under the User object
-        // Third: Remove the comment reference from the list under the Design object
-        // Fourth?: TODO: We could delete this Comment object in the db or save it.
-        db.collection("Comments").doc(comment_id).get().then((snapshot) => {
-            let doc = snapshot.data(),
+        try {
+            // Access the Comment object in the databse using the comment_id
+            // First: Get references to the Design and User objects in the database
+            // Second: Remove the comment reference from the list under the User object
+            // Third: Remove the comment reference from the list under the Design object
+            // Fourth?: TODO: We could delete this Comment object in the db or save it.
+            let commentsRef = await db.collection("Comments").doc(comment_id).get();
+            let doc = commentsRef.data(),
                 design_id = doc.design, // Reference to Design object
                 uid = doc.uid;          // Reference to User object
-            
-            db.collection("Users").doc(uid).get().then((user) => {
-                user = user.data();
-                for(let i = user.comments.length - 1; i >= 0; i--) {
-                    if(user.comments[i] == comment_id) {
-                        user.comments.splice(i, 1);     // Removes the reference
-                        break;
-                    }
-                }
-                db.collection("Users").doc(uid).set(user);              // Updates the User object
-            });
 
-            db.collection("Designs").doc(design_id).get().then((design) => {
-                design = design.data();
-                for(let i = design.comments.length - 1; i >= 0; i--) {
-                    if(design.comments[i] == comment_id) {
-                        design.comments.splice(i, 1);   // Removes the reference
-                        break;
-                    }
+            // remove from users
+            let usersRef = await db.collection("Users").doc(uid).get();
+            let user = usersRef.data();
+            for (let i = user.comments.length - 1; i >= 0; i--) {
+                if (user.comments[i] === comment_id) {
+                    user.comments.splice(i, 1); // Removes the reference
+                    break;
                 }
-                db.collection("Designs").doc(design_id).set(design);    // Updates Design object
-            });
+            }
+            await db.collection("Users").doc(uid).set(user); // Updates the User object
 
-        });
+            // remove from designs
+            let designsRef = await db.collection("Designs").doc(design_id).get();
+            let design = designsRef.data();
+            for (let i = design.comments.length - 1; i >= 0; i--) {
+                if (design.comments[i] === comment_id) {
+                    design.comments.splice(i, 1);   // Removes the reference
+                    break;
+                }
+            }
+            await db.collection("Designs").doc(design_id).set(design);    // Updates Design object
+
+            return {}
+        } catch (err) {
+            console.error(err);
+            return {err}
+        }
     }
 
     handleUpvote(design_id) {
@@ -322,6 +404,7 @@ class DatabaseStore {
             });
         });
     }
+
     handleDownvote(design_id) {
         if(!this.isAuthenticated()) {
             alert("Please login to vote on submissions!");
@@ -371,6 +454,38 @@ class DatabaseStore {
 
     /*
         Parameters: none
+        Returns: The authenticated user's profile URL
+        Actions: none
+        Assumes: this.isAuthenticated() == true
+    */
+    getMyProfileUrl() {
+        let user = this.getAuthUser();
+        return user !== null && user.hasOwnProperty('photoURL')
+            ? user.photoURL
+            : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
+    }
+
+    /*
+        Parameters: uid for a user's profile URL
+        Returns: The user's profile URL
+        Actions: none
+        Assumes: none
+    */
+    async getProfileUrl(uid) {
+        const defaultUrl = 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png';
+
+        // get user
+        try {
+            let userRef = await db.collection("Users").doc(uid).get();
+            return userRef.exists && userRef.data().hasOwnProperty('photoUrl') ? userRef.data().photoUrl : defaultUrl;
+        } catch (err){
+            console.error(err);
+            return defaultUrl;
+        }
+    }
+
+    /*
+        Parameters: none
         Returns: The database User object of whoever is authenticated
         Actions: none
         Assumes: this.isAuthenticated() == true
@@ -388,11 +503,10 @@ class DatabaseStore {
     isAuthenticated() {
         return auth.user != null || auth.currentUser != null;
     }
-     
+
 }
 
 let DBStore = new DatabaseStore();
-
 
 EventStore.on("Upvote", DBStore.handleUpvote);
 EventStore.on("Downvote", DBStore.handleDownvote);

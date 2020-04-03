@@ -47,15 +47,19 @@
         }
     });
 
-    $('#logoutLink').click(() => {
-        firebase.auth().signOut().then(function() {
+    $('#logoutLink').click(async () => {
+        try {
+            await firebase.auth().signOut();
+
             // Sign-out successful.
             console.log('User Logged Out!');
             $('#navLogoutLink').css("display", "none");
             $('#navLoginLink').show();
-        }).catch(function(error) {
-            // An error happened.
-            console.log(error);
-        });
+
+            // reload page (to refresh privileges)
+            location.reload();
+        } catch (err) {
+            console.error(err);
+        }
     })
 </script>

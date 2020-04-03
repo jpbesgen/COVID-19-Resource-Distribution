@@ -36,35 +36,29 @@ function renderDesigns(designs) {
                 return;
             }
             let design_id = "design-" + gridItem.id;
-            let newDesign = new DesignCardComponent(design_id, {
+            designCards[gridItem.id] = new DesignCardComponent(design_id, {
                 design: gridItem,
             });
-            designCards[gridItem.id] = newDesign;
 
             // Create the container for each design to embed in
             var $items = $(
-              `
-                <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
-                
-                </div>
+            `
+                <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;"></div>
             `);
             // append items to grid
-            // $grid.append( $items )
-                // .isotope( 'appended', $items );
-
-
             $grid.append( $items )
                 .isotope( 'appended', $items );
         });
-    }
+    };
 
-    fillGrid().then(() => {
+    fillGrid().then(async () => {
         ComponentTree.renderAll().then(() => {
             if(!initialRendered) {
                 setTimeout(DBStore.emitDesignsChange, 0);
             }
             initialRendered = true;
         });
+
         // enable carousel
         $(".owl-carousel").owlCarousel({
             items: 1,
@@ -80,6 +74,90 @@ function renderDesigns(designs) {
             autoplayTimeout: 5000,
         });
 
+        // inject comment view into each CommentComponent
+        $('div[id^="commentview-"]').each(async (index, element) => {
+
+            let currentUser = DBStore.getAuthUser();
+            let myProfileUrl =  DBStore.getMyProfileUrl();
+
+            // fetch design_id from selector
+            let commentView = $(element);
+            let design_id = commentView.attr("id");
+            design_id = design_id.substr(design_id.indexOf('-') + 1);
+
+            // display comment view
+            commentView.comments({
+                // functionalities
+                enableReplying: false,
+                enableEditing: true,
+                enableUpvoting: false,
+                enableDeleting: true,
+                enableDeletingCommentWithReplies: true,
+                enableAttachments: false,
+                enableHashtags: false,
+                enablePinging: false,
+                enableNavigation: true,
+                postCommentOnEnter: true,
+                readOnly: !DBStore.isAuthenticated(),
+
+                // user data
+                profilePictureURL: myProfileUrl,
+
+                // callbacks
+                getComments: async function(success, error) {
+                    // fetch comments
+                    let comments = await DBStore.fetchCommentsForDesignById(design_id);
+                    let commentsNew = [];
+
+                    if (comments.length > 0){
+                        // loop though comments
+                        for (const comment of comments){
+                            let photoUrl = await DBStore.getProfileUrl(comment.uid);
+                            commentsNew.push({
+                                id: comment.id,
+                                created: comment.time,
+                                modified: comment.modified || comment.time,
+                                content: comment.content,
+                                fullname: comment.author,
+                                created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
+                                profile_picture_url: photoUrl
+                            });
+                        }
+                    }
+                    success(commentsNew);
+                },
+                postComment: async function(commentJSON, success, error) {
+                    const {content} = commentJSON;
+                    let {err} = await DBStore.addComment(design_id, content);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                },
+                putComment: async function(commentJSON, success, error) {
+                    let id = commentJSON.id;
+                    let {err} = await DBStore.editComment(id, commentJSON.content, commentJSON.modified);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                },
+                deleteComment: async function(commentJSON, success, error) {
+                    let id = commentJSON.id;
+                    let {err} = await DBStore.removeComment(id);
+
+                    if (err) {
+                        error(err)
+                    } else {
+                        success(commentJSON);
+                    }
+                }
+            });
+        })
     });
   });
 }
