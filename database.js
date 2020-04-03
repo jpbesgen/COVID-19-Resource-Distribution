@@ -43,7 +43,7 @@ function renderDesigns(designs) {
 
             // Create the container for each design to embed in
             var $items = $(
-            `
+              `
                 <div id="${design_id}" class="grid-item card ${gridItem.type} ${gridItem.category} certified-${gridItem.certified} printer-${gridItem.printerRequired}" style="width: 18em;">
                 
                 </div>
