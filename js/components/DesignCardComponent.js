@@ -160,7 +160,7 @@ class DesignCardComponent extends Component {
                 break;
         }
 
-        let content = `
+        return `
             <h5 class="card-header text-dark">${design.name}</h5>
             <img class="card-img-top" src="${design.images[0].url}" alt="Item Attachment 0" />
             <div class="card-body">
@@ -181,49 +181,9 @@ class DesignCardComponent extends Component {
                     <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
                 </button> 
             </div>
-        
             
             <div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="${design.id}ModalLabel">${design.name}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-6">
-        <!--                                <img class="modal-img" src="${design.images[0].url}" alt="Modal item cap" />-->
-                            <!-- CAROUSEL -->
-                            <div class="owl-carousel owl-theme">
-                                ${images}
-                            </div>
-                            <!-- END CAROUSEL -->
-                        </div>
-                        <div class="col-xs-12 col-6">
-                            <div class="community">
-                                <div class="votes">
-                                    <h3 class="community-title">Community Score</h3>
-                                    <p id="${this.upvotes_id}" class="community-text">${design.upvotes} Upvotes</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button onClick="upvote('${design.id}')" class="btn">
-                            <img src="../img/arrow-dropdown.png"/>
-                        </button>
-                        <span class="btn" id="${this.cardfront_upvotes_id}">${design.upvotes}</span>
-                        <button onClick="downvote('${design.id}')" class="btn">
-                            <img style="transform: rotate(-180deg);" src="../img/arrow-dropdown.png"/>
-                        </button> 
-                    </div>
-                
-                    
-                    <div class="modal fade" id="${design.id}" tabindex="-1" role="dialog" aria-labelledby="${design.id}ModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="${design.id}ModalLabel">${design.name}</h5>
@@ -265,23 +225,24 @@ class DesignCardComponent extends Component {
                                     <p class="modal-text"><b>Description</b><br />${design.description}</p>
                                     <p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
                                     <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
-                                    ${design.certifiedLink != null && design.certified == "yes" ? 
-                                    `
+                                    ${design.certifiedLink != null && design.certified == "yes" ?
+                            `
                                         <p class="modal-text">
                                             <b>Certification Link</b>
                                             <br />
                                             <a href=${design.certifiedLink} target="_blank"> ${design.certifiedLink} </a>
-                                        </p>` : 
-                                        ``
-                                    }
+                                        </p>` :
+                            ``
+                        }
                                     <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
                                     <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
                                     ${links}
                                     <br/>
                                     ${downloads}
-                                </div>
+                                                    </div>
                                 <div class="tab-pane fade" id="comments-page-${design.id}" role="tabpanel" aria-labelledby="comments">
-                                    <div id="${this.comments_id}" class="comments"> </div>
+                                    <div id="${this.comments_id}" class="comments">
+                                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -291,7 +252,5 @@ class DesignCardComponent extends Component {
                     </div>
                 </div>
         `;
-
-        return content;
     }
 }

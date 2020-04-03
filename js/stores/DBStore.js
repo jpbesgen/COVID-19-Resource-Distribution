@@ -85,7 +85,7 @@ class DatabaseStore {
                 }).then(() => {
                     location.assign("/index.html");
                 }).catch((error) => {
-                    console.log(error);
+                    console.error(error);
                 });
             } else {
                 location.assign("/index.html");
@@ -206,7 +206,7 @@ class DatabaseStore {
             this.designCollectionSnapshot = querySnapshot;
             this.handleDesignsChange(querySnapshot);
         }, (error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
@@ -287,6 +287,7 @@ class DatabaseStore {
 
             return {}
         } catch (err) {
+            console.error(err);
             return {err}
         }
     }
@@ -310,6 +311,7 @@ class DatabaseStore {
             });
             return {};
         } catch (err) {
+            console.error(err);
             return {err};
         }
     }
@@ -333,9 +335,7 @@ class DatabaseStore {
             // Second: Remove the comment reference from the list under the User object
             // Third: Remove the comment reference from the list under the Design object
             // Fourth?: TODO: We could delete this Comment object in the db or save it.
-
             let commentsRef = await db.collection("Comments").doc(comment_id).get();
-
             let doc = commentsRef.data(),
                 design_id = doc.design, // Reference to Design object
                 uid = doc.uid;          // Reference to User object
@@ -345,14 +345,14 @@ class DatabaseStore {
             let user = usersRef.data();
             for (let i = user.comments.length - 1; i >= 0; i--) {
                 if (user.comments[i] === comment_id) {
-                    user.comments.splice(i, 1);     // Removes the reference
+                    user.comments.splice(i, 1); // Removes the reference
                     break;
                 }
             }
-            await db.collection("Users").doc(uid).set(user);              // Updates the User object
+            await db.collection("Users").doc(uid).set(user); // Updates the User object
 
             // remove from designs
-            let designsRef = db.collection("Designs").doc(design_id).get();
+            let designsRef = await db.collection("Designs").doc(design_id).get();
             let design = designsRef.data();
             for (let i = design.comments.length - 1; i >= 0; i--) {
                 if (design.comments[i] === comment_id) {
@@ -364,6 +364,7 @@ class DatabaseStore {
 
             return {}
         } catch (err) {
+            console.error(err);
             return {err}
         }
     }
@@ -429,7 +430,7 @@ class DatabaseStore {
             let userRef = await db.collection("Users").doc(uid).get();
             return userRef.exists && userRef.data().hasOwnProperty('photoUrl') ? userRef.data().photoUrl : defaultUrl;
         } catch (err){
-            console.log(err);
+            console.error(err);
             return defaultUrl;
         }
     }
