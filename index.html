@@ -65,6 +65,103 @@
 			<p>We’re a group of volunteers looking to solve two of the most urgent problems of the COVID-19 pandemic: How do we get vital medical supplies to the people who need them most and how do we mobilize the existing community of manufacturers, makers, and builders to ensure these vital supplies never run out. </p>
 		</div>
 	</section>
+
+
+	<style> 
+		.carousel-card-hidden { 
+			display: none;
+		} 
+		.carousel-card-header {
+			font-size: 1.4em;
+			text-align: center;
+		}
+		.carousel-card-body {
+			margin: 1%;
+			padding: 0px;
+		}
+		.landing-carousel-card {
+			margin: auto;
+			font-size: 0.7em;
+			background-color: white;
+			justify-content: flex-start;
+			padding: 1%;
+			max-height: 60vh;
+			overflow-y: scroll;
+		}
+		.carousel-card-img {
+			max-height: 10vh;
+			width: auto;
+			object-fit: contain;
+		}
+		.presenting-card-0 {
+			position: absolute;
+			right: -50vw;
+			opacity: 0;
+		}
+		.presenting-card-1 {
+			transform: scale(0.7);
+			opacity: 1;
+			transition: opacity 1s ease;
+		}
+		.presenting-card-2 {
+			margin-top: auto;
+			opacity: 1;
+			transition: all 1s ease;
+		}
+		.presenting-card-3 {
+			transform: scale(0.7);
+			opacity: 1;
+			transition: opacity 1s ease;
+		}
+		.presenting-card-4 {
+			position: absolute;
+			left: -50vw;
+			opacity: 0;
+		}
+		.landing-carousel {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			width: 90%;
+			height: 100%;
+			margin: auto;
+			background-color: white;
+		}
+		#card-carousel-container {
+			width: 90vw;
+			height: 40vh;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			background-color: white;
+			margin: auto;
+		}
+		.carousel-btn {
+			width: 5%;
+			height: 100%;
+			margin: 0px;
+			background-color: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+	</style>
+	<div id="card-carousel-container">
+		<div id="card-carousel-left" class="carousel-btn">
+			<button type="button" id="card-carousel-left-btn" class="btn">
+				<img style="transform: rotate(-90deg);" src="../img/arrow-dropdown.png"/>
+			</button>
+		</div>
+		<div id="card-carousel" class="landing-carousel"></div>
+		<div id="card-carousel-right" class="carousel-btn">
+			<button type="button" id="card-carousel-right-btn" class="btn">
+				<img style="transform: rotate(90deg);" src="../img/arrow-dropdown.png"/>
+			</button>
+		</div>
+	</div>
 <!-- 
 	<section>
 		<div class="container-fluid bottom">
@@ -101,6 +198,13 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+	<script src="./js/models/PubSub.js"></script>
+	<script src="./js/models/Component.js"></script>
+	<script src="./js/models/ComponentManager.js"></script>
+	<script src="./js/stores/DBStore.js"></script>
+	<script src="./js/components/LandingCarouselComponent.js"></script>
+	<script src="./js/landing.js"></script>
 </body>
 
 </html>

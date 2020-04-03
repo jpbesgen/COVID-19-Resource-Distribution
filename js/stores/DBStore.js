@@ -95,6 +95,10 @@ class DatabaseStore {
         EventStore.publish("DesignsChange", this.designs);
     }
 
+    getDesigns() {
+        return this.designs;
+    }
+
     /*
         Parameters:
             * querySnapshot = Firestore object containing .data() for all designs
