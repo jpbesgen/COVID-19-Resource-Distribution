@@ -292,25 +292,72 @@ class DatabaseStore {
             alert("Please login to vote on submissions!");
             return;
         }
-        db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let user = this.getAuthUser();
+        var increment = 1;
+        db.collection("Users").doc(user.uid).get().then((snapshot) => {
             let doc = snapshot.data();
-            doc.upvotes += 1;
-            db.collection("Designs").doc(design_id).set(doc);
+            if(doc.upvotes == null) {
+                doc.upvotes = [];
+            }
+            // check if user has already downvoted this design
+            if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
+              // remove design from downvotes
+              while(doc.downvotes.includes(design_id)) {
+                const index = doc.downvotes.indexOf(design_id);
+                if (index > -1) {
+                  doc.downvotes.splice(index, 1);
+                }
+              }
+              increment += 1;
+            } else if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
+              alert("You cannot upvote a design more than once!");
+              return;
+            }
+            doc.upvotes.push(design_id);
+            db.collection("Users").doc(user.uid).set(doc);
+            db.collection("Designs").doc(design_id).get().then((snapshot) => {
+                let doc = snapshot.data();
+                doc.upvotes += increment;
+                db.collection("Designs").doc(design_id).set(doc);
+            });
         });
     }
-    
     handleDownvote(design_id) {
         if(!this.isAuthenticated()) {
             alert("Please login to vote on submissions!");
             return;
         }
-        db.collection("Designs").doc(design_id).get().then((snapshot) => {
+        let user = this.getAuthUser();
+        var increment = 1;
+        db.collection("Users").doc(user.uid).get().then((snapshot) => {
             let doc = snapshot.data();
-            doc.upvotes = (doc.upvotes-1) > 0 ? doc.upvotes - 1 : 0;
-            db.collection("Designs").doc(design_id).set(doc);
+            if(doc.downvotes == null) {
+                doc.downvotes = [];
+            }
+            // check if user has already upvoted this design
+            if(doc.upvotes != null && doc.upvotes.includes(design_id)) {
+              // remove from downvotes and then upvote
+              while(doc.upvotes.includes(design_id)) {
+                const index = doc.upvotes.indexOf(design_id);
+                if (index > -1) {
+                  doc.upvotes.splice(index, 1);
+                }
+              }
+              increment += 1
+            }
+            if(doc.downvotes != null && doc.downvotes.includes(design_id)) {
+              alert("You cannot downvote a design more than once!");
+              return;
+            }
+            doc.downvotes.push(design_id);
+            db.collection("Users").doc(user.uid).set(doc);
+            db.collection("Designs").doc(design_id).get().then((snapshot) => {
+                let doc = snapshot.data();
+                doc.upvotes = (doc.upvotes-increment) > 0 ? doc.upvotes - increment : 0;
+                db.collection("Designs").doc(design_id).set(doc);
+            });
         });
     }
-
 
     /*
         Parameters: none
