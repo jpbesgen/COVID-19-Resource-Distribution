@@ -99,7 +99,11 @@ function renderDesigns(designs) {
                 readOnly: !isAuthenticated(),
 
                 // user data
-                profilePictureURL: getProfileUrl(),
+                // profilePictureURL: getProfileUrl(),
+
+                refresh: function() {
+                    commentView.addClass('rendered');
+                },
 
                 // callbacks
                 getComments: async function(success, error) {
@@ -108,12 +112,17 @@ function renderDesigns(designs) {
                     // fetch comments
                     let comments = await fetchCommentsForDesignById(design_id);
                     if (comments.length > 0){
-                        comments = comments.map(comment => {
+                        comments = comments.map(async comment => {
+                            // let commenterUrl = await getProfileUrl(comment.uid);
+                            // console.log(commenterUrl);
                             return {
+                                id: comment.id,
+                                created: comment.time,
+                                modified: comment.modified || comment.time,
                                 fullname: comment.author,
                                 content: comment.content,
-                                created: comment.time,
-                                id: comment.id
+                                // created_by_current_user: getUser().uid === comment.uid,
+                                // profile_picture_url:
                             }
                         });
                     }
@@ -122,13 +131,13 @@ function renderDesigns(designs) {
                 postComment: async function(commentJSON, success, error) {
                     const {content} = commentJSON;
                     console.log(commentJSON);
-                    let {err} = addComment(design_id, content);
-
-                    if (err) {
-                        error(err)
-                    } else {
-                        success(commentJSON);
-                    }
+                    // let {err} = addComment(design_id, content);
+                    //
+                    // if (err) {
+                    //     error(err)
+                    // } else {
+                    //     success(commentJSON);
+                    // }
                 },
                 putComment: function(commentJSON, success, error) {
                     console.log(commentJSON);
@@ -368,13 +377,38 @@ function isAuthenticated() {
 }
 
 // Assumes isAuthenticated() == True
-function getUser() {
-    return auth.user == null ? auth.currentUser : auth.user;
+async function getUser(uid) {
+    if (uid == null)
+        return auth.user == null ? auth.currentUser : auth.user;
+
+    try {
+        let usersRef = await db.collection("Users").doc(uid).get();
+        return usersRef.exists ? usersRef.data() : null;
+    } catch (err) {
+        return {err};
+    }
 }
 
-function getProfileUrl() {
-    let user = getUser();
-    return user !== null && user.hasOwnProperty('photoURL')
-        ? user.photoURL
-        : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
+async function getProfileUrl(uid) {
+    const defaultUrl = 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png';
+
+    // if no uid supplied, fetch own photo url
+    if (uid == null){
+        let user = getUser();
+        return user !== null && user.hasOwnProperty('photoURL')
+            ? user.photoURL
+            : defaultUrl
+    }
+
+    // uid supplied, fetch their url
+    let user = await getUser(uid);
+
+    if (user == null)
+        return defaultUrl;
+    if (user.err){
+        console.log(user.err);
+        return defaultUrl;
+    }
+
+    return user.hasOwnProperty('photoUrl') ? user.photoUrl : defaultUrl;
 }
