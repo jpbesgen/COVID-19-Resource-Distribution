@@ -75,11 +75,11 @@ function renderDesigns(designs) {
             autoplayTimeout: 5000,
         });
 
-        // need this for next section
-        let currentUser = await getUser();
-
         // inject comment view into each
         $('div[id^="commentview-"]').each(async (index, element) => {
+
+            let currentUser = getUser();
+            let myProfileUrl =  await getMyProfileUrl();
 
             // fetch design_id from selector
             let commentView = $(element);
@@ -102,11 +102,7 @@ function renderDesigns(designs) {
                 readOnly: !isAuthenticated(),
 
                 // user data
-                profilePictureURL: getProfileUrl(),
-
-                refresh: function() {
-                    commentView.addClass('rendered');
-                },
+                profilePictureURL: myProfileUrl,
 
                 // callbacks
                 getComments: async function(success, error) {
@@ -114,25 +110,28 @@ function renderDesigns(designs) {
 
                     // fetch comments
                     let comments = await fetchCommentsForDesignById(design_id);
+                    let commentsNew = [];
+
                     if (comments.length > 0){
-                        comments = comments.map(comment => {
-                            return {
+                        // loop though comments
+                        for (const comment of comments){
+                            let photoUrl = await getProfileUrl(comment.uid);
+                            commentsNew.push({
                                 id: comment.id,
                                 created: comment.time,
                                 modified: comment.modified || comment.time,
                                 content: comment.content,
                                 fullname: comment.author,
-                                created_by_current_user: currentUser.uid === comment.uid,
-                                profile_picture_url: 'https://lh3.googleusercontent.com/a-/AOh14GiyN0Bnek5AXf59FAm-SZIImDmS20CZX1jhWzKU5A'
-                            }
-                        });
+                                created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
+                                profile_picture_url: photoUrl
+                            });
+                        }
                     }
-                    success(comments);
+                    success(commentsNew);
                 },
                 postComment: async function(commentJSON, success, error) {
                     const {content} = commentJSON;
-                    console.log(commentJSON);
-                    let {err} = addComment(design_id, content);
+                    let {err} = await addComment(design_id, content);
 
                     if (err) {
                         error(err)
@@ -140,10 +139,9 @@ function renderDesigns(designs) {
                         success(commentJSON);
                     }
                 },
-                putComment: function(commentJSON, success, error) {
-                    console.log(commentJSON);
+                putComment: async function(commentJSON, success, error) {
                     let id = commentJSON.id;
-                    let {err} = editComment(id, commentJSON.content, commentJSON.modified);
+                    let {err} = await editComment(id, commentJSON.content, commentJSON.modified);
 
                     if (err) {
                         error(err)
@@ -151,10 +149,9 @@ function renderDesigns(designs) {
                         success(commentJSON);
                     }
                 },
-                deleteComment: function(commentJSON, success, error) {
-                    console.log(commentJSON);
+                deleteComment: async function(commentJSON, success, error) {
                     let id = commentJSON.id;
-                    let {err} = removeComment(id);
+                    let {err} = await removeComment(id);
 
                     if (err) {
                         error(err)
@@ -201,7 +198,7 @@ async function handleDesigns(querySnapshot) {
 async function fetchCommentsForDesign(doc) {
     let commentRefs = doc.comments;
     let comments = [];
-    if(commentRefs != undefined && commentRefs != null) {
+    if (commentRefs) {
         commentRefs.forEach((ref) => {
             comments.push(db.collection("Comments").doc(ref).get())
         });
@@ -290,12 +287,13 @@ async function addComment(design_id, comment_value) {
 
         // add comment
         await db.collection("Comments").doc(comment_id).set({
+            id: comment_id,
+            time: Date.now(),
+            modified: Date.now(),
             content: comment_value,
             author: user.displayName,
             uid: user.uid,
-            id: comment_id,
-            design: design_id,
-            time: Date.now()
+            design: design_id
         });
 
         // add to users
@@ -308,7 +306,7 @@ async function addComment(design_id, comment_value) {
         await db.collection("Users").doc(user.uid).set(doc);
 
         // add to designs
-        let designsRef = await db.collection("Designs").doc(design_id).get()
+        let designsRef = await db.collection("Designs").doc(design_id).get();
         doc = designsRef.data();
         if (doc.comments == null) {
             doc.comments = [];
@@ -317,7 +315,6 @@ async function addComment(design_id, comment_value) {
         await db.collection("Designs").doc(design_id).set(doc);
 
         return {}
-
     } catch (err) {
         return {err}
     }
@@ -332,7 +329,7 @@ async function removeComment(comment_id) {
             uid = doc.uid;
 
         // remove from users table
-        let usersRef = awaitdb.collection("Users").doc(uid).get();
+        let usersRef = await db.collection("Users").doc(uid).get();
         let user = usersRef.data();
         for (let i = user.comments.length - 1; i >= 0; i--) {
             if (user.comments[i] === comment_id) {
@@ -364,7 +361,7 @@ async function editComment(comment_id, newValue, newTimestamp) {
         let commentRef = await db.collection("Comments").doc(comment_id);
         await commentRef.update({
             content: newValue,
-            time: newTimestamp
+            modified: newTimestamp
         });
         return {};
     } catch (err) {
@@ -378,13 +375,26 @@ function isAuthenticated() {
 }
 
 // Assumes isAuthenticated() == True
-async function getUser() {
+function getUser() {
     return auth.user == null ? auth.currentUser : auth.user;
 }
 
-async function getProfileUrl() {
+async function getMyProfileUrl() {
     let user = getUser();
     return user !== null && user.hasOwnProperty('photoURL')
         ? user.photoURL
         : 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png'
+}
+
+async function getProfileUrl(uid) {
+    const defaultUrl = 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png';
+
+    // get user
+    try {
+        let userRef = await db.collection("Users").doc(uid).get();
+        return userRef.exists && userRef.data().hasOwnProperty('photoUrl') ? userRef.data().photoUrl : defaultUrl;
+    } catch (err){
+        console.log(err);
+        return defaultUrl;
+    }
 }
