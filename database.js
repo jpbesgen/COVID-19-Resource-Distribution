@@ -75,91 +75,91 @@ function renderDesigns(designs) {
         });
 
         // inject comment view into each CommentComponent
-        $('div[id^="commentview-"]').each(async (index, element) => {
-
-            let currentUser = DBStore.getAuthUser();
-            let myProfileUrl =  DBStore.getMyProfileUrl();
-
-            // fetch design_id from selector
-            let commentView = $(element);
-            let design_id = commentView.attr("id");
-            design_id = design_id.substr(design_id.indexOf('-') + 1);
-
-            // display comment view
-            commentView.comments({
-                // functionalities
-                enableReplying: false,
-                enableEditing: true,
-                enableUpvoting: false,
-                enableDeleting: true,
-                enableDeletingCommentWithReplies: true,
-                enableAttachments: false,
-                enableHashtags: false,
-                enablePinging: false,
-                enableNavigation: true,
-                postCommentOnEnter: true,
-                readOnly: !DBStore.isAuthenticated(),
-
-                // user data
-                profilePictureURL: myProfileUrl,
-
-                // callbacks
-                getComments: async function(success, error) {
-                    // await setTimeout(5000);
-
-                    // fetch comments
-                    let comments = await DBStore.fetchCommentsForDesignById(design_id);
-                    let commentsNew = [];
-
-                    if (comments.length > 0){
-                        // loop though comments
-                        for (const comment of comments){
-                            let photoUrl = await DBStore.getProfileUrl(comment.uid);
-                            commentsNew.push({
-                                id: comment.id,
-                                created: comment.time,
-                                modified: comment.modified || comment.time,
-                                content: comment.content,
-                                fullname: comment.author,
-                                created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
-                                profile_picture_url: photoUrl
-                            });
-                        }
-                    }
-                    success(commentsNew);
-                },
-                postComment: async function(commentJSON, success, error) {
-                    const {content} = commentJSON;
-                    let {err} = await DBStore.addComment(design_id, content);
-
-                    if (err) {
-                        error(err)
-                    } else {
-                        success(commentJSON);
-                    }
-                },
-                putComment: async function(commentJSON, success, error) {
-                    let id = commentJSON.id;
-                    let {err} = await DBStore.editComment(id, commentJSON.content, commentJSON.modified);
-
-                    if (err) {
-                        error(err)
-                    } else {
-                        success(commentJSON);
-                    }
-                },
-                deleteComment: async function(commentJSON, success, error) {
-                    let id = commentJSON.id;
-                    let {err} = await DBStore.removeComment(id);
-
-                    if (err) {
-                        error(err)
-                    } else {
-                        success(commentJSON);
-                    }
-                }
-            });
-        })
+        // $('div[id^="commentview-"]').each(async (index, element) => {
+        //
+        //     let currentUser = DBStore.getAuthUser();
+        //     let myProfileUrl =  DBStore.getMyProfileUrl();
+        //
+        //     // fetch design_id from selector
+        //     let commentView = $(element);
+        //     let design_id = commentView.attr("id");
+        //     design_id = design_id.substr(design_id.indexOf('-') + 1);
+        //
+        //     // display comment view
+        //     commentView.comments({
+        //         // functionalities
+        //         enableReplying: false,
+        //         enableEditing: true,
+        //         enableUpvoting: false,
+        //         enableDeleting: true,
+        //         enableDeletingCommentWithReplies: true,
+        //         enableAttachments: false,
+        //         enableHashtags: false,
+        //         enablePinging: false,
+        //         enableNavigation: true,
+        //         postCommentOnEnter: true,
+        //         readOnly: !DBStore.isAuthenticated(),
+        //
+        //         // user data
+        //         profilePictureURL: myProfileUrl,
+        //
+        //         // callbacks
+        //         getComments: async function(success, error) {
+        //             // await setTimeout(5000);
+        //
+        //             // fetch comments
+        //             let comments = await DBStore.fetchCommentsForDesignById(design_id);
+        //             let commentsNew = [];
+        //
+        //             if (comments.length > 0){
+        //                 // loop though comments
+        //                 for (const comment of comments){
+        //                     let photoUrl = await DBStore.getProfileUrl(comment.uid);
+        //                     commentsNew.push({
+        //                         id: comment.id,
+        //                         created: comment.time,
+        //                         modified: comment.modified || comment.time,
+        //                         content: comment.content,
+        //                         fullname: comment.author,
+        //                         created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
+        //                         profile_picture_url: photoUrl
+        //                     });
+        //                 }
+        //             }
+        //             success(commentsNew);
+        //         },
+        //         postComment: async function(commentJSON, success, error) {
+        //             const {content} = commentJSON;
+        //             let {err} = await DBStore.addComment(design_id, content);
+        //
+        //             if (err) {
+        //                 error(err)
+        //             } else {
+        //                 success(commentJSON);
+        //             }
+        //         },
+        //         putComment: async function(commentJSON, success, error) {
+        //             let id = commentJSON.id;
+        //             let {err} = await DBStore.editComment(id, commentJSON.content, commentJSON.modified);
+        //
+        //             if (err) {
+        //                 error(err)
+        //             } else {
+        //                 success(commentJSON);
+        //             }
+        //         },
+        //         deleteComment: async function(commentJSON, success, error) {
+        //             let id = commentJSON.id;
+        //             let {err} = await DBStore.removeComment(id);
+        //
+        //             if (err) {
+        //                 error(err)
+        //             } else {
+        //                 success(commentJSON);
+        //             }
+        //         }
+        //     });
+        // })
     });
   });
 }

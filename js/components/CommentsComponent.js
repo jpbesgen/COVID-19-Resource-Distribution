@@ -26,33 +26,34 @@ class CommentsComponent extends Component {
     }
 
     render() {
-        // let displayComments = ``,
-        //     { comments } = this.props,
-        //     parent_id = this.parent.props.design.id,
-        //     user = DBStore.getAuthUser();
-        // if(comments != null && comments.length > 0) {
-        //     comments.forEach((comment) => {
-        //         displayComments += `<p class="modal-text" id="comment-${comment.id}">${comment.content} <b>from ${comment.author}</b></p>`;
-        //         if(comment != comments[comments.length - 1]) {
-        //             displayComments += `<br/>`;
-        //         }
-        //     });
-        // }
-        //
-        // let addCommentDisplay = user == null ? "" :
-        // `
-        //     <input type="text" placeholder="Write a comment..." id="${parent_id}-comment-input"/>
-        //     <small class="form-text text-muted">from ${user.displayName}</small>
-        //     <input id="${parent_id}-add-comment-btn" class="btn" style="border:1px solid black" value="Make a Comment"/>
-        // `;
+        let displayComments = ``,
+            { comments } = this.props,
+            parent_id = this.parent.props.design.id,
+            user = DBStore.getAuthUser();
+        if(comments != null && comments.length > 0) {
+            comments.forEach((comment) => {
+                displayComments += `<p class="modal-text" id="comment-${comment.id}">${comment.content} <b>from ${comment.author}</b></p>`;
+                if(comment != comments[comments.length - 1]) {
+                    displayComments += `<br/>`;
+                }
+            });
+        }
 
-        return `<div id="commentview-${this.props.id}" style="padding: 20px"></div>`;
-        // `
-        //     // <h4 class="community-title">Comments<?h3>
-        //     // <p class="community-text">
-        //     //     ${displayComments}
-        //     // </p>
-        //     // ${addCommentDisplay}
-        // `;
+        let addCommentDisplay = user == null ? "" :
+        `
+            <input type="text" placeholder="Write a comment..." id="${parent_id}-comment-input"/>
+            <small class="form-text text-muted">from ${user.displayName}</small>
+            <input id="${parent_id}-add-comment-btn" class="btn" style="border:1px solid black" value="Make a Comment"/>
+        `;
+
+        return `
+            // <h4 class="community-title">Comments<?h3>
+            // <p class="community-text">
+            //     ${displayComments}
+            // </p>
+            // ${addCommentDisplay}
+        `;
+        // `<div id="commentview-${this.props.id}" style="padding: 20px"></div>`;
+
     }
 }
