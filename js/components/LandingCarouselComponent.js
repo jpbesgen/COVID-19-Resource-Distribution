@@ -78,13 +78,10 @@ class LandingCarouselComponent extends Component {
     goLeft() {
         let newPresentingCards = [];
 
-        console.log("NEW THANG");
         // set newpresentingcards
         for(let i = 0; i < this.presentingCards.length; i++) {
             let c = this.presentingCards[i];
             newPresentingCards.push(c.next);
-            console.log(c.index);
-            console.log(c.next.index);
         }
 
         // add new classes
@@ -109,7 +106,6 @@ class LandingCarouselComponent extends Component {
     goRight() {
         let newPresentingCards = [];
 
-        console.log("NEW THANG");
         // set newpresentingcards
         for(let i = this.presentingCards.length - 1; i >= 0; i--) {
             let c = this.presentingCards[i];
@@ -173,7 +169,7 @@ class LandingCarouselComponent extends Component {
             }
             displayCards += 
             `
-            <div id="${card.id}" class="card ${classes}" style="width: 18em;">
+            <div id="${card.id}" class="${classes}">
                 ok
             </div>
             `;
@@ -236,7 +232,7 @@ class CarouselCardComponent extends Component {
         }
         
         let links = ``;
-        if(design.links != null && design.links.length > 0) {
+        if(design.links != null && design.links.length > 0 && design.links[0].trim() != "") {
             links = `Links: `
             design.links.forEach((link) => {
                 let linkName = link;
