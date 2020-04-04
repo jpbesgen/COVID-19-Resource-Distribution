@@ -184,7 +184,7 @@ p {
 }
     .modal-title {
         color: #3B628B;
-        font-size: 64px;
+        font-size: 2.5rem;
         font-weight: 300;
     }
 .modal-body {
@@ -204,7 +204,7 @@ p {
         color: #000000;
     }
     .modal-text {
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 300;
         color: #000000;
         margin: 1rem 0;
