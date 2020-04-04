@@ -16,13 +16,34 @@ function renderDesigns(designs) {
       }
     });
 
-    $('.dropdown-menu').on( 'click', 'button', function() {
+    $('#dropdown1').on( 'click', 'button', function() {
       const filterValue = $( this ).attr('data-filter');
       console.log(filterValue);
       console.log($grid);
       // use filterFn if matches value
       // filterValue = filterFns[ filterValue ] || filterValue;
       $grid.isotope({ filter: filterValue });
+      $('#dropdownMenuButton1').text($(this).text());
+    });
+
+    $('#dropdown2').on( 'click', 'button', function() {
+      const filterValue = $( this ).attr('data-filter');
+      console.log(filterValue);
+      console.log($grid);
+      // use filterFn if matches value
+      // filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+      $('#dropdownMenuButton2').text($(this).text());
+    });
+
+    $('#dropdown3').on( 'click', 'button', function() {
+      const filterValue = $( this ).attr('data-filter');
+      console.log(filterValue);
+      console.log($grid);
+      // use filterFn if matches value
+      // filterValue = filterFns[ filterValue ] || filterValue;
+      $grid.isotope({ filter: filterValue });
+      $('#dropdownMenuButton3').text($(this).text());
     });
 
     fillGrid = async () => {
