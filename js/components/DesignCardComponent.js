@@ -12,13 +12,16 @@ class DesignCardComponent extends Component {
         this.cardfront_upvotes_id = "cardfront-upvotes-" + this.props.design.id;
 
         let commentDisplay = new CommentsComponent(this.comments_id, {
-            comments: retrievedComments
+            comments: retrievedComments,
+            design_id: this.props.design.id
         });
         let upvotesDisplay = new UpvotesComponent(this.upvotes_id, {
-            upvotes
+            upvotes,
+            design_id: this.props.design.id
         });
         let cardfrontUpvotesDisplay = new CardfrontUpvotesComponent(this.cardfront_upvotes_id, {
-            upvotes
+            upvotes,
+            design_id: this.props.design.id
         });
 
         this.addChild(commentDisplay);
