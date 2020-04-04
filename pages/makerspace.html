@@ -106,6 +106,7 @@
 					</div>
 				</div>
 				<div class="filter">
+					<button class="btn btn-secondary resetbtn" onclick="reset()">Reset Filters</button>
 					<button class="btn btn-secondary closebtn" onclick="closeNav()">☰ Close Sidebar</button>
 				</div>
 			</div>
@@ -138,6 +139,14 @@
 		function closeNav() {
 		  document.getElementById("filterSidebar").style.width = "0";
 		  document.getElementById("main").style.marginLeft= "0";
+		}
+
+		function reset() {
+			console.log("reset dropdown button text");
+			document.querySelector('#dropdownMenuButton1').innerText = 'Select';
+			document.querySelector('#dropdownMenuButton2').innerText = 'Select';
+			document.querySelector('#dropdownMenuButton3').innerText = 'Select';
+			resetFilters()
 		}
 	</script>
 

@@ -183,5 +183,21 @@ function renderDesigns(designs) {
   });
 }
 
+function resetFilters() {
+  $(document).ready(() => {
+
+    const $grid = $('#grid').isotope({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      masonry: {
+        columnWidth: 30
+      }
+    });
+
+    $grid.isotope({ filter: '*' });
+    console.log("reset all filters");
+  });
+}
+
 EventStore.on("DesignsChange", renderDesigns);
 DBStore.listenForDesignsChange();
