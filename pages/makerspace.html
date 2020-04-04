@@ -65,7 +65,7 @@
 						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="dropdown1">
 							<button class="dropdown-item" data-filter="*">All</button>
 							<button class="dropdown-item" data-filter=".n95">N95</button>
 							<button class="dropdown-item" data-filter=".surgicalMask">Surgical Mask</button>
@@ -85,7 +85,7 @@
 						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2" id="dropdown2">
 							<button class="dropdown-item" data-filter="*">All</button>
 							<button class="dropdown-item" data-filter=".certified-yes">Only Certified</button>
 						</div>
@@ -98,7 +98,7 @@
 						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Select
 						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3" id="dropdown3">
 							<button class="dropdown-item" data-filter="*">All</button>
 							<button class="dropdown-item" data-filter=".printer-true">Yes</button>
 							<button class="dropdown-item" data-filter=".printer-false">No</button>
@@ -106,6 +106,7 @@
 					</div>
 				</div>
 				<div class="filter">
+					<button class="btn btn-secondary resetbtn" onclick="reset()">Reset Filters</button>
 					<button class="btn btn-secondary closebtn" onclick="closeNav()">☰ Close Sidebar</button>
 				</div>
 			</div>
@@ -138,6 +139,14 @@
 		function closeNav() {
 		  document.getElementById("filterSidebar").style.width = "0";
 		  document.getElementById("main").style.marginLeft= "0";
+		}
+
+		function reset() {
+			console.log("reset dropdown button text");
+			document.querySelector('#dropdownMenuButton1').innerText = 'Select';
+			document.querySelector('#dropdownMenuButton2').innerText = 'Select';
+			document.querySelector('#dropdownMenuButton3').innerText = 'Select';
+			resetFilters()
 		}
 	</script>
 
