@@ -103,6 +103,10 @@ class DatabaseStore {
     emitDesignsChange() {
         EventStore.publish("DesignsChange", this.designs);
     }
+
+    getDesigns() {
+        return this.designs;
+    }
   
     /*
         Parameters:
