@@ -471,6 +471,15 @@ class DatabaseStore {
             if (!upvotedList) return false;
 
             // check if comment id is in upvoted list
+            if (comment_id === 'deIBlHbAimfgZVYL6e4v'){
+                // get comment upvotes count
+                let commentRef = await db.collection('Comments').doc(comment_id).get();
+                console.log('comment upvote count', commentRef.data().upvoteCount);
+                console.log('comment id', comment_id);
+                console.log('upvotedList', upvotedList);
+                console.log('included', upvotedList.includes(comment_id));
+            }
+
             return upvotedList.includes(comment_id);
 
         } catch (err) {
