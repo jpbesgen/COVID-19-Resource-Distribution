@@ -4,7 +4,7 @@ function renderLanding() {
     
     if(hasRendered) return;
     ComponentTree.renderAll().then(() => {
-        console.log('rendered carousel');
+        //console.log('rendered carousel');
         hasRendered = true;
     });
 }
