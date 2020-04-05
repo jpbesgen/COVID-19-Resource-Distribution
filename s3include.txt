@@ -11,3 +11,4 @@ database.rules.json
 database.js
 firebase.json
 index.html
+database.js
