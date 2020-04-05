@@ -24,6 +24,8 @@
     top: 40px;
     transition: all 1.5s ease, opacity 0.2s ease;
     box-shadow: 1px 1px 5px grey;
+    border-top-left-radius: 4%;
+    border-top-right-radius: 4%;
 }
 .carousel-card-img {
     max-height: 10vh;

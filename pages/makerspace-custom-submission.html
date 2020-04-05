@@ -193,6 +193,10 @@
         });
 
         function handleSubmission(event) {
+            if(!DBStore.isAuthenticated()) {
+                alert("You must be signed in to submit a design.");
+                return;
+            }
             processing = true;
             $("#loading-gif").show();
             // Get all values

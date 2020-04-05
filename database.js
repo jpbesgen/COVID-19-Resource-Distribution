@@ -49,6 +49,9 @@ function renderDesigns(designs) {
     fillGrid = async () => {
         let grid = document.getElementById("grid");
         if(grid == null) return;
+        designs = designs.sort((d1, d2) => {
+            return d2.upvotes - d1.upvotes;
+        })
         designs.forEach(gridItem => {
             if(designCards[gridItem.id] != null) {
                 EventStore.publish("DesignCardChange-" + gridItem.id, {
