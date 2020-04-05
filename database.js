@@ -189,8 +189,6 @@ function renderDesigns(designs) {
                     let user_id = currentUser ? currentUser.uid : null;
                     let result;
 
-                    console.log(commentJSON);
-
                     if (commentJSON.user_has_upvoted) {
                         result = await DBStore.addCommentUpvote(user_id, comment_id);
                     } else {
