@@ -18,42 +18,47 @@ and (-webkit-min-device-pixel-ratio: 2) {
       .search-bar {
 		width: 21rem;
 		margin: 6px 1.5rem 0 1.5rem;
-      }
-      
+  }
+
   .homepage-logo {
-      width: 85%;
+    width: 85%;
   }
+
   .homepage-one {
-      padding-top: 34px;
-      padding-bottom: 29px;
+    padding-top: 34px;
+    padding-bottom: 29px;
   }
-      .homepage-intro {
-          padding-top: .7rem;
-          font-size: 18px;
-          padding-left: 1rem;
-          padding-right: 1rem;
-      }
-      .search-bar {
-          width: 78%;
-      }
-  
+
+  .homepage-intro, #homepage-about {
+    padding-top: 0.7rem;
+    font-size: 18px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .search-bar {
+    width: 78%;
+  }
+
   .about {
-      padding-left: 5%;
-      padding-right: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
-      .about h1 {
-          padding-top: 25px;
-          font-family: 'Josefin Sans', sans-serif;
-          font-size: 28px;
-          font-weight: normal;
-      }
-      .about p {
-          font-size: 22px;
-          padding-bottom: 35px;
-          padding-left: 15px;
-          padding-right: 5px;
-      }
-  
+
+  .about h1 {
+    padding-top: 25px;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+  }
+
+  .about p {
+    font-size: 22px;
+    padding-bottom: 35px;
+    padding-left: 15px;
+    padding-right: 5px;
+  }
+
   .bottom {
       margin-bottom: 45px;
       margin-top: 0px;
@@ -77,3 +82,5 @@ and (-webkit-min-device-pixel-ratio: 2) {
               height: 8rem;
           }
 }
+
+/*# sourceMappingURL=style-phone.css.map */

@@ -42,14 +42,12 @@
 	<!-- Navbar -->
     <nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
 
-
     <section>
 		<h1>Submit a design!</h1>
 		<p class="subtitle">If you have a open source design to contribute to the makerspace, please submit it here!</p>
 	</section>
 
 	<script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script>
-
     <form class="form">
         <div class="form-row">
             <div class="form-group col-xs-12 col-6">
@@ -168,7 +166,8 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
-	<!-- Popper.js -->
+  <script src="../js/auth.js"></script>
+  <!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
@@ -213,7 +212,6 @@
             name = name.value;
             if(name == null || name.trim() == "") throw new Error("Please enter the name of your design!");
             design["name"] = name;
-
             category = category.value;
             if(category == null) throw new Error("Invalid Category");
             design["category"] = category;

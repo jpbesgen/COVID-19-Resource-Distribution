@@ -209,6 +209,7 @@ p {
     }
     .modal-text {
         font-size: 1.25rem;
+        font-size: 20px;
         font-weight: 300;
         color: #000000;
         margin: 1rem 0;

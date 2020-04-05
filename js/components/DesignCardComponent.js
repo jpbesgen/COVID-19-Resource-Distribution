@@ -129,7 +129,6 @@ class DesignCardComponent extends Component {
                 }
             });
         }
-
         let links = ``;
         if(design.links != null && design.links.length > 0) {
             links = `Links: `

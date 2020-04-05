@@ -9,6 +9,7 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/style-phone.css">
+	<link rel="stylesheet" href="./css/landing-carousel.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -36,36 +37,67 @@
 
 <body>
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom white-bg"></nav>
 
 	<!-- Logo & Intro -->
 	<section class="text-center homepage-one">
 		<img src="./img/logo.png" alt="Resource-19 Logo" class="homepage-logo">
-		<div class="homepage-intro text-center">
+		<img class="headerimg-left" src="img/homepage/connection-left.svg" alt="connection left"/>
+		<img class="headerimg-right" src="img/homepage/connection-right.svg" alt="connection right"/>
+		<div class="text-center">
 			<p class="homepage-intro">Do you have experience in 3D printing, sewing, CNC, or other forms of manufacturing? Do you want to help supply hospitals in desperate need of PPE? Explore hospitals in need to find what your area needs and view open source designs below to see what you can start making today.</p>
 		</div>
 		<div class="button-box">
 			<div class="search-bar">
 				<a href="./pages/search.html">
-					<button type="button" class="btn btn-primary btn-sm btn-block">View Hospitals in Need</button>
+					<button type="button" class="btn btn-primary btn-sm btn-block homepage-link">Hospitals In Need</button>
 				</a>
 			</div>
 			<div class="search-bar">
 				<a href="./pages/makerspace.html">
-					<button type="button" class="btn btn-primary btn-sm btn-block">View Open Source Designs</button>
+					<button type="button" class="btn btn-primary btn-sm btn-block homepage-link">Open Source Designs</button>
 				</a>
 			</div>
 		</div>
 	</section>
 
-	<!-- About Resource19 -->
-	<section>
-		<div class="homepage about">
-			<h1>What is resource19?</h1>
-			<p>We’re a group of volunteers looking to solve two of the most urgent problems of the COVID-19 pandemic: How do we get vital medical supplies to the people who need them most and how do we mobilize the existing community of manufacturers, makers, and builders to ensure these vital supplies never run out. </p>
+	<!-- BEGINNING OF CAROUSEL CARDS CODE -->
+	<section id="carousel-section">
+		<div id="card-carousel-container">
+			<div id="card-carousel-left" class="carousel-btn">
+				<button type="button" id="card-carousel-left-btn" class="btn">
+					<img style="transform: rotate(-90deg);" src="../img/arrow-dropdown.png"/>
+				</button>
+			</div>
+			<div id="card-carousel" class="landing-carousel"></div>
+			<div id="card-carousel-right" class="carousel-btn">
+				<button type="button" id="card-carousel-right-btn" class="btn">
+					<img style="transform: rotate(90deg);" src="../img/arrow-dropdown.png"/>
+				</button>
+			</div>
 		</div>
 	</section>
-<!-- 
+	<!-- END OF CAROUSEL CARDS CODE-->
+
+	<!-- About Resource19 -->
+	<section id="homepage-about">
+		<div class="homepage about">
+			<h1>What is Resource19?</h1>
+			<p style="margin-bottom: 0;">We’re a group of volunteers looking to solve two of the most urgent problems of the COVID-19 pandemic: How do we get vital medical supplies to the people who need them most and how do we mobilize the existing community of manufacturers, makers, and builders to ensure these vital supplies never run out. </p>
+		</div>
+	</section>
+
+<!--	<div id="card-carousel-container"></div>-->
+
+<!-- MAP EMBED -->
+<!--	<iframe style="width: 100%; height: 50vh; border: none" id="hospitals-map" src="https://findthemasks.com/give.html?hide-filters=true&hide-list=true&hide-search=true"></iframe>-->
+<!-- END MAP EMBED -->
+
+	<footer>
+		© 2020 Copyright: Built by the Invention Corps
+	</footer>
+
+<!--
 	<section>
 		<div class="container-fluid bottom">
 			<div class="row justify-content-center bottom-row">
@@ -92,8 +124,8 @@
 
 	<!-- JavaScript -->
 	<script>
-		// load html components
-		$("#navbar").load("./components/navbar.html");
+		$("#navbar").load("./components/navbar-homepage.html");
+		$("#card-carousel-container").load("./components/landing-carousel.html");
 	</script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -101,6 +133,13 @@
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="./bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+
+	<script src="./js/models/PubSub.js"></script>
+	<script src="./js/models/Component.js"></script>
+	<script src="./js/models/ComponentManager.js"></script>
+	<script src="./js/stores/DBStore.js"></script>
+	<script src="./js/components/LandingCarouselComponent.js"></script>
+	<script src="./js/landing.js"></script>
 </body>
 
 </html>

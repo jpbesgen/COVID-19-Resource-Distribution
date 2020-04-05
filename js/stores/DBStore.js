@@ -103,7 +103,7 @@ class DatabaseStore {
     emitDesignsChange() {
         EventStore.publish("DesignsChange", this.designs);
     }
-
+  
     /*
         Parameters:
             * querySnapshot = Firestore object containing .data() for all designs
@@ -503,7 +503,6 @@ class DatabaseStore {
     isAuthenticated() {
         return auth.user != null || auth.currentUser != null;
     }
-
 }
 
 let DBStore = new DatabaseStore();
