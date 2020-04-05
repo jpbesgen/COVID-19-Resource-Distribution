@@ -42,7 +42,7 @@ class LandingCarouselComponent extends Component {
         console.log(this.carouselCards)
         // sort the cards
         this.carouselCards = this.carouselCards.sort((c1, c2) => {
-            return c1.upvotes > c2.upvotes;
+            return c2.upvotes - c1.upvotes;
         });
 
         let len = this.carouselCards.length;
