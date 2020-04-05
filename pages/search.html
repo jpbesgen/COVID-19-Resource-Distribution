@@ -30,12 +30,14 @@
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 	<script src="../js/firebase_init.js"></script>
 </head>
 
 <body>
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
 	 <div class="container-fluid">
 		<div class="row">
@@ -57,7 +59,8 @@
 					</div>
 					<div class="row">
 						<!-- Airtable database entries -->
-						<iframe class="airtable-embed" src="https://airtable.com/embed/shrJVz7WeoS0ByQ9W?backgroundColor=transparent" frameborder="0" onmousewheel="" width="100%" height="1066" style="background: transparent; border: 1px solid #ccc;"></iframe>
+<!--						<iframe class="airtable-embed" src="https://airtable.com/embed/shrJVz7WeoS0ByQ9W?backgroundColor=transparent" frameborder="0" onmousewheel="" width="100%" height="1066" style="background: transparent; border: 1px solid #ccc;"></iframe>-->
+						<iframe style="width: 100%; height: 50vh; border: none" id="hospitals-map" src="https://findthemasks.com/give.html?hide-filters=true&hide-list=true&hide-search=true"></iframe>
 					</div>
 				</div>
 			</div>
@@ -69,6 +72,7 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

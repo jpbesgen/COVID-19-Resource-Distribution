@@ -7,3 +7,7 @@
 
 # AWS Authentication files
 credentials.csv
+firebase-debug.log
+.firebase/hosting..cache
+id_rsa*
+.firebase

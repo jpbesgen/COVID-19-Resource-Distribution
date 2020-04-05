@@ -29,16 +29,20 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			crossorigin="anonymous"></script>
+	<script src="../js/models/PubSub.js"></script>
+	<script src="../js/stores/DBStore.js"></script>
 	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>
 	<script src="../js/firebase_init.js"></script>
 </head>
 
-<body>
+<body style="background-color: white;">
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
 	<section>
 		<div class="container-fluid bottom">
@@ -48,13 +52,13 @@
 				</div>
 			</div>
 			<div class="row justify-content-center bottom-row">
-				<div class="col-4 text-center choice"></div>
-				<div class="col-4 text-center choice">
+				<div class="col-md-4 text-center choice"></div>
+				<div class="col-md-4 col-sm-12 text-center choice">
 					<div id="firebaseui-auth-container"></div>
 					<div id="loader">Loading...</div>
 					<div id="includedContent"></div>
 				</div>
-				<div class="col-4 text-center choice"></div>
+				<div class="col-md-4 text-center choice"></div>
 			</div>
 		</div>
 	</section>
@@ -64,6 +68,7 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<!-- Bootstrap js -->

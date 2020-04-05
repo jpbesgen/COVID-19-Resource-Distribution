@@ -5,6 +5,15 @@ html, body {
 body {
     background-color: white;
 }
+form {
+    background-color: white;
+    flex-direction: column;
+    padding: 0 9.25% 3rem 9.25%;
+}
+    .submit {
+        margin-top: 1rem;
+        border:1px solid #3B628B;
+    }
 
 .body-content {
     background-color: white;
@@ -35,12 +44,6 @@ h1 {
     .bold {
         font-weight: 400;
     }
-
-.form {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-}
 .airtable {
     width: 70%;
     height: 600px;

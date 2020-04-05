@@ -31,12 +31,14 @@
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 	<script src="../../js/firebase_init.js"></script>
 </head>
 
 <body> 
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
 	<section class="body-content">
 		<h1>Best Practices</h1>
@@ -63,6 +65,7 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

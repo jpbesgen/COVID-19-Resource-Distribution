@@ -31,12 +31,14 @@
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
 	<script src="../js/firebase_init.js"></script>
 </head>
 
 <body>
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
     <section>
 		<h1>Hello!</h1>
@@ -52,6 +54,7 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

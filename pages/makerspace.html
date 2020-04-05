@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/style-phone.css">
     <link rel="stylesheet" href="../css/search.css" />
+	<link rel="stylesheet" href="../lib/owlcarousel/owl.carousel.min.css">
+	<link rel="stylesheet" href="../lib/owlcarousel/owl.theme.default.min.css">
+	<link rel="stylesheet" type="text/css" href="../lib/jquery-comments/css/jquery-comments.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
 	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
 	<title>Resource-19</title>
@@ -19,6 +23,7 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
+
 		gtag('config', 'UA-161941609-1');
 	</script>
 	<!-- jQuery -->
@@ -29,45 +34,119 @@
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>
 	<script src="../js/firebase_init.js"></script>
+	<!-- Isotope sorting and filtering -->
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
 </head>
 
 <body>
 	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom bg-light"></nav>
+	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
-	 <div class="container-fluid">
-		<div class="row">
-			<div class="col-12">
+	 <div class="container-fluid body-content">
+		<div class="row" style="height: 100vh">
+			<div class="col-3 col-xs-3 sidebar">
+				<div class="logo-div">
+					<a href="./index.html">
+						<img src="../img/logo-white.png" alt="Resource 19 Logo" class="logo" />
+					</a>
+				</div>
+				<div class="filter">
+					<h3>Filter By:</h3>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Category</h5>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".n95">N95</button>
+							<button class="dropdown-item" data-filter=".surgicalMask">Surgical Mask</button>
+							<button class="dropdown-item" data-filter=".faceShield">Face Shield</button>
+							<button class="dropdown-item" data-filter=".hospitalGown">Hospital Gown</button>
+							<button class="dropdown-item" data-filter=".goggle">Goggle</button>
+							<button class="dropdown-item" data-filter=".ventilator">Ventilator</button>
+							<button class="dropdown-item" data-filter=".ventilatorParts">Ventilator Parts</button>
+							<button class="dropdown-item" data-filter=".other">Other</button>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>Certification</h5>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".certified-yes">Only Certified</button>
+						</div>
+					</div>
+					<hr />
+				</div>
+				<div class="parameter">
+					<h5>3D Printer Needed</h5>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle paremeter-extension" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Select
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+							<button class="dropdown-item" data-filter="*">All</button>
+							<button class="dropdown-item" data-filter=".printer-true">Yes</button>
+							<button class="dropdown-item" data-filter=".printer-false">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-9 item-area">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
                             <h1>Welcome to the Makerspace.</h1>
                             <p class="description">The Makerspace is where designers, engineers, and makers can explore open source plans for medical supplies currently needed by those on the frontlines of the COVID19 pandemic. In addition, the makerspace is intended as a platform for collaboration on currently incomplete or unapproved open source designs. Through the makerspace progress can be tracked on completion and approval. </p>
-							<p class="description">Want to submit a design? <a href="./makerspace-submission.html">Click here.</a></p>
-							<p class="description">Please read <a href="./best-practices.html">these best practices</a> before making any supplies.</p>
+							<p class="description">Want to submit a design? <a href="./makerspace-custom-submission.html">Click here.</a></p>
 						</div>
 					</div>
-					<div class="row">
+					<div class="card-columns" id="grid">
 						<!-- Airtable database entries -->
-						<iframe class="airtable-embed" src="https://airtable.com/embed/shrO1bl3A9tSoNKCD?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="1066" style="background: transparent; border: 1px solid #ccc;"></iframe>
+						<!-- <iframe class="airtable-embed" src="https://airtable.com/embed/shrO1bl3A9tSoNKCD?backgroundColor=purple" frameborder="0" onmousewheel="" width="100%" height="1066" style="background: transparent; border: 1px solid #ccc;"></iframe> -->
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
 
 	<!-- JavaScript -->
 	<script>
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
 	<!-- Bootstrap js -->
 	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+	<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery-comments/js/jquery-comments.js"></script>
+
+	<script src="../js/models/PubSub.js"></script>
+	<script src="../js/models/Component.js"></script>
+	<script src="../js/models/ComponentManager.js"></script>
+	<script src="../js/components/LoadingComponent.js"></script>
+	<script src="../js/components/CommentsComponent.js"></script>
+	<script src="../js/components/UpvotesComponent.js"></script>
+	<script src="../js/components/DesignCardComponent.js"></script>
+	<script src="../js/stores/DBStore.js"></script>
+	<script src="../database.js"></script>
 </body>
 
 </html>

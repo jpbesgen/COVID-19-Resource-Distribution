@@ -1,10 +1,11 @@
-<div class="container-fluid text-center">
+<!-- OLD NAV BAR -->
+<div class="container-fluid text-center" id="old-header">
     <!-- Logo -->
     <a class="navbar-brand" href="../index.html"><img src="../img/maskmanwhite.png" class="logo" /></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#oldNavbarResponsive">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="oldNavbarResponsive">
         <!-- Right side of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Navigation Links -->
@@ -18,44 +19,50 @@
                 <a class="nav-link" href="../pages/makerspace.html">Open Source Designs</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  About
+                <a class="nav-link dropdown-toggle" href="#" id="oldNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    About
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="oldNavbarDropdown">
                     <a class="dropdown-item" href="../pages/about.html">About Us</a>
                     <a class="dropdown-item" href="../pages/contact.html">Contact</a>
                     <a class="dropdown-item" href="../pages/faq.html">FAQ</a>
                 </div>
             </li>
-            <li class="nav-item" id="navLoginLink">
-                <a class="nav-link" href="../pages/login.html" id="loginLink">Log In</a>
+            <li class="nav-item navLoginLink">
+                <a class="nav-link " href="../pages/login.html" id="loginLink">Log In</a>
             </li>
-            <li class="nav-item" id="navLogoutLink" style="display: none;">
-                <img id="prof-img" src="../img/transparent_img.png" style="border-radius: 50%;"/>
+            <li class="nav-item navLogoutLink" style="display: none; align-self: center;">
+                <img class="prof-img" src="../img/transparent_img.png" style="border-radius: 50%; margin-right: 5px"/>
                 <a class="nav-link" href="#" id="logoutLink">Log Out</a>
             </li>
         </ul>
     </div>
 </div>
+<!-- END OLD NAVBAR -->
 
 <script>
     firebase.auth().onAuthStateChanged(function(user){
         if (user) {
-            $('#prof-img').attr("src", user.photoURL); // replace img with prof pic
-            $('#navLoginLink').hide();
-            $('#navLogoutLink').css("display", "flex");
+            $('.prof-img').attr("src", user.photoURL); // replace img with prof pic
+            $('.navLoginLink').hide();
+            $('.navLogoutLink').css("display", "flex");
         }
     });
 
-    $('#logoutLink').click(() => {
-        firebase.auth().signOut().then(function() {
+    $('#logoutLink').click(async () => {
+        try {
+            await firebase.auth().signOut();
+
             // Sign-out successful.
             console.log('User Logged Out!');
-            $('#navLogoutLink').css("display", "none");
-            $('#navLoginLink').show();
-        }).catch(function(error) {
-            // An error happened.
-            console.log(error);
-        });
-    })
+            $('.navLogoutLink').css("display", "none");
+            $('.navLoginLink').show();
+
+            // reload page (to refresh privileges)
+            location.reload();
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
 </script>
