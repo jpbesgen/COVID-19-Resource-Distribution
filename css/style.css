@@ -126,7 +126,7 @@ html, body {
 
 .homepage-intro {
   color: #3b628b;
-  font-size: 1.25rem;
+  font-size: 20px;
   padding: 25px 20% 0 20%;
 }
 
@@ -164,7 +164,7 @@ html, body {
 }
 
 .about p {
-  font-size: 1.25rem;
+  font-size: 24px;
   padding-bottom: 55px;
   font-weight: 300;
 }
@@ -240,8 +240,8 @@ html, body {
 }
 #carousel-section #card-carousel-container {
   padding-top: 50px;
-  width: 80vw;
-  height: 38vh;
+  width: 70vw;
+  height: 25vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -262,28 +262,19 @@ html, body {
   margin: 1%;
   padding: 0px;
 }
-#carousel-section #card-carousel-container .carousel-card-img {
-	max-height: 10%;
-	max-width: 100%;
-    object-fit: contain;
-}
 #carousel-section #card-carousel-container .landing-carousel-card {
   margin: auto;
   font-size: 0.7em;
   background-color: white;
   justify-content: flex-start;
   padding: 1%;
-  max-height: 100%;
-  min-height: 100%;
-  min-width: 110px;
-  max-width: 28%;
+  max-height: 60vh;
+  max-height: 60vh;
   width: 28%;
   overflow-y: scroll;
-  overflow-x: hidden;
   top: 40px;
   transition: all 1.5s ease, opacity 0.2s ease;
   border: 3px solid #7a98af;
-  box-shadow: 1px 1px 5px grey;
   border-radius: 12px;
 }
 #carousel-section #card-carousel-container .carousel-card-img {
@@ -292,36 +283,35 @@ html, body {
   object-fit: contain;
 }
 #carousel-section #card-carousel-container .presenting-card-0 {
-	position: absolute;
-	left: -50vw;
-	top: 30%;
-	opacity: 0;
+  position: absolute;
+  left: -50vw;
+  opacity: 0;
+  transform: scale(0.7);
 }
 #carousel-section #card-carousel-container .presenting-card-1 {
-	position: absolute;
-    left: 4%;
-    opacity: 1;
-    top: 20%;
+  position: absolute;
+  left: 4%;
+  opacity: 1;
+  transform: scale(0.7);
 }
 #carousel-section #card-carousel-container .presenting-card-2 {
-	position:absolute;
-    left: 36%;
-    margin-top: auto;
-    opacity: 1;
-	top: 0%;
-	z-index: 9000;
+  position: absolute;
+  left: 36%;
+  margin-top: auto;
+  opacity: 1;
+  top: 0px;
 }
 #carousel-section #card-carousel-container .presenting-card-3 {
-	position: absolute;
-    opacity: 1;
-    left: 68%;
-    top: 20%;
+  position: absolute;
+  opacity: 1;
+  left: 68%;
+  transform: scale(0.7);
 }
 #carousel-section #card-carousel-container .presenting-card-4 {
-	position: absolute;
-    left: 100vw;
-    opacity: 0;
-    top: 30%;
+  position: absolute;
+  left: 100vw;
+  opacity: 0;
+  transform: scale(0.7);
 }
 #carousel-section #card-carousel-container .landing-carousel {
   display: flex;
@@ -338,30 +328,17 @@ html, body {
   width: 5%;
   height: 100%;
   margin: 0px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-#carousel-section #card-carousel-container .carousel-btn .carousel-btn-img {
-	position: relative;
-	top: -20px;
 }
 #carousel-section #card-carousel-container .carousel-btn button {
   z-index: 999;
 }
 #carousel-section #card-carousel-container .carousel-btn button:focus {
   outline: 0;
-}
-#carousel-img {
-    position: absolute;
-    bottom: 0%;
-    left: 0%;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    z-index: 0;
-    margin-bottom: -6px;
 }
 
 footer {

@@ -114,7 +114,7 @@ function renderDesigns(designs) {
                 // functionalities
                 enableReplying: false,
                 enableEditing: true,
-                enableUpvoting: false,
+                enableUpvoting: true,
                 enableDeleting: true,
                 enableDeletingCommentWithReplies: true,
                 enableAttachments: false,
@@ -138,6 +138,7 @@ function renderDesigns(designs) {
                         // loop though comments
                         for (const comment of comments){
                             let photoUrl = await DBStore.getProfileUrl(comment.uid);
+                            let userHasUpvoted = await DBStore.userHasUpvotedComment(currentUser ? currentUser.uid : null, comment.id);
                             commentsNew.push({
                                 id: comment.id,
                                 created: comment.time,
@@ -145,7 +146,9 @@ function renderDesigns(designs) {
                                 content: comment.content,
                                 fullname: comment.author,
                                 created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
-                                profile_picture_url: photoUrl
+                                profile_picture_url: photoUrl,
+                                upvote_count: Math.max(comment.upvoteCount || 0, 0),
+                                user_has_upvoted: userHasUpvoted,
                             });
                         }
                     }
@@ -180,6 +183,24 @@ function renderDesigns(designs) {
                     } else {
                         success(commentJSON);
                     }
+                },
+                upvoteComment: async function(commentJSON, success, error){
+                    let comment_id = commentJSON.id;
+                    let user_id = currentUser ? currentUser.uid : null;
+                    let result;
+
+                    console.log(commentJSON);
+
+                    if (commentJSON.user_has_upvoted) {
+                        result = await DBStore.addCommentUpvote(user_id, comment_id);
+                    } else {
+                        result = await DBStore.removeCommentUpvote(user_id, comment_id);
+                    }
+
+                    if (result.err)
+                        error(result.err);
+                    else
+                        success(commentJSON);
                 }
             });
         })
