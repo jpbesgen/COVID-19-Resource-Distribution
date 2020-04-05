@@ -113,4 +113,5 @@
     height: auto;
     object-fit: contain;
     z-index: 0;
+    margin-bottom: -6px;
 }
