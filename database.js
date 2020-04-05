@@ -98,6 +98,7 @@ function renderDesigns(designs) {
                 enablePinging: false,
                 enableNavigation: true,
                 postCommentOnEnter: true,
+                roundProfilePictures: true,
                 readOnly: !DBStore.isAuthenticated(),
 
                 // user data

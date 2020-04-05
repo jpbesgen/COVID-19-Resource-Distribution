@@ -1,6 +1,6 @@
 // colors
 $blueColor: #3B628B;
-$blueBorders: #7a98af;
+$lightBlueColor: #7a98af;
 
 // breakpoints
 $md-breakpoint: 767.98px;
@@ -9,8 +9,7 @@ html, body {
     height: 100%;
     width: 100%;
     min-height: 100%;
-    background: white;
-    margin-bottom: 200px;
+    background: $lightBlueColor;
     font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -44,16 +43,27 @@ html, body {
 /* Navbar */
 .navbar {
     padding: 0.8rem;
-    color: white;
-    background-color: white;
+    background-color: $lightBlueColor;
+
+    &.white-bg {
+        color: $blueColor;
+        background-color: white;
+    }
+
+    #old-header .nav-link {
+        color: white!important;
+    }
 }
+
 .navbar-custom {
     color: white;
     //background-color: #7a98af!important;
 }
 .navbar img{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
+    margin-top: -1px;
+    margin-bottom: 5px;
 }
 .navbar-logo {
     display: inline-block;
@@ -70,7 +80,7 @@ html, body {
 }
 .nav-link {
     font-size: 1.2rem;
-    color: $blueColor !important;
+    color: $blueColor;
 }
 .nav-link:hover {
     color: #b0d7d7!important;
@@ -81,7 +91,8 @@ html, body {
 
 /* First section of homepage */
 .homepage-logo {
-    width: 40%;
+    width: 34%;
+    max-width: 600px;
 }
 .homepage-one {
     padding-top: 25px;
@@ -117,11 +128,9 @@ html, body {
 
 
 .homepage-intro {
-    padding-top: 25px;
     color: #3b628b;
-    font-size: 16px;
-    padding-left: 10%;
-    padding-right: 10%;
+    font-size: 20px;
+    padding: 25px 20% 0 20%;
 }
 .search-bar {
     width: 21rem;
@@ -134,6 +143,13 @@ html, body {
 .button-box {
     display: flex;
     justify-content: center;
+}
+
+#homepage-about {
+    background-color: white;
+    z-index: 999;
+    position: relative;
+    padding: 0 14%;
 }
 
 .about {
@@ -230,7 +246,8 @@ html, body {
 }
 
 #carousel-section {
-    border-bottom: 3px solid $blueBorders;
+    border-bottom: 3px solid $lightBlueColor;
+    background-color: white;
 
     #card-carousel-container {
         padding-top: 50px;
@@ -268,7 +285,7 @@ html, body {
             overflow-y: scroll;
             top: 40px;
             transition: all 1.5s ease, opacity 0.2s ease;
-            border: 3px solid $blueBorders;
+            border: 3px solid $lightBlueColor;
             border-radius: 12px;
         }
         .carousel-card-img {
@@ -328,9 +345,20 @@ html, body {
             align-items: center;
             justify-content: center;
 
+            button {
+                z-index: 999;
+            }
+
             button:focus {
                 outline: 0;
             }
         }
     }
+}
+
+footer {
+    background-color: $lightBlueColor;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }

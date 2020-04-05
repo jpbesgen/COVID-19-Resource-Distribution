@@ -2,8 +2,7 @@ html, body {
   height: 100%;
   width: 100%;
   min-height: 100%;
-  background: white;
-  margin-bottom: 200px;
+  background: #7a98af;
   font-family: "Josefin Sans", sans-serif;
 }
 
@@ -42,8 +41,14 @@ html, body {
 /* Navbar */
 .navbar {
   padding: 0.8rem;
-  color: white;
+  background-color: #7a98af;
+}
+.navbar.white-bg {
+  color: #3B628B;
   background-color: white;
+}
+.navbar #old-header .nav-link {
+  color: white !important;
 }
 
 .navbar-custom {
@@ -51,8 +56,10 @@ html, body {
 }
 
 .navbar img {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
+  margin-top: -1px;
+  margin-bottom: 5px;
 }
 
 .navbar-logo {
@@ -72,7 +79,7 @@ html, body {
 
 .nav-link {
   font-size: 1.2rem;
-  color: #3B628B !important;
+  color: #3B628B;
 }
 
 .nav-link:hover {
@@ -85,7 +92,8 @@ html, body {
 
 /* First section of homepage */
 .homepage-logo {
-  width: 40%;
+  width: 34%;
+  max-width: 600px;
 }
 
 .homepage-one {
@@ -117,11 +125,9 @@ html, body {
 }
 
 .homepage-intro {
-  padding-top: 25px;
   color: #3b628b;
-  font-size: 16px;
-  padding-left: 10%;
-  padding-right: 10%;
+  font-size: 20px;
+  padding: 25px 20% 0 20%;
 }
 
 .search-bar {
@@ -135,6 +141,13 @@ html, body {
 .button-box {
   display: flex;
   justify-content: center;
+}
+
+#homepage-about {
+  background-color: white;
+  z-index: 999;
+  position: relative;
+  padding: 0 14%;
 }
 
 .about {
@@ -223,6 +236,7 @@ html, body {
 
 #carousel-section {
   border-bottom: 3px solid #7a98af;
+  background-color: white;
 }
 #carousel-section #card-carousel-container {
   padding-top: 50px;
@@ -320,8 +334,18 @@ html, body {
   align-items: center;
   justify-content: center;
 }
+#carousel-section #card-carousel-container .carousel-btn button {
+  z-index: 999;
+}
 #carousel-section #card-carousel-container .carousel-btn button:focus {
   outline: 0;
+}
+
+footer {
+  background-color: #7a98af;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

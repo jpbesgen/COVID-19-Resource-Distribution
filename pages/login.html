@@ -40,7 +40,7 @@
 	<script src="../js/firebase_init.js"></script>
 </head>
 
-<body>
+<body style="background-color: white;">
 	<!-- Navbar -->
 	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
 
@@ -52,13 +52,13 @@
 				</div>
 			</div>
 			<div class="row justify-content-center bottom-row">
-				<div class="col-4 text-center choice"></div>
-				<div class="col-4 text-center choice">
+				<div class="col-md-4 text-center choice"></div>
+				<div class="col-md-4 col-sm-12 text-center choice">
 					<div id="firebaseui-auth-container"></div>
 					<div id="loader">Loading...</div>
 					<div id="includedContent"></div>
 				</div>
-				<div class="col-4 text-center choice"></div>
+				<div class="col-md-4 text-center choice"></div>
 			</div>
 		</div>
 	</section>
@@ -68,6 +68,7 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
+	<script src="../js/auth.js"></script>
 	<!-- Popper.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<!-- Bootstrap js -->

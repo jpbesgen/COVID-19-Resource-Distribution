@@ -170,7 +170,7 @@ class LandingCarouselComponent extends Component {
             displayCards += 
             `
             <div id="${card.id}" class="${classes}">
-                ok
+                
             </div>
             `;
         });
@@ -291,12 +291,12 @@ class CarouselCardComponent extends Component {
 
         let content = 
         `
-            <h5 class="card-header text-dark carousel-card-header">${design.name}</h5>
+            <center>
+            <h5 class="card-header text-dark carousel-card-header" style="padding:5%">${design.name}</h5>
             <img class="card-img-top carousel-card-img" src="${design.images[0].url}" alt="Item Attachment 0" />
+            <div class="text-info">${categoryDisplayName}</div>
+            </center>
             <div class="card-body carousel-card-body">
-                <figure class="figure">
-                    <div class="text-info">${categoryDisplayName}</div>
-                </figure>
                 <p class="card-text item-description">${description}</p>
                 ${printerRequired}
                 ${certification}
