@@ -15,6 +15,6 @@ class CommentsComponent extends Component {
     }
 
     render() {
-        return `<div id="commentview-${this.props.design_id}" style="padding: 20px"></div>`;
+        return `<div id="commentview-${this.props.id}" style="padding: 20px"></div>`;
     }
 }

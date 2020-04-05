@@ -1,20 +1,23 @@
-@media only screen and (min-device-width: 320px) and (max-device-width: 823px) and (-webkit-min-device-pixel-ratio: 2) {
-  .btn-sm {
-    font-size: 16px;
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 823px) 
+and (-webkit-min-device-pixel-ratio: 2) { 
+    .btn-sm {
+        font-size: 16px;
+	}
+    .navbar {
+      padding: 0.4rem;
   }
-
-  .navbar {
-    padding: 0.4rem;
-  }
-
-  .navbar img {
-    height: 40px;
-    width: 40px;
-  }
-
-  .search-bar {
-    width: 21rem;
-    margin: 6px 1.5rem 0 1.5rem;
+      .navbar img{
+          height: 40px;
+          width: 40px;
+      }
+      .navbar-nav li {
+		padding-right: 0;
+	}
+      .search-bar {
+		width: 21rem;
+		margin: 6px 1.5rem 0 1.5rem;
   }
 
   .homepage-logo {
@@ -57,32 +60,27 @@
   }
 
   .bottom {
-    margin-bottom: 45px;
-    margin-top: 0px;
-    padding-top: 25px;
+      margin-bottom: 45px;
+      margin-top: 0px;
+      padding-top: 25px;
   }
-
-  .choice {
-    margin: 0;
-    padding: 0;
-    font-size: 22px;
-  }
-
-  .bottom-text {
-    height: 58%;
-  }
-
-  .profession-button {
-    width: 8.5rem;
-  }
-
-  .divider {
-    width: 3rem;
-  }
-
-  .btn-lg {
-    height: 8rem;
-  }
+      .choice {
+          margin: 0;
+          padding: 0;
+          font-size: 22px;
+      }
+          .bottom-text {
+              height: 58%;
+          }
+          .profession-button {
+              width: 8.5rem;
+          }
+          .divider {
+              width: 3rem;
+          }
+          .btn-lg {
+              height: 8rem;
+          }
 }
 
 /*# sourceMappingURL=style-phone.css.map */

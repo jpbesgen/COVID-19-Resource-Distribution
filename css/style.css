@@ -126,7 +126,7 @@ html, body {
 
 .homepage-intro {
   color: #3b628b;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding: 25px 20% 0 20%;
 }
 
@@ -164,7 +164,7 @@ html, body {
 }
 
 .about p {
-  font-size: 24px;
+  font-size: 1.25rem;
   padding-bottom: 55px;
   font-weight: 300;
 }

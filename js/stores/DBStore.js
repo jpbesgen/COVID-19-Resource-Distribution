@@ -107,7 +107,7 @@ class DatabaseStore {
     getDesigns() {
         return this.designs;
     }
-
+  
     /*
         Parameters:
             * querySnapshot = Firestore object containing .data() for all designs
@@ -288,7 +288,6 @@ class DatabaseStore {
             }
             doc.comments.push(comment_id);
             await db.collection("Designs").doc(design_id).set(doc);
-
 
             return {}
         } catch (err) {
