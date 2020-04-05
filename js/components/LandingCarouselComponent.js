@@ -39,16 +39,16 @@ class LandingCarouselComponent extends Component {
     }
 
     orderCards() {
-        console.log(this.carouselCards)
+        //console.log(this.carouselCards)
         // sort the cards
         this.carouselCards = this.carouselCards.sort((c1, c2) => {
-            return c1.upvotes > c2.upvotes;
+            return c2.upvotes - c1.upvotes;
         });
 
         let len = this.carouselCards.length;
-        // take up to the top ten, at least 5
+        // take up to the top 8, at least 5
         if(len < 5) throw new Error("Less than 5 cards");
-        let cutoffNumber = len > 10 ? 10 : len;
+        let cutoffNumber = len > 8 ? 8 : len;
         this.carouselCards = this.carouselCards.splice(0, cutoffNumber)
 
         len = this.carouselCards.length;
@@ -206,7 +206,7 @@ class CarouselCardComponent extends Component {
     }
 
     render() {
-        console.log("rendering");
+        //console.log("rendering");
         let { design } = this.props;
 
         let description = design.description;
