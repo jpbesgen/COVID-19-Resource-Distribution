@@ -18,6 +18,9 @@ class DatabaseStore {
         this.handleDownvote = this.handleDownvote.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
         this.uploadDesign = this.uploadDesign.bind(this);
+        this.userHasUpvotedComment = this.userHasUpvotedComment.bind(this);
+        this.addCommentUpvote = this.addCommentUpvote.bind(this);
+        this.removeCommentUpvote = this.removeCommentUpvote.bind(this);
 
         // users
         this.getDBUser = this.getDBUser.bind(this);
@@ -82,6 +85,8 @@ class DatabaseStore {
                     lastLogin: Date.now(),
                     comments: [],
                     designs: [],
+                    upvoteCount: 0,
+                    upvotedComments: [],
                 }).then(() => {
                     location.assign("/index.html");
                 }).catch((error) => {
@@ -262,6 +267,7 @@ class DatabaseStore {
                 author: user.displayName,
                 uid: user.uid,
                 design: design_id,
+                upvoteCount: 0,
             });
 
 
@@ -444,6 +450,117 @@ class DatabaseStore {
                 db.collection("Designs").doc(design_id).set(doc);
             });
         });
+    }
+
+    async userHasUpvotedComment(user_id, comment_id) {
+        try {
+            if (!user_id) {
+                throw 'User ID not supplied'
+            }
+            if (!comment_id) {
+                throw 'Comment ID not supplied'
+            }
+
+            // fetch user
+            let userRef = await db.collection("Users").doc(user_id).get();
+            let user = userRef.exists ? userRef.data() : null;
+            if (!user) return false;
+
+            // fetch upvotes array
+            let upvotedList = user.upvotedComments;
+            if (!upvotedList) return false;
+
+            // check if comment id is in upvoted list
+            return upvotedList.includes(comment_id);
+
+        } catch (err) {
+            console.error(err);
+            return false;
+        }
+    }
+
+    async addCommentUpvote(user_id, comment_id) {
+        try {
+            if (!user_id) {
+                throw 'User ID not supplied'
+            }
+            if (!comment_id) {
+                throw 'Comment ID not supplied'
+            }
+
+            // fetch comment
+            let commentRef = await db.collection("Comments").doc(comment_id).get();
+            let comment = commentRef.exists ? commentRef.data() : null;
+            if (!comment) throw 'Comment does not exist';
+
+            // increment upvote count
+            await db.collection("Comments").doc(comment_id).update({
+                upvoteCount: comment.upvoteCount + 1,
+            });
+
+            // fetch user
+            let userRef = await db.collection("Users").doc(user_id).get();
+            let user = userRef.exists ? userRef.data() : null;
+            if (!user) throw 'User does not exist';
+
+            // add comment ID to user's likes
+            let upvotedList = user.upvotedComments || [];
+            upvotedList.push(comment_id);
+            await db.collection("Users").doc(user_id).update({
+                upvotedComments: upvotedList
+            });
+
+            return {};
+
+        } catch (err) {
+            console.error(err);
+            return {err};
+        }
+    }
+
+    async removeCommentUpvote(user_id, comment_id) {
+        try {
+            if (!user_id) {
+                throw 'User ID not supplied'
+            }
+            if (!comment_id) {
+                throw 'Comment ID not supplied'
+            }
+
+            // fetch comment
+            let commentRef = await db.collection("Comments").doc(comment_id).get();
+            let comment = commentRef.exists ? commentRef.data() : null;
+            if (!comment) throw 'Comment does not exist';
+
+            // decrement upvote count
+            await db.collection("Comments").doc(comment_id).update({
+                upvoteCount: Math.max(comment.upvoteCount - 1, 0),
+            });
+
+            // fetch user
+            let userRef = await db.collection("Users").doc(user_id).get();
+            let user = userRef.exists ? userRef.data() : null;
+            if (!user) throw 'User does not exist';
+
+            // remove comment ID from user's likes
+            let upvotedList = user.upvotedComments;
+            if (!upvotedList) return {};
+            let indexOfComment = upvotedList.indexOf(comment_id);
+            if (indexOfComment < 0) return {};
+            upvotedList.splice(
+                indexOfComment,
+                1
+            );
+            await db.collection("Users").doc(user_id).update({
+                upvotedComments: upvotedList
+            });
+
+            return {};
+
+        } catch (err) {
+            console.error(err);
+            return {err};
+        }
     }
 
     /*
