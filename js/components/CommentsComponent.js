@@ -15,6 +15,11 @@ class CommentsComponent extends Component {
     }
 
     render() {
-        return `<div id="commentview-${this.props.id}" style="padding: 20px"></div>`;
+        return `
+            <div>
+                <p>In order to comment, please <a href="/pages/login.html">log in</a>.</p>
+                <div id="commentview-${this.props.id}" style="padding: 20px"></div>
+            </div>
+        `;
     }
 }
