@@ -114,7 +114,5 @@
     object-fit: contain;
     z-index: 0;
     margin-bottom: -6px;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
     margin-left: 65px;
 }
