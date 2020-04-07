@@ -14,10 +14,17 @@ class CommentsComponent extends Component {
         this.update();
     }
 
+    afterCall() {
+        if (!DBStore.isAuthenticated()){
+            $('.login-to-comment').css("display", "block");
+        }
+    }
+
     render() {
+
         return `
             <div>
-                <p>In order to comment, please <a href="/pages/login.html">log in</a>.</p>
+                <p class="login-to-comment" style="display: none;">In order to comment, please <a href="/pages/login.html">log in</a>.</p>
                 <div id="commentview-${this.props.id}" style="padding: 20px"></div>
             </div>
         `;

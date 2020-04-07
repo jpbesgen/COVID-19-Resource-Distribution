@@ -361,7 +361,10 @@ html, body {
     height: auto;
     object-fit: contain;
     z-index: 0;
-    margin-bottom: -6px;
+    margin-bottom: -7px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    margin-left: 53px;
 }
 
 footer {
@@ -376,3 +379,7 @@ footer {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.login-to-comment {
+  margin-top: 10px;
+}
