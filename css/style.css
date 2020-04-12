@@ -79,7 +79,8 @@ html, body {
 
 .nav-link {
   font-size: 1.2rem;
-  color: #3B628B;
+  /*color: #3B628B;*/
+  color: white;
 }
 
 .nav-link:hover {
@@ -354,6 +355,19 @@ footer {
 
 .login-to-comment {
   margin-top: 15px;
+}
+
+#myTab {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#details-tab-link {
+  border-top-right-radius: 0;
+}
+
+#comments-tab-link {
+  border-top-left-radius: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

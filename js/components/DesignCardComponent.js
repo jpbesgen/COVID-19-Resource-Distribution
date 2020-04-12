@@ -250,9 +250,9 @@ class DesignCardComponent extends Component {
                             </ul>
                             <div class="tab-content" id="tab-content-${design.id}">
                                 <div class="tab-pane fade show active" id="details-page-${design.id}" role="tabpanel" aria-labelledby="details">
-                                    <p class="modal-text"><b>Category</b><br />${design.category}</p>
+                                    <p class="modal-text"><b>Category</b><br />${categoryDisplayName}</p>
                                     <p class="modal-text"><b>Description</b><br />${design.description}</p>
-                                    <p class="modal-text"><b>3D Printer Required</b><br />${design.printerRequired}</p>
+                                    ${design.printerRequired ? "<p class=\"modal-text\"><b>3D Printer Required</b><br /></p>" : ""}
                                     <p class="modal-text"><b>Certified</b><br /> ${design.certified}</p>
                                     ${design.certifiedLink != null && design.certified == "yes" ?
                             `
@@ -264,7 +264,8 @@ class DesignCardComponent extends Component {
                             ``
                         }
                                     <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
-                                    <p class="modal-text"><b>Credit</b><br /> ${design.credit}</p>
+                                    ${design.credit ? `<p class=\"modal-text\"><b>Credit</b><br /> ${design.credit}</p>` : ""}
+                                    
                                     ${links}
                                     <br/>
                                     ${downloads}
