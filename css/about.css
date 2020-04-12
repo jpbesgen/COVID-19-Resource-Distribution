@@ -27,6 +27,12 @@ h1 {
     margin-top: 52px;
     color: #3B628B;
 }
+h1, h3 {
+    font-weight: 300;
+    margin-left: 9.25%;
+    margin-top: 52px;
+    color: #3B628B;
+}
     .subtitle {
         font-weight: 300;
         font-size: 1.4rem;

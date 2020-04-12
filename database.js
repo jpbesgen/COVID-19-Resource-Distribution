@@ -138,7 +138,11 @@ function renderDesigns(designs) {
                         // loop though comments
                         for (const comment of comments){
                             let photoUrl = await DBStore.getProfileUrl(comment.uid);
-                            let userHasUpvoted = await DBStore.userHasUpvotedComment(currentUser ? currentUser.uid : null, comment.id);
+
+                            let userHasUpvoted;
+                            if (currentUser) {
+                                userHasUpvoted = await DBStore.userHasUpvotedComment(currentUser.uid, comment.id);
+                            }
                             commentsNew.push({
                                 id: comment.id,
                                 created: comment.time,
@@ -148,7 +152,7 @@ function renderDesigns(designs) {
                                 created_by_current_user: currentUser ? currentUser.uid === comment.uid : false,
                                 profile_picture_url: photoUrl,
                                 upvote_count: Math.max(comment.upvoteCount || 0, 0),
-                                user_has_upvoted: userHasUpvoted,
+                                user_has_upvoted: userHasUpvoted || false,
                             });
                         }
                     }

@@ -24,7 +24,7 @@ class CommentsComponent extends Component {
 
         return `
             <div>
-                <p class="login-to-comment" style="display: none;">In order to comment, please <a href="/pages/login.html">log in</a>.</p>
+                <p class="login-to-comment" style="display: none;">In order to comment, please <a href="/pages/login.html">log in / sign up</a>.</p>
                 <div id="commentview-${this.props.id}" style="padding: 20px"></div>
             </div>
         `;
