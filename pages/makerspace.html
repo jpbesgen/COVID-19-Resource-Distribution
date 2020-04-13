@@ -107,18 +107,18 @@
 				</div>
 				<div class="filter">
 					<button class="btn btn-secondary resetbtn" onclick="reset()">Reset Filters</button>
-					<button class="btn btn-secondary closebtn" onclick="closeNav()">☰ Close Sidebar</button>
+					<button class="btn btn-secondary closebtn" id="closebtn" onclick="closeNav()">☰ Close Sidebar</button>
 				</div>
 			</div>
 			<div class="item-area" id="main">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-12 text">
+						<div class="col-12 text" id="makerspace-text">
                             <h1>Welcome to the Makerspace.</h1>
                             <p class="description">The Makerspace is where designers, engineers, and makers can explore open source plans for medical supplies currently needed by those on the frontlines of the COVID19 pandemic. In addition, the makerspace is intended as a platform for collaboration on currently incomplete or unapproved open source designs. Through the makerspace progress can be tracked on completion and approval. </p>
                             <p class="description">Note: Certification is qualified as having the design certified by the NIH, CDC, ECDC, or an equivalent organization. </p>
 							<p class="description">Want to submit a design? <a href="./makerspace-submission.html">Click here.</a></p>
-							<button class="btn btn-secondary sidebar-button first-button" onclick="openNav()">☰ Open Sidebar</button>
+							<button class="btn btn-secondary sidebar-button first-button" id="openbtn" onclick="openNav()">☰ Open Sidebar</button>
 						</div>
 					</div>
 					<div class="col-12 card-columns" id="grid">
@@ -129,9 +129,17 @@
 	</div>
 
 	<script>
+		var query = window.matchMedia("(min-device-width: 320px) and (max-device-width: 899px) and (-webkit-min-device-pixel-ratio: 2)")
+		if (!query.matches) {
+			document.getElementById("filterSidebar").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+			document.getElementById("openbtn").style.display="none";
+			document.getElementById("closebtn").style.visibility="hidden";
+		} 
+
 		function openNav() {
 		  document.getElementById("filterSidebar").style.width = "250px";
-		  document.getElementById("main").style.marginLeft = "0px";
+			document.getElementById("main").style.marginLeft = "0px";
 		}
 
 		function closeNav() {
