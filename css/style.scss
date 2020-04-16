@@ -1,6 +1,7 @@
 // colors
 $blueColor: #3B628B;
 $lightBlueColor: #7a98af;
+$darkBlueColor: #3b628b;
 
 // breakpoints
 $md-breakpoint: 767.98px;
@@ -38,6 +39,7 @@ html, body {
 }
 .homepage-link {
     border: 1px solid $blueColor;
+    margin-top: 0;
 }
 
 /* Navbar */
@@ -384,3 +386,10 @@ footer {
     border-top-left-radius: 0;
 }
 
+.button-label {
+    text-align: left;
+    margin-bottom: 0;
+    color: $darkBlueColor;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
