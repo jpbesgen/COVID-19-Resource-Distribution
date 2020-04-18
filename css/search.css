@@ -112,7 +112,7 @@ p {
 
 #main {
     transition: margin-left .5s;
-    }
+}
 .add {
     margin: 24px 0px 18px 40px;
     color: #7A98AF;
@@ -135,11 +135,9 @@ p {
     margin: 0 1rem 3rem 1rem;
 }
 
-#card {
-    width: 23%;
-}
 .card-columns {
-    column-count: 4;
+    display: flex;
+    justify-content: center;
 }
     .card-header {
         font-size: 36px;
