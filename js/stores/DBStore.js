@@ -1,6 +1,7 @@
 class DatabaseStore {
     constructor() {
         this.designs = [];
+        this.designsMap = {};
         this.designCollectionSnapshot = null;
 
         // handlers
@@ -112,7 +113,11 @@ class DatabaseStore {
     getDesigns() {
         return this.designs;
     }
-  
+
+    getDesignsMap() {
+        return this.designsMap;
+    }
+
     /*
         Parameters:
             * querySnapshot = Firestore object containing .data() for all designs
@@ -138,6 +143,10 @@ class DatabaseStore {
 
         Promise.all(commentFetches).then((designs) => {
             this.designs = designs;
+            this.designsMap = designs.reduce((map, design) => {
+                map[design.id] = design;
+                return map;
+            });
             this.emitDesignsChange()
         });
     }

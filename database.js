@@ -6,6 +6,7 @@ let designCards = {},
 // Take the array of design data and format into a bootstrap card
 // and append each card to the view.
 function renderDesigns(designs) {
+    trackMakerSpaceClicks();
     $(document).ready(() => {
 
     const $grid = $('#grid').isotope({
