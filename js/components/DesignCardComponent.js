@@ -123,7 +123,7 @@ class DesignCardComponent extends Component {
         if(design.attachments != null && design.attachments.length > 0) {
             downloads = `Attachments: `
             design.attachments.forEach((attachment) => {
-                downloads += `<a href="${attachment.url}" target="_blank" download> ${attachment.name}</a>`;
+                downloads += `<a href="${attachment.url}" target="_blank" class="card-attachment" design-id="${design.id}" download> ${attachment.name}</a>`;
                 if(attachment != design.attachments[design.attachments.length - 1]) {
                     downloads += `,`
                 }
@@ -133,7 +133,7 @@ class DesignCardComponent extends Component {
         if(design.links != null && design.links.length > 0) {
             links = `Links: `
             design.links.forEach((link) => {
-                links += `<a href="${link}" target="_blank"> ${link}</a>`;
+                links += `<a href="${link}" class="card-link" design-id="${design.id}" target="_blank"> ${link}</a>`;
                 if(link != design.links[design.links.length - 1]) {
                     links += `,`
                 }
@@ -265,7 +265,7 @@ class DesignCardComponent extends Component {
                         }
                                     <p class="modal-text"><b>Difficulty Level</b><br /> ${design.difficulty}</p>
                                     ${design.credit ? `<p class=\"modal-text\"><b>Credit</b><br /> ${design.credit}</p>` : ""}
-                                    
+
                                     ${links}
                                     <br/>
                                     ${downloads}
