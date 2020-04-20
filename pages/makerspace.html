@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Bootstrap CSS -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="../css/style-phone.css">
@@ -129,8 +129,8 @@
 	</div>
 
 	<script>
-		const query = window.matchMedia("(min-device-width: 320px) and (max-device-width: 899px) and (-webkit-min-device-pixel-ratio: 2)")
-		if (!query.matches) {
+		var mediaChecker = window.matchMedia("(min-device-width: 320px) and (max-device-width: 899px) and (-webkit-min-device-pixel-ratio: 2)")
+		if (!mediaChecker.matches) {
 			document.getElementById("filterSidebar").style.width = "250px";
 			document.getElementById("main").style.marginLeft = "250px";
 			document.getElementById("openbtn").style.display="none";
@@ -139,7 +139,7 @@
 
 		function openNav() {
 		  document.getElementById("filterSidebar").style.width = "250px";
-		  document.getElementById("main").style.marginLeft = "0px";
+			document.getElementById("main").style.marginLeft = "0px";
 		}
 
 		function closeNav() {
@@ -161,12 +161,6 @@
 		// load html components
 		$("#navbar").load("../components/navbar.html");
 	</script>
-	<!-- Popper.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<!-- Bootstrap js -->
-	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 	<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="../lib/jquery-comments/js/jquery-comments.js"></script>
 
@@ -179,6 +173,9 @@
 	<script src="../js/components/DesignCardComponent.js"></script>
 	<script src="../js/stores/DBStore.js"></script>
 	<script src="../database.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 
 </html>
