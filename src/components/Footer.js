@@ -2,11 +2,20 @@ import React from 'react';
 
 const Footer = () => {
 	return (
-		<footer>
+		<footer style={style.Footer}>
 			© 2020 Copyright: Built by the Invention Corps Community and Web Dev @
 			Berkeley
 		</footer>
 	);
+};
+
+const style = {
+	Footer: {
+		backgroundColor: '#7a98af',
+		color: 'white',
+		padding: '20px',
+		textAlign: 'center',
+	},
 };
 
 export default Footer;

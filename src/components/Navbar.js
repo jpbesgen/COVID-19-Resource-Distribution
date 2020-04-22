@@ -4,8 +4,8 @@ import { Link } from '@reach/router';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
+import NavItem from 'react-bootstrap/NavItem';
 
 import MaskManWhite from '../img/maskmanwhite.png';
 import TransparentImage from '../img/transparent_img.png';
@@ -36,94 +36,75 @@ const SiteNavbar = () => {
 	// });
 
 	return (
-		<Navbar bg="dark" variant="dark" expand="lg">
+		<Navbar
+			bg="dark"
+			variant="dark"
+			expand="lg"
+			style={{ padding: '0.8rem 2rem' }}
+		>
 			<Navbar.Brand href="#home">
-				<img
-					src={MaskManWhite}
-					width="30"
-					height="30"
-					className="d-inline-block align-top"
-					alt="mask man white"
-				/>
+				<Link to="/">
+					<img
+						src={MaskManWhite}
+						width="40"
+						height="40"
+						className="d-inline-block align-top"
+						alt="mask man white"
+					/>
+				</Link>
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="ml-auto">
-					<NavLink>
+					<NavLink style={style.NavbarLink}>
 						<Link to="/">Home</Link>
 					</NavLink>
-					<Nav.Link href="#link">Link</Nav.Link>
-					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
-						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.2">
-							Another action
-						</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-						<NavDropdown.Divider />
-						<NavDropdown.Item href="#action/3.4">
-							Separated link
-						</NavDropdown.Item>
+					<NavLink style={style.NavbarLink}>
+						<Link to="/hospitals">Hospitals in Need</Link>
+					</NavLink>
+					<NavLink style={style.NavbarLink}>
+						<Link to="/makerspace">Browse Designs</Link>
+					</NavLink>
+					<NavDropdown
+						title="About"
+						id="basic-nav-dropdown"
+						style={style.NavbarLink}
+					>
+						<Link to="/best-practices">
+							<NavItem className="ml-4">Best Practices</NavItem>
+						</Link>
+						<Link to="/about">
+							<NavItem className="ml-4">About Us</NavItem>
+						</Link>
+						<Link to="/contact">
+							<NavItem className="ml-4">Contact</NavItem>
+						</Link>
+						<Link to="/faq">
+							<NavItem className="ml-4">FAQ</NavItem>
+						</Link>
 					</NavDropdown>
+					<NavLink style={style.NavbarLink} id="loginLink">
+						<Link to="/login">Log In</Link>
+					</NavLink>
+
+					<NavLink
+						className="nav-item navLogoutLink"
+						style={{ display: 'none', alignSelf: 'center' }}
+					>
+						<img
+							src={TransparentImage}
+							alt="transparent placeholder"
+							className="prof-img"
+							style={{ borderRadius: '50%', marginRight: '5px' }}
+						/>
+						<Link to="/" className="nav-link" id="logoutLink">
+							Log Out
+						</Link>
+					</NavLink>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
 
-		// <div className="container-fluid text-center" id="old-header">
-		// 	<Link to="/" className="navbar-brand">
-		// 		<img src={MaskManWhite} alt="mask man white" className="logo" />
-		// 	</Link>
-		// 	<button
-		// 		className="navbar-toggler"
-		// 		type="button"
-		// 		dataToggle="collapse"
-		// 		dataTarget="#oldNavbarResponsive"
-		// 	>
-		// 		<span className="navbar-toggler-icon"></span>
-		// 	</button>
-		// 	<div className="collapse navbar-collapse" id="oldNavbarResponsive">
-		// 		<ul className="navbar-nav ml-auto">
-		// 			<li className="nav-item">
-		// 				<a className="nav-link active" href="../index.html">
-		// 					Home
-		// 				</a>
-		// 			</li>
-		// 			<li className="nav-item">
-		// 				<a className="nav-link" href="../pages/search.html">
-		// 					Hospitals in Need
-		// 				</a>
-		// 			</li>
-		// 			<li className="nav-item">
-		// 				<a className="nav-link" href="../pages/makerspace.html">
-		// 					Browse Designs
-		// 				</a>
-		// 			</li>
-		// 			<li className="nav-item dropdown">
-		// 				<Link
-		// 					to="/"
-		// 					className="nav-link dropdown-toggle"
-		// 					id="oldNavbarDropdown"
-		// 					role="button"
-		// 					dataToggle="dropdown"
-		// 					ariaHaspopup="true"
-		// 					ariaExpanded="false"
-		// 				>
-		// 					About
-		// 				</Link>
-		// 				<div className="dropdown-menu" aria-labelledby="oldNavbarDropdown">
-		// 					<a className="dropdown-item" href="../pages/best-practices.html">
-		// 						Best Practices
-		// 					</a>
-		// 					<a className="dropdown-item" href="../pages/about.html">
-		// 						About Us
-		// 					</a>
-		// 					<a className="dropdown-item" href="../pages/contact.html">
-		// 						Contact
-		// 					</a>
-		// 					<a className="dropdown-item" href="../pages/faq.html">
-		// 						FAQ
-		// 					</a>
-		// 				</div>
-		// 			</li>
 		// 			<li className="nav-item navLoginLink">
 		// 				<a className="nav-link " href="../pages/login.html" id="loginLink">
 		// 					Login / Signup
@@ -143,10 +124,15 @@ const SiteNavbar = () => {
 		// 					Log Out
 		// 				</Link>
 		// 			</li>
-		// 		</ul>
-		// 	</div>
-		// </div>
 	);
+};
+
+const style = {
+	NavbarLink: {
+		paddingRight: '1rem',
+		fontSize: '1.2rem',
+		fontWeight: '400',
+	},
 };
 
 export default SiteNavbar;

@@ -5,6 +5,14 @@ import Navbar from './Navbar';
 import Button from 'react-bootstrap/Button';
 
 const BestPractices = () => {
+	function setButtonHover(e) {
+		e.target.style.color = 'black';
+	}
+
+	function unsetButtonHover(e) {
+		e.target.style.color = '#3B628B';
+	}
+
 	return (
 		<div>
 			<Navbar />
@@ -93,7 +101,13 @@ const BestPractices = () => {
 			</section>
 			<section style={style.BodyContent} className="text-center">
 				<Link to="/makerspace">
-					<Button style={style.Button}>Explore Available Designs</Button>
+					<Button
+						style={style.Button}
+						onMouseEnter={setButtonHover}
+						onMouseLeave={unsetButtonHover}
+					>
+						Explore Available Designs
+					</Button>
 				</Link>
 			</section>
 		</div>
@@ -109,7 +123,7 @@ let style = {
 		fontWeight: '300',
 		fontSize: '3.5rem',
 		marginLeft: '9.25%',
-		marginTop: '52px',
+		paddingTop: '52px',
 		color: '#3B628B',
 	},
 	Text: {
@@ -122,22 +136,22 @@ let style = {
 	TextWithBigIndent: {
 		fontSize: '1.25rem',
 		fontWeight: '300',
-		marginLeft: '9.25%',
+		marginLeft: '13.75%',
 		marginRight: '8.4%',
 		color: '#3B628B',
-		textIndent: '4rem',
 	},
 	TextWithSmallIndent: {
 		fontSize: '1.25rem',
 		fontWeight: '300',
-		marginLeft: '9.25%',
+		marginLeft: '11.5%',
 		marginRight: '8.4%',
 		color: '#3B628B',
-		textIndent: '2rem',
 	},
 	Button: {
 		border: '1px solid #3B628B',
-		width: '30%',
+		padding: '0.5rem 3.5rem',
+		maxWidth: '90%',
+		background: 'transparent',
 		fontSize: '24px',
 		color: '#7A98AF',
 	},

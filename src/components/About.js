@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 const About = () => {
 	return (
 		<div>
-			{/* <Navbar /> */}
+			<Navbar />
 			<section style={style.BodyContent}>
 				<h1 style={style.Header1}>About Us</h1>
 				<p style={style.Text}>
@@ -539,7 +539,7 @@ let style = {
 		fontWeight: '300',
 		fontSize: '3.5rem',
 		marginLeft: '9.25%',
-		marginTop: '52px',
+		paddingTop: '52px',
 		color: '#3B628B',
 	},
 	Header3: {

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 const Faq = () => {
 	return (
 		<div>
-			{/* <Navbar /> */}
+			<Navbar />
 			<section style={style.BodyContent}>
 				<h1 style={style.Header1}>FAQ</h1>
 				<div style={style.FirstFaqBox}>
@@ -101,7 +101,7 @@ let style = {
 		fontWeight: '300',
 		fontSize: '3.5rem',
 		marginLeft: '9.25%',
-		marginTop: '52px',
+		paddingTop: '52px',
 		color: '#3B628B',
 	},
 	Question: {

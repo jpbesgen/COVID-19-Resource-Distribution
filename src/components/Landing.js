@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import Navbar from './Navbar';
+import LandingNavbar from './LandingNavbar';
+import LandingCarousel from './LandingCarousel';
 import Footer from './Footer';
 
 import Logo from '../img/logo.png';
@@ -9,10 +10,22 @@ import ConnectionLeft from '../img/connection-left.svg';
 
 import '../css/style.css';
 
+import Button from 'react-bootstrap/Button';
+
 const Landing = () => {
+	function setButtonHover(e) {
+		e.target.style.color = 'white';
+		e.target.style.background = '#7A98AF';
+	}
+
+	function unsetButtonHover(e) {
+		e.target.style.color = '#7A98AF';
+		e.target.style.background = 'transparent';
+	}
+
 	return (
 		<div>
-			{/* <Navbar /> */}
+			<LandingNavbar />
 			{/* <!-- Logo & Intro --> */}
 			<section className="text-center homepage-one">
 				<img src={Logo} alt="Resource-19 Logo" className="homepage-logo" />
@@ -34,30 +47,27 @@ const Landing = () => {
 						need.
 					</p>
 				</div>
-				<div className="button-box">
-					<div className="search-bar">
-						<Link to="/search">
-							<button
-								type="button"
-								className="btn btn-primary btn-sm btn-block homepage-link"
-							>
-								Hospitals In Need
-							</button>
-						</Link>
-					</div>
-					<div className="search-bar">
-						<Link to="/best-practices">
-							<button
-								type="button"
-								className="btn btn-primary btn-sm btn-block homepage-link"
-							>
-								Browse Designs
-							</button>
-						</Link>
-					</div>
-				</div>
-			</section>
+				<Link to="/hospitals">
+					<Button
+						style={style.Button}
+						onMouseEnter={setButtonHover}
+						onMouseLeave={unsetButtonHover}
+					>
+						Hospitals In Need
+					</Button>
+				</Link>
 
+				<Link to="/best-practices">
+					<Button
+						style={style.Button}
+						onMouseEnter={setButtonHover}
+						onMouseLeave={unsetButtonHover}
+					>
+						Browse Designs
+					</Button>
+				</Link>
+			</section>
+			<LandingCarousel />
 			{/* <!-- About Resource19 --> */}
 			<section id="homepage-about">
 				<div className="homepage about">
@@ -74,6 +84,19 @@ const Landing = () => {
 			<Footer />
 		</div>
 	);
+};
+
+let style = {
+	Button: {
+		border: '1px solid #3B628B',
+		padding: '0.8rem 2.5rem',
+		margin: '1rem',
+		minWidth: '23%',
+		maxWidth: '50%',
+		background: 'transparent',
+		fontSize: '20px',
+		color: '#7A98AF',
+	},
 };
 
 export default Landing;

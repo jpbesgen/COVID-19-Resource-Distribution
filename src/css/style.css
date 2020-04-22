@@ -1,14 +1,12 @@
 html,
 body {
-	height: 100%;
+	height: 101%;
 	width: 100%;
-	min-height: 100%;
-	background: #7a98af;
-	font-family: 'Josefin Sans', sans-serif;
+	min-height: 101%;
 }
 
 /* Button Styling */
-.btn-primary {
+/* .btn-primary {
 	background-color: white;
 	border-color: white;
 	color: #3b628b;
@@ -37,60 +35,7 @@ body {
 
 .homepage-link {
 	border: 1px solid #3b628b;
-}
-
-/* Navbar */
-.navbar {
-	padding: 0.8rem;
-	background-color: #7a98af;
-}
-.navbar.white-bg {
-	color: #3b628b;
-	background-color: white;
-}
-.navbar #old-header .nav-link {
-	color: white !important;
-}
-
-.navbar-custom {
-	color: white;
-}
-
-.navbar img {
-	height: 40px;
-	width: 40px;
-	margin-top: -1px;
-	margin-bottom: 5px;
-}
-
-.navbar-logo {
-	display: inline-block;
-	padding-top: 0.3125rem;
-	padding-bottom: 0.3125rem;
-	margin-right: 1rem;
-	font-size: 1.25rem;
-	line-height: inherit;
-	white-space: nowrap;
-	width: 15px;
-}
-
-.navbar-nav li {
-	padding: 0 8px;
-}
-
-.nav-link {
-	font-size: 1.2rem;
-	/*color: #3B628B;*/
-	color: white;
-}
-
-.nav-link:hover {
-	color: #b0d7d7 !important;
-}
-
-.active {
-	color: #3b628b !important;
-}
+} */
 
 /* First section of homepage */
 .homepage-logo {
@@ -173,30 +118,6 @@ body {
 	font-weight: 300;
 }
 
-.container {
-	padding-top: 50px;
-}
-
-.btn-primary:hover {
-	background-color: #7a98af;
-	border-color: #7a98af;
-}
-
-.airtable-embed {
-	padding-top: 30px;
-}
-
-.bottom {
-	margin-bottom: 100px;
-	margin-top: 70px;
-}
-
-.choice {
-	font-size: 24px;
-	line-height: 24px;
-	color: #3b628b;
-}
-
 .profession-button {
 	width: 80%;
 	margin: auto;
@@ -206,31 +127,6 @@ body {
 	width: 10%;
 }
 
-/* .footer {
-	background-color: #7a98af;
-} */
-.nav-container .navbar-nav {
-	float: none;
-	vertical-align: top;
-	border-bottom: 1px solid #3b628b;
-}
-.nav-container .navbar-collapse {
-	text-align: center;
-}
-.nav-container .navbar-toggler {
-	margin: 10px 0;
-}
-
-@media (min-width: 767.98px) {
-	.nav-container {
-		padding-top: 30px;
-	}
-}
-@media (max-width: 767.98px) {
-	.nav-container {
-		border-bottom: 1px solid #3b628b;
-	}
-}
 .background-images .headerimg-left {
 	position: absolute;
 }
@@ -343,13 +239,6 @@ body {
 }
 #carousel-section #card-carousel-container .carousel-btn button:focus {
 	outline: 0;
-}
-
-footer {
-	background-color: #7a98af;
-	color: white;
-	padding: 20px;
-	text-align: center;
 }
 
 .navLogoutLink {

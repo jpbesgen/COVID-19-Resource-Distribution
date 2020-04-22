@@ -1,0 +1,246 @@
+#carousel-section {
+    border-bottom: 0;
+    background-color: transparent;
+  }
+  #carousel-section #card-carousel-container {
+    padding-top: 0px;
+    width: 80vw;
+    height:45vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+  }
+  #carousel-section #card-carousel-container .carousel-card-hidden {
+    opacity: 0;
+    position: absolute;
+    left: 100vw;
+  }
+  #carousel-section #card-carousel-container .carousel-card-header {
+    font-size: 1em;
+    text-align: center;
+  }
+  #carousel-section #card-carousel-container .carousel-card-body {
+    margin: 1%;
+    padding: 0px;
+  }
+  #carousel-section #card-carousel-container .landing-carousel-card {
+    margin: auto;
+    font-size: 0.7em;
+    background-color: white;
+    justify-content: flex-start;
+    padding: 0px;
+    max-height: 60vh;
+    width: 20%;
+    overflow-y: scroll;
+    top: 0;
+    transition: all 1.5s ease, opacity 0.2s ease;
+    border: 0px;
+    border-radius: 12px;
+  }
+  #carousel-section #card-carousel-container .carousel-card-img {
+    max-height: 15vh;
+    height: 15vh;
+    width: 100%;
+    object-fit: fill;
+  }
+  #carousel-section #card-carousel-container .presenting-card-0 {
+    position: absolute;
+    left: -50vw;
+    opacity: 0;
+    transform: scale(1);
+  }
+  #carousel-section #card-carousel-container .presenting-card-1 {
+    position: absolute;
+    left: 4%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  #carousel-section #card-carousel-container .presenting-card-2 {
+    position: absolute;
+    left: 28%;
+    margin-top: auto;
+    height: ;
+    opacity: 1;
+    top: 0px;
+  }
+  #carousel-section #card-carousel-container .presenting-card-3 {
+    position: absolute;
+    opacity: 1;
+    left: 52%;
+    transform: scale(1);
+  }
+  #carousel-section #card-carousel-container .presenting-card-4 {
+    position: absolute;
+    opacity: 1;
+    left: 76%;
+    transform: scale(1);
+  }
+  #carousel-section #card-carousel-container .presenting-card-5 {
+    position: absolute;
+    left: 100vw;
+    opacity: 0;
+    transform: scale(1);
+  }
+  #carousel-section #card-carousel-container .landing-carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: relative;
+    overflow-x: hidden;
+  }
+  #carousel-section #card-carousel-container .carousel-btn {
+    width: 5%;
+    height: 100%;
+    margin: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #carousel-section #card-carousel-container .carousel-btn button {
+    z-index: 999;
+  }
+  #carousel-section #card-carousel-container .carousel-btn button:focus {
+    outline: 0;
+  }
+
+
+
+#inner-carousel-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+}
+#card-carousel-container {
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+}
+
+.carousel-card-hidden { 
+    opacity: 0;
+    position: absolute;
+    left: 100vw;
+} 
+.carousel-card-header {
+    font-size: 1em;
+    text-align: center;
+}
+.carousel-card-body {
+    margin: 1%;
+    padding: 0px;
+}
+.landing-carousel-card {
+    margin: auto;
+    font-size: 0.7em;
+    background-color: white;
+    justify-content: flex-start;
+    padding: 0;
+    min-height: 100%;
+    max-height: 100%;
+    width: 35%;
+    overflow-y: scroll;
+    top: 40px;
+    transition: all 1.5s ease, opacity 0.2s ease;
+    box-shadow: 1px 1px 5px grey;
+    border-top-left-radius: 4%;
+    border-top-right-radius: 4%;
+}
+.carousel-card-img {
+    max-height: 10vh;
+    width: auto;
+    object-fit: contain;
+}
+.landing-carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 98%;
+    margin: auto;
+    margin-top: 0%;
+    position: relative;
+    overflow:hidden;
+    z-index: 1;
+}
+.carousel-btn {
+    width: 5%;
+    height: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#carousel-img {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    z-index: 0;
+    margin-bottom: -6px;
+    margin-left: 3vw;
+}
+
+.card-columns {
+    display: flex;
+    justify-content: center;
+}
+    .card-header {
+        font-size: 18px;
+        color: #3B628B;
+        font-weight: 400;
+        background-color: white;
+        padding: 0;
+        margin: 12px 0px;
+        border: 0;
+    }
+    .card-img-top {
+        padding: 0;
+        margin: 0;
+        height: 10rem;
+        width: 100%;
+        max-width: 100%;
+        margin: auto;
+    }
+    .card-body {
+        padding: .8rem;
+        padding-top: 0;
+    }
+
+        .card-text {
+            font-size: 20px;
+            font-weight: 300;
+            color: #000000;
+            margin: .4rem 0;
+            padding: 0;
+        }
+            .item-description {
+                margin-top: 10px;
+                line-height: 1.2;
+                font-weight: 300;
+                min-height: 6rem;
+                height: auto;
+                font-size: 14px;
+            }
