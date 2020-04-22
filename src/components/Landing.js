@@ -27,20 +27,20 @@ const Landing = () => {
 		<div>
 			<LandingNavbar />
 			{/* <!-- Logo & Intro --> */}
-			<section className="text-center homepage-one">
-				<img src={Logo} alt="Resource-19 Logo" className="homepage-logo" />
+			<section style={style.HomepageTop} className="text-center">
+				<img src={Logo} alt="Resource-19 Logo" style={style.HomepageLogo} />
 				<img
-					className="headerimg-left"
 					src={ConnectionLeft}
 					alt="connection left"
+					style={style.HeaderImgLeft}
 				/>
 				<img
-					className="headerimg-right"
 					src={ConnectionRight}
 					alt="connection right"
+					style={style.HeaderImgRight}
 				/>
 				<div className="text-center">
-					<p className="homepage-intro">
+					<p style={style.HomepageIntro}>
 						Want to sew masks, manufacture ventilator parts, or contribute other
 						medical supplies for the COVID-19 crisis? Explore hospitals near
 						you, then use our designs to create the resources they desperately
@@ -69,10 +69,10 @@ const Landing = () => {
 			</section>
 			<LandingCarousel />
 			{/* <!-- About Resource19 --> */}
-			<section id="homepage-about">
-				<div className="homepage about">
-					<h1>What is Resource19?</h1>
-					<p style={{ marginBottom: '0' }}>
+			<section style={style.HomepageAbout}>
+				<div className="about">
+					<h1 style={style.Header1}>What is Resource19?</h1>
+					<p style={style.About}>
 						We’re a group of volunteers looking to solve two of the most urgent
 						problems of the COVID-19 pandemic: How do we get vital medical
 						supplies to the people who need them most and how do we mobilize the
@@ -87,6 +87,53 @@ const Landing = () => {
 };
 
 let style = {
+	HomepageTop: {
+		paddingTop: '25px',
+		backgroundColor: 'white',
+		textAlign: 'center',
+		zIndex: '0',
+		position: 'relative',
+	},
+	HomepageLogo: {
+		width: '34%',
+		maxWidth: '600px',
+	},
+	HeaderImgLeft: {
+		position: 'absolute',
+		zIndex: '-9',
+		maxWidth: '160px',
+		left: '40px',
+		top: '-50px',
+	},
+	HeaderImgRight: {
+		position: 'absolute',
+		zIndex: '-9',
+		maxWidth: '160px',
+		right: '70px',
+		top: '-60px',
+	},
+	HomepageIntro: {
+		color: '#3b628b',
+		fontSize: '20px',
+		padding: '25px 20% 0 20%',
+	},
+	HomepageAbout: {
+		backgroundColor: 'white',
+		zIndex: '999',
+		position: 'relative',
+		padding: '0 14%',
+	},
+	Header1: {
+		fontSize: '67px',
+		fontWeight: '300',
+		paddingTop: '50px',
+	},
+	About: {
+		fontSize: '24px',
+		paddingBottom: '55px',
+		fontWeight: '300',
+		marginBottom: '0',
+	},
 	Button: {
 		border: '1px solid #3B628B',
 		padding: '0.8rem 2.5rem',
