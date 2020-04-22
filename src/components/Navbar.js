@@ -3,11 +3,9 @@ import { Link } from '@reach/router';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavLink from 'react-bootstrap/NavLink';
-import NavItem from 'react-bootstrap/NavItem';
 
-import MaskManWhite from '../img/maskmanwhite.png';
+import Logo from '../img/logo.png';
 import TransparentImage from '../img/transparent_img.png';
 
 const SiteNavbar = () => {
@@ -37,17 +35,16 @@ const SiteNavbar = () => {
 
 	return (
 		<Navbar
-			bg="dark"
-			variant="dark"
+			bg="transparent"
+			variant="light"
 			expand="lg"
-			style={{ padding: '0.8rem 2rem' }}
+			style={{ padding: '0.8rem 2rem', borderBottom: '2px solid #3B628B' }}
 		>
 			<Navbar.Brand href="#home">
 				<Link to="/">
 					<img
-						src={MaskManWhite}
-						width="40"
-						height="40"
+						src={Logo}
+						height="28"
 						className="d-inline-block align-top"
 						alt="mask man white"
 					/>
@@ -65,24 +62,9 @@ const SiteNavbar = () => {
 					<NavLink style={style.NavbarLink}>
 						<Link to="/makerspace">Browse Designs</Link>
 					</NavLink>
-					<NavDropdown
-						title="About"
-						id="basic-nav-dropdown"
-						style={style.NavbarLink}
-					>
-						<Link to="/best-practices">
-							<NavItem className="ml-4">Best Practices</NavItem>
-						</Link>
-						<Link to="/about">
-							<NavItem className="ml-4">About Us</NavItem>
-						</Link>
-						<Link to="/contact">
-							<NavItem className="ml-4">Contact</NavItem>
-						</Link>
-						<Link to="/faq">
-							<NavItem className="ml-4">FAQ</NavItem>
-						</Link>
-					</NavDropdown>
+					<NavLink style={style.NavbarLink}>
+						<Link to="/about">About</Link>
+					</NavLink>
 					<NavLink style={style.NavbarLink} id="loginLink">
 						<Link to="/login">Log In</Link>
 					</NavLink>

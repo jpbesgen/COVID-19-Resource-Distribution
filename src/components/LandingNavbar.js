@@ -7,7 +7,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavLink from 'react-bootstrap/NavLink';
 import NavItem from 'react-bootstrap/NavItem';
 
-import MaskManWhite from '../img/maskmanwhite.png';
 import TransparentImage from '../img/transparent_img.png';
 
 const SiteNavbar = () => {
@@ -58,13 +57,10 @@ const SiteNavbar = () => {
 								<NavItem className="ml-4">Best Practices</NavItem>
 							</Link>
 							<Link to="/about">
-								<NavItem className="ml-4">About Us</NavItem>
+								<NavItem className="ml-4">About Us / FAQ</NavItem>
 							</Link>
 							<Link to="/contact">
 								<NavItem className="ml-4">Contact</NavItem>
-							</Link>
-							<Link to="/faq">
-								<NavItem className="ml-4">FAQ</NavItem>
 							</Link>
 						</NavDropdown>
 						<NavLink style={style.NavbarLink} className="ml-3" id="loginLink">
