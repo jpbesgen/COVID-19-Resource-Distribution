@@ -9,5 +9,6 @@ pages/
 404.html
 database.rules.json
 database.js
+analytics.js
 firebase.json
 index.html
