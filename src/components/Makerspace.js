@@ -6,8 +6,9 @@ const Makerspace = () => {
 	return (
 		<div>
 			<Navbar />
-			<section>makerspace</section>
+			<section id="makerspace-carousel">
 			<DesignCard/>
+			</section>
 		</div>
 	);
 };
