@@ -9,11 +9,32 @@ import Login from './components/Login';
 import About from './components/About';
 import BestPractices from './components/BestPractices';
 
+import LandingMobile from './components/Mobile/LandingMobile';
+import MakerspaceMobile from './components/Mobile/MakerspaceMobile';
+import SubmitMobile from './components/Mobile/SubmitMobile';
+import BestPracticesMobile from './components/Mobile/BestPracticesMobile';
+import AboutMobile from './components/Mobile/AboutMobile';
+
 import { Router } from '@reach/router';
 
 function App() {
+	if (window.matchMedia('(max-width: 991px)').matches) {
+		return (
+			<div>
+				<Router>
+					<LandingMobile path="/" />
+					<Hospitals path="/hospitals" />
+					<MakerspaceMobile path="/makerspace" />
+					<SubmitMobile path="/submit" />
+					<Login path="/login" />
+					<AboutMobile path="/about" />
+					<BestPracticesMobile path="/best-practices" />
+				</Router>
+			</div>
+		);
+	}
 	return (
-		<div style={{ backgroundColor: 'white' }}>
+		<div>
 			<Router>
 				<Landing path="/" />
 				<Hospitals path="/hospitals" />

@@ -43,11 +43,11 @@ const SiteNavbar = () => {
 				borderBottom: '2px solid #3B628B',
 			}}
 		>
-			<Navbar.Brand href="#home">
+			<Navbar.Brand>
 				<Link to="/">
 					<img
 						src={Logo}
-						height="28"
+						height="28px"
 						className="d-inline-block align-top"
 						alt="mask man white"
 					/>

@@ -65,7 +65,7 @@ const About = () => {
 				<Individual
 					name="Samarth Goel"
 					major="UC Berkeley Double Major in
-					Computer Science and Business Administration w/ minor in Data Science"
+					Computer Science and Business Administration"
 					role="Frontend Engineer"
 					linkedin="http://linkedin.com/in/samarth-goel-07"
 					email="mailto:sgoel9@berkeley.edu"
@@ -162,7 +162,7 @@ const About = () => {
 
 let style = {
 	BodyContent: {
-		margin: '0 9.25% 0.3rem 8.4%',
+		margin: '0 4.25% 0.3rem 4.25%',
 	},
 	Header1: {
 		fontWeight: '300',

@@ -1,14 +1,20 @@
 import React from 'react';
 import Navbar from './Navbar';
+import LandingNavbarMobile from './Mobile/LandingNavbarMobile';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Container';
 
 const Login = () => {
+	let nav = <Navbar />;
+	if (window.matchMedia('(max-width: 991px)').matches) {
+		nav = <LandingNavbarMobile />;
+	}
+
 	return (
 		<div>
-			<Navbar />
+			{nav}
 			<section>
 				<Container fluid style={style.Bottom}>
 					<Row className="justify-content-center bottom-row">

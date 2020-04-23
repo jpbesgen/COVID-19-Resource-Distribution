@@ -69,7 +69,7 @@ const Faq = () => {
 
 let style = {
 	BodyContent: {
-		padding: ' 0 9.25% 3rem 8.4%',
+		padding: ' 0 4.25% 3rem 4.25%',
 	},
 	Header1: {
 		fontWeight: '300',

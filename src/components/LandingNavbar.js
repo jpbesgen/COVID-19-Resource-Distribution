@@ -7,7 +7,7 @@ import NavLink from 'react-bootstrap/NavLink';
 
 import TransparentImage from '../img/transparent_img.png';
 
-const SiteNavbar = () => {
+const LandingNavbar = () => {
 	// firebase.auth().onAuthStateChanged(function (user) {
 	// 	if (user) {
 	// 		$('.prof-img').attr('src', user.photoURL); // replace img with prof pic
@@ -124,4 +124,4 @@ const style = {
 	},
 };
 
-export default SiteNavbar;
+export default LandingNavbar;

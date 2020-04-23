@@ -26,7 +26,7 @@ const Individual = (props) => {
 				</svg>
 			</a>
 			<p style={style.Text}>
-				<b style={{ fontWeight: '400' }}>{props.name}</b> - {props.major}
+				<b>{props.name}</b> - {props.major}
 				<br />
 				Role: {props.role}
 				<br />
