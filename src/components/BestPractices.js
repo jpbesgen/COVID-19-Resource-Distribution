@@ -108,10 +108,10 @@ const BestPractices = () => {
 
 let style = {
 	BodyContent: {
-		margin: '0 9.25% 1.5rem 8.4%',
+		margin: '0 4.25% 1.5rem 4.25%',
 	},
 	BottomButton: {
-		margin: '0 9.25% 3rem 8.4%',
+		marginBottom: '3rem',
 	},
 	Header1: {
 		fontWeight: '300',

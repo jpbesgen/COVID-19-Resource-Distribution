@@ -4,13 +4,12 @@ import LandingNavbar from './LandingNavbar';
 import LandingCarousel from './LandingCarousel';
 import Footer from './Footer';
 
-import Logo from '../img/logo.png';
+import LogoWithSubtitle from '../img/logowithsubtitle.png';
 import ConnectionRight from '../img/connection-right.svg';
 import ConnectionLeft from '../img/connection-left.svg';
 
-import '../css/style.css';
-
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 const Landing = () => {
 	function setButtonHover(e) {
@@ -28,7 +27,11 @@ const Landing = () => {
 			<LandingNavbar />
 			{/* <!-- Logo & Intro --> */}
 			<section style={style.HomepageTop} className="text-center">
-				<img src={Logo} alt="Resource-19 Logo" style={style.HomepageLogo} />
+				<img
+					src={LogoWithSubtitle}
+					alt="Resource-19 Logo"
+					style={style.HomepageLogo}
+				/>
 				<img
 					src={ConnectionLeft}
 					alt="connection left"
@@ -41,10 +44,12 @@ const Landing = () => {
 				/>
 				<div className="text-center">
 					<p style={style.HomepageIntro}>
-						Want to sew masks, manufacture ventilator parts, or contribute other
-						medical supplies for the COVID-19 crisis? Explore hospitals near
-						you, then use our designs to create the resources they desperately
-						need.
+						Want to donate or manufacture PPE for the COVID-19 crisis? Click
+						<br />
+						<b>Get Started</b> to find out how you can help, or{' '}
+						<b>Go to the Makerspace</b>
+						<br />
+						to explore PPE designs.
 					</p>
 				</div>
 				<Link to="/hospitals">
@@ -53,7 +58,7 @@ const Landing = () => {
 						onMouseEnter={setButtonHover}
 						onMouseLeave={unsetButtonHover}
 					>
-						Hospitals In Need
+						<b>Hospitals In Need</b>
 					</Button>
 				</Link>
 
@@ -63,24 +68,30 @@ const Landing = () => {
 						onMouseEnter={setButtonHover}
 						onMouseLeave={unsetButtonHover}
 					>
-						Browse Designs
+						<b>Go to the Makerspace</b>
 					</Button>
 				</Link>
 			</section>
+
 			<LandingCarousel />
-			{/* <!-- About Resource19 --> */}
-			<section style={style.HomepageAbout}>
-				<div className="about">
-					<h1 style={style.Header1}>What is Resource19?</h1>
-					<p style={style.About}>
-						We’re a group of volunteers looking to solve two of the most urgent
-						problems of the COVID-19 pandemic: How do we get vital medical
-						supplies to the people who need them most and how do we mobilize the
-						existing community of manufacturers, makers, and builders to ensure
-						these vital supplies never run out.
-					</p>
-				</div>
-			</section>
+
+			<Container fluid className="text-center">
+				<p style={style.HospitalDescription}>
+					Below you’ll find a list of hospitals, contact information, dropoff
+					instructions, and specific needs. If any of the entries are incomplete
+					or incorrect please reach out to us at feedback@resource19.org
+				</p>
+				<iframe
+					title="Hospital data"
+					style={{ width: '100%', height: '90vh', border: 'none' }}
+					id="hospitals-map"
+					src="https://findthemasks.com/give.html"
+				></iframe>
+			</Container>
+			<footer style={style.HospitalFooter}>
+				Credits to this page go to:{' '}
+				<a href="https://findthemasks.com">findthemasks.com</a>
+			</footer>
 			<Footer />
 		</div>
 	);
@@ -88,61 +99,59 @@ const Landing = () => {
 
 let style = {
 	HomepageTop: {
-		paddingTop: '25px',
+		paddingTop: '1vh',
 		backgroundColor: 'white',
 		textAlign: 'center',
 		zIndex: '0',
 		position: 'relative',
 	},
 	HomepageLogo: {
-		width: '34%',
-		maxWidth: '600px',
+		width: '747px',
+		padding: '0 5%',
+		maxWidth: '80%',
+		borderBottom: '1px solid #3b628b',
 	},
 	HeaderImgLeft: {
 		position: 'absolute',
 		zIndex: '-9',
-		maxWidth: '160px',
-		left: '40px',
+		maxWidth: '266px',
+		left: '2.5%',
 		top: '-50px',
 	},
 	HeaderImgRight: {
 		position: 'absolute',
 		zIndex: '-9',
-		maxWidth: '160px',
-		right: '70px',
+		maxWidth: '252px',
+		right: '8%',
 		top: '-60px',
 	},
 	HomepageIntro: {
 		color: '#3b628b',
-		fontSize: '20px',
+		fontSize: '28px',
+		fontWeight: '400',
 		padding: '25px 20% 0 20%',
 	},
-	HomepageAbout: {
-		backgroundColor: 'white',
-		zIndex: '999',
-		position: 'relative',
-		padding: '0 14%',
-	},
-	Header1: {
-		fontSize: '67px',
-		fontWeight: '300',
-		paddingTop: '50px',
-	},
-	About: {
-		fontSize: '24px',
-		paddingBottom: '55px',
-		fontWeight: '300',
-		marginBottom: '0',
-	},
 	Button: {
-		border: '1px solid #3B628B',
-		padding: '0.8rem 2.5rem',
+		border: '0px solid #3B628B',
+		padding: '1.5rem 0',
 		margin: '1rem',
-		minWidth: '23%',
+		fontSize: '24px',
+		minWidth: '30%',
 		maxWidth: '50%',
 		background: 'transparent',
-		fontSize: '20px',
 		color: '#7A98AF',
+		boxShadow: '0px 2px 6px #888888',
+	},
+	HospitalDescription: {
+		fontSize: '18px',
+		color: '#3B628B',
+		padding: '0 19%',
+	},
+	HospitalFooter: {
+		backgroundColor: 'transparent',
+		color: 'black',
+		padding: '10px',
+		textAlign: 'center',
 	},
 };
 

@@ -38,7 +38,10 @@ const SiteNavbar = () => {
 			bg="transparent"
 			variant="light"
 			expand="lg"
-			style={{ padding: '0.8rem 2rem', borderBottom: '2px solid #3B628B' }}
+			style={{
+				padding: '0.8rem 0.2rem 0.8rem 2.5rem',
+				borderBottom: '2px solid #3B628B',
+			}}
 		>
 			<Navbar.Brand href="#home">
 				<Link to="/">
@@ -54,19 +57,29 @@ const SiteNavbar = () => {
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="ml-auto">
 					<NavLink style={style.NavbarLink}>
-						<Link to="/">Home</Link>
+						<Link to="/">
+							<p style={style.NavItem}>Home</p>
+						</Link>
 					</NavLink>
 					<NavLink style={style.NavbarLink}>
-						<Link to="/hospitals">Hospitals in Need</Link>
+						<Link to="/hospitals">
+							<p style={style.NavItem}>Hospitals in Need</p>
+						</Link>
 					</NavLink>
 					<NavLink style={style.NavbarLink}>
-						<Link to="/makerspace">Browse Designs</Link>
+						<Link to="/makerspace">
+							<p style={style.NavItem}>Browse Designs</p>
+						</Link>
 					</NavLink>
 					<NavLink style={style.NavbarLink}>
-						<Link to="/about">About</Link>
+						<Link to="/about">
+							<p style={style.NavItem}>About</p>
+						</Link>
 					</NavLink>
 					<NavLink style={style.NavbarLink} id="loginLink">
-						<Link to="/login">Log In</Link>
+						<Link to="/login">
+							<p style={style.NavItem}>Log In</p>
+						</Link>
 					</NavLink>
 
 					<NavLink
@@ -111,9 +124,14 @@ const SiteNavbar = () => {
 
 const style = {
 	NavbarLink: {
-		paddingRight: '1rem',
+		paddingRight: '1.3rem',
 		fontSize: '1.2rem',
 		fontWeight: '400',
+	},
+	NavItem: {
+		fontSize: '18px',
+		color: '#828282',
+		margin: '0',
 	},
 };
 

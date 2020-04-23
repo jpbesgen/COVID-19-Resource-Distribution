@@ -3,9 +3,7 @@ import { Link } from '@reach/router';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import NavLink from 'react-bootstrap/NavLink';
-import NavItem from 'react-bootstrap/NavItem';
 
 import TransparentImage from '../img/transparent_img.png';
 
@@ -46,25 +44,19 @@ const SiteNavbar = () => {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mx-auto">
 						<NavLink style={style.NavbarLink} className="mr-3">
-							<Link to="/">Home</Link>
+							<Link to="/">
+								<p style={style.NavItem}>Home</p>
+							</Link>
 						</NavLink>
-						<NavDropdown
-							title="About"
-							id="basic-nav-dropdown"
-							style={style.NavbarLink}
-						>
-							<Link to="/best-practices">
-								<NavItem className="ml-4">Best Practices</NavItem>
-							</Link>
+						<NavLink style={style.NavbarLink}>
 							<Link to="/about">
-								<NavItem className="ml-4">About Us / FAQ</NavItem>
+								<p style={style.NavItem}>About</p>
 							</Link>
-							<Link to="/contact">
-								<NavItem className="ml-4">Contact</NavItem>
-							</Link>
-						</NavDropdown>
+						</NavLink>
 						<NavLink style={style.NavbarLink} className="ml-3" id="loginLink">
-							<Link to="/login">Login / Signup</Link>
+							<Link to="/login">
+								<p style={style.NavItem}>Log In</p>
+							</Link>
 						</NavLink>
 
 						<NavLink
@@ -115,15 +107,20 @@ const style = {
 		marginBottom: '.5rem',
 	},
 	NavbarStyle: {
-		margin: '2.6rem 0 0 0',
+		margin: '0.6rem 0 0 0',
 		padding: '0',
-		borderBottom: '1px solid #3B628B',
+		borderBottom: '2px solid #3B628B',
 		width: '25%',
 	},
 	NavbarLink: {
-		padding: 'auto 1rem',
+		padding: '0 1rem',
 		fontSize: '1.2rem',
 		fontWeight: '400',
+	},
+	NavItem: {
+		fontSize: '24px',
+		color: '#3B628B',
+		margin: '.3rem 0',
 	},
 };
 
