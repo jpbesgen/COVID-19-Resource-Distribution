@@ -110,7 +110,7 @@ const style = {
 		margin: '0.6rem 0 0 0',
 		padding: '0',
 		borderBottom: '2px solid #3B628B',
-		width: '25%',
+		width: '35%',
 	},
 	NavbarLink: {
 		padding: '0 1rem',

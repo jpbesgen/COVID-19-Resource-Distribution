@@ -127,7 +127,7 @@ let style = {
 	},
 	HomepageIntro: {
 		color: '#3b628b',
-		fontSize: '28px',
+		fontSize: '24px',
 		fontWeight: '400',
 		padding: '25px 20% 0 20%',
 	},
@@ -135,7 +135,7 @@ let style = {
 		border: '0px solid #3B628B',
 		padding: '1.5rem 0',
 		margin: '1rem',
-		fontSize: '24px',
+		fontSize: '20px',
 		minWidth: '30%',
 		maxWidth: '50%',
 		background: 'transparent',
