@@ -10,6 +10,6 @@ const Makerspace = () => {
 	);
 };
 
-let style = {};
+// let style = {};
 
 export default Makerspace;

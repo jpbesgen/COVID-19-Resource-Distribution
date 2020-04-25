@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import { auth, database as db, storage as st } from "../FirebaseModule.js";
+import { auth, database as db, storage as st, firebase_app as firebase } from "../FirebaseModule.js";
 
 class DBStore extends EventEmitter {
     constructor() {
@@ -12,33 +12,41 @@ class DBStore extends EventEmitter {
 
         this.defaultPhotoUrl = "https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png";
 
-
         // Method Binds
-        this.uploadDesign = this.uploadDesign.bind(this);
+
+        // files
         this.uploadFile = this.uploadFile.bind(this);
-        this.authenticateUser = this.authenticateUser.bind(this);
+
+        // designs
+        this.uploadDesign = this.uploadDesign.bind(this);
         this.getDesignsForQueries = this.getDesignsForQueries.bind(this);
         this.listenForDesignsChange = this.listenForDesignsChange.bind(this);
         this.addDesign = this.addDesign.bind(this);
         this.updateDesign = this.updateDesign.bind(this);
         this.removeDesign = this.removeDesign.bind(this);
+        this.upvoteDesign = this.upvoteDesign.bind(this);
+        this.downvoteDesign = this.downvoteDesign.bind(this);
+        this.getDesigns = this.getDesigns.bind(this);
+        this.getDesignsMap = this.getDesignsMap.bind(this);
+        this.getTop3Designs = this.getTop3Designs.bind(this);
+
+        // comments
         this.fetchCommentsForDesignByDoc = this.fetchCommentsForDesignByDoc.bind(this);
         this.fetchCommentsForDesignById = this.fetchCommentsForDesignById.bind(this);
         this.addComment = this.addComment.bind(this);
         this.editComment = this.editComment.bind(this);
         this.removeComment = this.removeComment.bind(this);
-        this.upvoteDesign = this.upvoteDesign.bind(this);
-        this.downvoteDesign = this.downvoteDesign.bind(this);
         this.userHasUpvotedComment = this.userHasUpvotedComment.bind(this);
         this.addCommentUpvote = this.addCommentUpvote.bind(this);
         this.removeCommentUpvote = this.removeCommentUpvote.bind(this);
+
+        // auth
+        this.authenticateUser = this.authenticateUser.bind(this);
         this.getAuthUser = this.getAuthUser.bind(this);
         this.getMyProfileUrl = this.getMyProfileUrl.bind(this);
         this.getProfileUrl = this.getProfileUrl.bind(this);
         this.getDBUser = this.getDBUser.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
-        this.getDesigns = this.getDesigns.bind(this);
-        this.getDesignsMap = this.getDesignMap.bind(this);
     }
 
     async uploadDesign(design) {
@@ -106,12 +114,13 @@ class DBStore extends EventEmitter {
             db.runTransaction((transaction) => {
                 let { user } = authResult,
                     user_ref = db.collection("Users").doc(user.uid);
+
                 return transaction.get(user_ref).then((user_snapshot) => {
                     let user_doc = user_snapshot.data();
 
-                    if(!user_snapshot.exists || user_doc == null) {
+                    if (!user_snapshot.exists || user_doc == null) {
                         // New User
-                        transaction.set(userRef, {
+                        transaction.set(user_ref, {
                             name: user.displayName,
                             email: user.email,
                             emailVerified: user.emailVerified,
@@ -125,7 +134,7 @@ class DBStore extends EventEmitter {
                         });
                     } else {
                         // Returning User
-                        transaction.update(userRef, {
+                        transaction.update(user_ref, {
                             name: user_doc.name != user.displayName ? user.displayName : user_doc.name,
                             email: user_doc.email != user.email ? user.email : user_doc,
                             emailVerified: user.emailVerified,
@@ -161,7 +170,7 @@ class DBStore extends EventEmitter {
                     q[1], // operator i.e. ">"
                     q[2] // value i.e. "5"
                 );
-            })
+            });
             designs_ref = designs_ref.orderBy("upvotes", "asc");
 
             if(lastDoc != null) designs_ref = designs_ref.startAfter(lastDoc);
@@ -239,7 +248,7 @@ class DBStore extends EventEmitter {
     async fetchCommentsForDesignByDoc(doc) {
         return new Promise((resolve, reject) => {
             let { comments } = doc;
-            if (comments == undefined || comments  == null || comments.length == 0) {
+            if (comments === undefined || comments === null || comments.length === 0) {
                 resolve([]);
             }
 
@@ -273,8 +282,8 @@ class DBStore extends EventEmitter {
 
                     let commentsRefs = design_doc.comments;
                     
-                    if(commentsRefs == null || commentsRefs.length == 0) return [];
-                    let commentsFetches = commentsRef.map((c) => {
+                    if(commentsRefs == null || commentsRefs.length === 0) return [];
+                    let commentsFetches = commentsRefs.map((c) => {
                             let ref = db.collection("Comments").doc(c);
                             return transaction.get(ref);
                         });
@@ -373,7 +382,7 @@ class DBStore extends EventEmitter {
             if(!this.isAuthenticated()) reject("Please login before removing a comment!");
            
             db.runTransaction((transaction) => {
-                let comment_ref = db.collection("Comments").doc(comment_id),
+                let comment_ref = db.collection("Comments").doc(comment_id);
                 
                 return transaction.get(comment_ref).then((comment_snapshot) => {
                     if(!comment_snapshot.exists) throw "Comment document doesn't exist";
@@ -489,8 +498,8 @@ class DBStore extends EventEmitter {
 
     async userHasUpvotedComment(uid, comment_id) {
         return new Promise((resolve, reject) => {
-            if(uid == undefined || uid == null) reject("User ID not supplied");
-            if(comment_id == undefined || comment_id == null) reject("Comment ID not supplied");
+            if(uid === undefined || uid === null) reject("User ID not supplied");
+            if(comment_id === undefined || comment_id === null) reject("Comment ID not supplied");
 
             let user_ref = db.collection("Users").doc(uid);
 
@@ -648,7 +657,9 @@ class DBStore extends EventEmitter {
         return this.designsMap;
     }
 
+    getTop3Designs(opts) {
 
+    }
 }
 
 let dbstore = new DBStore();
