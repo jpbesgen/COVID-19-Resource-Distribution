@@ -1,15 +1,19 @@
-let db = firebase.firestore(),
-    st = firebase.storage(),
-    auth = firebase.auth();
-class DBStore {
+import EventEmitter from "events";
+import { auth, database as db, storage as st } from "../FirebaseModule.js";
+
+class DBStore extends EventEmitter {
     constructor() {
-        this.queryLimit = 10;
+        super();
+        this.queryLimit = 50;
         this.designs = {}; // key = design_id
         this.designListeners = [];
         this.designsMap = {};
+        this.user = {};
 
         this.defaultPhotoUrl = "https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png";
 
+
+        // Method Binds
         this.uploadDesign = this.uploadDesign.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
         this.authenticateUser = this.authenticateUser.bind(this);
@@ -18,6 +22,23 @@ class DBStore {
         this.addDesign = this.addDesign.bind(this);
         this.updateDesign = this.updateDesign.bind(this);
         this.removeDesign = this.removeDesign.bind(this);
+        this.fetchCommentsForDesignByDoc = this.fetchCommentsForDesignByDoc.bind(this);
+        this.fetchCommentsForDesignById = this.fetchCommentsForDesignById.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.editComment = this.editComment.bind(this);
+        this.removeComment = this.removeComment.bind(this);
+        this.upvoteDesign = this.upvoteDesign.bind(this);
+        this.downvoteDesign = this.downvoteDesign.bind(this);
+        this.userHasUpvotedComment = this.userHasUpvotedComment.bind(this);
+        this.addCommentUpvote = this.addCommentUpvote.bind(this);
+        this.removeCommentUpvote = this.removeCommentUpvote.bind(this);
+        this.getAuthUser = this.getAuthUser.bind(this);
+        this.getMyProfileUrl = this.getMyProfileUrl.bind(this);
+        this.getProfileUrl = this.getProfileUrl.bind(this);
+        this.getDBUser = this.getDBUser.bind(this);
+        this.isAuthenticated = this.isAuthenticated.bind(this);
+        this.getDesigns = this.getDesigns.bind(this);
+        this.getDesignsMap = this.getDesignMap.bind(this);
     }
 
     async uploadDesign(design) {
@@ -188,13 +209,21 @@ class DBStore {
     addDesign(doc) {
         let { id } = doc;
         if(this.designs[id] != null) throw "Design can't be added.";
-        this.designs[id] = new Design(doc);
+        //this.designs[id] = new Design(doc);
+        this.designs[id] = doc;
+        setTimeout(() => {
+            this.emit("DesignAdded", doc);
+        }, 0);
     }
 
     updateDesign(doc) {
         let { id } = doc;
         if(this.designs[id] == null) throw "Design can't be updated";
-        this.designs[id].update(doc);
+        //this.designs[id].update(doc);
+        this.designs[id] = doc;
+        setTimeout(() => {
+            this.emit("DesignUpdated", doc);
+        })
     }
 
     removeDesign(doc) {
@@ -202,6 +231,9 @@ class DBStore {
         if(this.designs[id] == null) throw "Design can't be removed";
         this.designs[id] = null;
         delete this.designs[id];
+        setTimeout(() => {
+            this.emit("DesignRemoved", doc);
+        });
     }
 
     async fetchCommentsForDesignByDoc(doc) {
