@@ -1,6 +1,10 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import NavbarMobile from './NavbarMobile';
+import FileUpload from '../FileUpload';
+
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -8,10 +12,8 @@ const SubmitMobile = () => {
 	return (
 		<div>
 			<NavbarMobile />
-			<section style={style.HeaderSection}>
-				<h1 style={style.Header1}>Submit a design!</h1>
-			</section>
 			<div style={style.BodyContent}>
+				<h1 style={style.Header1}>Submit a design</h1>
 				<p style={style.Subtitle}>
 					If you have an open source design to contribute to the makerspace,
 					please submit it here!
@@ -56,41 +58,51 @@ const SubmitMobile = () => {
 
 					<Row>
 						<Col xs={12}>
-							<Form.Label style={style.FormHeader}>
-								Proof of Certification
-							</Form.Label>
-							<Form.Text style={style.FormSubtitle}>
-								To be certified on Resource 19, a design has to provide proof of
-								approval by one of the following institutions: CDC, ECDC, FDA,
-								NIH, or WHO. Designs approved by individual research
-								institiutions such as Universities or others may also be
-								approved on a case by case basis Please provide proof of
-								approval below in the form of a link.
-							</Form.Text>
+							<Form.Label style={style.FormHeader}>Certification</Form.Label>
 							<Form.Text style={style.FormSubtitle}>
 								Would you like to submit your design for certification?
 							</Form.Text>
 						</Col>
-						<Col xs={3}>
+						<Col xs={12}>
 							<Form.Control as="select" id="submission_certified">
 								<option value="no">No</option>
 								<option value="yes">Yes</option>
 								<option value="inProgress">In Progress</option>
 							</Form.Control>
 						</Col>
-						<Col xs={9}>
+						<Col xs={12} style={{ marginTop: '0.8rem' }}>
 							<Form.Control
-								type="text"
-								placeholder="If certified, please provide link to prove certification."
+								as="textarea"
+								rows="2"
+								placeholder="If Yes, please provide link to documentation verifying certification."
 								id="submission_certification"
 							/>
 						</Col>
 					</Row>
 
 					<Row>
+						<Col xs={12} sm={6}>
+							<Form.Label style={style.FormHeader}>Materials</Form.Label>
+							<Form.Control
+								type="text"
+								id="submission_materials"
+								placeholder="Materials"
+							/>
+						</Col>
+						<Col xs={12}>
+							<Form.Label style={style.FormHeader}>Tools Required</Form.Label>
+							<Form.Control
+								type="text"
+								id="submission_tools"
+								placeholder="Tools Required"
+							/>
+						</Col>
+					</Row>
+
+					<Row>
 						<Col xs={12}>
 							<Form.Label style={style.FormHeader}>
-								Links (Links separated by commas)
+								Links <b style={{ fontWeight: '300' }}>(separated by commas)</b>
 							</Form.Label>
 							<Form.Control
 								as="textarea"
@@ -101,74 +113,81 @@ const SubmitMobile = () => {
 						</Col>
 					</Row>
 
-					<Row>
-						<Col xs={6}>
+					<Row className="justify-content-between">
+						<Col xs={12}>
 							<Form.Label style={style.FormHeader}>
 								Images (JPG, PNG)
 							</Form.Label>
-							<Form.Control
-								as="textarea"
-								rows="3"
-								id="submission_links"
-								placeholder="Links"
-							/>
-						</Col>
-						<Col xs={6}>
-							<Form.Label style={style.FormHeader}>
-								Attachments (PDFs, CAD files, etc.)
-							</Form.Label>
-							<Form.Control
-								as="textarea"
-								rows="3"
-								id="submission_links"
-								placeholder="Links"
-							/>
+							<FileUpload id="submission_images" />
 						</Col>
 					</Row>
 
 					<Row>
 						<Col xs={12}>
-							<Form.Label style={style.FormHeader}>
-								Give credit where credit is due. Who made this design possible?
-							</Form.Label>
-							<Form.Control type="text" id="submission_credit" />
+							<Form.Label style={style.FormHeader}>Credit</Form.Label>
+							<Form.Control
+								type="text"
+								id="submission_credit"
+								placeholder="Who made this design possible?"
+							/>
 						</Col>
 					</Row>
 				</Form>
 			</div>
+			<Row className="text-center" style={style.ButtonContainer}>
+				<Col xs={12}>
+					<Link to="/makerspace">
+						<Button variant="primary" type="submit" style={style.Button}>
+							Submit
+						</Button>
+					</Link>
+				</Col>
+			</Row>
 		</div>
 	);
 };
 
 const style = {
 	BodyContent: {
-		margin: '0 10% 3rem 10%',
-	},
-	HeaderSection: {
-		background: '#EBF0F3',
-		padding: '1rem 10%',
+		margin: '0 5% 1.3rem 5%',
 	},
 	Header1: {
-		fontSize: '42px',
+		paddingTop: '1rem',
+		fontSize: '36px',
 		color: '#3B628B',
 		margin: '.3rem 0 0 0',
 	},
 	Subtitle: {
-		fontSize: '24px',
+		fontSize: '20px',
 		fontWeight: '300',
+		lineHeight: '1.2',
 		color: '#3B628B',
-		paddingTop: '0.8rem',
-		marginBottom: '0',
+		padding: '0rem',
+		margin: '0',
 	},
 	FormHeader: {
-		fontSize: '20px',
+		fontSize: '24px',
 		fontWeight: '400',
 		margin: '1rem 0 0.2rem 0',
 	},
 	FormSubtitle: {
-		fontSize: '16px',
+		fontSize: '20px',
+		lineHeight: '1.2',
 		fontWeight: '300',
+		marginTop: '0',
 		marginBottom: '0.4rem',
+	},
+	ButtonContainer: {
+		background: '#EDF2F7',
+	},
+	Button: {
+		border: 'none',
+		padding: '0.6rem 0',
+		width: '70%',
+		margin: '1rem 0',
+		background: '#3B628B',
+		fontSize: '20px',
+		color: 'white',
 	},
 };
 

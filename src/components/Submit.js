@@ -1,6 +1,10 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import Navbar from './Navbar';
+import FileUpload from './FileUpload';
+
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -71,18 +75,37 @@ const Submit = () => {
 								Would you like to submit your design for certification?
 							</Form.Text>
 						</Col>
-						<Col xs={3}>
+						<Col xs={12} sm={3}>
 							<Form.Control as="select" id="submission_certified">
 								<option value="no">No</option>
 								<option value="yes">Yes</option>
 								<option value="inProgress">In Progress</option>
 							</Form.Control>
 						</Col>
-						<Col xs={9}>
+						<Col xs={12} sm={9}>
 							<Form.Control
 								type="text"
 								placeholder="If certified, please provide link to prove certification."
 								id="submission_certification"
+							/>
+						</Col>
+					</Row>
+
+					<Row>
+						<Col xs={12} sm={6}>
+							<Form.Label style={style.FormHeader}>Materials</Form.Label>
+							<Form.Control
+								type="text"
+								id="submission_materials"
+								placeholder="Materials"
+							/>
+						</Col>
+						<Col xs={12} sm={6}>
+							<Form.Label style={style.FormHeader}>Tools Required</Form.Label>
+							<Form.Control
+								type="text"
+								id="submission_tools"
+								placeholder="Tools Required"
 							/>
 						</Col>
 					</Row>
@@ -101,28 +124,18 @@ const Submit = () => {
 						</Col>
 					</Row>
 
-					<Row>
-						<Col xs={6}>
+					<Row className="justify-content-between">
+						<Col xs={12} sm={5}>
 							<Form.Label style={style.FormHeader}>
 								Images (JPG, PNG)
 							</Form.Label>
-							<Form.Control
-								as="textarea"
-								rows="3"
-								id="submission_links"
-								placeholder="Links"
-							/>
+							<FileUpload id="submission_images" />
 						</Col>
-						<Col xs={6}>
+						<Col xs={12} sm={5}>
 							<Form.Label style={style.FormHeader}>
 								Attachments (PDFs, CAD files, etc.)
 							</Form.Label>
-							<Form.Control
-								as="textarea"
-								rows="3"
-								id="submission_links"
-								placeholder="Links"
-							/>
+							<FileUpload id="submission_attachments" />
 						</Col>
 					</Row>
 
@@ -132,6 +145,16 @@ const Submit = () => {
 								Give credit where credit is due. Who made this design possible?
 							</Form.Label>
 							<Form.Control type="text" id="submission_credit" />
+						</Col>
+					</Row>
+
+					<Row className="text-center">
+						<Col xs={12}>
+							<Link to="/makerspace">
+								<Button variant="primary" type="submit" style={style.Button}>
+									Submit
+								</Button>
+							</Link>
 						</Col>
 					</Row>
 				</Form>
@@ -169,6 +192,15 @@ const style = {
 		fontSize: '16px',
 		fontWeight: '300',
 		marginBottom: '0.4rem',
+	},
+	Button: {
+		border: 'none',
+		padding: '0.5rem 7.5rem',
+		maxWidth: '85%',
+		margin: '3rem 0',
+		background: '#7A98AF',
+		fontSize: '24px',
+		color: 'white',
 	},
 };
 
