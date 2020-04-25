@@ -81,6 +81,41 @@ const SubmitMobile = () => {
 					</Row>
 
 					<Row>
+						<Col xs={12}>
+							<Form.Label style={style.FormHeader}>Difficulty</Form.Label>
+						</Col>
+					</Row>
+					<Row>
+						<Col xs={3}>
+							<Form.Check
+								inline
+								type="radio"
+								label="Easy (5-10 Minutes)"
+								name="formHorizontalRadios"
+								id="submission_easy"
+							/>
+						</Col>
+						<Col xs={3}>
+							<Form.Check
+								inline
+								type="radio"
+								label="Medium (30-60 Minutes)"
+								name="formHorizontalRadios"
+								id="submission_medium"
+							/>
+						</Col>
+						<Col xs={3}>
+							<Form.Check
+								inline
+								type="radio"
+								label="Difficult (1 hr+)"
+								name="formHorizontalRadios"
+								id="submission_hard"
+							/>
+						</Col>
+					</Row>
+
+					<Row>
 						<Col xs={12} sm={6}>
 							<Form.Label style={style.FormHeader}>Materials</Form.Label>
 							<Form.Control
