@@ -63,7 +63,7 @@ class DBStore extends EventEmitter {
                     user_ref = db.collection("Users").doc(uid);
 
                 return transaction.get(user_ref).then((user_snapshot) => {
-                    if (!user_snapshot.exists) throw "User document doesn't exist";
+                    if (!user_snapshot.exists) throw new Error("User document doesn't exist");
 
                     transaction.update(user_ref, {
                         designs: firebase.firestore.FieldValue.arrayUnion(design_id)
@@ -89,7 +89,7 @@ class DBStore extends EventEmitter {
             filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
                 // Progress
                 (snapshot) => {
-                    let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    // let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     // console.log("Upload is " + progress + "% done");
                 },
                 // Error
@@ -118,7 +118,7 @@ class DBStore extends EventEmitter {
                 return transaction.get(user_ref).then((user_snapshot) => {
                     let user_doc = user_snapshot.data();
 
-                    if (!user_snapshot.exists || user_doc == null) {
+                    if (!user_snapshot.exists || user_doc === null) {
                         // New User
                         transaction.set(user_ref, {
                             name: user.displayName,
@@ -135,11 +135,11 @@ class DBStore extends EventEmitter {
                     } else {
                         // Returning User
                         transaction.update(user_ref, {
-                            name: user_doc.name != user.displayName ? user.displayName : user_doc.name,
-                            email: user_doc.email != user.email ? user.email : user_doc,
+                            name: user_doc.name !== user.displayName ? user.displayName : user_doc.name,
+                            email: user_doc.email !== user.email ? user.email : user_doc,
                             emailVerified: user.emailVerified,
-                            phone: user_doc.phone != user.phoneNumber ? user.phoneNumber : user_doc.phone,
-                            photoUrl: user_doc.photoUrl != user.photoURL ? user.photoURL : user_doc.photoUrl,
+                            phone: user_doc.phone !== user.phoneNumber ? user.phoneNumber : user_doc.phone,
+                            photoUrl: user_doc.photoUrl !== user.photoURL ? user.photoURL : user_doc.photoUrl,
                             lastLogin: firebase.firestore.FieldValue.serverTimestamp()
                         });
                     }
@@ -173,7 +173,7 @@ class DBStore extends EventEmitter {
             });
             designs_ref = designs_ref.orderBy("upvotes", "asc");
 
-            if(lastDoc != null) designs_ref = designs_ref.startAfter(lastDoc);
+            if(lastDoc !== null) designs_ref = designs_ref.startAfter(lastDoc);
 
             designs_ref = designs_ref.limit(this.queryLimit);
 
@@ -217,7 +217,7 @@ class DBStore extends EventEmitter {
 
     addDesign(doc) {
         let { id } = doc;
-        if(this.designs[id] != null) throw "Design can't be added.";
+        if(this.designs[id] !== null) throw new Error("Design can't be added.");
         //this.designs[id] = new Design(doc);
         this.designs[id] = doc;
         setTimeout(() => {
@@ -227,7 +227,7 @@ class DBStore extends EventEmitter {
 
     updateDesign(doc) {
         let { id } = doc;
-        if(this.designs[id] == null) throw "Design can't be updated";
+        if(this.designs[id] === null) throw new Error("Design can't be updated");
         //this.designs[id].update(doc);
         this.designs[id] = doc;
         setTimeout(() => {
@@ -237,7 +237,7 @@ class DBStore extends EventEmitter {
 
     removeDesign(doc) {
         let { id } = doc;
-        if(this.designs[id] == null) throw "Design can't be removed";
+        if(this.designs[id] === null) throw new Error("Design can't be removed");
         this.designs[id] = null;
         delete this.designs[id];
         setTimeout(() => {
@@ -275,14 +275,14 @@ class DBStore extends EventEmitter {
 
                 return transaction.get(design_ref).then((design_snapshot) => {
                     if(!design_snapshot.exists) {
-                        throw "Design doesn't exist";
+                        throw new Error("Design doesn't exist");
                     }
 
                     let design_doc = design_snapshot.data();
 
                     let commentsRefs = design_doc.comments;
                     
-                    if(commentsRefs == null || commentsRefs.length === 0) return [];
+                    if(commentsRefs === null || commentsRefs.length === 0) return [];
                     let commentsFetches = commentsRefs.map((c) => {
                             let ref = db.collection("Comments").doc(c);
                             return transaction.get(ref);
@@ -323,8 +323,8 @@ class DBStore extends EventEmitter {
                 ]).then((snapshots) => {
                     let user_snapshot = snapshots[0],
                         design_snapshot = snapshots[1];
-                    if(!user_snapshot.exists) throw "User document doesn't exist";
-                    if(!design_snapshot.exists) throw "Design document doesn't exist";
+                    if(!user_snapshot.exists) throw new Error("User document doesn't exist");
+                    if(!design_snapshot.exists) throw new Error("Design document doesn't exist");
 
                     transaction.set(comment_ref, {
                         id: comment_id,
@@ -361,7 +361,7 @@ class DBStore extends EventEmitter {
             db.runTransaction((transaction) => {
                 let comment_ref = db.collection("Comments").doc(comment_id);
                 return transaction.get(comment_ref).then((comment_snapshot) => {
-                    if(!comment_snapshot.exists) throw "Comment document doesn't exist";
+                    if(!comment_snapshot.exists) throw new Error("Comment document doesn't exist");
 
                     transaction.update(comment_ref, {
                         content: new_value,
@@ -385,7 +385,7 @@ class DBStore extends EventEmitter {
                 let comment_ref = db.collection("Comments").doc(comment_id);
                 
                 return transaction.get(comment_ref).then((comment_snapshot) => {
-                    if(!comment_snapshot.exists) throw "Comment document doesn't exist";
+                    if(!comment_snapshot.exists) throw new Error("Comment document doesn't exist");
 
                     let comment_doc = comment_snapshot.data(),
                         design_id = comment_doc.design,
@@ -424,17 +424,17 @@ class DBStore extends EventEmitter {
                     increment = 1;
 
                 return transaction.get(user_ref).then((user_snapshot) => {
-                    if(!user_snapshot.exists) throw "User document doesn't exist";
+                    if(!user_snapshot.exists) throw new Error("User document doesn't exist");
 
                     let user_doc = user_snapshot.data();
 
                     // Check if user has already upvoted
-                    if(user_doc.upvotes != null && user_doc.upvotes.includes(design_id)) {
-                        throw "You can't upvote a design more than once!";
+                    if(user_doc.upvotes !== null && user_doc.upvotes.includes(design_id)) {
+                        throw new Error("You can't upvote a design more than once!");
                     }
 
                     // Check if user has downvoted
-                    if(user_doc.downvotes != null && user_doc.downvotes.includes(design_id)) increment++;
+                    if(user_doc.downvotes !== null && user_doc.downvotes.includes(design_id)) increment++;
 
                     transaction.update(user_ref, {
                         upvotes: firebase.firestore.FieldValue.arrayUnion(design_id),
@@ -466,17 +466,17 @@ class DBStore extends EventEmitter {
                     increment = 1;
 
                 return transaction.get(user_ref).then((user_snapshot) => {
-                    if(!user_snapshot.exists) throw "User document doesn't exist";
+                    if(!user_snapshot.exists) throw new Error("User document doesn't exist");
 
                     let user_doc = user_snapshot.data();
 
                     // Check if user has already downvoted
-                    if(user_doc.downvotes != null && user_doc.downvotes.includes(design_id)) {
-                        throw "You can't downvote a design more than once!";
+                    if(user_doc.downvotes !== null && user_doc.downvotes.includes(design_id)) {
+                        throw new Error("You can't downvote a design more than once!");
                     }
 
                     // Check if user has upvoted
-                    if(user_doc.upvotes != null && user_doc.upvotes.includes(design_id)) increment++;
+                    if(user_doc.upvotes !== null && user_doc.upvotes.includes(design_id)) increment++;
 
                     transaction.update(user_ref, {
                         upvotes: increment > 1 ? firebase.firestore.FieldValue.arrayRemove(design_id) : user_doc.upvotes,
@@ -504,12 +504,12 @@ class DBStore extends EventEmitter {
             let user_ref = db.collection("Users").doc(uid);
 
             user_ref.get().then((user_snapshot) => {
-                if(!user_snapshot.exists) throw "User document doesn't exist";
+                if(!user_snapshot.exists) throw new Error("User document doesn't exist");
 
                 let user_doc = user_snapshot.data();
 
                 // Check if there are any upvoted comments
-                if(user_doc.upvotedComments == null || user_doc.upvotedComments.length == 0) {
+                if(user_doc.upvotedComments === null || user_doc.upvotedComments.length === 0) {
                     resolve(false);
                 };
 
@@ -539,15 +539,15 @@ class DBStore extends EventEmitter {
                 ]).then((snapshots) => {
                     let user_snapshot = snapshots[0],
                         comment_snapshot = snapshots[1];
-                    if(!user_snapshot.exists) throw "User document doesn't exist";
-                    if(!comment_snapshot.exists) throw "Comment document doesn't exist";
+                    if(!user_snapshot.exists) throw new Error("User document doesn't exist");
+                    if(!comment_snapshot.exists) throw new Error("Comment document doesn't exist");
 
-                    let user_doc = user_snapshot.data(),
-                        comment_doc = comment_snapshot.data();
+                    let user_doc = user_snapshot.data();
+                        // comment_doc = comment_snapshot.data();
 
                     // Check if already upvoted
-                    if(user_doc.upvotedComments != null && user_doc.upvotedComments.includes(comment_id)) {
-                        throw "You can only upvote a comment once";
+                    if(user_doc.upvotedComments !== null && user_doc.upvotedComments.includes(comment_id)) {
+                        throw new Error("You can only upvote a comment once");
                     }
 
                     transaction.update(comment_ref, {
@@ -583,13 +583,13 @@ class DBStore extends EventEmitter {
                 ]).then((snapshots) => {
                     let user_snapshot = snapshots[0],
                         comment_snapshot = snapshots[1];
-                    if(!user_snapshot.exists) throw "User document doesn't exist";
-                    if(!comment_snapshot.exists) throw "Comment document doesn't exist";
+                    if(!user_snapshot.exists) throw new Error("User document doesn't exist");
+                    if(!comment_snapshot.exists) throw new Error("Comment document doesn't exist");
 
                     let user_doc = user_snapshot.data();
 
                     // Check if user hasn't upvoted, if not, just return
-                    if(user_doc.upvotedComments != null && !user_doc.upvotedComments.includes(comment_id)) return;
+                    if(user_doc.upvotedComments !== null && !user_doc.upvotedComments.includes(comment_id)) return;
 
                     transaction.update(comment_ref, {
                         upvoteCount: firebase.firestore.FieldValue.increment(-1)
@@ -610,12 +610,12 @@ class DBStore extends EventEmitter {
     }
 
     getAuthUser() {
-        return auth.user == null ? auth.currentUser : auth.user;
+        return auth.user === null ? auth.currentUser : auth.user;
     }
 
     getMyProfileUrl() {
         let user = this.getAuthUser();
-        return user != null && user.hasOwnProperty("photoURL")
+        return user !== null && user.hasOwnProperty("photoURL")
             ? user.photoURL :
             this.defaultPhotoUrl;
     }
@@ -625,7 +625,7 @@ class DBStore extends EventEmitter {
             let user_ref = db.collection("Users").doc(uid);
 
             user_ref.get().then((user_snapshot) => {
-                if(!user_snapshot.exists) throw "User document doesn't exist";
+                if(!user_snapshot.exists) throw new Error("User document doesn't exist");
                 
                 let user_doc = user_snapshot.data();
 
@@ -646,19 +646,34 @@ class DBStore extends EventEmitter {
     }
 
     isAuthenticated() {
-        return auth.user != null || auth.currentUser != null;
+        return auth.user !== null || auth.currentUser !== null;
     }
 
-    getDesigns() {
-        return this.designs;
+    async getDesigns() {
+        try {
+            const designsRef = db.collection('Designs');
+            const allDesignsArray = await designsRef.get();
+            const allDesigns = [];
+
+            allDesignsArray.forEach(design => {
+                allDesigns.push(design.data());
+            });
+
+            return allDesigns;
+        }
+        catch (err) {
+            console.log("Could not fetch designs:", err);
+            return {err};
+        }
     }
 
     getDesignsMap() {
         return this.designsMap;
     }
 
-    getTop3Designs(opts) {
-
+    async getTop3Designs(opts) {
+        let designs = await this.getDesigns();
+        return designs.slice(0,3);
     }
 }
 
