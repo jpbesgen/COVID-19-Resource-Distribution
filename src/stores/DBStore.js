@@ -429,7 +429,7 @@ class DBStore extends EventEmitter {
 
                     transaction.update(user_ref, {
                         upvotes: firebase.firestore.FieldValue.arrayUnion(design_id),
-                        downvoes: increment > 1 ? firebase.firestore.FieldValue.arrayRemove(design_id) : user_doc.downvotes
+                        downvotes: increment > 1 ? firebase.firestore.FieldValue.arrayRemove(design_id) : user_doc.downvotes
                     });
 
                     transaction.update(design_ref, {
