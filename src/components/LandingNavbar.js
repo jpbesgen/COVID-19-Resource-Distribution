@@ -74,7 +74,7 @@ class LandingNavbar extends React.Component {
 								</Nav.Link>
 							) : (
 								<Nav.Link href="/login" style={style.NavbarLink} className="ml-3" id="loginLink">
-									<p style={style.NavItem}>Log In</p>
+									<p style={style.NavItem}>Login / Signup</p>
 								</Nav.Link>
 							)}
 						</Nav>

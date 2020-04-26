@@ -94,7 +94,7 @@ class SiteNavbar extends React.Component {
 							</NavLink>
 						) : (
 							<NavLink href="/login" style={style.NavbarLink} id="loginLink">
-								<p style={style.NavItem}>Log In</p>
+								<p style={style.NavItem}>Login / Signup</p>
 							</NavLink>
 						)}
 					</Nav>
