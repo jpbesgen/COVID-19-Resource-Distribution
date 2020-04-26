@@ -1,0 +1,17 @@
+.form_button {
+	padding: 20px;
+	width: 200px;
+	margin: 10px;
+	border: none;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.15);
+	text-align: center;
+}
+
+.form_button:focus,
+.form_button--selected {
+	background-color: #7A98AF;
+	outline: 0;
+	color: white;
+}
