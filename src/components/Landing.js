@@ -1,101 +1,108 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+
+import dbstore from '../stores/DBStore';
 import LandingNavbar from './LandingNavbar';
 import LandingCarousel from './LandingCarousel';
 import Footer from './Footer';
-
 import LogoWithSubtitle from '../img/logowithsubtitle.png';
 import ConnectionRight from '../img/connection-right.svg';
 import ConnectionLeft from '../img/connection-left.svg';
 
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
+export class Landing extends React.Component {
+	componentDidMount = async () => {
+		const designs = await dbstore.getTop3Designs();
+		console.log(designs);
+	};
 
-const Landing = () => {
-	function setButtonHover(e) {
+	setButtonHover = (e) => {
 		e.target.style.color = 'white';
 		e.target.style.background = '#7A98AF';
-	}
+	};
 
-	function unsetButtonHover(e) {
+	unsetButtonHover = (e) => {
 		e.target.style.color = '#7A98AF';
 		e.target.style.background = 'transparent';
-	}
+	};
 
-	return (
-		<div>
-			<LandingNavbar />
-			{/* <!-- Logo & Intro --> */}
-			<section style={style.HomepageTop} className="text-center">
-				<img
-					src={LogoWithSubtitle}
-					alt="Resource-19 Logo"
-					style={style.HomepageLogo}
-				/>
-				<img
-					src={ConnectionLeft}
-					alt="connection left"
-					style={style.HeaderImgLeft}
-				/>
-				<img
-					src={ConnectionRight}
-					alt="connection right"
-					style={style.HeaderImgRight}
-				/>
-				<div className="text-center">
-					<p style={style.HomepageIntro}>
-						Want to donate or manufacture PPE for the COVID-19 crisis? Click
-						<br />
-						<b>Get Started</b> to find out how you can help, or{' '}
-						<b>Go to the Makerspace</b>
-						<br />
-						to explore PPE designs.
+	render() {
+		return (
+			<div>
+				<LandingNavbar/>
+				{/* <!-- Logo & Intro --> */}
+				<section style={style.HomepageTop} className="text-center">
+					<img
+						src={LogoWithSubtitle}
+						alt="Resource-19 Logo"
+						style={style.HomepageLogo}
+					/>
+					<img
+						src={ConnectionLeft}
+						alt="connection left"
+						style={style.HeaderImgLeft}
+					/>
+					<img
+						src={ConnectionRight}
+						alt="connection right"
+						style={style.HeaderImgRight}
+					/>
+					<div className="text-center">
+						<p style={style.HomepageIntro}>
+							Want to donate or manufacture PPE for the COVID-19 crisis? Click
+							<br/>
+							<b>Get Started</b> to find out how you can help, or{' '}
+							<b>Go to the Makerspace</b>
+							<br/>
+							to explore PPE designs.
+						</p>
+					</div>
+					<Link to="/hospitals">
+						<Button
+							style={style.Button}
+							onMouseEnter={this.setButtonHover}
+							onMouseLeave={this.unsetButtonHover}
+						>
+							<b>Hospitals In Need</b>
+						</Button>
+					</Link>
+
+					<Link to="/best-practices">
+						<Button
+							style={style.Button}
+							onMouseEnter={this.setButtonHover}
+							onMouseLeave={this.unsetButtonHover}
+						>
+							<b>Go to the Makerspace</b>
+						</Button>
+					</Link>
+				</section>
+
+				<LandingCarousel/>
+
+				<Container fluid className="text-center">
+					<p style={style.HospitalDescription}>
+						Below you’ll find a list of hospitals, contact information, dropoff
+						instructions, and specific needs. If any of the entries are incomplete
+						or incorrect please reach out to us at feedback@resource19.org
 					</p>
-				</div>
-				<Link to="/hospitals">
-					<Button
-						style={style.Button}
-						onMouseEnter={setButtonHover}
-						onMouseLeave={unsetButtonHover}
-					>
-						<b>Hospitals In Need</b>
-					</Button>
-				</Link>
-
-				<Link to="/best-practices">
-					<Button
-						style={style.Button}
-						onMouseEnter={setButtonHover}
-						onMouseLeave={unsetButtonHover}
-					>
-						<b>Go to the Makerspace</b>
-					</Button>
-				</Link>
-			</section>
-
-			<LandingCarousel />
-
-			<Container fluid className="text-center">
-				<p style={style.HospitalDescription}>
-					Below you’ll find a list of hospitals, contact information, dropoff
-					instructions, and specific needs. If any of the entries are incomplete
-					or incorrect please reach out to us at feedback@resource19.org
-				</p>
-				<iframe
-					title="Hospital data"
-					style={{ width: '100%', height: '90vh', border: 'none' }}
-					id="hospitals-map"
-					src="https://findthemasks.com/give.html"
-				></iframe>
-			</Container>
-			<footer style={style.HospitalFooter}>
-				Credits to this page go to:{' '}
-				<a href="https://findthemasks.com">findthemasks.com</a>
-			</footer>
-			<Footer />
-		</div>
-	);
-};
+					<iframe
+						title="Hospital data"
+						style={{ width: '100%', height: '90vh', border: 'none' }}
+						id="hospitals-map"
+						src="https://findthemasks.com/give.html"
+					/>
+				</Container>
+				<footer style={style.HospitalFooter}>
+					Credits to this page go to:{' '}
+					<a href="https://findthemasks.com">findthemasks.com</a>
+				</footer>
+				<Footer/>
+			</div>
+		);
+	}
+}
 
 let style = {
 	HomepageTop: {

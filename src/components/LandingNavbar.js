@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from '@reach/router';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/NavLink';
 
 import TransparentImage from '../img/transparent_img.png';
 
@@ -43,23 +41,18 @@ const LandingNavbar = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mx-auto">
-						<NavLink style={style.NavbarLink} className="mr-3">
-							<Link to="/">
-								<p style={style.NavItem}>Home</p>
-							</Link>
-						</NavLink>
-						<NavLink style={style.NavbarLink}>
-							<Link to="/about">
-								<p style={style.NavItem}>About</p>
-							</Link>
-						</NavLink>
-						<NavLink style={style.NavbarLink} className="ml-3" id="loginLink">
-							<Link to="/login">
-								<p style={style.NavItem}>Log In</p>
-							</Link>
-						</NavLink>
+						<Nav.Link href="/" style={style.NavbarLink} className="mr-3">
+							<p style={style.NavItem}>Home</p>
+						</Nav.Link>
+						<Nav.Link href="/about" style={style.NavbarLink}>
+							<p style={style.NavItem}>About</p>
+						</Nav.Link>
+						<Nav.Link href="/login" style={style.NavbarLink} className="ml-3" id="loginLink">
+							<p style={style.NavItem}>Log In</p>
+						</Nav.Link>
 
-						<NavLink
+						<Nav.Link
+							href="/"
 							className="nav-item navLogoutLink"
 							style={{ display: 'none', alignSelf: 'center' }}
 						>
@@ -69,10 +62,8 @@ const LandingNavbar = () => {
 								className="prof-img"
 								style={{ borderRadius: '50%', marginRight: '5px' }}
 							/>
-							<Link to="/" className="nav-link" id="logoutLink">
-								Log Out
-							</Link>
-						</NavLink>
+							<p style={style.NavItem}>Log Out</p>
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

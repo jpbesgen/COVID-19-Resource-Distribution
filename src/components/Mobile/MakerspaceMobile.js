@@ -10,6 +10,6 @@ const MakerspaceMobile = () => {
 	);
 };
 
-let style = {};
+// let style = {};
 
 export default MakerspaceMobile;

@@ -1,5 +1,5 @@
-import * as firebase from "firebase";
-var firebaseConfig = {
+import firebase from "firebase";
+const firebaseConfig = {
     apiKey: "AIzaSyC7XCt0Yzaiob53UaJHJLzh_Kx5esfp8uA",
     authDomain: "resource19-9fdaa.firebaseapp.com",
     databaseURL: "https://resource19-9fdaa.firebaseio.com",
@@ -8,14 +8,12 @@ var firebaseConfig = {
     messagingSenderId: "103851964611",
     appId: "1:103851964611:web:ecb245ed14e7a168598a76",
     measurementId: "G-FSB5CVSSPV",
-    storageBucket: "gs://resource19-9fdaa.appspot.com"
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
 
-export default {
-    auth: fb.auth(),
-    database: fb.firestore(),
-    storage: fb.storage().ref(),
-    analytics: fb.analytics()
-};
+export const auth = fb.auth();
+export const database = fb.firestore();
+export const storage = fb.storage().ref();
+export const analytics = fb.analytics();
+export const firebase_app = fb;

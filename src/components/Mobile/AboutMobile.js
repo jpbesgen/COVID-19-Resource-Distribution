@@ -1,5 +1,4 @@
 import React from 'react';
-import Individual from '../Individual';
 import IndividualMobile from './IndividualMobile';
 import FaqMobile from './FaqMobile';
 import NavbarMobile from './NavbarMobile';
