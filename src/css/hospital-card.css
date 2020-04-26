@@ -1,0 +1,13 @@
+.hospital_card {
+	padding: 10px;
+	width: 400px;
+	margin: 10px auto;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.15);
+}
+
+.hospital_name {
+	font-weight: 500;
+	margin-top: 10px;
+}

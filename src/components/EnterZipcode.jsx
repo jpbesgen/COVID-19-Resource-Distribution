@@ -12,7 +12,7 @@ class EnterZipcode extends Component {
 					Where are you located?
 				</div>
 				<FormInput onChange={this.props.onChange} value={this.props.zipcodeState} placeholder="94110" />
-				<a onClick={this.props.nextStep}> >>> continue </a>
+				<a onClick={this.props.startSearch}> >>> continue </a>
 			</div>
 		);
 	}
