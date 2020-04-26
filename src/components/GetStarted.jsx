@@ -9,9 +9,10 @@ import WhatMaterials from './WhatMaterials';
 import WhatTools from './WhatTools';
 
 import WhatToDonate from './WhatToDonate';
+import HowMuchToDonate from './HowMuchToDonate';
 
 import EnterZipcode from './EnterZipcode';
-import HospitalCard from './HospitalCard';
+import HospitalSearchResults from './HospitalSearchResults';
 import '../css/get-started.css'
 
 class GetStarted extends Component {
@@ -59,15 +60,16 @@ class GetStarted extends Component {
 		this.setZipcode = this.setZipcode.bind(this);
 		this.getSearchResults = this.getSearchResults.bind(this);
 		this.updateHospitalsWithSearchResults = this.updateHospitalsWithSearchResults.bind(this);
+		this.setDonateAmount = this.setDonateAmount;
 	}
 
-	nextStep() {
+	nextStep = () => {
 		this.setState(state => ({currentStep: state.currentStep + 1}));
 	}
 
-	setMode(mode) {
+	setMode = (mode) => {
 		this.setState({ mode });
-		this.nextStep();
+		this.setState({ currentStep: 2 });
 	}
 
 	setItem(category, item) {
@@ -78,6 +80,13 @@ class GetStarted extends Component {
 
 	setZipcode(e) {
 		this.setState({ zipcode: e.target.value.replace(/\D/,'') });
+	}
+
+	setDonateAmount(e, itemName) {
+		//TODO - fill this in once we use these values
+		// const ppeToDonate = this.state.ppeToDonate;
+		// ppeToDonate[itemName] = e.target.value.replace(/\D/,'');
+		// this.setState({ ppeToDonate });
 	}
 
 	updateHospitalsWithSearchResults() {
@@ -91,24 +100,29 @@ class GetStarted extends Component {
 	}
 
 	getSearchResults() {
+		this.getHospitalSearchResults();
+	}
+
+	getHospitalSearchResults() {
+		const state = this.state;
+		const resources = state.mode === 'MAKE' ? state.ppeToMake : state.ppeToDonate;
 		const apiParams = {
+			org_types: JSON.stringify(['hospital']),
 			app_name: 'resource19',
 			zip_code: this.state.zipcode,
 			radius_mi: 15,
-			resource_types: JSON.stringify(Object.keys(this.state.ppeToMake).filter((key) => {return this.state.ppeToMake[key]})),
+			resource_types: JSON.stringify(Object.keys(resources).filter((key) => (resources[key]))),
 		};
-		console.log(apiParams.resource_types);
 		axios.get('https://covid-19-hospitals.now.sh/api/fetch-hospitals', {
 		    params: apiParams,
 		})
 	    .then(res => {
-	    	console.log(res.data);
 	    	this.setState({ hospitals: res.data.locations });
 		});
 	}
 
 	renderDonateForm() {
-		// TODO
+		const itemsToDonate = Object.keys(this.state.ppeToDonate).filter((key) => (this.state.ppeToDonate[key]));
 		return(
 			<>
 				{ this.state.currentStep >= 2
@@ -121,10 +135,18 @@ class GetStarted extends Component {
 				}
 				{ this.state.currentStep >= 3
 					&&
-						<WhatToDonate
-							setItem={this.setItem}
-							formState={this.state.ppeToDonate}
+						<HowMuchToDonate
+							items={itemsToDonate}
+							setDonateAmount={this.setDonateAmount}
 							nextStep={this.nextStep}
+						/>
+				}
+				{ this.state.currentStep >= 4
+					&&
+						<EnterZipcode
+							onChange={this.setZipcode}
+							startSearch={this.getSearchResults}
+							zipcodeState={this.state.zipcode}
 						/>
 				}
 			</>
@@ -160,39 +182,27 @@ class GetStarted extends Component {
 				}
 				{ this.state.currentStep >= 5
 					&&
-						<EnterZipcode onChange={this.setZipcode} startSearch={this.getSearchResults} zipcodeState={this.state.zipcode} />
+						<EnterZipcode
+							onChange={this.setZipcode}
+							startSearch={this.getSearchResults}
+							zipcodeState={this.state.zipcode}
+						/>
 				}
 			</>
 		);
 	}
 
-	renderHospitalSearchResults() {
-		return (
-			<div className="hospital_search_results">
-				<div> Hospitals in need in your area </div>
-				{ this.renderHospitalList() }
-			</div>
-		)
-	}
-
-	renderHospitalList() {
-		const hospitals = this.state.hospitals;
-		if (!hospitals) return;
-		return (hospitals.map((hospital) => {
-			return <HospitalCard name={hospital.name} address={hospital.address} />;
-		}));
-	}
-
 	render() {
+		const {mode, hospitals} = this.state;
 		return (
 			<>
 				<LandingNavbar />
 				<div className="get_started_page">
 					<MakeOrDonate modeState={this.state.mode} setMode={this.setMode} />
-					{ this.state.mode === 'MAKE' && this.renderMakeForm() }
-					{ this.state.mode === 'DONATE' && this.renderDonateForm() }
+					{ mode === 'MAKE' && this.renderMakeForm() }
+					{ mode === 'DONATE' && this.renderDonateForm() }
 				</div>
-				{ this.state.hospitals && this.renderHospitalSearchResults() }
+				{ <HospitalSearchResults hospitals={hospitals} /> }
 			</>
 		);
 	}
