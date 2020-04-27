@@ -5,16 +5,68 @@ import DesignCard from './DesignCard.js';
 import PlaceholderImage from '../img/doctormaskcolored.png';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import '../css/makerspace-carousel.css';
+import { Link } from '@reach/router';
+import Button from 'react-bootstrap/Button';
+
 
 
 
 
 const MakerspaceCarousel = () => {
+    function setDonateButtonHover(e) {
+		e.target.style.color = '#3B628B';
+		e.target.style.background = 'transparent';
+	}
+
+	function unsetDonateButtonHover(e) {
+		e.target.style.color = 'white';
+		e.target.style.background = '#3B628B';
+    }
+    function setviewAllButtonHover(e) {
+		e.target.style.color = 'gray';
+		e.target.style.background = 'transparent';
+	}
+
+	function unsetviewAllButtonHover(e) {
+		e.target.style.color = 'silver';
+		e.target.style.background = 'transparent';
+	}
     return (
-        <Carousel responsive={responsive} 
-			infinite>
-  				<DesignCard/><DesignCard/><DesignCard/><DesignCard/><DesignCard/>
-		</Carousel>
+        <div id = "carousel-large-block">
+            <div>
+                <h1 id="makerspace-carousel-name">Masks</h1>
+                {/* <span id="makerspace-viewall-button"> */}
+                <Link to="/makerspace" id="viewall-button">
+                <Button id = "viewall-button"
+						onMouseEnter={setviewAllButtonHover}
+						onMouseLeave={unsetviewAllButtonHover}
+					>
+						<b>View All ></b>
+					</Button>
+				</Link>
+                <Link to="/hospitals">
+                    <Button id = "donate-button"
+						onMouseEnter={setDonateButtonHover}
+						onMouseLeave={unsetDonateButtonHover}
+					>
+						<b>Donate</b>
+					</Button>
+				</Link>
+
+                {/* </span> */}
+            </div>
+            
+            <Carousel responsive={responsive} 
+                infinite
+                renderButtonGroupOutside={true} >
+                    <div id = "design-div" ><DesignCard/></div>
+                    <div id = "design-div" ><DesignCard/></div>
+                    <div id = "design-div" ><DesignCard/></div>
+                    <div id = "design-div" ><DesignCard/></div>
+                    <div id = "design-div" ><DesignCard/></div>
+            </Carousel>
+        </div>
 
     );
 };
@@ -38,5 +90,14 @@ const responsive = {
 	  items: 1
 	}
   };
+
+//   const cardstyle = ({DesignCard}) =>
+//   {style.width = '10%'}; 
+
+  let style= {}
+
+  
+
+  
 
 export default MakerspaceCarousel;

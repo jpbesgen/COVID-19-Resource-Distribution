@@ -15,6 +15,10 @@ const Makerspace = () => {
 			{/* <DesignCard/> */}
 			</section>
 			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+
+			</div>
 		</div>
 	);
 };
