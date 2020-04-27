@@ -11,21 +11,18 @@ const Makerspace = () => {
 		<div>
 			<Navbar />
 			<section id="makerspace-carousel">
-			<DesignCard/>
 			</section>
 			<div>
-			<Carousel responsive={responsive} 
+			<Carousel responsive={responsive}
 			infinite>
-  				<div><DesignCard/></div>
-  				<div><DesignCard/></div>
-  				<div><DesignCard/></div>
-  				<div><DesignCard/></div>
-				<div><DesignCard/></div>
-				<div><DesignCard/></div>
-				<div><DesignCard/></div>
-				<div><DesignCard/></div>
+  				<DesignCard/>
+  				<DesignCard/>
+					<DesignCard/>
+  				<DesignCard/>
+					<DesignCard/>
+  				<DesignCard/>
 			</Carousel>;
-			
+
 			</div>
 		</div>
 	);
