@@ -12,7 +12,7 @@ const Makerspace = () => {
 			<Navbar />
 			<section id="makerspace-carousel">
 			</section>
-			<div>
+			<div style={{padding: '20px'}}>
 			<Carousel responsive={responsive}
 			infinite>
   				<DesignCard/>
@@ -22,7 +22,6 @@ const Makerspace = () => {
 					<DesignCard/>
   				<DesignCard/>
 			</Carousel>;
-
 			</div>
 		</div>
 	);
