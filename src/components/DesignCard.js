@@ -31,15 +31,25 @@ const DesignCard = () => {
   </div>
   */
 
+  const VotingComponent = () => {
+    return (
+      <span id="makerspace-card-voting-container">
+        <Button variant="primary" id="makerspace-card-vote-button">Upvote</Button>
+        <h1 id="makerspace-card-vote-count">21</h1>
+        <Button variant="primary" id = "makerspace-card-vote-button">Downvote</Button>
+      </span>
+    );
+  }
+
   return (
     <span>
-      <Card style={{ width: '18rem' }}>
+      <Card id="makerspace-card">
         <div id="makerspace-card-image-container">
-        <Card.Img variant="top" src={PlaceholderImage}/>
+        <Card.Img variant="top" src={PlaceholderImage} id="makerspace-card-image"/>
         <span id="makerspace-card-certified-label">Certified </span>
         </div>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title id="makerspace-card-title">Card Title</Card.Title>
           <div id="makerspace-card-tag-container">
             <span id="makerspace-card-tag">Med</span>
             <span id="makerspace-card-tag">Elastic</span>
@@ -51,7 +61,7 @@ const DesignCard = () => {
           Some quick example text to build on the card title and make up the bulk of
           the card's content.
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <VotingComponent/>
         </Card.Body>
       </Card>
     </span>
