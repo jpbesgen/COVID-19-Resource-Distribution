@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Carousel from 'react-bootstrap/Carousel'
 
 // css copied from makerspace-carousel for now
 import '../css/design-card.css';
