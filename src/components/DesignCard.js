@@ -7,7 +7,8 @@ import Carousel from 'react-bootstrap/Carousel'
 import '../css/design-card.css';
 
 import PlaceholderImage from '../img/doctormaskcolored.png';
-
+import UpvoteButtonImage from '../img/arrow-dropdown.png';
+import CheckmarkImage from '../img/check-mark.png';
 // props and state
 
 const DesignCard = () => {
@@ -35,9 +36,22 @@ const DesignCard = () => {
   const VotingComponent = () => {
     return (
       <span id="makerspace-card-voting-container">
-        <Button variant="primary" id="makerspace-card-vote-button">Upvote</Button>
+        <Button variant="primary" id="makerspace-card-vote-button">
+          <img src={UpvoteButtonImage}/>
+        </Button>
         <h1 id="makerspace-card-vote-count">21</h1>
-        <Button variant="primary" id = "makerspace-card-vote-button">Downvote</Button>
+        <Button variant="primary" id="makerspace-card-vote-button">
+          <img src={UpvoteButtonImage} id="makerspace-downvote-image"/>
+        </Button>
+      </span>
+    );
+  }
+
+  const CertifiedLabel = () => {
+    return (
+      <span id="makerspace-card-certified-label">
+        Certified
+        <img src={CheckmarkImage} id="makerspace-card-certified-image"/>
       </span>
     );
   }
@@ -47,7 +61,7 @@ const DesignCard = () => {
       <Card id="makerspace-card">
         <div id="makerspace-card-image-container">
         <Card.Img variant="top" src={PlaceholderImage} id="makerspace-card-image"/>
-        <span id="makerspace-card-certified-label">Certified </span>
+        <CertifiedLabel/>
         </div>
         <Card.Body>
           <Card.Title id="makerspace-card-title">Card Title</Card.Title>
@@ -62,8 +76,8 @@ const DesignCard = () => {
           Some quick example text to build on the card title and make up the bulk of
           the card's content.
           </Card.Text>
-          <VotingComponent/>
         </Card.Body>
+        <VotingComponent/>
       </Card>
     </span>
   );
