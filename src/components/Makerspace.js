@@ -15,6 +15,9 @@ const Makerspace = () => {
 			</section>
 			<div style={{padding: '20px'}}>
 			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+			
 			</div>
 		</div>
 	);
