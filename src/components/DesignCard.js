@@ -82,15 +82,25 @@ function Tags(props) {
 
 class DesignCard extends React.Component {
   /*
-  this.props:
+  DesignCard this.props:
   design_id
   title
   image
   is_certified
-  materials/tools/difficulty
+  difficulty
+  tags
   description
   upvote_count
   */
+
+  constructor(props) {
+    super(props);
+    this.state = {hasUpvoted: false, hasDownvoted: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleDownvote = this.handleDownvote.bind(this);
+    this.handleUpvote = this.handleUpvote.bind(this);
+  }
 
   truncateString(str, num) {
     if (str.length <= num) {
@@ -101,12 +111,20 @@ class DesignCard extends React.Component {
 
   formatDescription(desciption) {
     // description (String)
-    return this.truncateString(desciption, 100);
+    return this.truncateString(desciption, 90);
   }
 
   formatTitle(title) {
     // title (String)
     return this.truncateString(title, 25);
+  }
+
+  handleUpvote() {
+    // todo
+  }
+
+  handleDownvote() {
+    // todo
   }
 
   render() {
@@ -119,10 +137,10 @@ class DesignCard extends React.Component {
           <DifficultyLabel difficulty={this.props.difficulty ? this.props.difficulty : "Easy"}/>
           </div>
           <Card.Body>
-            <Card.Title id="makerspace-card-title">{this.props.title ? this.props.title : ""}</Card.Title>
+            <Card.Title id="makerspace-card-title">{this.props.title ? this.formatTitle(this.props.title) : ""}</Card.Title>
             <Tags tags={this.props.tags ? this.props.tags : []}/>
-            <Card.Text>
-            {this.props.description ? this.props.description : ""}
+            <Card.Text id="makerspace-card-description">
+            {this.props.description ? this.formatDescription(this.props.description) : ""}
             </Card.Text>
           </Card.Body>
           <VotingComponent votes={this.props.upvote_count ? this.props.upvote_count : 0}/>
