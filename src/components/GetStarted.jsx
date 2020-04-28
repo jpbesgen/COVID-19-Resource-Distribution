@@ -59,7 +59,7 @@ class GetStarted extends Component {
 		this.setItem = this.setItem.bind(this);
 		this.setZipcode = this.setZipcode.bind(this);
 		this.getSearchResults = this.getSearchResults.bind(this);
-		this.updateHospitalsWithSearchResults = this.updateHospitalsWithSearchResults.bind(this);
+		// this.updateHospitalsWithSearchResults = this.updateHospitalsWithSearchResults.bind(this);
 		this.setDonateAmount = this.setDonateAmount;
 	}
 
@@ -88,7 +88,7 @@ class GetStarted extends Component {
 		// ppeToDonate[itemName] = e.target.value.replace(/\D/,'');
 		// this.setState({ ppeToDonate });
 	}
-
+	/*
 	updateHospitalsWithSearchResults() {
 		if(xhr.readyState === XMLHttpRequest.DONE) {
 			var status = xhr.status;
@@ -98,6 +98,7 @@ class GetStarted extends Component {
 			}
 		}
 	}
+	*/
 
 	getSearchResults() {
 		this.getHospitalSearchResults();
