@@ -5,14 +5,15 @@
 
 #makerspace-card {
   border-radius: 25px;
-  width: 300px;
+  width: 275px;
+  height: 450px;
   overflow: hidden;
   box-shadow: 2px 2px 20px #D9D9D9;
 }
 
 #makerspace-card-image {
   object-fit: cover;
-  height: 200px;
+  height: 175px;
 }
 
 #makerspace-card-certified-label {
@@ -28,6 +29,21 @@
   padding-top: 2px;
   padding-bottom: 2px;
   left: 10px;
+  bottom: 10px;
+}
+
+#makerspace-card-difficulty-label {
+  position: absolute;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  right: 10px;
   bottom: 10px;
 }
 
@@ -48,8 +64,8 @@
   display: flex;
   background-color: #F4F7FA;
   width: 100%;
-  justify-content: center;
   height: 75px;
+  justify-content: center;
 }
 
 #makerspace-card-vote-count {
@@ -65,9 +81,9 @@
   background-color: #F4F7FA;
   text-align: center;
   color: #3B628B;
-  margin-left: 30px;
-  margin-right: 30px;
   border-width: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #makerspace-downvote-image {
