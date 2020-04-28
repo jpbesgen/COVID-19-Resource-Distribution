@@ -21,7 +21,7 @@ const Makerspace = () => {
   				<DesignCard/>
 					<DesignCard/>
   				<DesignCard/>
-			</Carousel>;
+			</Carousel>
 			</div>
 		</div>
 	);
