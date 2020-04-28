@@ -60,6 +60,10 @@
   color: #3B628B;
 }
 
+#makerspace-card-description {
+  font-size: 1rem;
+}
+
 #makerspace-card-voting-container {
   display: flex;
   background-color: #F4F7FA;

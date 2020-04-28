@@ -12,11 +12,12 @@ const Makerspace = () => {
 		<div>
 			<Navbar />
 			<section id="makerspace-carousel">
-			{/* <DesignCard/> */}
 			</section>
+			<div style={{padding: '20px'}}>
 			<MakerspaceCarousel/>
 			<MakerspaceCarousel/>
 			<MakerspaceCarousel/>
+			</div>
 		</div>
 	);
 };
