@@ -82,27 +82,17 @@ function Tags(props) {
 
 class DesignCard extends React.Component {
   /*
-<<<<<<< HEAD
-  this.props:
-=======
   DesignCard this.props:
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
   design_id
   title
   image
   is_certified
-<<<<<<< HEAD
-  materials/tools/difficulty
-=======
   difficulty
   tags
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
   description
   upvote_count
   */
 
-<<<<<<< HEAD
-=======
   constructor(props) {
     super(props);
     this.state = {hasUpvoted: false, hasDownvoted: true};
@@ -112,7 +102,6 @@ class DesignCard extends React.Component {
     this.handleUpvote = this.handleUpvote.bind(this);
   }
 
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
   truncateString(str, num) {
     if (str.length <= num) {
       return str;
@@ -122,11 +111,7 @@ class DesignCard extends React.Component {
 
   formatDescription(desciption) {
     // description (String)
-<<<<<<< HEAD
-    return this.truncateString(desciption, 100);
-=======
     return this.truncateString(desciption, 90);
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
   }
 
   formatTitle(title) {
@@ -134,40 +119,12 @@ class DesignCard extends React.Component {
     return this.truncateString(title, 25);
   }
 
-<<<<<<< HEAD
-  render() {
-    return (
-      <span>
-        <Card id="makerspace-card">
-          <div id="makerspace-card-image-container">
-          <Card.Img variant="top" src={this.props.image ? this.props.image : PlaceholderImage} id="makerspace-card-image"/>
-          <CertifiedLabel showCertifiedLabel={this.props.is_certified ? true : false}/>
-          <DifficultyLabel difficulty={this.props.difficulty ? this.props.difficulty : "Easy"}/>
-          </div>
-          <Card.Body>
-            <Card.Title id="makerspace-card-title">{this.props.title ? this.props.title : ""}</Card.Title>
-            <Tags tags={this.props.tags ? this.props.tags : []}/>
-            <Card.Text>
-            {this.props.description ? this.props.description : ""}
-            </Card.Text>
-          </Card.Body>
-          <VotingComponent votes={this.props.upvote_count ? this.props.upvote_count : 0}/>
-        </Card>
-      </span>
-    );
-  }
-
-  formatTitle(title) {
-    // title (String)
-    return this.truncateString(title, 25);
-=======
   handleUpvote() {
     // todo
   }
 
   handleDownvote() {
     // todo
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
   }
 
   render() {
@@ -180,17 +137,10 @@ class DesignCard extends React.Component {
           <DifficultyLabel difficulty={this.props.difficulty ? this.props.difficulty : "Easy"}/>
           </div>
           <Card.Body>
-<<<<<<< HEAD
-            <Card.Title id="makerspace-card-title">{this.props.title ? this.props.title : ""}</Card.Title>
-            <Tags tags={this.props.tags ? this.props.tags : []}/>
-            <Card.Text>
-            {this.props.description ? this.props.description : ""}
-=======
             <Card.Title id="makerspace-card-title">{this.props.title ? this.formatTitle(this.props.title) : ""}</Card.Title>
             <Tags tags={this.props.tags ? this.props.tags : []}/>
             <Card.Text id="makerspace-card-description">
             {this.props.description ? this.formatDescription(this.props.description) : ""}
->>>>>>> 1c9dd774dd6daaef804e1038f71e74fab7e6d059
             </Card.Text>
           </Card.Body>
           <VotingComponent votes={this.props.upvote_count ? this.props.upvote_count : 0}/>
