@@ -14,14 +14,16 @@ const Makerspace = () => {
 			<section id="makerspace-carousel">
 			</section>
 			<div style={{padding: '20px'}}>
-				<MakerspaceCarousel/>
-				<MakerspaceCarousel/>
-				<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
+			<MakerspaceCarousel/>
 			</div>
 		</div>
 	);
 };
 
-// let style = {};
+
+
+let style = {};
 
 export default Makerspace;
