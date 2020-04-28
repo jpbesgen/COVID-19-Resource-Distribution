@@ -79,6 +79,19 @@ const MakerspaceCarousel = () => {
     );
 };
 
+/*
+DesignCard
+this.props:
+design_id
+title
+image
+is_certified
+difficulty
+tags
+description
+upvote_count
+*/
+
 const responsive = {
 	superLargeDesktop: {
 	  // the naming can be any, depends on you.
@@ -97,6 +110,6 @@ const responsive = {
 	  breakpoint: { max: 464, min: 0 },
 	  items: 1
 	}
-  };
+};
 
 export default MakerspaceCarousel;
