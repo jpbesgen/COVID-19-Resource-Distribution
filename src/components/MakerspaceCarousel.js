@@ -56,11 +56,19 @@ const MakerspaceCarousel = () => {
 
                 {/* </span> */}
             </div>
-            
-            <Carousel responsive={responsive} 
+
+            <Carousel responsive={responsive}
                 infinite
                 renderButtonGroupOutside={true} >
-                    <div id = "design-div" ><DesignCard/></div>
+                    <div id = "design-div"><DesignCard
+                      title = "Some Mask"
+                      is_certified = {true}
+                      difficulty = "Med"
+                      tags = {["Fabric", "Elastic", "Filter", "Sewing Machine"]}
+                      description = "A surgical mask, also known as a procedure mask, medical mask or simply as a face mask, is intended to be worn by health professionals during surgery and during nursing to catch the bacteria shed in liquid droplets and aerosols from the wearer's mouth and nose."
+                      upvote_count = {34}
+                    />
+                    </div>
                     <div id = "design-div" ><DesignCard/></div>
                     <div id = "design-div" ><DesignCard/></div>
                     <div id = "design-div" ><DesignCard/></div>
@@ -70,6 +78,19 @@ const MakerspaceCarousel = () => {
 
     );
 };
+
+/*
+DesignCard
+this.props:
+design_id
+title
+image
+is_certified
+difficulty
+tags
+description
+upvote_count
+*/
 
 const responsive = {
 	superLargeDesktop: {
@@ -92,12 +113,12 @@ const responsive = {
   };
 
 //   const cardstyle = ({DesignCard}) =>
-//   {style.width = '10%'}; 
+//   {style.width = '10%'};
 
   let style= {}
 
-  
 
-  
+
+
 
 export default MakerspaceCarousel;

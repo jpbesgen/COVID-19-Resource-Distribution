@@ -17,8 +17,6 @@ const Makerspace = () => {
 			<MakerspaceCarousel/>
 			<MakerspaceCarousel/>
 			<MakerspaceCarousel/>
-
-			</div>
 		</div>
 	);
 };
