@@ -22,6 +22,8 @@ const About = () => {
 				<p style={style.Bold}>
 					Our team consists of the following people in the following roles:
 				</p>
+
+				<h3 style={style.CategoryHeader}>Leads</h3>
 				<Individual
 					name="John Miller"
 					major="UC Berkeley Economics w/ minor
@@ -38,6 +40,8 @@ const About = () => {
 					linkedin="https://www.linkedin.com/in/jpbesgen/"
 					email="mailto:jpbesgen@berkeley.edu"
 				/>
+
+				<h3 style={style.CategoryHeader}>Strategy</h3>
 				<Individual
 					name="James Zamora"
 					major="Program Manager, Office of
@@ -46,21 +50,27 @@ const About = () => {
 					linkedin="https://www.linkedin.com/in/jazammm/"
 					email="maito:james.z.zamora@berkeley.edu"
 				/>
+
+				<h3 style={style.CategoryHeader}>Engineers</h3>
 				<Individual
 					name="Alex Madrzyk"
-					major="Infrastructure Software
-					Engineer at Slack"
+					major="Infrastructure Software Engineer at Slack"
 					role="Full-Stack Engineer"
 					linkedin="http://linkedin.com/in/alexmadrzyk"
 					email="mailto:alexmadrzyk@gmail.com"
 				/>
 				<Individual
 					name="Gunner Spencer"
-					major="UC Santa Cruz Computer
-					Science"
+					major="UC Santa Cruz Computer Science"
 					role="Full-Stack Engineer"
 					linkedin="https://www.linkedin.com/in/gunner-spencer-822551178/"
 					email="mailto:gunn686@gmail.com"
+				/>
+				<Individual
+					name="Eddie Jiao"
+					major="Frontend Software Engineer at Slack"
+					role="Frontend Engineer"
+					linkedin="http://linkedin.com/in/edward-jiao"
 				/>
 				<Individual
 					name="Samarth Goel"
@@ -92,6 +102,8 @@ const About = () => {
 					linkedin="https://www.linkedin.com/in/ebaccay/"
 					email="mailto:ebaccay@berkeley.edu"
 				/>
+
+				<h3 style={style.CategoryHeader}>Designers</h3>
 				<Individual
 					name="Victoria Li"
 					major="UC Berkeley Computer Science
@@ -116,6 +128,8 @@ const About = () => {
 					linkedin="https://www.linkedin.com/in/leilani-chu-342563130/"
 					email="mailto:leilanic@berkeley.edu"
 				/>
+
+				<h3 style={style.CategoryHeader}>User Researchers</h3>
 				<Individual
 					name="Allan Lee"
 					major="UC Berkeley Bioengineering"
@@ -138,6 +152,8 @@ const About = () => {
 					linkedin="http://www.linkedin.com/in/joseph-schroer"
 					email="mailto:joseph.schroer1@gmail.com"
 				/>
+
+				<h3 style={style.CategoryHeader}>Marketing</h3>
 				<Individual
 					name="Taylor Rimell"
 					major="UC Berkeley Business
@@ -185,6 +201,10 @@ let style = {
 		fontWeight: '400',
 		color: 'black',
 	},
+	CategoryHeader: {
+		paddingTop: '20px',
+		color: 'rgb(59, 98, 139)',
+	}
 };
 
 export default About;
