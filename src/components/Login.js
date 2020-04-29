@@ -1,10 +1,26 @@
 import React from 'react';
-import Navbar from './Navbar';
-import LandingNavbarMobile from './Mobile/LandingNavbarMobile';
-
+import firebase from 'firebase';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Container';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+
+import Navbar from './Navbar';
+import LandingNavbarMobile from './Mobile/LandingNavbarMobile';
+
+const uiConfig = {
+	signInFlow: 'popup',
+	signInSuccessUrl: '/',
+	signInOptions: [
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+		firebase.auth.FacebookAuthProvider.PROVIDER_ID
+	],
+	callbacks: {
+		uiShown: () => {
+			document.getElementById('loader').style.display = 'none';
+		}
+	},
+};
 
 const Login = () => {
 	let nav = <Navbar />;
@@ -24,9 +40,9 @@ const Login = () => {
 					</Row>
 					<Row className="justify-content-center bottom-row">
 						<Col xs={10} style={style.Choice} className="text-center">
-							<div id="firebaseui-auth-container"></div>
+							<StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()}/>
 							<div id="loader">Loading...</div>
-							<div id="includedContent"></div>
+							<div id="includedContent" />
 						</Col>
 					</Row>
 				</Container>

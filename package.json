@@ -16,6 +16,7 @@
     "react-dom": "^16.13.1",
     "react-multi-carousel": "^2.5.5",
     "react-dropzone": "^10.2.2",
+    "react-firebaseui": "^4.1.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {

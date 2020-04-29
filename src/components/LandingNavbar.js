@@ -1,95 +1,89 @@
 import React from 'react';
-
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 import TransparentImage from '../img/transparent_img.png';
+import { auth } from '../FirebaseModule';
+import '../css/navbar.css';
 
-const LandingNavbar = () => {
-	// firebase.auth().onAuthStateChanged(function (user) {
-	// 	if (user) {
-	// 		$('.prof-img').attr('src', user.photoURL); // replace img with prof pic
-	// 		$('.navLoginLink').hide();
-	// 		$('.navLogoutLink').css('display', 'flex');
-	// 	}
-	// });
+class LandingNavbar extends React.Component {
+	constructor(props){
+		super(props);
 
-	// $('#logoutLink').click(async () => {
-	// 	try {
-	// 		await firebase.auth().signOut();
+		this.state = {
+			loggedIn: false,
+			user: null
+		};
+	}
 
-	// 		// Sign-out successful.
-	// 		console.log('User Logged Out!');
-	// 		$('.navLogoutLink').css('display', 'none');
-	// 		$('.navLoginLink').show();
+	componentDidMount() {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				this.setState({
+					user,
+					loggedIn: true
+				})
+			}
+		})
+	}
 
-	// 		// reload page (to refresh privileges)
-	// 		location.reload();
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-	// });
+	handleLogOut = async () => {
+		try {
+			await auth.signOut();
+			this.setState({loggedIn: false});
+			// reload page (to refresh privileges)
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-	return (
-		<div style={style.EnclosingDiv}>
-			<Navbar
-				bg="transparent"
-				variant="light"
-				expand="lg"
-				style={style.NavbarStyle}
-			>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="mx-auto">
-						<Nav.Link href="/" style={style.NavbarLink} className="mr-3">
-							<p style={style.NavItem}>Home</p>
-						</Nav.Link>
-						<Nav.Link href="/about" style={style.NavbarLink}>
-							<p style={style.NavItem}>About</p>
-						</Nav.Link>
-						<Nav.Link href="/login" style={style.NavbarLink} className="ml-3" id="loginLink">
-							<p style={style.NavItem}>Log In</p>
-						</Nav.Link>
+	render(){
+		return (
+			<div style={style.EnclosingDiv}>
+				<Navbar
+					bg="transparent"
+					variant="light"
+					expand="lg"
+					style={style.NavbarStyle}
+				>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
+						<Nav className="mx-auto">
+							<Nav.Link href="/" style={style.NavbarLink} className="mr-3">
+								<p style={style.NavItem}>Home</p>
+							</Nav.Link>
+							<Nav.Link href="/about" style={style.NavbarLink}>
+								<p style={style.NavItem}>About</p>
+							</Nav.Link>
 
-						<Nav.Link
-							href="/"
-							className="nav-item navLogoutLink"
-							style={{ display: 'none', alignSelf: 'center' }}
-						>
-							<img
-								src={TransparentImage}
-								alt="transparent placeholder"
-								className="prof-img"
-								style={{ borderRadius: '50%', marginRight: '5px' }}
-							/>
-							<p style={style.NavItem}>Log Out</p>
-						</Nav.Link>
-					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
-		</div>
-
-		// 			<li className="nav-item navLoginLink">
-		// 				<a className="nav-link " href="../pages/login.html" id="loginLink">
-		// 					Login / Signup
-		// 				</a>
-		// 			</li>
-		// 			<li
-		// 				className="nav-item navLogoutLink"
-		// 				style={{ display: 'none', alignSelf: 'center' }}
-		// 			>
-		// 				<img
-		// 					src={TransparentImage}
-		// 					alt="transparent placeholder"
-		// 					className="prof-img"
-		// 					style={{ borderRadius: '50%', marginRight: '5px' }}
-		// 				/>
-		// 				<Link to="/" className="nav-link" id="logoutLink">
-		// 					Log Out
-		// 				</Link>
-		// 			</li>
-	);
-};
+							{this.state.loggedIn ? (
+								<Nav.Link
+									href="/"
+									className="nav-item navLogoutLink"
+									style={style.LogoutLink}
+									onSelect={this.handleLogOut}
+								>
+									<img
+										src={this.state.user ? this.state.user.photoURL : TransparentImage}
+										alt="profile"
+										className="prof-img"
+										style={{ borderRadius: '50%', marginRight: '10px', maxWidth: '50px' }}
+									/>
+									<p style={style.NavItem}>Log Out</p>
+								</Nav.Link>
+							) : (
+								<Nav.Link href="/login" style={style.NavbarLink} className="ml-3" id="loginLink">
+									<p style={style.NavItem}>Login / Signup</p>
+								</Nav.Link>
+							)}
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+			</div>
+		);
+	}
+}
 
 const style = {
 	EnclosingDiv: {
@@ -113,6 +107,12 @@ const style = {
 		color: '#3B628B',
 		margin: '.3rem 0',
 	},
+	LogoutLink: {
+		alignSelf: 'center',
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center'
+	}
 };
 
 export default LandingNavbar;
