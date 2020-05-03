@@ -1,37 +1,127 @@
 import React, { Component } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <h5
+        ref={ref}
+        onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+        }}
+        style={{margin: 6, cursor: "pointer"}}
+    >
+        {children}
+        <svg style={{marginLeft: 6,}} width="9" height="6" viewBox="0 0 9 6" fill="none">
+            <path d="M1 1L4.5 4.5L8 1" stroke="#828282" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+    </h5>
+));
+
+function TagDropdown(props){
+    const items = props.tags.map((tag) =>
+        <Dropdown.Item
+            key={tag}
+            active={props.selectedTags.has(tag)}
+            onClick={(e)=> {
+                e.preventDefault();
+                props.filterUpdate(tag);
+            }}
+        >
+            {tag}
+        </Dropdown.Item>
+    );
+    return (
+        <Dropdown style={{userSelect: "none"}}>
+            <Dropdown.Toggle as={CustomToggle} >
+                {props.name}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+                {items}
+            </Dropdown.Menu>
+        </Dropdown>
+    );
+}
+
+function Tag(props) {
+    return (
+        <span style={{backgroundColor: "#3B628B", color: "#FFFFFF", padding: 6, margin: 6, borderRadius: 2, userSelect: "none"}}>
+            {props.name}
+            <svg onClick={props.dismiss} style={{marginLeft: 6, cursor: "pointer", }} width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M2 2L11 11M11 2L2 11" stroke="white" strokeWidth="3"/>
+            </svg>
+        </span>
+    );
+}
 
 export default class MakerspaceFilter extends Component {
     constructor(props) {
         super(props);
-
+        this.tagsCategories = new Map();
+        this.tagsCategories.set('Difficulty', [
+            "Easy",
+            "Medium",
+            "Difficult",
+        ]);
+        this.tagsCategories.set('Materials', [
+            "Fabric",
+            "Elastic",
+        ]);
+        this.tagsCategories.set('Tools Required', [
+            "Sewing Machine",
+            "3D Printer",
+        ]);
+        this.state = {
+            selectedTags: new Set(),
+        }
+        this.filterUpdate = this.filterUpdate.bind(this);
+        this.removeTag = this.removeTag.bind(this);
     }
 
+	filterUpdate(tag) {
+        const alreadyContainsTag = this.state.selectedTags.has(tag);
+        //Set state is a pure function, need to calculate state before hand
+        this.props.filterUpdate(tag.replace(/\s+/g, '-').toLowerCase(), !alreadyContainsTag);
+		this.setState((state, props) => {
+            let { selectedTags } = state;
+            if (alreadyContainsTag) {
+                selectedTags.delete(tag);
+            } else {
+                selectedTags.add(tag);
+            }
+			return { selectedTags };
+		});
+    }
+
+    removeTag(tag) {
+        this.setState((state, props) => {
+            let { selectedTags } = state;
+            selectedTags.delete(tag);
+			return { selectedTags };
+		});
+    }
+
+
     render() {
+        const dropdowns = [...this.tagsCategories.entries()].map(([key, value]) =>
+            <TagDropdown
+                key={key}
+                name={key}
+                tags={value}
+                filterUpdate={this.filterUpdate}
+                selectedTags={this.state.selectedTags}
+            />
+        );
+        const tags = [...this.state.selectedTags].map((tag) =>
+            <Tag key={tag} name={tag} dismiss={(e)=> {
+                e.preventDefault();
+                this.removeTag(tag);
+            }}/>
+        );
         return (
             <div>
-                <div id="list1" class="dropdown-check-list" tabindex="100">
-                    <span class="anchor">Difficulty</span>
-                    <ul class="items">
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("easy", e.target.checked)}/> Easy </li>
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("medium", e.target.checked)}/> Medium </li>
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("difficult", e.target.checked)}/> Difficult </li>
-                        
-                    </ul>
-                </div>
-                <div id="list2" class="dropdown-check-list" tabindex="100">
-                    <span class="anchor">Material</span>
-                    <ul class="items">
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("fabric", e.target.checked)}/> Fabric </li>
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("elastic", e.target.checked)}/> Elastic </li>
-                    </ul>
-                </div>
-                <div id="list3" class="dropdown-check-list" tabindex="100">
-                    <span class="anchor">Tools Required</span>
-                    <ul class="items">
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("sewing-machine", e.target.checked)}/> Sewing Machine </li>
-                        <li><input type="checkbox" onChange={(e) => this.props.filterUpdate("3d-printer", e.target.checked)}/> 3D Printer </li>
-                    </ul>
-                </div>
+                {dropdowns}
+                {tags}
             </div>
         )
     }
