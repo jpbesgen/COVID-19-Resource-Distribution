@@ -2,10 +2,23 @@
   cursor: pointer;
   width: max-content;
   display: inline;
-  font-size: 16px;
+  font-size: 20px;
   color: #828282;
-  margin-right: 35px;
+  padding-right: 22px;
+  margin-right: 13px;
   user-select: none;
+}
+
+.makerspace-filter-item {
+  font-size: 15px;
+  color: #828282;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.makerspace-filter-item-checkbox {
+  margin-left: 13px;
+  margin-right: 8px;
 }
 
 .makerspace-tag {

@@ -7,8 +7,8 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <div
         ref={ref}
         onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
+            e.preventDefault();
+            onClick(e);
         }}
         className="inline"
     >
@@ -19,11 +19,29 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     </div>
 ));
 
+const CustomItem = React.forwardRef(({ children, onClick, isActive }, ref) => (
+    <div
+        ref={ref}
+        onClick={(e) => {
+            e.preventDefault();
+            onClick(e);
+        }}
+        className="makerspace-filter-item"
+    >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="makerspace-filter-item-checkbox">
+            {isActive ? <path d="M3 5.53333L4.87805 8L10 4" stroke="#6BA48C" strokeOpacity="0.6" strokeWidth="1.5"/> : null }
+            <rect x="0.5" y="0.5" width="11" height="11" rx="0.5" stroke="#3B628B" strokeOpacity="0.41"/>
+        </svg>
+        {children}
+    </div>
+));
+
 function TagDropdown(props){
     const items = props.tags.map((tag) =>
         <Dropdown.Item
+            as={CustomItem}
             key={tag}
-            active={props.selectedTags.has(tag)}
+            isActive={props.selectedTags.has(tag)}
             onClick={(e)=> {
                 e.preventDefault();
                 props.filterUpdate(tag);
