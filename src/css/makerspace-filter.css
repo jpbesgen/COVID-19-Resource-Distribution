@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+.dropdown-menu.show {
+  min-width: 100%;
+}
+
 .makerspace-filter-item {
   font-size: 15px;
   color: #828282;
