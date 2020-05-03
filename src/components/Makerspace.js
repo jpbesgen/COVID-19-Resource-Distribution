@@ -20,7 +20,7 @@ export default class Makerspace extends Component {
 	}
 
 	filterUpdate(key,value) {
-		this.setState((state, props) => {	
+		this.setState((state, props) => {
 			let { filters } = state;
 			filters[key] = value;
 			return { filters };
@@ -31,11 +31,13 @@ export default class Makerspace extends Component {
 		return (
 			<div>
 				<Navbar />
-				<Filter filterUpdate={this.filterUpdate}/>
 				<div style={{padding: '20px'}}>
-					<MakerspaceCarousel/>
-					<MakerspaceCarousel/>
-					<MakerspaceCarousel/>
+					<Filter filterUpdate={this.filterUpdate}/>
+					<div>
+						<MakerspaceCarousel/>
+						<MakerspaceCarousel/>
+						<MakerspaceCarousel/>
+					</div>
 				</div>
 			</div>
 		);

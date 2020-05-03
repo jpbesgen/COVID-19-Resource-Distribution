@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 
+import '../css/makerspace-filter.css';
+
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <h5
+    <div
         ref={ref}
         onClick={(e) => {
         e.preventDefault();
         onClick(e);
         }}
-        style={{margin: 6, cursor: "pointer"}}
+        className="inline"
     >
         {children}
         <svg style={{marginLeft: 6,}} width="9" height="6" viewBox="0 0 9 6" fill="none">
             <path d="M1 1L4.5 4.5L8 1" stroke="#828282" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-    </h5>
+    </div>
 ));
 
 function TagDropdown(props){
@@ -31,7 +33,7 @@ function TagDropdown(props){
         </Dropdown.Item>
     );
     return (
-        <Dropdown style={{userSelect: "none"}}>
+        <Dropdown className="makerspace-filter">
             <Dropdown.Toggle as={CustomToggle} >
                 {props.name}
             </Dropdown.Toggle>
@@ -45,7 +47,7 @@ function TagDropdown(props){
 
 function Tag(props) {
     return (
-        <span style={{backgroundColor: "#3B628B", color: "#FFFFFF", padding: 6, margin: 6, borderRadius: 2, userSelect: "none"}}>
+        <span className="makerspace-tag">
             {props.name}
             <svg onClick={props.dismiss} style={{marginLeft: 6, cursor: "pointer", }} width="13" height="13" viewBox="0 0 13 13" fill="none">
                 <path d="M2 2L11 11M11 2L2 11" stroke="white" strokeWidth="3"/>
@@ -119,9 +121,13 @@ export default class MakerspaceFilter extends Component {
             }}/>
         );
         return (
-            <div>
-                {dropdowns}
-                {tags}
+            <div className="filters-block">
+                <div className="filters-dropdowns-block">
+                    {dropdowns}
+                </div>
+                <div className="tags-block">
+                    {tags}
+                </div>
             </div>
         )
     }

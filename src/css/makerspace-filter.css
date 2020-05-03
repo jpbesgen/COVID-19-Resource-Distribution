@@ -1,0 +1,36 @@
+.makerspace-filter {
+  cursor: pointer;
+  width: max-content;
+  display: inline;
+  font-size: 16px;
+  color: #828282;
+  margin-right: 35px;
+  user-select: none;
+}
+
+.makerspace-tag {
+  background-color: #3B628B;
+  color: white;
+  padding: 6px;
+  margin: 6px;
+  border-radius: 2px;
+  user-select: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.tags-block {
+  margin-top: 35px;
+}
+
+.filters-dropdowns-block {
+  margin-top: 41px;
+}
+
+.filters-block {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 17px;
+}
