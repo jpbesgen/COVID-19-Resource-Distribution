@@ -70,7 +70,7 @@ function Tags(props) {
   // props: tags (array of Strings)
   let items = []
   for (let i = 0; i < props.tags.length; i++) {
-    items.push(<span id="makerspace-card-tag">{props.tags[i]}</span>);
+    items.push(<span key={i} id="makerspace-card-tag">{props.tags[i]}</span>);
   }
   return (
     // loop through list of tags and add to div as span

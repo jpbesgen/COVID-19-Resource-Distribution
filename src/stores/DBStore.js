@@ -56,7 +56,7 @@ class DBStore extends EventEmitter {
             let { displayName, uid } = this.getAuthUser();
             design["user"] = displayName;
             design["uid"] = uid;
-            
+
             db.runTransaction((transaction) => {
                 let design_id = db.collection("Designs").doc().id,
                     design_ref = db.collection("Designs").doc(design_id),
@@ -78,14 +78,14 @@ class DBStore extends EventEmitter {
             }).catch((error) => {
                 reject(error);
             });
-            
+
         });
     }
 
     async uploadFile(file, path) {
         return new Promise((resolve, reject) => {
             let filePut = st.child(path + file.name).put(file);
-            
+
             filePut.on(firebase.storage.TaskEvent.STATE_CHANGED,
                 // Progress
                 (snapshot) => {
@@ -100,7 +100,7 @@ class DBStore extends EventEmitter {
                 // Success
                 () => {
                     filePut.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                        resolve({ 
+                        resolve({
                             name: file.name,
                             url: downloadURL
                         });
@@ -159,7 +159,7 @@ class DBStore extends EventEmitter {
             ["category", "==", "surgicalMask"]
         ]
 
-        lastDoc - reference to the snapshot returned by 
+        lastDoc - reference to the snapshot returned by
     */
     async getDesignsForQueries(queries, lastDoc) {
         return new Promise((resolve, reject) => {
@@ -187,6 +187,32 @@ class DBStore extends EventEmitter {
                 reject(error);
             });
         });
+    }
+
+    // gets designs for queries without lastDoc
+    async getMakerspaceDesignsForQueries(queries) {
+      return new Promise((resolve, reject) => {
+          let designs_ref = db.collection("Designs")
+          queries.forEach((q) => {
+              designs_ref = designs_ref.where(
+                  q[0], // field i.e. "upvotes"
+                  q[1], // operator i.e. ">"
+                  q[2] // value i.e. "5"
+              );
+          });
+          designs_ref = designs_ref.orderBy("upvotes", "asc");
+
+          designs_ref = designs_ref.limit(this.queryLimit);
+
+          designs_ref.get().then((designs_snapshot) => {
+              let designs_docs = designs_snapshot.data();
+              resolve({
+                  designs: designs_docs
+              });
+          }).catch((error) => {
+              reject(error);
+          });
+      });
     }
 
     // Propagates design changes through event emitter
@@ -281,7 +307,7 @@ class DBStore extends EventEmitter {
                     let design_doc = design_snapshot.data();
 
                     let commentsRefs = design_doc.comments;
-                    
+
                     if(commentsRefs === null || commentsRefs.length === 0) return [];
                     let commentsFetches = commentsRefs.map((c) => {
                             let ref = db.collection("Comments").doc(c);
@@ -345,7 +371,7 @@ class DBStore extends EventEmitter {
                         comments: firebase.firestore.FieldValue.arrayUnion(comment_id)
                     });
                 });
-                    
+
             }).then(() => {
                 // Transaction successful
                 resolve();
@@ -380,10 +406,10 @@ class DBStore extends EventEmitter {
     async removeComment(comment_id) {
         return new Promise((resolve, reject) => {
             if(!this.isAuthenticated()) reject("Please login before removing a comment!");
-           
+
             db.runTransaction((transaction) => {
                 let comment_ref = db.collection("Comments").doc(comment_id);
-                
+
                 return transaction.get(comment_ref).then((comment_snapshot) => {
                     if(!comment_snapshot.exists) throw new Error("Comment document doesn't exist");
 
@@ -516,7 +542,7 @@ class DBStore extends EventEmitter {
                 // Check if comment_id is in the upvoted list
                 let isInList = user_doc.upvotedComments.includes(comment_id);
 
-                resolve(isInList); 
+                resolve(isInList);
             }).catch((error) => {
                 reject(error);
             })
@@ -626,7 +652,7 @@ class DBStore extends EventEmitter {
 
             user_ref.get().then((user_snapshot) => {
                 if(!user_snapshot.exists) throw new Error("User document doesn't exist");
-                
+
                 let user_doc = user_snapshot.data();
 
                 if(user_doc.hasOwnProperty("photoUrl")) {

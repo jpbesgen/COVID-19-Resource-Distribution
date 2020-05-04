@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
-import DesignCard from './DesignCard.js';
-// import Carousel from 'react-bootstrap/Carousel'
-import PlaceholderImage from '../img/doctormaskcolored.png';
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import MakerspaceCarousel from './MakerspaceCarousel'
 import Filter from "./MakerspaceFilter";
+import dbstore from '../stores/DBStore';
 
 export default class Makerspace extends Component {
 	constructor(props) {
@@ -27,6 +24,9 @@ export default class Makerspace extends Component {
 		});
 	}
 
+	// pull all the designs in this page
+	//
+
 	render() {
 		return (
 			<div>
@@ -34,9 +34,9 @@ export default class Makerspace extends Component {
 				<div style={{padding: '20px'}}>
 					<Filter filterUpdate={this.filterUpdate}/>
 					<div>
-						<MakerspaceCarousel/>
-						<MakerspaceCarousel/>
-						<MakerspaceCarousel/>
+						<MakerspaceCarousel category="surgicalMask"/>
+						<MakerspaceCarousel category="faceShield"/>
+						<MakerspaceCarousel category="other"/>
 					</div>
 				</div>
 			</div>
