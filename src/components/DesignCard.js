@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Carousel from 'react-bootstrap/Carousel'
+import Modal from 'react-bootstrap/Modal';
+import DesignCardModal from './DesignCardModal';
 
 // css copied from makerspace-carousel for now
 import '../css/design-card.css';
@@ -29,7 +30,7 @@ function VotingComponent(props) {
 function CertifiedLabel(props) {
   //props:
   if (!props.showCertifiedLabel) {
-    return null
+    return null;
   } else {
     return (
       <span id="makerspace-card-certified-label">
@@ -95,11 +96,13 @@ class DesignCard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {hasUpvoted: false, hasDownvoted: true};
+    this.state = {hasUpvoted: false, hasDownvoted: true, showModal: false};
 
     // This binding is necessary to make `this` work in the callback
     this.handleDownvote = this.handleDownvote.bind(this);
     this.handleUpvote = this.handleUpvote.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
   }
 
   truncateString(str, num) {
@@ -127,16 +130,24 @@ class DesignCard extends React.Component {
     // todo
   }
 
+  handleShowModal() {
+    this.setState({showModal: true});
+  }
+
+  handleCloseModal() {
+    this.setState({showModal: false});
+  }
+
   render() {
     return (
       <span>
         <Card id="makerspace-card">
-          <div id="makerspace-card-image-container">
+          <div id="makerspace-card-image-container" onClick={this.handleShowModal}>
           <Card.Img variant="top" src={this.props.image ? this.props.image : PlaceholderImage} id="makerspace-card-image"/>
           <CertifiedLabel showCertifiedLabel={this.props.is_certified ? true : false}/>
           <DifficultyLabel difficulty={this.props.difficulty ? this.props.difficulty : "Easy"}/>
           </div>
-          <Card.Body>
+          <Card.Body onClick={this.handleShowModal}>
             <Card.Title id="makerspace-card-title">{this.props.title ? this.formatTitle(this.props.title) : ""}</Card.Title>
             <Tags tags={this.props.tags ? this.props.tags : []}/>
             <Card.Text id="makerspace-card-description">
@@ -144,6 +155,7 @@ class DesignCard extends React.Component {
             </Card.Text>
           </Card.Body>
           <VotingComponent votes={this.props.upvote_count ? this.props.upvote_count : 0}/>
+          <DesignCardModal show={this.state.showModal} onHide={this.handleCloseModal} {...this.props}/>
         </Card>
       </span>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navbar from './Navbar';
 import DesignCard from './DesignCard.js';
 // import Carousel from 'react-bootstrap/Carousel'
@@ -13,7 +13,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const MakerspaceCarousel = () => {
+const MakerspaceCarousel = (props) => {
     function setDonateButtonHover(e) {
 		e.target.style.color = '#3B628B';
 		e.target.style.background = 'transparent';
@@ -22,7 +22,8 @@ const MakerspaceCarousel = () => {
 	function unsetDonateButtonHover(e) {
 		e.target.style.color = 'white';
 		e.target.style.background = '#3B628B';
-    }
+	}
+	
     function setviewAllButtonHover(e) {
 		e.target.style.color = 'gray';
 		e.target.style.background = 'transparent';
@@ -32,6 +33,7 @@ const MakerspaceCarousel = () => {
 		e.target.style.color = 'silver';
 		e.target.style.background = 'transparent';
 	}
+	
     return (
         <div id = "carousel-large-block">
             <div>
