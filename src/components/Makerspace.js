@@ -52,7 +52,7 @@ export default class Makerspace extends Component {
 	}
 
 	filterUpdate(key,value) {
-		this.setState((state, props) => {	
+		this.setState((state, props) => {
 			let { filters } = state;
 			filters[key] = value;
 			return { filters };
