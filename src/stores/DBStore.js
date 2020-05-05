@@ -26,9 +26,10 @@ class DBStore extends EventEmitter {
         this.removeDesign = this.removeDesign.bind(this);
         this.upvoteDesign = this.upvoteDesign.bind(this);
         this.downvoteDesign = this.downvoteDesign.bind(this);
-        this.getDesigns = this.getDesigns.bind(this);
+        this.fetchDesigns = this.fetchDesigns.bind(this);
         this.getDesignsMap = this.getDesignsMap.bind(this);
         this.getTop3Designs = this.getTop3Designs.bind(this);
+        this.getDesignsList = this.getDesignsList.bind(this);
 
         // comments
         this.fetchCommentsForDesignByDoc = this.fetchCommentsForDesignByDoc.bind(this);
@@ -217,11 +218,11 @@ class DBStore extends EventEmitter {
 
     addDesign(doc) {
         let { id } = doc;
-        if(this.designs[id] !== null) throw new Error("Design can't be added.");
+        //if(this.designs[id] !== null) throw new Error("Design can't be added.");
         //this.designs[id] = new Design(doc);
         this.designs[id] = doc;
         setTimeout(() => {
-            this.emit("DesignAdded", doc);
+            this.emit("DesignsChange", doc);
         }, 0);
     }
 
@@ -231,7 +232,7 @@ class DBStore extends EventEmitter {
         //this.designs[id].update(doc);
         this.designs[id] = doc;
         setTimeout(() => {
-            this.emit("DesignUpdated", doc);
+            this.emit("DesignsChange", doc);
         })
     }
 
@@ -241,9 +242,10 @@ class DBStore extends EventEmitter {
         this.designs[id] = null;
         delete this.designs[id];
         setTimeout(() => {
-            this.emit("DesignRemoved", doc);
+            this.emit("DesignsChange", doc);
         });
     }
+
 
     async fetchCommentsForDesignByDoc(doc) {
         return new Promise((resolve, reject) => {
@@ -649,7 +651,7 @@ class DBStore extends EventEmitter {
         return auth.user !== null || auth.currentUser !== null;
     }
 
-    async getDesigns() {
+    async fetchDesigns() {
         try {
             const designsRef = db.collection('Designs');
             const allDesignsArray = await designsRef.get();
@@ -665,6 +667,10 @@ class DBStore extends EventEmitter {
             console.log("Could not fetch designs:", err);
             return {err};
         }
+    }
+
+    getDesignsList() {
+        return Object.keys(this.designs).map((key) => this.designs[key]);
     }
 
     getDesignsMap() {
