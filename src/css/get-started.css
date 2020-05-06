@@ -1,6 +1,24 @@
 .get_started_page {
 	margin: auto;
-	max-width: 700px;
+	font-size: 16pt;
+}
+
+.get_started__form {
+	max-width: 850px;
+	margin: auto;
+}
+
+.get_started__search_results {
+	margin-top: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+	.get_started__search_results {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		margin: auto;
+		max-width: 1200px;
+	}
 }
 
 /* TODO: move these to a new component */

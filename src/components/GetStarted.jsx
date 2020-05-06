@@ -13,6 +13,7 @@ import HowMuchToDonate from './HowMuchToDonate';
 
 import EnterZipcode from './EnterZipcode';
 import HospitalSearchResults from './HospitalSearchResults';
+import DesignSearchResults from './DesignSearchResults';
 import '../css/get-started.css'
 
 class GetStarted extends Component {
@@ -51,16 +52,21 @@ class GetStarted extends Component {
 	    		'sewingMachine': false,
 	    		'laserCutter': false,
 	    	},
-	    	zipcode: null,
+	    	zipcode: '',
 	    	hospitals: [],
+	    	designs: [],
+	    	showSearchResults: false,
 	    }
-		this.setMode = this.setMode.bind(this);
-		this.nextStep = this.nextStep.bind(this);
-		this.setItem = this.setItem.bind(this);
-		this.setZipcode = this.setZipcode.bind(this);
-		this.getSearchResults = this.getSearchResults.bind(this);
-		// this.updateHospitalsWithSearchResults = this.updateHospitalsWithSearchResults.bind(this);
-		this.setDonateAmount = this.setDonateAmount;
+	    this.bottom = React.createRef();
+	}
+
+	componentDidMount() {
+		this.scrollToBottom();
+	}
+
+	// not quite working
+	scrollToBottom = () => {
+		this.bottom.current.scrollIntoView({ behavior: 'smooth' });
 	}
 
 	nextStep = () => {
@@ -72,39 +78,29 @@ class GetStarted extends Component {
 		this.setState({ currentStep: 2 });
 	}
 
-	setItem(category, item) {
+	setItem = (category, item) => {
 		const categoryToChange = this.state[category];
 		categoryToChange[item] = !categoryToChange[item];
 		this.setState({ categoryToChange })
 	}
 
-	setZipcode(e) {
+	setZipcode = (e) => {
 		this.setState({ zipcode: e.target.value.replace(/\D/,'') });
 	}
 
-	setDonateAmount(e, itemName) {
+	setDonateAmount = (e, itemName) => {
 		//TODO - fill this in once we use these values
 		// const ppeToDonate = this.state.ppeToDonate;
 		// ppeToDonate[itemName] = e.target.value.replace(/\D/,'');
 		// this.setState({ ppeToDonate });
 	}
-	/*
-	updateHospitalsWithSearchResults() {
-		if(xhr.readyState === XMLHttpRequest.DONE) {
-			var status = xhr.status;
-		    if (status === 0 || (status >= 200 && status < 400)) {
-		      // The request has been completed successfully
-		    	console.log(xhr.responseText);
-			}
-		}
-	}
-	*/
 
-	getSearchResults() {
+	getSearchResults = () => {
 		this.getHospitalSearchResults();
+		this.setState({ showSearchResults: true });
 	}
 
-	getHospitalSearchResults() {
+	getHospitalSearchResults = () => {
 		const state = this.state;
 		const resources = state.mode === 'MAKE' ? state.ppeToMake : state.ppeToDonate;
 		const apiParams = {
@@ -122,7 +118,7 @@ class GetStarted extends Component {
 		});
 	}
 
-	renderDonateForm() {
+	renderDonateForm = () => {
 		const itemsToDonate = Object.keys(this.state.ppeToDonate).filter((key) => (this.state.ppeToDonate[key]));
 		return(
 			<>
@@ -154,7 +150,17 @@ class GetStarted extends Component {
 		);
 	}
 
-	renderMakeForm() {
+	renderSearchResults = () => {
+		const { designs, hospitals } = this.state;
+		return (
+			<div className="get_started__search_results">
+				<DesignSearchResults designs={designs} />
+				<HospitalSearchResults hospitals={hospitals} />
+			</div>
+		)
+	}
+
+	renderMakeForm = () => {
 		return (
 			<>
 				{ this.state.currentStep >= 2
@@ -194,16 +200,19 @@ class GetStarted extends Component {
 	}
 
 	render() {
-		const {mode, hospitals} = this.state;
+		const {mode, showSearchResults} = this.state;
 		return (
 			<>
 				<LandingNavbar />
 				<div className="get_started_page">
-					<MakeOrDonate modeState={this.state.mode} setMode={this.setMode} />
-					{ mode === 'MAKE' && this.renderMakeForm() }
-					{ mode === 'DONATE' && this.renderDonateForm() }
+					<div className="get_started__form">
+						<MakeOrDonate modeState={this.state.mode} setMode={this.setMode} />
+						{ mode === 'MAKE' && this.renderMakeForm() }
+						{ mode === 'DONATE' && this.renderDonateForm() }
+					</div>
+					{showSearchResults && this.renderSearchResults() }
+					<div ref={this.bottom}></div>
 				</div>
-				{ <HospitalSearchResults hospitals={hospitals} /> }
 			</>
 		);
 	}
