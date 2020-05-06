@@ -28,6 +28,7 @@ export default class Makerspace extends Component {
 	//
 
 	render() {
+		const categories = ["surgicalMask", "n95", "ventilators", "ventilatorParts", "faceShield", "hospitalGown", "handSanitizer", "disposableBooties", "other"];
 		return (
 			<div>
 				<Navbar />

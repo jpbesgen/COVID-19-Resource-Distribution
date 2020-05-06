@@ -13,6 +13,31 @@ import dbstore from '../stores/DBStore';
 // get data, check if filters are updated
 // or create something that filters
 
+function DesignCards(props) {
+  // this.props.designs: dictionary from DBStore function getDesignsForCategory
+  // copied from Tags in DesignCard (for now)
+  let items = []
+  for (let i = 0; i < props.designs.length; i++) {
+    items.push(
+      <div id = "design-div">
+      <DesignCard
+        title = "Some Mask"
+        is_certified = {true}
+        difficulty = "Med"
+        tags = {["Fabric", "Elastic", "Filter", "Sewing Machine"]}
+        description = "A surgical mask, also known as a procedure mask, medical mask or simply as a face mask, is intended to be worn by health professionals during surgery and during nursing to catch the bacteria shed in liquid droplets and aerosols from the wearer's mouth and nose."
+        upvote_count = {34}
+      />
+      </div>
+    );
+  }
+  return (
+    // loop through list of tags and add to div as span
+    <div id="makerspace-card-tag-container">
+      {items}
+    </div>
+  );
+}
 export default class MakerspaceCarousel extends Component {
 
   // props: design_category, filters
@@ -34,18 +59,15 @@ export default class MakerspaceCarousel extends Component {
   }
 
   componentDidMount = async () => {
-		const top3designs = await dbstore.getTop3Designs();
-		console.log(top3designs);
-    const queries = this.formatQueries()
-    console.log(queries);
-    const designs = await dbstore.getDesigns()
-    // const designs = await dbstore.getMakerspaceDesignsForQueries(queries);
-    // console.log(designs);
+    // const queries = this.formatQueries();
+    const designs = await dbstore.getDesignsForCategory(this.props.category);
+    this.designs = designs
+    console.log(this.designs);
 	};
-
 
   formatQueries() {
     // should return an array of strings describing the applied filters
+    // defaulting to just category
 
     /* i.e.
         queries = [
@@ -56,8 +78,6 @@ export default class MakerspaceCarousel extends Component {
         lastDoc - reference to the snapshot returned by
     */
 
-    console.log(this.props.filters);
-    console.log(this.props.category);
     return [
       ["category", "==", this.props.category ? this.props.category : "*"]
     ];

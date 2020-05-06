@@ -215,6 +215,26 @@ class DBStore extends EventEmitter {
       });
     }
 
+    async getDesignsForCategory(category) {
+      const cat = category ? category : "all";
+      try {
+          const designsRef = db.collection('Designs').where("category", "==", category);
+          const designsArray = await designsRef.get();
+          const designs = [];
+
+          designsArray.forEach(design => {
+              designs.push(design.data());
+          });
+
+          return designs;
+      }
+      catch (err) {
+          console.log("Could not fetch designs:", err);
+          return {err};
+      }
+
+    }
+
     // Propagates design changes through event emitter
     listenForDesignsChange() {
         db.collection("Designs").onSnapshot((querySnapshots) => {
