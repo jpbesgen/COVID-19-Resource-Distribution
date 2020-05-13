@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import qs from 'qs'
+import qs from 'qs';
+import DBStore from '../stores/DBStore';
 
 import LandingNavbar from './LandingNavbar';
 import MakeOrDonate from './MakeOrDonate';
@@ -97,6 +98,7 @@ class GetStarted extends Component {
 
 	getSearchResults = () => {
 		this.getHospitalSearchResults();
+		this.getDesignSearchResults();
 		this.setState({ showSearchResults: true });
 	}
 
@@ -116,6 +118,18 @@ class GetStarted extends Component {
 	    .then(res => {
 	    	this.setState({ hospitals: res.data.locations });
 		});
+	}
+
+	getDesignSearchResults = () => {
+		const { ppeToDonate, ppeToMake, mode, materials, tools } = this.state;
+		const ppeToSearch = mode === 'MAKE' ? ppeToMake : ppeToDonate;
+		const searchArgs = {
+			ppe: Object.keys(ppeToSearch).filter((key) => (ppeToSearch[key])),
+			materials: Object.keys(materials).filter((key) => (materials[key])),
+			tools: Object.keys(tools).filter((key) => (tools[key])),
+		}
+		const designs = DBStore.getTop3Designs(searchArgs);
+	    this.setState({ designs });
 	}
 
 	renderDonateForm = () => {

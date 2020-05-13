@@ -13,8 +13,8 @@ class DesignSearchResults extends Component {
 				<p>We're sorry, we couldn't find PPE designs that matched the criteria you entered.</p>
 			)
 		}
-		return (hospitals.map((hospital) => {
-			return <HospitalCard name={hospital.name} address={hospital.address} />;
+		return (designs.map((design) => {
+			return <DesignCard image={design.image} tags={design.tags} />;
 		}));
 	}
 
