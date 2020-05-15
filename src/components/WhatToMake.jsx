@@ -5,7 +5,6 @@ import FormButton from './FormButton';
 class WhatToMake extends Component {
 	render() {
 		const { setItem, formState } = this.props;
-		console.log(formState.mask);
 		return (
 			<div className="form_step what_to_make">
 				<div className="form_label">
