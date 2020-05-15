@@ -9,7 +9,6 @@
 	text-align: center;
 }
 
-.form_button:focus,
 .form_button--selected {
 	background-color: #7A98AF;
 	outline: 0;

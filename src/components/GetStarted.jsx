@@ -48,8 +48,8 @@ class GetStarted extends Component {
 	    		'pvc': false,
 	    		'polycarbonateSheets': false,
 	    		'cottonFabric': false,
+	    		'elastic': false,
 	    		'other': false,
-	    		'none': false,
 	    	},
 	    	tools: {
 	    		'threeDPrinter': false,
