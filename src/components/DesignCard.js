@@ -128,14 +128,14 @@ class DesignCard extends React.Component {
   }
 
   render() {
-    let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
+    let { images, certified, difficulty, name, tags, description, upvotes } = this.props.design;
     console.log(this.props.design);
     return (
       <span>
         <Card id="makerspace-card">
           <div id="makerspace-card-image-container">
           <Card.Img variant="top" src={images[0] ? images[0].url : PlaceholderImage} id="makerspace-card-image"/>
-          <CertifiedLabel showCertifiedLabel={is_certified ? true : false}/>
+          <CertifiedLabel showCertifiedLabel={certified ? true : false}/>
           <DifficultyLabel difficulty={difficulty ? difficulty : "Easy"}/>
           </div>
           <Card.Body>
