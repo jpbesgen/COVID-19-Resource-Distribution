@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -82,7 +82,7 @@ function Tags(props) {
   );
 }
 
-class DesignCard extends React.Component {
+class DesignCard extends PureComponent {
   /*
   DesignCard this.props:
   design_id
@@ -136,12 +136,15 @@ class DesignCard extends React.Component {
   }
 
   handleCloseModal() {
+    console.log("CLICKed close")
     this.setState({showModal: false});
+    console.log(this.state.showModal);
+    this.setState({hasUpvoted: true});
   }
 
   render() {
     let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
-    console.log(this.props.design);
+    console.log(this.state.showModal);
     return (
       <span>
         <Card id="makerspace-card" onClick={this.handleShowModal}>
@@ -158,7 +161,7 @@ class DesignCard extends React.Component {
             </Card.Text>
           </Card.Body>
           <VotingComponent votes={upvotes ? upvotes : 0}/>
-          <DesignCardModal show={this.state.showModal} onHide={this.handleCloseModal} {...this.props}/>
+          <DesignCardModal {...this.props} showModal={this.state.showModal} onHide={this.handleCloseModal}/>
         </Card>
       </span>
     );

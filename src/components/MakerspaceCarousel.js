@@ -35,8 +35,6 @@ const MakerspaceCarousel = (props) => {
 	}
 
 
-	console.log(props.filters);
-
     return (
         <div id = "carousel-large-block">
             <div>
