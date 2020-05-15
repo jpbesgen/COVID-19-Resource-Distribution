@@ -56,13 +56,13 @@ export class Landing extends React.Component {
 							to explore PPE designs.
 						</p>
 					</div>
-					<Link to="/hospitals">
+					<Link to="/get-started">
 						<Button
 							style={style.Button}
 							onMouseEnter={this.setButtonHover}
 							onMouseLeave={this.unsetButtonHover}
 						>
-							<b>Hospitals In Need</b>
+							<b>Get Started</b>
 						</Button>
 					</Link>
 
