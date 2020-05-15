@@ -221,7 +221,6 @@ class GetStarted extends Component {
 	}
 
 	render() {
-		console.log(this.state.ppeToMake);
 		const {mode, showSearchResults} = this.state;
 		return (
 			<>
