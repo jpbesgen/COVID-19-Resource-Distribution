@@ -8,6 +8,7 @@ import Submit from './components/Submit';
 import Login from './components/Login';
 import About from './components/About';
 import BestPractices from './components/BestPractices';
+import GetStarted from './components/GetStarted';
 
 import LandingMobile from './components/Mobile/LandingMobile';
 import MakerspaceMobile from './components/Mobile/MakerspaceMobile';
@@ -26,6 +27,7 @@ function App() {
 					<Hospitals path="/hospitals" />
 					<MakerspaceMobile path="/makerspace" />
 					<SubmitMobile path="/submit" />
+					<GetStarted path="/get-started" />
 					<Login path="/login" />
 					<AboutMobile path="/about" />
 					<BestPracticesMobile path="/best-practices" />
@@ -40,6 +42,7 @@ function App() {
 				<Hospitals path="/hospitals" />
 				<Makerspace path="/makerspace" />
 				<Submit path="/submit" />
+				<GetStarted path="/get-started" />
 				<Login path="/login" />
 				<About path="/about" />
 				<BestPractices path="/best-practices" />
