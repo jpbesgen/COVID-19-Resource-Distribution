@@ -11,6 +11,7 @@ class HospitalSearchResults extends Component {
 				<p>We're sorry, there were no hospitals in our system that match the items and location you've entered.</p>
 			)
 		}
+		hospitals = hospitals.slice(0, 5); // get the first 5
 		return (hospitals.map((hospital) => {
 			return <HospitalCard name={hospital.name} address={hospital.address} />;
 		}));

@@ -13,8 +13,20 @@ class DesignSearchResults extends Component {
 				<p>We're sorry, we couldn't find PPE designs that matched the criteria you entered.</p>
 			)
 		}
+		designs = designs.slice(0, 3); // get the first 3
 		return (designs.map((design) => {
-			return <DesignCard image={design.image} tags={design.tags} />;
+			return (
+				<div className="design_search_card">
+					<DesignCard
+						title = {design.name}
+						is_certified = {design.certified === 'yes'}
+						difficulty = {design.difficulty}
+						tags = {["Fabric", "Elastic", "Filter", "Sewing Machine"]}
+						description = {design.description}
+	 					image={design.images.url}
+	                />
+	            </div>
+            )
 		}));
 	}
 
@@ -22,7 +34,9 @@ class DesignSearchResults extends Component {
 		return (
 			<div className="design_search_results">
 				<p> Designs for the PPE you've chosen </p>
-				{this.renderDesigns(this.props.designs)}
+				<div className="design_cards">
+					{this.renderDesigns(this.props.designs)}
+				</div>
 			</div>
 		);
 	}

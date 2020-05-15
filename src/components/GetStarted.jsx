@@ -120,7 +120,7 @@ class GetStarted extends Component {
 		});
 	}
 
-	getDesignSearchResults = () => {
+	getDesignSearchResults = async () => {
 		const { ppeToDonate, ppeToMake, mode, materials, tools } = this.state;
 		const ppeToSearch = mode === 'MAKE' ? ppeToMake : ppeToDonate;
 		const searchArgs = {
@@ -128,7 +128,7 @@ class GetStarted extends Component {
 			materials: Object.keys(materials).filter((key) => (materials[key])),
 			tools: Object.keys(tools).filter((key) => (tools[key])),
 		}
-		const designs = DBStore.getTop3Designs(searchArgs);
+		const designs = await DBStore.getTop3Designs(searchArgs);
 	    this.setState({ designs });
 	}
 
