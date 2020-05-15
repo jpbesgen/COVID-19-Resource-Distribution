@@ -1,0 +1,33 @@
+.partner_card {
+	padding: 20px;
+	max-width: 800px;
+	margin: 10px auto;
+	border: none;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	text-align: left;
+	display: flex;
+	flex-direction: horizontal;
+}
+
+.partner_card__wrapper a {
+	text-decoration: none;
+	color: black;
+}
+
+.partner_card__text {
+	margin: 5px 5px 5px 20px;
+}
+
+.partner_image {
+	width: 30%;
+	margin: 5px;
+	padding: 1px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+
+.partner_card__subtitle {
+	font-size: 16px;
+}

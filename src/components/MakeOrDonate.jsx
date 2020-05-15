@@ -6,10 +6,11 @@ class MakeOrDonate extends Component {
 		return (
 			<div className="form_step make_or_donate">
 				<div className="form_label">
-					Do you want to make PPE or donate PPE?
+					What would you like to contribute?
 				</div>
-				<FormButton isSelected={this.props.modeState === 'MAKE'} onClick={() => {this.props.setMode('MAKE')}} label="Make"/>
-				<FormButton isSelected={this.props.modeState === 'DONATE'} onClick={() => {this.props.setMode('DONATE')}} label="Donate"/>
+				<FormButton isSelected={this.props.modeState === 'MAKE'} onClick={() => {this.props.setMode('MAKE')}} label="Make PPE"/>
+				<FormButton isSelected={this.props.modeState === 'DONATE'} onClick={() => {this.props.setMode('DONATE')}} label="Donate PPE"/>
+				<FormButton isSelected={this.props.modeState === 'FUNDS'} onClick={() => {this.props.setMode('FUNDS')}} label="Donate Funds"/>
 			</div>
 		);
 	}

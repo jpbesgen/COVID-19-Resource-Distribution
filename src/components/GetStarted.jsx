@@ -15,6 +15,9 @@ import HowMuchToDonate from './HowMuchToDonate';
 import EnterZipcode from './EnterZipcode';
 import HospitalSearchResults from './HospitalSearchResults';
 import DesignSearchResults from './DesignSearchResults';
+
+import DonateToPartners from './DonateToPartners';
+
 import '../css/get-started.css'
 
 class GetStarted extends Component {
@@ -164,6 +167,10 @@ class GetStarted extends Component {
 		);
 	}
 
+	renderFundsForm = () => {
+		return <DonateToPartners />;
+	}
+
 	renderSearchResults = () => {
 		const { designs, hospitals } = this.state;
 		return (
@@ -223,6 +230,7 @@ class GetStarted extends Component {
 						<MakeOrDonate modeState={this.state.mode} setMode={this.setMode} />
 						{ mode === 'MAKE' && this.renderMakeForm() }
 						{ mode === 'DONATE' && this.renderDonateForm() }
+						{ mode === 'FUNDS' && this.renderFundsForm() }
 					</div>
 					{showSearchResults && this.renderSearchResults() }
 					<div ref={this.bottom}></div>
