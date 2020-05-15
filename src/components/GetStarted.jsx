@@ -48,8 +48,8 @@ class GetStarted extends Component {
 	    		'pvc': false,
 	    		'polycarbonateSheets': false,
 	    		'cottonFabric': false,
+	    		'elastic': false,
 	    		'other': false,
-	    		'none': false,
 	    	},
 	    	tools: {
 	    		'threeDPrinter': false,
@@ -221,6 +221,7 @@ class GetStarted extends Component {
 	}
 
 	render() {
+		console.log(this.state.ppeToMake);
 		const {mode, showSearchResults} = this.state;
 		return (
 			<>
