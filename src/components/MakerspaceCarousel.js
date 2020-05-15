@@ -13,7 +13,7 @@ import Button from 'react-bootstrap/Button';
 
 
 
-const MakerspaceCarousel = () => {
+const MakerspaceCarousel = (props) => {
     function setDonateButtonHover(e) {
 		e.target.style.color = '#3B628B';
 		e.target.style.background = 'transparent';
@@ -32,18 +32,22 @@ const MakerspaceCarousel = () => {
 		e.target.style.color = 'silver';
 		e.target.style.background = 'transparent';
 	}
+
+
+	console.log(props.filters);
+
     return (
         <div id = "carousel-large-block">
             <div>
-                <h1 id="makerspace-carousel-name">Masks</h1>
+                <h1 id="makerspace-carousel-name">{props.category}</h1>
                 {/* <span id="makerspace-viewall-button"> */}
                 <Link to="/makerspace" id="viewall-button">
-                <Button id = "viewall-button"
+                {/* <Button id = "viewall-button"
 						onMouseEnter={setviewAllButtonHover}
 						onMouseLeave={unsetviewAllButtonHover}
 					>
 						<b>View All ></b>
-					</Button>
+					</Button> */}
 				</Link>
                 <Link to="/hospitals">
                     <Button id = "donate-button"
@@ -60,19 +64,11 @@ const MakerspaceCarousel = () => {
             <Carousel responsive={responsive}
                 infinite
                 renderButtonGroupOutside={true} >
-                    <div id = "design-div"><DesignCard
-                      title = "Some Mask"
-                      is_certified = {true}
-                      difficulty = "Med"
-                      tags = {["Fabric", "Elastic", "Filter", "Sewing Machine"]}
-                      description = "A surgical mask, also known as a procedure mask, medical mask or simply as a face mask, is intended to be worn by health professionals during surgery and during nursing to catch the bacteria shed in liquid droplets and aerosols from the wearer's mouth and nose."
-                      upvote_count = {34}
-                    />
-                    </div>
-                    <div id = "design-div" ><DesignCard/></div>
-                    <div id = "design-div" ><DesignCard/></div>
-                    <div id = "design-div" ><DesignCard/></div>
-                    <div id = "design-div" ><DesignCard/></div>
+					{props.designs.sort((d1, d2) => {
+						return d2.upvotes - d1.upvotes;
+						}).map((design) => {
+						return <div id="design-div" key={design.id}><DesignCard design={design}/></div>
+					})}
             </Carousel>
         </div>
 

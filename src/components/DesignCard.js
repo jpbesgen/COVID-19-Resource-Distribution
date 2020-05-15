@@ -128,22 +128,24 @@ class DesignCard extends React.Component {
   }
 
   render() {
+    let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
+    console.log(this.props.design);
     return (
       <span>
         <Card id="makerspace-card">
           <div id="makerspace-card-image-container">
-          <Card.Img variant="top" src={this.props.image ? this.props.image : PlaceholderImage} id="makerspace-card-image"/>
-          <CertifiedLabel showCertifiedLabel={this.props.is_certified ? true : false}/>
-          <DifficultyLabel difficulty={this.props.difficulty ? this.props.difficulty : "Easy"}/>
+          <Card.Img variant="top" src={images[0] ? images[0].url : PlaceholderImage} id="makerspace-card-image"/>
+          <CertifiedLabel showCertifiedLabel={is_certified ? true : false}/>
+          <DifficultyLabel difficulty={difficulty ? difficulty : "Easy"}/>
           </div>
           <Card.Body>
-            <Card.Title id="makerspace-card-title">{this.props.title ? this.formatTitle(this.props.title) : ""}</Card.Title>
-            <Tags tags={this.props.tags ? this.props.tags : []}/>
+            <Card.Title id="makerspace-card-title">{name ? this.formatTitle(name) : ""}</Card.Title>
+            <Tags tags={tags ? tags : []}/>
             <Card.Text id="makerspace-card-description">
-            {this.props.description ? this.formatDescription(this.props.description) : ""}
+            {description ? this.formatDescription(description) : ""}
             </Card.Text>
           </Card.Body>
-          <VotingComponent votes={this.props.upvote_count ? this.props.upvote_count : 0}/>
+          <VotingComponent votes={upvotes ? upvotes : 0}/>
         </Card>
       </span>
     );
