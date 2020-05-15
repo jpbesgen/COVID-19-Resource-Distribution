@@ -136,15 +136,11 @@ class DesignCard extends PureComponent {
   }
 
   handleCloseModal() {
-    console.log("CLICKed close")
     this.setState({showModal: false});
-    console.log(this.state.showModal);
-    this.setState({hasUpvoted: true});
   }
 
   render() {
     let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
-    console.log(this.state.showModal);
     return (
       <span>
         <Card id="makerspace-card" onClick={this.handleShowModal}>
@@ -161,8 +157,8 @@ class DesignCard extends PureComponent {
             </Card.Text>
           </Card.Body>
           <VotingComponent votes={upvotes ? upvotes : 0}/>
-          <DesignCardModal {...this.props} showModal={this.state.showModal} onHide={this.handleCloseModal}/>
         </Card>
+        <DesignCardModal {...this.props} showModal={this.state.showModal} onHide={this.handleCloseModal}/>
       </span>
     );
   }

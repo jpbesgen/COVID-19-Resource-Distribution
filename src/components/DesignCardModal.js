@@ -22,7 +22,6 @@ export default class DesignCardModal extends PureComponent {
         let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
         const onHide = this.props.onHide;
         const show = this.props.showModal;
-        console.log(show);
         return(
             <Modal {...this.props} onHide={onHide} show={this.state.showModal} >
                 <Modal.Header closeButton>
