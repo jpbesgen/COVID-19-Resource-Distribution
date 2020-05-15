@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import { Router } from '@reach/router';
 
 import Landing from './components/Landing';
 import Hospitals from './components/Hospitals';
@@ -16,9 +16,12 @@ import SubmitMobile from './components/Mobile/SubmitMobile';
 import BestPracticesMobile from './components/Mobile/BestPracticesMobile';
 import AboutMobile from './components/Mobile/AboutMobile';
 
-import { Router } from '@reach/router';
+import './App.css';
+import DBStore from './stores/DBStore';
 
 function App() {
+	DBStore.getTop3Designs();
+
 	if (window.matchMedia('(max-width: 991px)').matches) {
 		return (
 			<div>

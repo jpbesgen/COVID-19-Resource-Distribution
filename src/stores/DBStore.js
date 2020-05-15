@@ -675,6 +675,14 @@ class DBStore extends EventEmitter {
     getDesignsMap() {
         return this.designsMap;
     }
+
+    async getTop3Designs(opts) {
+        let designs = await this.fetchDesigns();
+        console.log(designs);
+
+        designs = designs.splice(0,3);
+        return designs;
+    }
 }
 
 let dbstore = new DBStore();
