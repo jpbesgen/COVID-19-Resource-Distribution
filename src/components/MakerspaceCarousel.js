@@ -42,12 +42,12 @@ const MakerspaceCarousel = (props) => {
                 <h1 id="makerspace-carousel-name">{props.category}</h1>
                 {/* <span id="makerspace-viewall-button"> */}
                 <Link to="/makerspace" id="viewall-button">
-                <Button id = "viewall-button"
+                {/* <Button id = "viewall-button"
 						onMouseEnter={setviewAllButtonHover}
 						onMouseLeave={unsetviewAllButtonHover}
 					>
 						<b>View All ></b>
-					</Button>
+					</Button> */}
 				</Link>
                 <Link to="/hospitals">
                     <Button id = "donate-button"

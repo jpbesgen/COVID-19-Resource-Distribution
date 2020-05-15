@@ -128,7 +128,8 @@ class DesignCard extends React.Component {
   }
 
   render() {
-    let { images, is_certified, difficulty, title, tags, description, upvotes } = this.props.design;
+    let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
+    console.log(this.props.design);
     return (
       <span>
         <Card id="makerspace-card">
@@ -138,7 +139,7 @@ class DesignCard extends React.Component {
           <DifficultyLabel difficulty={difficulty ? difficulty : "Easy"}/>
           </div>
           <Card.Body>
-            <Card.Title id="makerspace-card-title">{title ? this.formatTitle(title) : ""}</Card.Title>
+            <Card.Title id="makerspace-card-title">{name ? this.formatTitle(name) : ""}</Card.Title>
             <Tags tags={tags ? tags : []}/>
             <Card.Text id="makerspace-card-description">
             {description ? this.formatDescription(description) : ""}
