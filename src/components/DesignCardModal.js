@@ -12,11 +12,12 @@ export default class DesignCardModal extends Component {
     }
     
     render() {
+        let { images, is_certified, difficulty, name, tags, description, upvotes } = this.props.design;
         return(
             <Modal {...this.props}>
                 <Modal.Header closeButton closeLabel>
                     <Modal.Title>
-                        {this.props.title ? this.props.title : ""}
+                        {name ? name : ""}
                     </Modal.Title>
                 </Modal.Header>
             </Modal>
