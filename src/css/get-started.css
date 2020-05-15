@@ -1,6 +1,8 @@
 .get_started_page {
 	margin: auto;
 	font-size: 16pt;
+	min-height: 90vh;
+	margin-bottom: 50px;
 }
 
 .get_started__form {

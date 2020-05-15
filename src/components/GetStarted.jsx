@@ -4,6 +4,7 @@ import qs from 'qs';
 import DBStore from '../stores/DBStore';
 
 import LandingNavbar from './LandingNavbar';
+import Footer from './Footer';
 import MakeOrDonate from './MakeOrDonate';
 import WhatToMake from './WhatToMake';
 import WhatMaterials from './WhatMaterials';
@@ -223,7 +224,7 @@ class GetStarted extends Component {
 	render() {
 		const {mode, showSearchResults} = this.state;
 		return (
-			<>
+			<div className="get_started_page__container">
 				<LandingNavbar />
 				<div className="get_started_page">
 					<div className="get_started__form">
@@ -235,7 +236,8 @@ class GetStarted extends Component {
 					{showSearchResults && this.renderSearchResults() }
 					<div ref={this.bottom}></div>
 				</div>
-			</>
+				<Footer />
+			</div>
 		);
 	}
 };
