@@ -8,13 +8,17 @@ import 'react-multi-carousel/lib/styles.css';
 import MakerspaceCarousel from './MakerspaceCarousel'
 import Filter from "./MakerspaceFilter";
 
+<<<<<<< HEAD
 import db from "../stores/DBStore";
 
+=======
+>>>>>>> develop-v2
 export default class Makerspace extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+<<<<<<< HEAD
 			filters: {},
 			carouselTypes: {}
 		};
@@ -49,6 +53,12 @@ export default class Makerspace extends Component {
 			carouselTypes,
 		});
 		
+=======
+			filters: {}
+		};
+
+		this.filterUpdate = this.filterUpdate.bind(this);
+>>>>>>> develop-v2
 	}
 
 	filterUpdate(key,value) {
@@ -60,6 +70,7 @@ export default class Makerspace extends Component {
 	}
 
 	render() {
+<<<<<<< HEAD
 		let { carouselTypes } = this.state,
 			carousels = Object.keys(carouselTypes).map((key) => {
 				return <MakerspaceCarousel category={key} key={key} designs={carouselTypes[key]} filters={this.state.filters}/>
@@ -70,6 +81,18 @@ export default class Makerspace extends Component {
 				<Filter filters={this.state.filters} filterUpdate={this.filterUpdate}/>
 				<div style={{padding: '20px'}}>
 					{carousels}
+=======
+		return (
+			<div>
+				<Navbar />
+				<div style={{padding: '20px'}}>
+					<Filter filterUpdate={this.filterUpdate}/>
+					<div>
+						<MakerspaceCarousel/>
+						<MakerspaceCarousel/>
+						<MakerspaceCarousel/>
+					</div>
+>>>>>>> develop-v2
 				</div>
 			</div>
 		);
