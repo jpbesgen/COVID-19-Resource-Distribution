@@ -1,0 +1,14 @@
+.design_search_results {
+	margin: 20px auto;
+	text-align: left;
+}
+
+.design_cards {
+	display: flex;
+	flex-direction: horizontal;
+	padding: 20px;
+}
+
+.design_search_card {
+	padding: 5px;
+}
