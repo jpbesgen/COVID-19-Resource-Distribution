@@ -13,8 +13,6 @@ import ConnectionLeft from '../img/connection-left.svg';
 
 export class Landing extends React.Component {
 	componentDidMount = async () => {
-		const designs = await dbstore.getTop3Designs();
-		console.log(designs);
 	};
 
 	setButtonHover = (e) => {

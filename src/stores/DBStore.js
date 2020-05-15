@@ -28,7 +28,6 @@ class DBStore extends EventEmitter {
         this.downvoteDesign = this.downvoteDesign.bind(this);
         this.fetchDesigns = this.fetchDesigns.bind(this);
         this.getDesignsMap = this.getDesignsMap.bind(this);
-        this.getTop3Designs = this.getTop3Designs.bind(this);
         this.getDesignsList = this.getDesignsList.bind(this);
 
         // comments
@@ -675,11 +674,6 @@ class DBStore extends EventEmitter {
 
     getDesignsMap() {
         return this.designsMap;
-    }
-
-    async getTop3Designs(opts) {
-        let designs = await this.getDesigns();
-        return designs.slice(0,3);
     }
 }
 
