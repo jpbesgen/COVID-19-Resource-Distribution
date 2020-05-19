@@ -26,7 +26,7 @@ class WhatToMake extends Component {
 					<FormButton
 						isSelected={formState.gown}
 						onClick={() => {
-							setItem("ppeToMake", "gowns");
+							setItem("ppeToMake", "gown");
 						}}
 						label="Gowns"
 					/>

@@ -204,7 +204,7 @@ class DBStore extends EventEmitter {
 					q[2] // value i.e. "5"
 				);
 			});
-			designs_ref = designs_ref.orderBy("upvotes", "asc");
+			designs_ref = designs_ref.orderBy("upvotes", "desc");
 
 			if (lastDoc !== null) designs_ref = designs_ref.startAfter(lastDoc);
 
@@ -830,8 +830,34 @@ class DBStore extends EventEmitter {
 		return this.designsMap;
 	}
 
-	async getTop3Designs() {
-		return (await this.fetchDesigns()).slice(0, 3);
+	async getTop3Designs(params, isMakeFlow) {
+		const { materials, ppe, tools } = params;
+		try {
+			let designs = await this.fetchDesigns();
+			designs = designs.filter((design) => {
+				const materialsFilter =
+					materials.includes("other") ||
+					materials.some((material) =>
+						design.tags.materials.includes(material)
+					);
+				const ppeFilter =
+					ppe.includes("other") ||
+					ppe.some((ppe) => design.tags.ppe.includes(ppe));
+				const toolsFilter =
+					(tools.length === 0 &&
+						design.tags.tools.includes("none")) ||
+					tools.some((tool) => design.tags.tools.includes(tool));
+
+				return isMakeFlow
+					? materialsFilter && toolsFilter && ppeFilter
+					: ppeFilter;
+			});
+			designs = designs.sort((a, b) => b.upvotes - a.upvotes);
+			return designs.slice(0, 3);
+		} catch (err) {
+			console.log("Could not fetch designs:", err);
+			return { err };
+		}
 	}
 }
 

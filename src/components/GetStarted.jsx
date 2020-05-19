@@ -20,41 +20,46 @@ import DonateToPartners from "./DonateToPartners";
 
 import "../css/get-started.css";
 
+const DEFAULT_ppeToDonate = {
+		mask: false,
+		shield: false,
+		gown: false,
+		medicalParts: false,
+		accessories: false,
+		other: false,
+	},
+	DEFAULT_ppeToMake = {
+		mask: false,
+		shield: false,
+		gown: false,
+		medicalParts: false,
+		accessories: false,
+		other: false,
+	},
+	DEFAULT_materials = {
+		petg: false,
+		pvc: false,
+		polycarbonateSheets: false,
+		cottonFabric: false,
+		elastic: false,
+		other: false,
+	},
+	DEFAULT_tools = {
+		threeDPrinter: false,
+		sewingMachine: false,
+		laserCutter: false,
+	};
+
 class GetStarted extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			currentStep: 1,
 			mode: null,
-			ppeToDonate: {
-				mask: false,
-				shield: false,
-				gown: false,
-				medicalParts: false,
-				accessories: false,
-				other: false,
-			},
-			ppeToMake: {
-				mask: false,
-				shield: false,
-				gown: false,
-				medicalParts: false,
-				accessories: false,
-				other: false,
-			},
-			materials: {
-				petg: false,
-				pvc: false,
-				polycarbonateSheets: false,
-				cottonFabric: false,
-				elastic: false,
-				other: false,
-			},
-			tools: {
-				threeDPrinter: false,
-				sewingMachine: false,
-				laserCutter: false,
-			},
+			ppeToDonate: DEFAULT_ppeToDonate,
+			ppeToMake: DEFAULT_ppeToMake,
+			materials: DEFAULT_materials,
+			tools: DEFAULT_tools,
 			zipcode: "",
 			hospitals: [],
 			designs: [],
@@ -140,7 +145,10 @@ class GetStarted extends Component {
 			materials: Object.keys(materials).filter((key) => materials[key]),
 			tools: Object.keys(tools).filter((key) => tools[key]),
 		};
-		const designs = await DBStore.getTop3Designs(searchArgs);
+		const designs = await DBStore.getTop3Designs(
+			searchArgs,
+			mode === "MAKE"
+		);
 		this.setState({ designs });
 	};
 
