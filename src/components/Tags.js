@@ -7,7 +7,7 @@ function formatMaterialOrTool(tag) {
 		case "pvc":
 			return "PVC";
 		case "polycarbonateSheets":
-			return "Polycarbonate4";
+			return "Polycarbonate";
 		case "cottonFabric":
 			return "Cotton";
 		case "elastic":
