@@ -110,12 +110,12 @@ export default class DesignCardModal extends PureComponent {
 					</div>
 				</Modal.Body>
 				<Modal.Footer className="modal-bottom">
-					<Button className="modal-bottom-button">
+					{/* <Button className="modal-bottom-button">
 						<p>Get This Design</p>
 					</Button>
 					<Button className="modal-bottom-button">
 						<p>Donate This Design</p>
-					</Button>
+					</Button> */}
 				</Modal.Footer>
 			</Modal>
 		);
