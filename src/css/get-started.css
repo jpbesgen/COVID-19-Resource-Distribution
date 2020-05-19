@@ -23,8 +23,7 @@
 
 /* TODO: move these to a new component */
 .form_step {
-	margin: auto;
-	margin-top: 50px;
+	margin: 50px auto auto;
 	text-align: center;
 }
 

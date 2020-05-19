@@ -3,8 +3,9 @@ import React from 'react';
 const Footer = () => {
 	return (
 		<footer style={style.Footer}>
-			© 2020 Copyright: Built by the Invention Corps Community and Web Dev @
-			Berkeley
+			Made with ❤️ by the Invention Corps Community and Web Dev @ Berkeley
+			<br />
+			Copyright 2020 ©
 		</footer>
 	);
 };

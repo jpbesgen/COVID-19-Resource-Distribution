@@ -14,9 +14,9 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
-    "react-multi-carousel": "^2.5.5",
     "react-dropzone": "^10.2.2",
     "react-firebaseui": "^4.1.0",
+    "react-multi-carousel": "^2.5.5",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -41,6 +41,13 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "prettier": "^2.0.5",
+    "stylelint": "^13.4.1",
+    "stylelint-config-standard": "^20.0.0"
+  },
+  "prettier": {
+    "useTabs": true,
+    "tabWidth": 4
   }
 }

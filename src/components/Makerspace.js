@@ -75,7 +75,3 @@ export default class Makerspace extends Component {
 		);
 	}
 };
-
-let styles = {
-
-};
