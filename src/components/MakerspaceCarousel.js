@@ -34,11 +34,34 @@ const MakerspaceCarousel = (props) => {
 		e.target.style.background = 'transparent';
 	}
 
+	function formatTitle() {
+		// switching on values written in Submit.js
+		switch(props.category) {
+		  case "surgicalMask":
+			return "Surgical Masks";
+		  case "n95":
+			return "N95";
+		  case "ventilators":
+			return "Ventilator";
+		  case "ventilatorParts":
+			return "Ventilator Parts";
+		  case "faceShield":
+			return "Face Shields";
+		  case "hospitalGown":
+			return "Hospital Gowns";
+		  case "handSanitizer":
+			return "Hand Sanitizer";
+		  case "disposableBooties":
+			return "Disposable Booties";
+		  default:
+			return "Other Designs";
+		}
+	  }
 
     return (
         <div id = "carousel-large-block">
             <div>
-                <h1 id="makerspace-carousel-name">{props.category}</h1>
+                <h1 id="makerspace-carousel-name">{props.category ? formatTitle(props.category) : "Designs"}</h1>
                 {/* <span id="makerspace-viewall-button"> */}
                 <Link to="/makerspace" id="viewall-button">
                 {/* <Button id = "viewall-button"
