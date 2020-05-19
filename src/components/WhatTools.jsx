@@ -16,7 +16,7 @@ class WhatTools extends Component {
 					<FormButton isSelected={formState.sewingMachine} onClick={() => {setItem('tools', 'sewingMachine')}} label="Sewing Machine"/>
 					<FormButton isSelected={formState.laserCutter} onClick={() => {setItem('tools', 'laserCutter')}} label="Laser Cutter"/>
 				</div>
-				<a onClick={this.props.nextStep}> >>> continue </a>
+			  <button className="continue_button" onClick={this.props.nextStep}> >>> continue </button>
 			</div>
 		);
 	}

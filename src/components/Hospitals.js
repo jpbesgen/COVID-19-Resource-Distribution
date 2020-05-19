@@ -19,13 +19,13 @@ const Hospitals = () => {
 	);
 };
 
-const style = {
-	Footer: {
-		backgroundColor: "#7a98af",
-		color: "white",
-		padding: "20px",
-		textAlign: "center",
-	},
-};
+// const style = {
+// 	Footer: {
+// 		backgroundColor: "#7a98af",
+// 		color: "white",
+// 		padding: "20px",
+// 		textAlign: "center",
+// 	},
+// };
 
 export default Hospitals;

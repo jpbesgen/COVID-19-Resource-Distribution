@@ -18,7 +18,7 @@ class WhatToMake extends Component {
 					<FormButton isSelected={formState.accessories} onClick={() => {setItem('ppeToMake', 'accessories')}} label="Mask Accessories"/>
 					<FormButton isSelected={formState.other} onClick={() => {setItem('ppeToMake', 'other')}} label="Other"/>
 				</div>
-				<a onClick={this.props.nextStep}> >>> continue </a>
+				<button className="continue_button" onClick={this.props.nextStep}> >>> continue </button>
 			</div>
 		);
 	}
