@@ -50,6 +50,8 @@ export default class DesignCardModal extends PureComponent {
 			tags,
 			description,
 			upvotes,
+			category,
+			user,
 		} = this.props.design;
 		const onHide = this.props.onHide;
 		const show = this.props.showModal;
@@ -61,28 +63,42 @@ export default class DesignCardModal extends PureComponent {
 				show={this.state.showModal}
 				size="lg"
 			>
-				<Modal.Header closeButton>
+				<Modal.Header closeButton className="modal-top">
 					<Modal.Title>
-						{name ? name : ''}
-						<CertifiedLabel showCertifiedLabel={is_certified ? true : false} />
+						<div>
+							<h2 className="title">{name ? name : ''}</h2>
+							<p className="subtitle">
+								<b>{category ? category : ''}</b> submitted by{' '}
+								<b>{user ? user : ''}</b>
+							</p>
+						</div>
 					</Modal.Title>
+					<CertifiedLabel showCertifiedLabel={is_certified ? true : false} />
 				</Modal.Header>
-				<Modal.Body>
+				<Modal.Body className="modal-middle">
 					<div>
 						<img src={images[0]} alt="item images" />
-						<div>
-							<Button>Description</Button>
-							<Button>Comments</Button>
+						<div className="image-footer-button-group">
+							<Button className="image-footer-button">
+								<p>Description</p>
+							</Button>
+							<Button className="image-footer-button">
+								<p>Comments</p>
+							</Button>
 						</div>
-						<div>
+						<div className="item-content">
 							<Tags tags={tags ? tags : []} />
-							{description ? description : ''}
+							<p className="item-content">{description ? description : ''}</p>
 						</div>
 					</div>
 				</Modal.Body>
-				<Modal.Footer>
-					<Button>Get This Design</Button>
-					<Button>Donate This Design</Button>
+				<Modal.Footer className="modal-bottom">
+					<Button className="modal-bottom-button">
+						<p>Get This Design</p>
+					</Button>
+					<Button className="modal-bottom-button">
+						<p>Donate This Design</p>
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		);
