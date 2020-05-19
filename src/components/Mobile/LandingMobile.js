@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "@reach/router";
 import LandingNavbarMobile from "./LandingNavbarMobile";
-import LandingCarouselMobile from "./LandingCarouselMobile";
-import Footer from "../Footer";
+// import LandingCarouselMobile from "./LandingCarouselMobile";
+// import Footer from "../Footer";
 
 import Button from "react-bootstrap/Button";
 
