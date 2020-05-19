@@ -3,10 +3,10 @@ import { Link } from "@reach/router";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
-import dbstore from "../stores/DBStore";
+// import dbstore from "../stores/DBStore";
 import LandingNavbar from "./LandingNavbar";
 import LandingCarousel from "./LandingCarousel";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import LogoWithSubtitle from "../img/logowithsubtitle.png";
 import ConnectionRight from "../img/connection-right.svg";
 import ConnectionLeft from "../img/connection-left.svg";

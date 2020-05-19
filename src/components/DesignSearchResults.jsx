@@ -18,14 +18,7 @@ class DesignSearchResults extends Component {
 		return designs.map((design, index) => {
 			return (
 				<div className="design_search_card" key={index}>
-					<DesignCard
-						title={design.name}
-						is_certified={design.certified === "yes"}
-						difficulty={design.difficulty}
-						tags={["Fabric", "Elastic", "Filter", "Sewing Machine"]}
-						description={design.description}
-						images={design.images}
-					/>
+					<DesignCard design={design} />
 				</div>
 			);
 		});

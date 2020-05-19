@@ -23,7 +23,7 @@ function App() {
 	if (window.matchMedia("(max-width: 991px)").matches) {
 		return (
 			<>
-				<Router>
+				<Router style={{ flex: 1 }}>
 					<LandingMobile path="/" />
 					<Hospitals path="/hospitals" />
 					<MakerspaceMobile path="/makerspace" />
@@ -39,7 +39,7 @@ function App() {
 	}
 	return (
 		<>
-			<Router>
+			<Router style={{ flex: 1 }}>
 				<Landing path="/" />
 				<Hospitals path="/hospitals" />
 				<Makerspace path="/makerspace" />

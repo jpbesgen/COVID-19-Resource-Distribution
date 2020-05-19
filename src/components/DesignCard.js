@@ -16,11 +16,15 @@ function VotingComponent(props) {
 	return (
 		<span id="makerspace-card-voting-container">
 			<Button variant="primary" id="makerspace-card-vote-button">
-				<img src={UpvoteButtonImage} />
+				<img src={UpvoteButtonImage} alt="upvote button" />
 			</Button>
 			<h1 id="makerspace-card-vote-count">{props.votes}</h1>
 			<Button variant="primary" id="makerspace-card-vote-button">
-				<img src={UpvoteButtonImage} id="makerspace-downvote-image" />
+				<img
+					src={UpvoteButtonImage}
+					id="makerspace-downvote-image"
+					alt=""
+				/>
 			</Button>
 		</span>
 	);
@@ -37,6 +41,7 @@ function CertifiedLabel(props) {
 				<img
 					src={CheckmarkImage}
 					id="makerspace-card-certified-image"
+					alt=""
 				/>
 			</span>
 		);
@@ -144,7 +149,7 @@ class DesignCard extends React.Component {
 			tags,
 			description,
 			upvotes,
-		} = this.props;
+		} = this.props.design;
 
 		return (
 			<span>
@@ -153,9 +158,12 @@ class DesignCard extends React.Component {
 						<Card.Img
 							variant="top"
 							src={images[0] ? images[0].url : PlaceholderImage}
+							alt=""
 							id="makerspace-card-image"
 						/>
-						<CertifiedLabel showCertifiedLabel={!!certified} />
+						<CertifiedLabel
+							showCertifiedLabel={certified === "yes"}
+						/>
 						<DifficultyLabel
 							difficulty={difficulty ? difficulty : "Easy"}
 						/>

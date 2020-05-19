@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import qs from "qs";
+// import qs from "qs";
 import DBStore from "../stores/DBStore";
 
 import LandingNavbar from "./LandingNavbar";
@@ -227,7 +227,7 @@ class GetStarted extends Component {
 	render() {
 		const { mode, showSearchResults } = this.state;
 		return (
-			<>
+			<div className="get_started__contents">
 				<LandingNavbar />
 				<div className="get_started_page">
 					<div className="get_started__form">
@@ -242,7 +242,7 @@ class GetStarted extends Component {
 					{showSearchResults && this.renderSearchResults()}
 					<div ref={this.bottom} />
 				</div>
-			</>
+			</div>
 		);
 	}
 }

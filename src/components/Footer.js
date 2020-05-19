@@ -3,7 +3,11 @@ import React from "react";
 const Footer = () => {
 	return (
 		<footer style={style.Footer}>
-			Made with ❤️ by the Invention Corps Community and Web Dev @ Berkeley
+			Made with{" "}
+			<span role="img" aria-label="heart" aria-labelledby="heart">
+				❤️
+			</span>{" "}
+			by the Invention Corps Community and Web Dev @ Berkeley
 			<br />
 			Copyright 2020 ©
 		</footer>
