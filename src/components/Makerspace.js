@@ -36,7 +36,7 @@ export default class Makerspace extends Component {
 	handleDesigns() {
 		let designs = db.getDesignsList();
 
-		console.log(designs);
+		// console.log(designs);
 
 		let carouselTypes = {};
 		designs.forEach((design) => {

@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Tags from './Tags';
 import CheckmarkImage from '../img/check-mark.png';
 
-import '../css/design-card-modal.css';
+// import '../css/design-card-modal.css';
 
 function CertifiedLabel(props) {
 	//props:

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import DesignCardModal from './DesignCardModal';
 import Carousel from 'react-bootstrap/Carousel';
+import Tags from './Tags';
 
 // css copied from makerspace-carousel for now
 import '../css/design-card.css';
@@ -72,18 +73,6 @@ function DifficultyLabel(props) {
 		>
 			{props.difficulty}
 		</span>
-	);
-}
-
-function Tags(props) {
-	// props: tags (array of Strings)
-	let items = [];
-	for (let i = 0; i < props.tags.length; i++) {
-		items.push(<span id="makerspace-card-tag">{props.tags[i]}</span>);
-	}
-	return (
-		// loop through list of tags and add to div as span
-		<div id="makerspace-card-tag-container">{items}</div>
 	);
 }
 
@@ -175,7 +164,7 @@ class DesignCard extends PureComponent {
 							{description ? this.formatDescription(description) : ''}
 						</Card.Text>
 					</Card.Body>
-					<VotingComponent votes={upvotes ? upvotes : 0} />
+					{/* <VotingComponent votes={upvotes ? upvotes : 0} /> */}
 				</Card>
 				<DesignCardModal
 					{...this.props}
