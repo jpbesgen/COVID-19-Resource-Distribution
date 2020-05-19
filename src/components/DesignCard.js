@@ -1,7 +1,11 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-// import Carousel from "react-bootstrap/Carousel";
+
+import React, { PureComponent } from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import DesignCardModal from './DesignCardModal';
+import Carousel from 'react-bootstrap/Carousel';
+import Tags from './Tags';
 
 // css copied from makerspace-carousel for now
 import "../css/design-card.css";
@@ -40,8 +44,8 @@ function CertifiedLabel(props) {
 				Certified
 				<img
 					src={CheckmarkImage}
+					alt="certified"
 					id="makerspace-card-certified-image"
-					alt=""
 				/>
 			</span>
 		);
@@ -52,16 +56,16 @@ function DifficultyLabel(props) {
 	// props: difficulty (String)
 	// I think...
 
-	var color = "#6BA48C";
+	var color = '#6BA48C';
 	switch (props.difficulty) {
-		case "Easy":
-			color = "#9DDB8D";
+		case 'Easy':
+			color = '#9DDB8D';
 			break;
-		case "Med":
-			color = "#FFC773";
+		case 'Med':
+			color = '#FFC773';
 			break;
-		case "Hard":
-			color = "#FF8888";
+		case 'Hard':
+			color = '#FF8888';
 			break;
 		default:
 			break;
@@ -77,23 +81,7 @@ function DifficultyLabel(props) {
 	);
 }
 
-function Tags(props) {
-	// props: tags (array of Strings)
-	let items = [];
-	for (let i = 0; i < props.tags.length; i++) {
-		items.push(
-			<span id="makerspace-card-tag" key={i}>
-				{props.tags[i]}
-			</span>
-		);
-	}
-	return (
-		// loop through list of tags and add to div as span
-		<div id="makerspace-card-tag-container">{items}</div>
-	);
-}
-
-class DesignCard extends React.Component {
+class DesignCard extends PureComponent {
 	/*
   DesignCard this.props:
   design_id
@@ -108,18 +96,20 @@ class DesignCard extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { hasUpvoted: false, hasDownvoted: true };
+		this.state = { hasUpvoted: false, hasDownvoted: true, showModal: false };
 
 		// This binding is necessary to make `this` work in the callback
 		this.handleDownvote = this.handleDownvote.bind(this);
 		this.handleUpvote = this.handleUpvote.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
+		this.handleShowModal = this.handleShowModal.bind(this);
 	}
 
 	truncateString(str, num) {
 		if (str.length <= num) {
 			return str;
 		}
-		return str.slice(0, num) + "...";
+		return str.slice(0, num) + '...';
 	}
 
 	formatDescription(desciption) {
@@ -140,10 +130,18 @@ class DesignCard extends React.Component {
 		// todo
 	}
 
+	handleShowModal() {
+		this.setState({ showModal: true });
+	}
+
+	handleCloseModal() {
+		this.setState({ showModal: false });
+	}
+
 	render() {
 		let {
 			images,
-			certified,
+			is_certified,
 			difficulty,
 			name,
 			tags,
@@ -153,34 +151,32 @@ class DesignCard extends React.Component {
 
 		return (
 			<span>
-				<Card id="makerspace-card">
+				<Card id="makerspace-card" onClick={this.handleShowModal}>
 					<div id="makerspace-card-image-container">
 						<Card.Img
 							variant="top"
 							src={images[0] ? images[0].url : PlaceholderImage}
-							alt=""
 							id="makerspace-card-image"
 						/>
-						<CertifiedLabel
-							showCertifiedLabel={certified === "yes"}
-						/>
-						<DifficultyLabel
-							difficulty={difficulty ? difficulty : "Easy"}
-						/>
+						<CertifiedLabel showCertifiedLabel={is_certified ? true : false} />
+						<DifficultyLabel difficulty={difficulty ? difficulty : 'Easy'} />
 					</div>
-					<Card.Body>
+					<Card.Body onClick={this.handleShowModal}>
 						<Card.Title id="makerspace-card-title">
-							{name ? this.formatTitle(name) : ""}
+							{name ? this.formatTitle(name) : ''}
 						</Card.Title>
 						<Tags tags={tags ? tags : []} />
 						<Card.Text id="makerspace-card-description">
-							{description
-								? this.formatDescription(description)
-								: ""}
+							{description ? this.formatDescription(description) : ''}
 						</Card.Text>
 					</Card.Body>
-					<VotingComponent votes={upvotes ? upvotes : 0} />
+					{/* <VotingComponent votes={upvotes ? upvotes : 0} /> */}
 				</Card>
+				<DesignCardModal
+					{...this.props}
+					showModal={this.state.showModal}
+					onHide={this.handleCloseModal}
+				/>
 			</span>
 		);
 	}

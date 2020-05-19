@@ -7,7 +7,7 @@ const Footer = () => {
 			<span role="img" aria-label="heart" aria-labelledby="heart">
 				❤️
 			</span>{" "}
-			by the Invention Corps Community and Web Dev @ Berkeley
+			by the Invention Corps Community and Web Development at Berkeley
 			<br />
 			Copyright 2020 ©
 		</footer>

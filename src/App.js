@@ -26,7 +26,7 @@ function App() {
 				<Router style={{ flex: 1 }}>
 					<LandingMobile path="/" />
 					<Hospitals path="/hospitals" />
-					<MakerspaceMobile path="/makerspace" />
+					<Makerspace path="/makerspace" />
 					<SubmitMobile path="/submit" />
 					<GetStarted path="/get-started" />
 					<Login path="/login" />
