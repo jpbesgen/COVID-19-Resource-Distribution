@@ -25,7 +25,7 @@ function App() {
 				<Router>
 					<LandingMobile path="/" />
 					<Hospitals path="/hospitals" />
-					<MakerspaceMobile path="/makerspace" />
+					<Makerspace path="/makerspace" />
 					<SubmitMobile path="/submit" />
 					<GetStarted path="/get-started" />
 					<Login path="/login" />
