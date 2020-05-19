@@ -89,7 +89,7 @@ const MakerspaceCarousel = (props) => {
 					{props.designs.sort((d1, d2) => {
 						return d2.upvotes - d1.upvotes;
 						}).map((design) => {
-						return <div id="design-div" key={design.id}><DesignCard design={design}/></div>
+						return <div id="design-div" key={design.id}><DesignCard design={design} formattedTitle={formatTitle(props.category)}/></div>
 					})}
             </Carousel>
         </div>
@@ -117,15 +117,15 @@ const responsive = {
 	  items: 5
 	},
 	desktop: {
-	  breakpoint: { max: 3000, min: 1024 },
+	  breakpoint: { max: 3000, min: 1120 },
 	  items: 4
 	},
 	tablet: {
-	  breakpoint: { max: 1024, min: 464 },
-	  items: 2
+	  breakpoint: { max: 1120, min: 869 },
+	  items: 3
 	},
 	mobile: {
-	  breakpoint: { max: 464, min: 0 },
+	  breakpoint: { max: 869, min: 0 },
 	  items: 1
 	}
 };

@@ -25,7 +25,6 @@ function formatMaterialOrTool(tag) {
 
 const Tags = (props) => {
 	let items = [];
-	console.log(props.tags)
 	for (let i = 0; i < props.tags.materials.length; i++) {
 		if (props.tags.materials[i] != "other") {
 			items.push(<span id="makerspace-card-tag">{formatMaterialOrTool(props.tags.materials[i])}</span>);

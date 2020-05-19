@@ -8,8 +8,9 @@ import Col from 'react-bootstrap/Col';
 
 import Tags from './Tags';
 import CheckmarkImage from '../img/check-mark.png';
+import PlaceholderImage from '../img/doctormaskcolored.png';
 
-// import '../css/design-card-modal.css';
+import '../css/design-card-modal.css';
 
 function CertifiedLabel(props) {
 	//props:
@@ -45,17 +46,21 @@ export default class DesignCardModal extends PureComponent {
 		let {
 			images,
 			is_certified,
-			difficulty,
+            difficulty,
+            credit,
+            attachments,
+            links,
 			name,
 			tags,
 			description,
 			upvotes,
-			category,
+            category,
 			user,
-		} = this.props.design;
+        } = this.props.design;
 		const onHide = this.props.onHide;
-		const show = this.props.showModal;
+        const show = this.props.showModal;
 
+        console.log(links);
 		return (
 			<Modal
 				{...this.props}
@@ -68,7 +73,7 @@ export default class DesignCardModal extends PureComponent {
 						<div>
 							<h2 className="title">{name ? name : ''}</h2>
 							<p className="subtitle">
-								<b>{category ? category : ''}</b> submitted by{' '}
+								<b>{this.props.formattedTitle ? this.props.formattedTitle : ''}</b> submitted by{' '}
 								<b>{user ? user : ''}</b>
 							</p>
 						</div>
@@ -77,18 +82,30 @@ export default class DesignCardModal extends PureComponent {
 				</Modal.Header>
 				<Modal.Body className="modal-middle">
 					<div>
-						<img src={images[0]} alt="item images" />
-						<div className="image-footer-button-group">
+						<img src={images[0] ? images[0].url : PlaceholderImage} alt="item images" className="modal-image"/>
+						{/* <div className="image-footer-button-group">
 							<Button className="image-footer-button">
 								<p>Description</p>
 							</Button>
 							<Button className="image-footer-button">
 								<p>Comments</p>
 							</Button>
-						</div>
+						</div> */}
 						<div className="item-content">
-							<Tags tags={tags ? tags : []} />
+							<br/><Tags tags={tags ? tags : []} /><br/>
+                            <p className="item-content"><strong>Description</strong></p>
 							<p className="item-content">{description ? description : ''}</p>
+                            <p className="item-content">
+                                <strong>Credit: </strong>{credit}<br/>
+                                <strong>{Object.keys(attachments).length > 0 ? "Attachments: " : "" }</strong>
+                                {attachments.map((attachment, index) => {
+                                    return <div><a href={attachment.url} key={index}>{attachment.name}</a><br/></div>
+                                })}
+                                <strong>{(links && links[0] != "") ? "Links: " : "" }</strong>
+                                {links.map((link, index) => {
+                                    return <div><a href={link} key={index}>{link}</a><br/></div>
+                                })}
+                            </p>
 						</div>
 					</div>
 				</Modal.Body>
