@@ -19,6 +19,7 @@ import DesignSearchResults from "./DesignSearchResults";
 import DonateToPartners from "./DonateToPartners";
 
 import "../css/get-started.css";
+import LandingNavbarMobile from "./Mobile/LandingNavbarMobile";
 
 const DEFAULT_ppeToDonate = {
 		mask: false,
@@ -236,7 +237,12 @@ class GetStarted extends Component {
 		const { mode, showSearchResults } = this.state;
 		return (
 			<div className="get_started__contents">
-				<LandingNavbar />
+				{window.matchMedia("(max-width: 991px)").matches ? (
+					<LandingNavbarMobile />
+				) : (
+					<LandingNavbar />
+				)}
+
 				<div className="get_started_page">
 					<div className="get_started__form">
 						<MakeOrDonate

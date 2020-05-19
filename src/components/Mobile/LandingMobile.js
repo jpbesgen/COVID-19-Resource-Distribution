@@ -31,13 +31,13 @@ const LandingMobile = () => {
 						designs.
 					</p>
 				</div>
-				<Link to="/hospitals">
+				<Link to="/get-started">
 					<Button
 						style={style.Button}
 						onMouseDown={setButtonHover}
 						onMouseUp={unsetButtonHover}
 					>
-						<b>Hospitals In Need</b>
+						<b>Get Started</b>
 					</Button>
 				</Link>
 
