@@ -1,3 +1,13 @@
+#root {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.get_started__contents {
+	flex: 1;
+}
+
 .get_started_page {
 	margin: auto;
 	font-size: 16pt;
@@ -14,7 +24,7 @@
 
 @media only screen and (min-width: 600px) {
 	.get_started__search_results {
-		display: grid;
+		display: flex;
 		grid-template-columns: 2fr 1fr;
 		margin: auto;
 		max-width: 1200px;
@@ -23,11 +33,21 @@
 
 /* TODO: move these to a new component */
 .form_step {
-	margin: auto;
-	margin-top: 50px;
+	margin: 50px auto auto;
 	text-align: center;
+	padding: 0 20px;
 }
 
 .form_label {
 	margin-bottom: 10px;
+}
+
+.continue_button {
+	background-color: transparent;
+	border: none;
+}
+
+.continue_button:focus,
+.form_input:focus {
+	outline: none;
 }

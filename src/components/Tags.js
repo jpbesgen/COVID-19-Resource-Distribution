@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 function formatMaterialOrTool(tag) {
-	switch(tag) {
+	switch (tag) {
 		case "petg":
 			return "PETG";
 		case "pvc":
@@ -26,13 +26,21 @@ function formatMaterialOrTool(tag) {
 const Tags = (props) => {
 	let items = [];
 	for (let i = 0; i < props.tags.materials.length; i++) {
-		if (props.tags.materials[i] != "other") {
-			items.push(<span id="makerspace-card-tag">{formatMaterialOrTool(props.tags.materials[i])}</span>);
+		if (props.tags.materials[i] !== "other") {
+			items.push(
+				<span id="makerspace-card-tag" key={"materials-" + i}>
+					{formatMaterialOrTool(props.tags.materials[i])}
+				</span>
+			);
 		}
 	}
 	for (let i = 0; i < props.tags.tools.length; i++) {
-		if (props.tags.tools[i] != "none") {
-			items.push(<span id="makerspace-card-tag">{formatMaterialOrTool(props.tags.tools[i])}</span>);
+		if (props.tags.tools[i] !== "none") {
+			items.push(
+				<span id="makerspace-card-tag" key={"tools-" + i}>
+					{formatMaterialOrTool(props.tags.tools[i])}
+				</span>
+			);
 		}
 	}
 	return (

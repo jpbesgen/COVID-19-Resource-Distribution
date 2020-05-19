@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import DesignCardModal from './DesignCardModal';
-import Carousel from 'react-bootstrap/Carousel';
-import Tags from './Tags';
+import React, { PureComponent } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import DesignCardModal from "./DesignCardModal";
+import Carousel from "react-bootstrap/Carousel";
+import Tags from "./Tags";
 
 // css copied from makerspace-carousel for now
-import '../css/design-card.css';
+import "../css/design-card.css";
 
-import PlaceholderImage from '../img/doctormaskcolored.png';
-import UpvoteButtonImage from '../img/arrow-dropdown.png';
-import CheckmarkImage from '../img/check-mark.png';
+import PlaceholderImage from "../img/doctormaskcolored.png";
+import UpvoteButtonImage from "../img/arrow-dropdown.png";
+import CheckmarkImage from "../img/check-mark.png";
 // props and state
 
 function VotingComponent(props) {
@@ -19,11 +19,15 @@ function VotingComponent(props) {
 	return (
 		<span id="makerspace-card-voting-container">
 			<Button variant="primary" id="makerspace-card-vote-button">
-				<img src={UpvoteButtonImage} />
+				<img src={UpvoteButtonImage} alt="upvote button" />
 			</Button>
 			<h1 id="makerspace-card-vote-count">{props.votes}</h1>
 			<Button variant="primary" id="makerspace-card-vote-button">
-				<img src={UpvoteButtonImage} id="makerspace-downvote-image" />
+				<img
+					src={UpvoteButtonImage}
+					id="makerspace-downvote-image"
+					alt=""
+				/>
 			</Button>
 		</span>
 	);
@@ -51,16 +55,16 @@ function DifficultyLabel(props) {
 	// props: difficulty (String)
 	// I think...
 
-	var color = '#6BA48C';
+	var color = "#6BA48C";
 	switch (props.difficulty) {
-		case 'Easy':
-			color = '#9DDB8D';
+		case "Easy":
+			color = "#9DDB8D";
 			break;
-		case 'Med':
-			color = '#FFC773';
+		case "Med":
+			color = "#FFC773";
 			break;
-		case 'Hard':
-			color = '#FF8888';
+		case "Hard":
+			color = "#FF8888";
 			break;
 		default:
 			break;
@@ -91,7 +95,11 @@ class DesignCard extends PureComponent {
 
 	constructor(props) {
 		super(props);
-		this.state = { hasUpvoted: false, hasDownvoted: true, showModal: false };
+		this.state = {
+			hasUpvoted: false,
+			hasDownvoted: true,
+			showModal: false,
+		};
 
 		// This binding is necessary to make `this` work in the callback
 		this.handleDownvote = this.handleDownvote.bind(this);
@@ -104,7 +112,7 @@ class DesignCard extends PureComponent {
 		if (str.length <= num) {
 			return str;
 		}
-		return str.slice(0, num) + '...';
+		return str.slice(0, num) + "...";
 	}
 
 	formatDescription(desciption) {
@@ -143,6 +151,7 @@ class DesignCard extends PureComponent {
 			description,
 			upvotes,
 		} = this.props.design;
+
 		return (
 			<span>
 				<Card id="makerspace-card" onClick={this.handleShowModal}>
@@ -152,16 +161,22 @@ class DesignCard extends PureComponent {
 							src={images[0] ? images[0].url : PlaceholderImage}
 							id="makerspace-card-image"
 						/>
-						<CertifiedLabel showCertifiedLabel={is_certified ? true : false} />
-						<DifficultyLabel difficulty={difficulty ? difficulty : 'Easy'} />
+						<CertifiedLabel
+							showCertifiedLabel={is_certified ? true : false}
+						/>
+						<DifficultyLabel
+							difficulty={difficulty ? difficulty : "Easy"}
+						/>
 					</div>
 					<Card.Body onClick={this.handleShowModal}>
 						<Card.Title id="makerspace-card-title">
-							{name ? this.formatTitle(name) : ''}
+							{name ? this.formatTitle(name) : ""}
 						</Card.Title>
 						<Tags tags={tags ? tags : []} />
 						<Card.Text id="makerspace-card-description">
-							{description ? this.formatDescription(description) : ''}
+							{description
+								? this.formatDescription(description)
+								: ""}
 						</Card.Text>
 					</Card.Body>
 					{/* <VotingComponent votes={upvotes ? upvotes : 0} /> */}

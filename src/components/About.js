@@ -1,7 +1,7 @@
-import React from 'react';
-import Individual from './Individual';
-import Faq from './Faq';
-import Navbar from './Navbar';
+import React from "react";
+import Individual from "./Individual";
+import Faq from "./Faq";
+import Navbar from "./Navbar";
 
 const About = () => {
 	return (
@@ -10,17 +10,19 @@ const About = () => {
 			<section style={style.BodyContent}>
 				<h1 style={style.Header1}>About Us</h1>
 				<p style={style.Text}>
-					We’re a team of UC Berkeley students looking to create and mobilize a
-					community of makers, manufacturers, and designers to help close the
-					increasingly large gaps within the medical supply chain in the United
-					States. Currently, many Americans feel trapped at home helpless
-					watching as household after household falls to the tragedy of the
-					COVID-19 pandemic. We hope to contribute to the reinvorgoration of the
-					spirit people around the country and the world through the collective
-					action of this platform.
+					We’re a team of UC Berkeley students looking to create and
+					mobilize a community of makers, manufacturers, and designers
+					to help close the increasingly large gaps within the medical
+					supply chain in the United States. Currently, many Americans
+					feel trapped at home helpless watching as household after
+					household falls to the tragedy of the COVID-19 pandemic. We
+					hope to contribute to the reinvorgoration of the spirit
+					people around the country and the world through the
+					collective action of this platform.
 				</p>
 				<p style={style.Bold}>
-					Our team consists of the following people in the following roles:
+					Our team consists of the following people in the following
+					roles:
 				</p>
 
 				<h3 style={style.CategoryHeader}>Leads</h3>
@@ -178,33 +180,33 @@ const About = () => {
 
 let style = {
 	BodyContent: {
-		margin: '0 4.25% 0.3rem 4.25%',
+		margin: "0 4.25% 0.3rem 4.25%",
 	},
 	Header1: {
-		fontWeight: '300',
-		fontSize: '64px',
-		paddingTop: '28px',
-		color: '#3B628B',
+		fontWeight: "300",
+		fontSize: "64px",
+		paddingTop: "28px",
+		color: "#3B628B",
 	},
 	Header3: {
-		marginTop: '52px',
-		fontWeight: '300',
-		color: '#3B628B',
+		marginTop: "52px",
+		fontWeight: "300",
+		color: "#3B628B",
 	},
 	Text: {
-		fontSize: '24px',
-		fontWeight: '300',
-		color: 'black',
+		fontSize: "24px",
+		fontWeight: "300",
+		color: "black",
 	},
 	Bold: {
-		fontSize: '24px',
-		fontWeight: '400',
-		color: 'black',
+		fontSize: "24px",
+		fontWeight: "400",
+		color: "black",
 	},
 	CategoryHeader: {
-		paddingTop: '20px',
-		color: 'rgb(59, 98, 139)',
-	}
+		paddingTop: "20px",
+		color: "rgb(59, 98, 139)",
+	},
 };
 
 export default About;

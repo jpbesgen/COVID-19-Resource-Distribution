@@ -1,7 +1,7 @@
-import React from 'react';
-import IndividualMobile from './IndividualMobile';
-import FaqMobile from './FaqMobile';
-import NavbarMobile from './NavbarMobile';
+import React from "react";
+import IndividualMobile from "./IndividualMobile";
+import FaqMobile from "./FaqMobile";
+import NavbarMobile from "./NavbarMobile";
 
 const About = () => {
 	return (
@@ -10,24 +10,25 @@ const About = () => {
 			<section style={style.BodyContent}>
 				<h1 style={style.Header1}>ABOUT US</h1>
 				<p style={style.Text}>
-					We are a team of UC Berkeley students who hope to create and mobilize
-					a community of makers, manufacturers, and designers to help close the
-					increasingly large gaps within the medical supply chain in the United
-					States.
+					We are a team of UC Berkeley students who hope to create and
+					mobilize a community of makers, manufacturers, and designers
+					to help close the increasingly large gaps within the medical
+					supply chain in the United States.
 				</p>
 				<p style={style.Text}>
-					Currently, many Americans feel trapped at home, helpless, watching as
-					household after household falls to the tragedy of the COVID-19
-					pandemic. We hope to help in channeling that restlessness into
-					resolve.
+					Currently, many Americans feel trapped at home, helpless,
+					watching as household after household falls to the tragedy
+					of the COVID-19 pandemic. We hope to help in channeling that
+					restlessness into resolve.
 				</p>
 				<p style={style.Text}>
-					As our grandparents collected cans for bullets and rolled bandages for
-					first aid kits in WW2, we have already seen individual Americans and
-					small businesses mobilizing to open source the designs for vital
-					medical equipment, sew surgical masks, construct gowns, build face
-					shields, and 3D print much-needed materials for the battle we now face
-					against COVID-19.
+					As our grandparents collected cans for bullets and rolled
+					bandages for first aid kits in WW2, we have already seen
+					individual Americans and small businesses mobilizing to open
+					source the designs for vital medical equipment, sew surgical
+					masks, construct gowns, build face shields, and 3D print
+					much-needed materials for the battle we now face against
+					COVID-19.
 				</p>
 				<h3 style={style.Header3}>OUR TEAM</h3>
 				<IndividualMobile
@@ -136,26 +137,26 @@ const About = () => {
 
 let style = {
 	BodyContent: {
-		margin: '0 9.25%',
+		margin: "0 9.25%",
 	},
 	Header1: {
-		fontWeight: '300',
-		fontSize: '24px',
-		paddingTop: '18px',
-		marginBottom: '.3rem',
-		color: '#3B628B',
+		fontWeight: "300",
+		fontSize: "24px",
+		paddingTop: "18px",
+		marginBottom: ".3rem",
+		color: "#3B628B",
 	},
 	Header3: {
-		marginTop: '16px',
-		fontSize: '24px',
-		fontWeight: '300',
-		color: '#3B628B',
+		marginTop: "16px",
+		fontSize: "24px",
+		fontWeight: "300",
+		color: "#3B628B",
 	},
 	Text: {
-		fontSize: '18px',
-		lineHeight: '1.2',
-		fontWeight: '300',
-		color: 'black',
+		fontSize: "18px",
+		lineHeight: "1.2",
+		fontWeight: "300",
+		color: "black",
 	},
 };
 

@@ -1,20 +1,20 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/NavLink';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavLink from "react-bootstrap/NavLink";
 
-import {auth} from '../FirebaseModule';
-import Logo from '../img/logo.png';
-import TransparentImage from '../img/transparent_img.png';
-import '../css/navbar.css';
+import { auth } from "../FirebaseModule";
+import Logo from "../img/logo.png";
+import TransparentImage from "../img/transparent_img.png";
+import "../css/navbar.css";
 
 class SiteNavbar extends React.Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 
 		this.state = {
 			loggedIn: false,
-			user: null
+			user: null,
 		};
 	}
 
@@ -23,16 +23,16 @@ class SiteNavbar extends React.Component {
 			if (user) {
 				this.setState({
 					user,
-					loggedIn: true
-				})
+					loggedIn: true,
+				});
 			}
-		})
+		});
 	}
 
 	handleLogOut = async () => {
 		try {
 			await auth.signOut();
-			this.setState({loggedIn: false});
+			this.setState({ loggedIn: false });
 			// reload page (to refresh privileges)
 			window.location.reload();
 		} catch (err) {
@@ -47,8 +47,8 @@ class SiteNavbar extends React.Component {
 				variant="light"
 				expand="lg"
 				style={{
-					padding: '0.8rem 0.2rem 0.8rem 2.5rem',
-					borderBottom: '2px solid #3B628B',
+					padding: "0.8rem 0.2rem 0.8rem 2.5rem",
+					borderBottom: "2px solid #3B628B",
 				}}
 			>
 				<Navbar.Brand>
@@ -81,19 +81,31 @@ class SiteNavbar extends React.Component {
 							<NavLink
 								href="#"
 								className="nav-item nav-link navLogoutLink"
-								style={{ alignSelf: 'center' }}
+								style={{ alignSelf: "center" }}
 								onSelect={this.handleLogOut}
 							>
 								<img
-									src={this.state.user ? this.state.user.photoURL : TransparentImage}
+									src={
+										this.state.user
+											? this.state.user.photoURL
+											: TransparentImage
+									}
 									alt="profile"
 									className="prof-img"
-									style={{ borderRadius: '50%', marginRight: '10px', maxWidth: '50px' }}
+									style={{
+										borderRadius: "50%",
+										marginRight: "10px",
+										maxWidth: "50px",
+									}}
 								/>
 								Log Out
 							</NavLink>
 						) : (
-							<NavLink href="/login" style={style.NavbarLink} id="loginLink">
+							<NavLink
+								href="/login"
+								style={style.NavbarLink}
+								id="loginLink"
+							>
 								<p style={style.NavItem}>Login / Signup</p>
 							</NavLink>
 						)}
@@ -106,14 +118,14 @@ class SiteNavbar extends React.Component {
 
 const style = {
 	NavbarLink: {
-		paddingRight: '1.3rem',
-		fontSize: '1.2rem',
-		fontWeight: '400',
+		paddingRight: "1.3rem",
+		fontSize: "1.2rem",
+		fontWeight: "400",
 	},
 	NavItem: {
-		fontSize: '18px',
-		color: '#828282',
-		margin: '0',
+		fontSize: "18px",
+		color: "#828282",
+		margin: "0",
 	},
 };
 

@@ -1,16 +1,16 @@
-import React from 'react';
-import { Link } from '@reach/router';
-import Navbar from './Navbar';
-import BestPracticesText from './BestPracticesText';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import { Link } from "@reach/router";
+import Navbar from "./Navbar";
+import BestPracticesText from "./BestPracticesText";
+import Button from "react-bootstrap/Button";
 
 const BestPractices = () => {
 	function setButtonHover(e) {
-		e.target.style.color = 'black';
+		e.target.style.color = "black";
 	}
 
 	function unsetButtonHover(e) {
-		e.target.style.color = '#3B628B';
+		e.target.style.color = "#3B628B";
 	}
 
 	return (
@@ -108,32 +108,32 @@ const BestPractices = () => {
 
 let style = {
 	BodyContent: {
-		margin: '0 4.25% 1.5rem 4.25%',
+		margin: "0 4.25% 1.5rem 4.25%",
 	},
 	BottomButton: {
-		marginBottom: '3rem',
+		marginBottom: "3rem",
 	},
 	Header1: {
-		fontWeight: '300',
-		fontSize: '64px',
-		paddingTop: '28px',
-		color: '#3B628B',
+		fontWeight: "300",
+		fontSize: "64px",
+		paddingTop: "28px",
+		color: "#3B628B",
 	},
 	Header3: {
-		fontWeight: '400',
-		fontSize: '32px',
-		paddingTop: '.5rem',
-		marginLeft: '4%',
-		color: '#3B628B',
+		fontWeight: "400",
+		fontSize: "32px",
+		paddingTop: ".5rem",
+		marginLeft: "4%",
+		color: "#3B628B",
 	},
 	Button: {
-		border: '1px solid #3B628B',
-		padding: '0.5rem 3.5rem',
-		maxWidth: '90%',
-		background: 'transparent',
-		fontSize: '24px',
-		color: '#7A98AF',
-		boxShadow: '0px 2px 3px #888888',
+		border: "1px solid #3B628B",
+		padding: "0.5rem 3.5rem",
+		maxWidth: "90%",
+		background: "transparent",
+		fontSize: "24px",
+		color: "#7A98AF",
+		boxShadow: "0px 2px 3px #888888",
 	},
 };
 

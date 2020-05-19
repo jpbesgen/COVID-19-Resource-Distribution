@@ -9,8 +9,12 @@
 	text-align: center;
 }
 
+.form_button:focus {
+	outline: none;
+}
+
 .form_button--selected {
-	background-color: #7A98AF;
+	background-color: #7a98af;
 	outline: 0;
 	color: white;
 }

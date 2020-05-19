@@ -1,67 +1,72 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import qs from 'qs';
-import DBStore from '../stores/DBStore';
+import React, { Component } from "react";
+import axios from "axios";
+// import qs from "qs";
+import DBStore from "../stores/DBStore";
 
-import LandingNavbar from './LandingNavbar';
-import MakeOrDonate from './MakeOrDonate';
-import WhatToMake from './WhatToMake';
-import WhatMaterials from './WhatMaterials';
-import WhatTools from './WhatTools';
+import LandingNavbar from "./LandingNavbar";
+import MakeOrDonate from "./MakeOrDonate";
+import WhatToMake from "./WhatToMake";
+import WhatMaterials from "./WhatMaterials";
+import WhatTools from "./WhatTools";
 
-import WhatToDonate from './WhatToDonate';
-import HowMuchToDonate from './HowMuchToDonate';
+import WhatToDonate from "./WhatToDonate";
+import HowMuchToDonate from "./HowMuchToDonate";
 
-import EnterZipcode from './EnterZipcode';
-import HospitalSearchResults from './HospitalSearchResults';
-import DesignSearchResults from './DesignSearchResults';
+import EnterZipcode from "./EnterZipcode";
+import HospitalSearchResults from "./HospitalSearchResults";
+import DesignSearchResults from "./DesignSearchResults";
 
-import DonateToPartners from './DonateToPartners';
+import DonateToPartners from "./DonateToPartners";
 
-import '../css/get-started.css'
+import "../css/get-started.css";
+import LandingNavbarMobile from "./Mobile/LandingNavbarMobile";
+
+const DEFAULT_ppeToDonate = {
+		mask: false,
+		shield: false,
+		gown: false,
+		medicalParts: false,
+		accessories: false,
+		other: false,
+	},
+	DEFAULT_ppeToMake = {
+		mask: false,
+		shield: false,
+		gown: false,
+		medicalParts: false,
+		accessories: false,
+		other: false,
+	},
+	DEFAULT_materials = {
+		petg: false,
+		pvc: false,
+		polycarbonateSheets: false,
+		cottonFabric: false,
+		elastic: false,
+		other: false,
+	},
+	DEFAULT_tools = {
+		threeDPrinter: false,
+		sewingMachine: false,
+		laserCutter: false,
+	};
 
 class GetStarted extends Component {
-
 	constructor(props) {
-	    super(props)
-	    this.state = {
-	    	currentStep: 1,
-	    	mode: null,
-	    	ppeToDonate: {
-	    		'mask': false,
-	    		'shield': false,
-	    		'gown': false,
-	    		'medicalParts': false,
-	    		'accessories': false,
-	    		'other': false,
-	    	},
-	    	ppeToMake: {
-	    		'mask': false,
-	    		'shield': false,
-	    		'gown': false,
-	    		'medicalParts': false,
-	    		'accessories': false,
-	    		'other': false,
-	    	},
-	    	materials: {
-	    		'petg': false,
-	    		'pvc': false,
-	    		'polycarbonateSheets': false,
-	    		'cottonFabric': false,
-	    		'elastic': false,
-	    		'other': false,
-	    	},
-	    	tools: {
-	    		'threeDPrinter': false,
-	    		'sewingMachine': false,
-	    		'laserCutter': false,
-	    	},
-	    	zipcode: '',
-	    	hospitals: [],
-	    	designs: [],
-	    	showSearchResults: false,
-	    }
-	    this.bottom = React.createRef();
+		super(props);
+		this.state = {
+			currentStep: 1,
+			mode: null,
+			ppeToDonate: DEFAULT_ppeToDonate,
+			ppeToMake: DEFAULT_ppeToMake,
+			materials: DEFAULT_materials,
+			tools: DEFAULT_tools,
+			zipcode: "",
+			hospitals: [],
+			designs: [],
+			showSearchResults: false,
+		};
+		this.bottom = React.createRef();
 	}
 
 	componentDidMount() {
@@ -70,174 +75,190 @@ class GetStarted extends Component {
 
 	// not quite working
 	scrollToBottom = () => {
-		this.bottom.current.scrollIntoView({ behavior: 'smooth' });
-	}
+		this.bottom.current.scrollIntoView({ behavior: "smooth" });
+	};
 
 	nextStep = () => {
-		this.setState(state => ({currentStep: state.currentStep + 1}));
-	}
+		this.setState((state) => ({ currentStep: state.currentStep + 1 }));
+	};
 
 	setMode = (mode) => {
 		this.setState({ mode });
 		this.setState({ currentStep: 2 });
-	}
+	};
 
 	setItem = (category, item) => {
 		const categoryToChange = this.state[category];
 		categoryToChange[item] = !categoryToChange[item];
-		this.setState({ categoryToChange })
-	}
+		this.setState({ categoryToChange });
+	};
 
 	setZipcode = (e) => {
-		this.setState({ zipcode: e.target.value.replace(/\D/,'') });
-	}
+		this.setState({ zipcode: e.target.value.replace(/\D/, "") });
+	};
 
 	setDonateAmount = (e, itemName) => {
 		//TODO - fill this in once we use these values
 		// const ppeToDonate = this.state.ppeToDonate;
 		// ppeToDonate[itemName] = e.target.value.replace(/\D/,'');
 		// this.setState({ ppeToDonate });
-	}
+	};
 
 	getSearchResults = () => {
 		this.getHospitalSearchResults();
 		this.getDesignSearchResults();
 		this.setState({ showSearchResults: true });
-	}
+	};
 
-	getHospitalSearchResults = () => {
+	getHospitalSearchResults = async () => {
 		const state = this.state;
-		const resources = state.mode === 'MAKE' ? state.ppeToMake : state.ppeToDonate;
+		const resources =
+			state.mode === "MAKE" ? state.ppeToMake : state.ppeToDonate;
 		const apiParams = {
-			org_types: JSON.stringify(['hospital']),
-			app_name: 'resource19',
+			org_types: JSON.stringify(["hospital"]),
+			app_name: "resource19",
 			zip_code: this.state.zipcode,
 			radius_mi: 15,
-			resource_types: JSON.stringify(Object.keys(resources).filter((key) => (resources[key]))),
+			resource_types: JSON.stringify(
+				Object.keys(resources).filter((key) => resources[key])
+			),
 		};
-		axios.get('https://covid-19-hospitals.now.sh/api/fetch-hospitals', {
-		    params: apiParams,
-		})
-	    .then(res => {
-	    	this.setState({ hospitals: res.data.locations });
-		});
-	}
+
+		try {
+			const res = await axios.get(
+				"https://covid-19-hospitals.now.sh/api/fetch-hospitals",
+				{
+					params: apiParams,
+				}
+			);
+			this.setState({ hospitals: res.data.locations || [] });
+		} catch (err) {
+			console.log(err);
+			this.setState({ hospitals: [] });
+		}
+	};
 
 	getDesignSearchResults = async () => {
 		const { ppeToDonate, ppeToMake, mode, materials, tools } = this.state;
-		const ppeToSearch = mode === 'MAKE' ? ppeToMake : ppeToDonate;
+		const ppeToSearch = mode === "MAKE" ? ppeToMake : ppeToDonate;
 		const searchArgs = {
-			ppe: Object.keys(ppeToSearch).filter((key) => (ppeToSearch[key])),
-			materials: Object.keys(materials).filter((key) => (materials[key])),
-			tools: Object.keys(tools).filter((key) => (tools[key])),
-		}
-		const designs = await DBStore.getTop3Designs(searchArgs);
-	    this.setState({ designs });
-	}
+			ppe: Object.keys(ppeToSearch).filter((key) => ppeToSearch[key]),
+			materials: Object.keys(materials).filter((key) => materials[key]),
+			tools: Object.keys(tools).filter((key) => tools[key]),
+		};
+		const designs = await DBStore.getTop3Designs(
+			searchArgs,
+			mode === "MAKE"
+		);
+		this.setState({ designs });
+	};
 
 	renderDonateForm = () => {
-		const itemsToDonate = Object.keys(this.state.ppeToDonate).filter((key) => (this.state.ppeToDonate[key]));
-		return(
+		const itemsToDonate = Object.keys(this.state.ppeToDonate).filter(
+			(key) => this.state.ppeToDonate[key]
+		);
+		return (
 			<>
-				{ this.state.currentStep >= 2
-					&&
-						<WhatToDonate
-							setItem={this.setItem}
-							formState={this.state.ppeToDonate}
-							nextStep={this.nextStep}
-						/>
-				}
-				{ this.state.currentStep >= 3
-					&&
-						<HowMuchToDonate
-							items={itemsToDonate}
-							setDonateAmount={this.setDonateAmount}
-							nextStep={this.nextStep}
-						/>
-				}
-				{ this.state.currentStep >= 4
-					&&
-						<EnterZipcode
-							onChange={this.setZipcode}
-							startSearch={this.getSearchResults}
-							zipcodeState={this.state.zipcode}
-						/>
-				}
+				{this.state.currentStep >= 2 && (
+					<WhatToDonate
+						setItem={this.setItem}
+						formState={this.state.ppeToDonate}
+						nextStep={this.nextStep}
+					/>
+				)}
+				{this.state.currentStep >= 3 && (
+					<HowMuchToDonate
+						items={itemsToDonate}
+						setDonateAmount={this.setDonateAmount}
+						nextStep={this.nextStep}
+					/>
+				)}
+				{this.state.currentStep >= 4 && (
+					<EnterZipcode
+						onChange={this.setZipcode}
+						startSearch={this.getSearchResults}
+						zipcodeState={this.state.zipcode}
+					/>
+				)}
 			</>
 		);
-	}
+	};
 
 	renderFundsForm = () => {
 		return <DonateToPartners />;
-	}
+	};
 
 	renderSearchResults = () => {
-		const { designs, hospitals } = this.state;
+		const { designs, hospitals, mode } = this.state;
 		return (
 			<div className="get_started__search_results">
-				<DesignSearchResults designs={designs} />
+				{mode === "MAKE" && <DesignSearchResults designs={designs} />}
 				<HospitalSearchResults hospitals={hospitals} />
 			</div>
-		)
-	}
+		);
+	};
 
 	renderMakeForm = () => {
 		return (
 			<>
-				{ this.state.currentStep >= 2
-					&&
-						<WhatToMake
-							setItem={this.setItem}
-							formState={this.state.ppeToMake}
-							nextStep={this.nextStep}
-						/>
-				}
-				{ this.state.currentStep >= 3
-					&&
-						<WhatMaterials
-							setItem={this.setItem}
-							formState={this.state.materials}
-							nextStep={this.nextStep}
-						/>
-				}
-				{ this.state.currentStep >= 4
-					&&
-						<WhatTools
-							setItem={this.setItem}
-							formState={this.state.tools}
-							nextStep={this.nextStep}
-						/>
-				}
-				{ this.state.currentStep >= 5
-					&&
-						<EnterZipcode
-							onChange={this.setZipcode}
-							startSearch={this.getSearchResults}
-							zipcodeState={this.state.zipcode}
-						/>
-				}
+				{this.state.currentStep >= 2 && (
+					<WhatToMake
+						setItem={this.setItem}
+						formState={this.state.ppeToMake}
+						nextStep={this.nextStep}
+					/>
+				)}
+				{this.state.currentStep >= 3 && (
+					<WhatMaterials
+						setItem={this.setItem}
+						formState={this.state.materials}
+						nextStep={this.nextStep}
+					/>
+				)}
+				{this.state.currentStep >= 4 && (
+					<WhatTools
+						setItem={this.setItem}
+						formState={this.state.tools}
+						nextStep={this.nextStep}
+					/>
+				)}
+				{this.state.currentStep >= 5 && (
+					<EnterZipcode
+						onChange={this.setZipcode}
+						startSearch={this.getSearchResults}
+						zipcodeState={this.state.zipcode}
+					/>
+				)}
 			</>
 		);
-	}
+	};
 
 	render() {
-		const {mode, showSearchResults} = this.state;
+		const { mode, showSearchResults } = this.state;
 		return (
-			<>
-				<LandingNavbar />
+			<div className="get_started__contents">
+				{window.matchMedia("(max-width: 991px)").matches ? (
+					<LandingNavbarMobile />
+				) : (
+					<LandingNavbar />
+				)}
+
 				<div className="get_started_page">
 					<div className="get_started__form">
-						<MakeOrDonate modeState={this.state.mode} setMode={this.setMode} />
-						{ mode === 'MAKE' && this.renderMakeForm() }
-						{ mode === 'DONATE' && this.renderDonateForm() }
-						{ mode === 'FUNDS' && this.renderFundsForm() }
+						<MakeOrDonate
+							modeState={this.state.mode}
+							setMode={this.setMode}
+						/>
+						{mode === "MAKE" && this.renderMakeForm()}
+						{mode === "DONATE" && this.renderDonateForm()}
+						{mode === "FUNDS" && this.renderFundsForm()}
 					</div>
-					{showSearchResults && this.renderSearchResults() }
-					<div ref={this.bottom}></div>
+					{showSearchResults && this.renderSearchResults()}
+					<div ref={this.bottom} />
 				</div>
-			</>
+			</div>
 		);
 	}
-};
+}
 
 export default GetStarted;

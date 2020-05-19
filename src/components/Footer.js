@@ -1,20 +1,26 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
 	return (
 		<footer style={style.Footer}>
-			© 2020 Copyright: Built by the Invention Corps Community and Web
-			Development at Berkeley
+			Made with{" "}
+			<span role="img" aria-label="heart" aria-labelledby="heart">
+				❤️
+			</span>{" "}
+			by the Invention Corps Community and Web Development at Berkeley
+			<br />
+			Copyright 2020 ©
 		</footer>
 	);
 };
 
 const style = {
 	Footer: {
-		backgroundColor: '#7a98af',
-		color: 'white',
-		padding: '20px',
-		textAlign: 'center',
+		backgroundColor: "#7a98af",
+		color: "white",
+		padding: "20px",
+		textAlign: "center",
+		marginTop: "20px",
 	},
 };
 

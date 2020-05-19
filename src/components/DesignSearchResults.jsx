@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import DesignCard from './DesignCard';
+import DesignCard from "./DesignCard";
 
-
-import '../css/design-search-results.css';
+import "../css/design-search-results.css";
 
 class DesignSearchResults extends Component {
-
 	renderDesigns(designs) {
 		if (designs.length === 0) {
 			return (
-				<p>We're sorry, we couldn't find PPE designs that matched the criteria you entered.</p>
-			)
+				<p>
+					We're sorry, we couldn't find PPE designs that matched the
+					criteria you entered.
+				</p>
+			);
 		}
 		designs = designs.slice(0, 3); // get the first 3
-		return (designs.map((design) => {
+		return designs.map((design, index) => {
 			return (
-				<div className="design_search_card">
-					<DesignCard
-						title = {design.name}
-						is_certified = {design.certified === 'yes'}
-						difficulty = {design.difficulty}
-						tags = {["Fabric", "Elastic", "Filter", "Sewing Machine"]}
-						description = {design.description}
-	 					image={design.images.url}
-	                />
-	            </div>
-            )
-		}));
+				<div className="design_search_card" key={index}>
+					<DesignCard design={design} />
+				</div>
+			);
+		});
 	}
 
 	render() {
@@ -40,6 +34,6 @@ class DesignSearchResults extends Component {
 			</div>
 		);
 	}
-};
+}
 
 export default DesignSearchResults;
