@@ -36,8 +36,6 @@ export default class Makerspace extends Component {
 	handleDesigns() {
 		let designs = db.getDesignsList();
 
-		console.log(designs);
-
 		let carouselTypes = {};
 		designs.forEach((design) => {
 			let arr = carouselTypes[design.category];
@@ -60,16 +58,18 @@ export default class Makerspace extends Component {
 
 	render() {
 		let { carouselTypes } = this.state,
-			carousels = Object.keys(carouselTypes).map((key) => {
-				return (
-					<MakerspaceCarousel
-						category={key}
-						key={key}
-						designs={carouselTypes[key]}
-						filters={this.state.filters}
-					/>
-				);
-			});
+			carousels = Object.keys(carouselTypes)
+				.sort()
+				.map((key) => {
+					return (
+						<MakerspaceCarousel
+							category={key}
+							key={key}
+							designs={carouselTypes[key]}
+							filters={this.state.filters}
+						/>
+					);
+				});
 		return (
 			<div>
 				<Navbar />

@@ -24,7 +24,7 @@
 
 @media only screen and (min-width: 600px) {
 	.get_started__search_results {
-		display: grid;
+		display: flex;
 		grid-template-columns: 2fr 1fr;
 		margin: auto;
 		max-width: 1200px;
@@ -35,6 +35,7 @@
 .form_step {
 	margin: 50px auto auto;
 	text-align: center;
+	padding: 0 20px;
 }
 
 .form_label {

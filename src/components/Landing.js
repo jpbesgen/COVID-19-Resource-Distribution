@@ -76,6 +76,7 @@ export class Landing extends React.Component {
 				</section>
 
 				<LandingCarousel />
+				<hr />
 
 				<Container fluid className="text-center" style={{ padding: 0 }}>
 					<p style={style.HospitalDescription}>

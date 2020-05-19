@@ -9,6 +9,15 @@ import "../css/makerspace-carousel.css";
 import { Link } from "@reach/router";
 import Button from "react-bootstrap/Button";
 
+const NAME_MAPPING = {
+	handSanitizer: "Hand Sanitizers",
+	surgicalMask: "Face Masks",
+	hospitalGown: "Hospital Gowns",
+	faceShield: "Face Shields",
+	ventilatorParts: "Ventilator Parts",
+	other: "Other",
+};
+
 const MakerspaceCarousel = (props) => {
 	function setDonateButtonHover(e) {
 		e.target.style.color = "#3B628B";
@@ -29,12 +38,12 @@ const MakerspaceCarousel = (props) => {
 	// 	e.target.style.background = "transparent";
 	// }
 
-	console.log(props.filters);
-
 	return (
 		<div id="carousel-large-block">
 			<div>
-				<h1 id="makerspace-carousel-name">{props.category}</h1>
+				<h1 id="makerspace-carousel-name">
+					{NAME_MAPPING[props.category]}
+				</h1>
 				{/* <span id="makerspace-viewall-button"> */}
 				<Link to="/makerspace" id="viewall-button">
 					{/* <Button id = "viewall-button"

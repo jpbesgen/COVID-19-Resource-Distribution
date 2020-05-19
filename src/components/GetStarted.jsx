@@ -188,10 +188,10 @@ class GetStarted extends Component {
 	};
 
 	renderSearchResults = () => {
-		const { designs, hospitals } = this.state;
+		const { designs, hospitals, mode } = this.state;
 		return (
 			<div className="get_started__search_results">
-				<DesignSearchResults designs={designs} />
+				{mode === "MAKE" && <DesignSearchResults designs={designs} />}
 				<HospitalSearchResults hospitals={hospitals} />
 			</div>
 		);
