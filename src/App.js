@@ -20,7 +20,7 @@ import { Router } from "@reach/router";
 import Footer from "./components/Footer";
 
 function App() {
-	if (window.matchMedia("(max-width: 991px)").matches) {
+	if (window.matchMedia("(max-width: 767px)").matches) {
 		return (
 			<>
 				<Router style={{ flex: 1 }}>
