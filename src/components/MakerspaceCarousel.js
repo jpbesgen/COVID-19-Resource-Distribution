@@ -20,15 +20,15 @@ const MakerspaceCarousel = (props) => {
 		e.target.style.background = "#3B628B";
 	}
 
-	function setviewAllButtonHover(e) {
-		e.target.style.color = "gray";
-		e.target.style.background = "transparent";
-	}
-
-	function unsetviewAllButtonHover(e) {
-		e.target.style.color = "silver";
-		e.target.style.background = "transparent";
-	}
+	// function setviewAllButtonHover(e) {
+	// 	e.target.style.color = "gray";
+	// 	e.target.style.background = "transparent";
+	// }
+	//
+	// function unsetviewAllButtonHover(e) {
+	// 	e.target.style.color = "silver";
+	// 	e.target.style.background = "transparent";
+	// }
 
 	function formatTitle() {
 		// switching on values written in Submit.js

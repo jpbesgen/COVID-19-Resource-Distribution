@@ -20,6 +20,7 @@ const LandingMobile = () => {
 	return (
 		<div>
 			<LandingNavbarMobile />
+
 			{/* <!-- Logo & Intro --> */}
 			<section style={style.HomepageTop} className="text-center">
 				<div>
@@ -50,10 +51,6 @@ const LandingMobile = () => {
 					</Button>
 				</Link>
 			</section>
-
-			<LandingCarouselMobile />
-
-			<Footer />
 		</div>
 	);
 };

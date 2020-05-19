@@ -11,7 +11,7 @@ import BestPractices from "./components/BestPractices";
 import GetStarted from "./components/GetStarted";
 
 import LandingMobile from "./components/Mobile/LandingMobile";
-import MakerspaceMobile from "./components/Mobile/MakerspaceMobile";
+// import MakerspaceMobile from "./components/Mobile/MakerspaceMobile";
 import SubmitMobile from "./components/Mobile/SubmitMobile";
 import BestPracticesMobile from "./components/Mobile/BestPracticesMobile";
 import AboutMobile from "./components/Mobile/AboutMobile";

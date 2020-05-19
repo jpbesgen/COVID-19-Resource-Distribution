@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Button from "react-bootstrap/Button";
+// import Container from "react-bootstrap/Container";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
 
 import Tags from "./Tags";
 import CheckmarkImage from "../img/check-mark.png";
@@ -12,6 +12,9 @@ import PlaceholderImage from "../img/doctormaskcolored.png";
 
 import "../css/design-card-modal.css";
 
+/**
+ * @return {null}
+ */
 function CertifiedLabel(props) {
 	//props:
 	if (!props.showCertifiedLabel) {
@@ -46,19 +49,19 @@ export default class DesignCardModal extends PureComponent {
 		let {
 			images,
 			is_certified,
-			difficulty,
+			// difficulty,
 			credit,
 			attachments,
 			links,
 			name,
 			tags,
 			description,
-			upvotes,
-			category,
+			// upvotes,
+			// category,
 			user,
 		} = this.props.design;
 		const onHide = this.props.onHide;
-		const show = this.props.showModal;
+		// const show = this.props.showModal;
 
 		return (
 			<Modal
@@ -130,7 +133,7 @@ export default class DesignCardModal extends PureComponent {
 									);
 								})}
 								<strong>
-									{links && links[0] != "" ? "Links: " : ""}
+									{links && links[0] !== "" ? "Links: " : ""}
 								</strong>
 								{links.map((link, index) => {
 									return (
