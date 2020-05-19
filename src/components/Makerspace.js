@@ -67,7 +67,7 @@ export default class Makerspace extends Component {
 		return (
 			<div>
 				<Navbar />
-				<Filter filters={this.state.filters} filterUpdate={this.filterUpdate}/>
+				{/* <Filter filters={this.state.filters} filterUpdate={this.filterUpdate}/> */}
 				<div style={{padding: '20px'}}>
 					{carousels}
 				</div>
