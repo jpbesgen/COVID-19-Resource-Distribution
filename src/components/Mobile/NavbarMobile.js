@@ -1,137 +1,140 @@
-import React from 'react';
-import { Link } from '@reach/router';
+import React from "react";
+import { Link } from "@reach/router";
 
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/NavLink';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavLink from "react-bootstrap/NavLink";
 
-import Logo from '../../img/logo.png';
-import TransparentImage from '../../img/transparent_img.png';
+import Logo from "../../img/logo.png";
+import TransparentImage from "../../img/transparent_img.png";
+import { auth } from "../../FirebaseModule";
 
-const SiteNavbarMobile = () => {
-	// firebase.auth().onAuthStateChanged(function (user) {
-	// 	if (user) {
-	// 		$('.prof-img').attr('src', user.photoURL); // replace img with prof pic
-	// 		$('.navLoginLink').hide();
-	// 		$('.navLogoutLink').css('display', 'flex');
-	// 	}
-	// });
+class SiteNavbarMobile extends React.Component {
+	constructor(props) {
+		super(props);
 
-	// $('#logoutLink').click(async () => {
-	// 	try {
-	// 		await firebase.auth().signOut();
+		this.state = {
+			loggedIn: false,
+			user: null,
+		};
+	}
 
-	// 		// Sign-out successful.
-	// 		console.log('User Logged Out!');
-	// 		$('.navLogoutLink').css('display', 'none');
-	// 		$('.navLoginLink').show();
+	componentDidMount() {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				this.setState({
+					user,
+					loggedIn: true,
+				});
+			}
+		});
+	}
 
-	// 		// reload page (to refresh privileges)
-	// 		location.reload();
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-	// });
+	handleLogOut = async () => {
+		try {
+			await auth.signOut();
+			this.setState({ loggedIn: false });
+			// reload page (to refresh privileges)
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
-	return (
-		<Navbar
-			variant="light"
-			expand="lg"
-			style={{
-				padding: '2.5rem 1rem 0.8rem 1rem',
-				borderBottom: '2px solid #3B628B',
-				background: '#F4F7FA',
-			}}
-		>
-			<Navbar.Brand style={{ marginRight: '0' }}>
-				<Link to="/">
-					<img
-						src={Logo}
-						height="28px"
-						className="d-inline-block align-top"
-						alt="mask man white"
-					/>
-				</Link>
-			</Navbar.Brand>
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav" className="text-center">
-				<Nav>
-					<NavLink style={style.NavbarLink}>
-						<Link to="/">
-							<p style={style.NavItem}>Home</p>
-						</Link>
-					</NavLink>
-					<NavLink style={style.NavbarLink}>
-						<Link to="/hospitals">
-							<p style={style.NavItem}>Hospitals in Need</p>
-						</Link>
-					</NavLink>
-					<NavLink style={style.NavbarLink}>
-						<Link to="/makerspace">
-							<p style={style.NavItem}>Browse Designs</p>
-						</Link>
-					</NavLink>
-					<NavLink style={style.NavbarLink}>
-						<Link to="/about">
-							<p style={style.NavItem}>About</p>
-						</Link>
-					</NavLink>
-
-					<NavLink style={style.NavbarLink} id="loginLink">
-						<Link to="/login">
-							<p style={style.NavItem}>Log In</p>
-						</Link>
-					</NavLink>
-
-					<NavLink
-						className="nav-item navLogoutLink"
-						style={{ display: 'none', alignSelf: 'center' }}
-					>
+	render() {
+		console.log("STATE", this.state);
+		return (
+			<Navbar
+				variant="light"
+				expand="lg"
+				style={{
+					padding: "2.5rem 1rem 0.8rem 1rem",
+					borderBottom: "2px solid #3B628B",
+					background: "#F4F7FA",
+				}}
+			>
+				<Navbar.Brand style={{ marginRight: "0" }}>
+					<Link to="/">
 						<img
-							src={TransparentImage}
-							alt="transparent placeholder"
-							className="prof-img"
-							style={{ borderRadius: '50%', marginRight: '5px' }}
+							src={Logo}
+							height="28px"
+							className="d-inline-block align-top"
+							alt="mask man white"
 						/>
-						<Link to="/" className="nav-link" id="logoutLink">
-							Log Out
-						</Link>
-					</NavLink>
-				</Nav>
-			</Navbar.Collapse>
-		</Navbar>
+					</Link>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav" className="text-center">
+					<Nav>
+						<NavLink style={style.NavbarLink}>
+							<Link to="/">
+								<p style={style.NavItem}>Home</p>
+							</Link>
+						</NavLink>
+						<NavLink style={style.NavbarLink}>
+							<Link to="/hospitals">
+								<p style={style.NavItem}>Hospitals in Need</p>
+							</Link>
+						</NavLink>
+						<NavLink style={style.NavbarLink}>
+							<Link to="/makerspace">
+								<p style={style.NavItem}>Browse Designs</p>
+							</Link>
+						</NavLink>
+						<NavLink style={style.NavbarLink}>
+							<Link to="/about">
+								<p style={style.NavItem}>About</p>
+							</Link>
+						</NavLink>
 
-		// 			<li className="nav-item navLoginLink">
-		// 				<a className="nav-link " href="../pages/login.html" id="loginLink">
-		// 					Login / Signup
-		// 				</a>
-		// 			</li>
-		// 			<li
-		// 				className="nav-item navLogoutLink"
-		// 				style={{ display: 'none', alignSelf: 'center' }}
-		// 			>
-		// 				<img
-		// 					src={TransparentImage}
-		// 					alt="transparent placeholder"
-		// 					className="prof-img"
-		// 					style={{ borderRadius: '50%', marginRight: '5px' }}
-		// 				/>
-		// 				<Link to="/" className="nav-link" id="logoutLink">
-		// 					Log Out
-		// 				</Link>
-		// 			</li>
-	);
-};
+						{this.state.loggedIn ? (
+							<NavLink
+								href="#"
+								className="nav-item nav-link navLogoutLink"
+								style={{ alignSelf: "center" }}
+								onSelect={this.handleLogOut}
+							>
+								<img
+									src={
+										this.state.user
+											? this.state.user.photoURL
+											: TransparentImage
+									}
+									alt="transparent placeholder"
+									className="prof-img"
+									style={{
+										borderRadius: "50%",
+										marginRight: "5px",
+										maxWidth: "50px",
+									}}
+								/>
+								Log Out
+							</NavLink>
+						) : (
+							<NavLink
+								href="/login"
+								style={style.NavbarLink}
+								id="loginLink"
+							>
+								<p style={style.NavItem}>Login / Signup</p>
+							</NavLink>
+						)}
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
+		);
+	}
+}
 
 const style = {
 	NavbarLink: {
-		fontSize: '1.2rem',
-		fontWeight: '400',
+		fontSize: "1.2rem",
+		fontWeight: "400",
 	},
 	NavItem: {
-		fontSize: '18px',
-		color: '#828282',
-		margin: '0',
+		fontSize: "18px",
+		color: "#828282",
+		margin: "0",
 	},
 };
 
