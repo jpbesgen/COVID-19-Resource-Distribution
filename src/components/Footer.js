@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
 	return (
@@ -12,10 +12,10 @@ const Footer = () => {
 
 const style = {
 	Footer: {
-		backgroundColor: '#7a98af',
-		color: 'white',
-		padding: '20px',
-		textAlign: 'center',
+		backgroundColor: "#7a98af",
+		color: "white",
+		padding: "20px",
+		textAlign: "center",
 	},
 };
 
