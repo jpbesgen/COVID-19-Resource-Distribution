@@ -1,18 +1,18 @@
 .faq-box {
-    margin: 0px 9.25% 54.72px 9.25%;
-    color: #000000;
+  margin: 0px 9.25% 54.72px 9.25%;
+  color: #000000;
 }
-    .first {
-        margin-top: 28px;
-    }
-    .question {
-        font-size: 1.7rem;
-    }
-    .answer {
-        font-size: 1.25rem;
-        font-weight: 300;
-    }
-        .answer-start {
-            font-size: 1.5rem;
-            font-weight: 400;
-        }
+.first {
+  margin-top: 28px;
+}
+.question {
+  font-size: 1.7rem;
+}
+.answer {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+.answer-start {
+  font-size: 1.5rem;
+  font-weight: 400;
+}

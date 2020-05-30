@@ -1,11 +1,11 @@
 .text {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: #3B628B;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #3b628b;
 }
 .btn {
-    border: 1px solid #3B628B;
-    width: 30%;
-    font-size: 24px;
-    color: #7A98AF;
+  border: 1px solid #3b628b;
+  width: 30%;
+  font-size: 24px;
+  color: #7a98af;
 }

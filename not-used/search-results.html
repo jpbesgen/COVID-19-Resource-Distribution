@@ -1,183 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style-phone.css" />
+    <link rel="stylesheet" href="./css/search-results.css" />
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon" />
+    <title>Resource-19</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!-- Bootstrap CSS -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="./css/style.css" />
-	<link rel="stylesheet" href="./css/style-phone.css">
-	<link rel="stylesheet" href="./css/search-results.css" />
-	<link rel='icon' href='./img/favicon.png' type='image/x-icon' />
-	<title>Resource-19</title>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
+      gtag("config", "UA-161941609-1");
+    </script>
+  </head>
 
-	gtag('config', 'UA-161941609-1');
-	</script>
-</head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md sticky-top navbar-light">
+      <div class="container-fluid text-center">
+        <!-- Logo -->
+        <a class="navbar-brand" href="./index.html"
+          ><img src="./img/logo.png"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <!-- Right side of Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Navigation Links -->
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./search-results.html">Items</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./sign-up.html">Sign Up</a>
+            </li>
+            <!-- Donation Button -->
+            <li class="nav-item">
+              <a href="./donate.html"
+                ><button type="button" class="btn btn-outline-dark btn-lg">
+                  Donate Now
+                </button></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-<body>
-	<!-- Navbar -->
-	<nav class="navbar navbar-expand-md sticky-top navbar-light">
-		<div class="container-fluid text-center">
-			<!-- Logo -->
-			<a class="navbar-brand" href="./index.html"><img src="./img/logo.png" /></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<!-- Right side of Navbar -->
-				<ul class="navbar-nav ml-auto">
-					<!-- Navigation Links -->
-					<li class="nav-item">
-						<a class="nav-link" href="./index.html">Home</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="./search-results.html">Items</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./login.html">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./sign-up.html">Sign Up</a>
-					</li>
-					<!-- Donation Button -->
-					<li class="nav-item">
-						<a href="./donate.html"><button type="button" class="btn btn-outline-dark btn-lg">
-								Donate Now
-							</button></a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+    <div class="container-fluid padding content-body">
+      <div class="row">
+        <div class="col-6 col-xs-12 text-center">
+          <h5 class="lead m-3">Cant find what you're looking for?</h5>
+        </div>
+        <!-- Production Proposal Button -->
+        <div class="col-6 col-xs-12 p-1">
+          <a href="./proposal.html">
+            <button type="button" class="btn btn-outline-dark btn-lg btn-block">
+              Make a Production Proposal
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Search Bar -->
+        <div class="col-7 col-xs-12 p-1">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </div>
+        <!-- Category Dropdown -->
+        <div class="col-3 col-xs-6 p-1">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-dark dropdown-toggle btn-block"
+              type="button"
+              id="dropdownCategories"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Categories
+            </button>
+            <div
+              class="dropdown-menu button-group filters-button-group"
+              aria-labelledby="dropdownCategories"
+            >
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter="*"
+              >
+                All
+              </button>
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter=".PPE"
+              >
+                PPE
+              </button>
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter=".medical-parts"
+              >
+                Medical Parts
+              </button>
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter=".hardware"
+              >
+                Hardware
+              </button>
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter=".lan-equipment"
+              >
+                Lab Equipment
+              </button>
+              <button
+                type="button"
+                class="dropdown-item mt-0 mb-0"
+                data-filter=".other"
+              >
+                Other
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Sort Dropdown -->
+        <div class="col-2 col-xs-6 p-1">
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-dark dropdown-toggle btn-block"
+              type="button"
+              id="dropdownSort"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Sort By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownSort">
+              <p class="dropdown-item mt-0 mb-0">Price</p>
+              <p class="dropdown-item mt-0 mb-0">Distance</p>
+              <p class="dropdown-item mt-0 mb-0">Quantity</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3 sidebar button-group filters-button-group">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Quick Find</li>
+            <li class="list-group-item">
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                data-filter="*"
+              >
+                All
+              </button>
+            </li>
+            <li class="list-group-item">
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                data-filter=".mask"
+              >
+                Masks
+              </button>
+            </li>
+            <li class="list-group-item">
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                data-filter=".ventilator"
+              >
+                Ventilators
+              </button>
+            </li>
+            <li class="list-group-item">
+              <button
+                type="button"
+                class="list-group-item list-group-item-action"
+                data-filter=".other"
+              >
+                Other
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="col-9" id="grid"></div>
+      </div>
+    </div>
 
-	<div class="container-fluid padding content-body">
-		<div class="row">
-			<div class="col-6 col-xs-12 text-center">
-				<h5 class="lead m-3">Cant find what you're looking for?</h5>
-			</div>
-			<!-- Production Proposal Button -->
-			<div class="col-6 col-xs-12 p-1">
-				<a href="./proposal.html">
-					<button type="button" class="btn btn-outline-dark btn-lg btn-block">
-						Make a Production Proposal
-					</button>
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<!-- Search Bar -->
-			<div class="col-7 col-xs-12 p-1">
-				<input class="form-control" type="text" placeholder="Search" aria-label="Search" />
-			</div>
-			<!-- Category Dropdown -->
-			<div class="col-3 col-xs-6 p-1">
-				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
-						id="dropdownCategories" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">
-						Categories
-					</button>
-					<div class="dropdown-menu button-group filters-button-group" aria-labelledby="dropdownCategories">
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter="*">All</button>
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".PPE">PPE</button>
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".medical-parts">Medical Parts</button>
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".hardware">Hardware</button>
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".lan-equipment">Lab Equipment</button>
-						<button type="button" class="dropdown-item mt-0 mb-0" data-filter=".other">Other</button>
-					</div>
-				</div>
-			</div>
-			<!-- Sort Dropdown -->
-			<div class="col-2 col-xs-6 p-1">
-				<div class="dropdown">
-					<button class="btn btn-outline-dark dropdown-toggle btn-block" type="button"
-						id="dropdownSort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Sort By
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownSort">
-						<p class="dropdown-item mt-0 mb-0">Price</p>
-						<p class="dropdown-item mt-0 mb-0">Distance</p>
-						<p class="dropdown-item mt-0 mb-0">Quantity</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-3 sidebar button-group filters-button-group">
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Quick Find</li>
-					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action" data-filter="*">
-							All
-						</button>
-					</li>
-					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action" data-filter=".mask">
-							Masks
-						</button>
-					</li>
-					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action" data-filter=".ventilator">
-							Ventilators
-						</button>
-					</li>
-					<li class="list-group-item">
-						<button type="button" class="list-group-item list-group-item-action" data-filter=".other">
-							Other
-						</button>
-					</li>
-				</ul>
-			</div>
-			<div class="col-9" id="grid">
+    <!-- Footer -->
+    <footer>
+      <div class="container-fluid padding">
+        <div class="row text-center">
+          <div class="col-12">
+            <!-- Header Text -->
+            <h3 class="display-8">Contact Us</h3>
+            <!-- Horizontal Rule -->
+            <hr class="dark" />
+          </div>
+          <div class="col-xs-12 col-6">
+            Phone Number:
+          </div>
+          <div class="col-xs-12 col-6">
+            Email:
+          </div>
+        </div>
+      </div>
+    </footer>
 
-			</div>
-		</div>
-	</div>
+    <!-- JavaScript -->
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Popper.js -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap js -->
+    <script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <!-- Isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
-	<!-- Footer -->
-	<footer>
-		<div class="container-fluid padding">
-			<div class="row text-center">
-				<div class="col-12">
-					<!-- Header Text -->
-					<h3 class="display-8">Contact Us</h3>
-					<!-- Horizontal Rule -->
-					<hr class="dark" />
-				</div>
-				<div class="col-xs-12 col-6">
-					Phone Number:
-				</div>
-				<div class="col-xs-12 col-6">
-					Email:
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<!-- JavaScript -->
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<!-- Popper.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<!-- Bootstrap js -->
-	<script src="../bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-	<!-- Isotope js -->
-	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-
-	<script src="../search-results.js"></script>
-</body>
-
+    <script src="../search-results.js"></script>
+  </body>
 </html>

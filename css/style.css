@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   min-height: 100%;
@@ -26,7 +27,7 @@ html, body {
 
 .btn-sm {
   font-size: 18px;
-  color: #7A98AF;
+  color: #7a98af;
 }
 
 .btn-block {
@@ -35,7 +36,7 @@ html, body {
 }
 
 .homepage-link {
-  border: 1px solid #3B628B;
+  border: 1px solid #3b628b;
 }
 
 /* Navbar */
@@ -44,7 +45,7 @@ html, body {
   background-color: #7a98af;
 }
 .navbar.white-bg {
-  color: #3B628B;
+  color: #3b628b;
   background-color: white;
 }
 .navbar #old-header .nav-link {
@@ -79,8 +80,7 @@ html, body {
 
 .nav-link {
   font-size: 1.2rem;
-  /*color: #3B628B;*/
-  color: white;
+  color: #3b628b;
 }
 
 .nav-link:hover {
@@ -88,7 +88,7 @@ html, body {
 }
 
 .active {
-  color: #3B628B !important;
+  color: #3b628b !important;
 }
 
 /* First section of homepage */
@@ -104,7 +104,8 @@ html, body {
   z-index: 0;
   position: relative;
 }
-.homepage-one .headerimg-left, .homepage-one .headerimg-right {
+.homepage-one .headerimg-left,
+.homepage-one .headerimg-right {
   position: absolute;
   z-index: -9;
   max-width: 160px;
@@ -118,7 +119,8 @@ html, body {
   top: -60px;
 }
 @media (max-width: 767.98px) {
-  .homepage-one .headerimg-left, .homepage-one .headerimg-right {
+  .homepage-one .headerimg-left,
+  .homepage-one .headerimg-right {
     display: inline-block;
     position: static;
     margin-top: 20px;
@@ -191,7 +193,7 @@ html, body {
 .choice {
   font-size: 24px;
   line-height: 24px;
-  color: #3B628B;
+  color: #3b628b;
 }
 
 .profession-button {
@@ -209,7 +211,7 @@ html, body {
 .nav-container .navbar-nav {
   float: none;
   vertical-align: top;
-  border-bottom: 1px solid #3B628B;
+  border-bottom: 1px solid #3b628b;
 }
 .nav-container .navbar-collapse {
   text-align: center;
@@ -225,7 +227,7 @@ html, body {
 }
 @media (max-width: 767.98px) {
   .nav-container {
-    border-bottom: 1px solid #3B628B;
+    border-bottom: 1px solid #3b628b;
   }
 }
 .background-images .headerimg-left {

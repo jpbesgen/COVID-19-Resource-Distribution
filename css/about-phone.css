@@ -1,14 +1,11 @@
-@media only screen 
-and (min-device-width: 320px) 
-and (max-device-width: 823px) 
-and (-webkit-min-device-pixel-ratio: 2) { 
-    h1 {
-        font-size: 3rem;
-    }
-        .subtitle {
-            margin-right: 6.4%;
-        }
-        .text {
-            font-size: 1rem;
-        }
+@media only screen and (min-device-width: 320px) and (max-device-width: 823px) and (-webkit-min-device-pixel-ratio: 2) {
+  h1 {
+    font-size: 3rem;
+  }
+  .subtitle {
+    margin-right: 6.4%;
+  }
+  .text {
+    font-size: 1rem;
+  }
 }

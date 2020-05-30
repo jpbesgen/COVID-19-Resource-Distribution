@@ -1,72 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="../css/style.css" />
-	<link rel="stylesheet" href="../css/style-phone.css">
-	<link rel="stylesheet" href="../css/about.css" />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style-phone.css" />
+    <link rel="stylesheet" href="../css/about.css" />
     <link rel="stylesheet" href="../css/about-phone.css" />
     <link rel="stylesheet" href="../css/best-practices.css" />
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap" rel="stylesheet">
-	<link rel='icon' href='../img/favicon.png' type='image/x-icon' />
-	<title>Resource-19</title>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-161941609-1');
-	</script>
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			crossorigin="anonymous"></script>
-	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>	
-	<script src="../../js/firebase_init.js"></script>
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon" />
+    <title>Resource-19</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-161941609-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-161941609-1");
+    </script>
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-storage.js"></script>
+    <script src="../../js/firebase_init.js"></script>
+  </head>
 
-<body> 
-	<!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-expand-md navbar-light navbar-custom"></nav>
+  <body>
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="navbar navbar-expand-md navbar-light navbar-custom"
+    ></nav>
 
-	<section class="body-content">
-		<h1>Best Practices</h1>
-        <p class="text">- Before you begin making any of the listed designs we highly recommend that you reach out to your local hospital before beginning to manufacture these parts. Many locations may be unwilling or unfamiliar with made parts and this could prevent you from being able to effectively donate them. We recommend using this <a href="https://getusppe.org/makers-create/sample_scripts/">helpful script</a> created by <a href="http://getusppe.org">getusppe.org</a>. Please make sure you are respectful of the time of those at your local hospital as every second counts for those fighting this pandemic.</p>      
-		<p class="text">- The most important point to be made about this process is that you SHOULD NOT attempt to manufacture PPE if you are feeling sick in any way. A runny nose, a tickle in the throat, or a light cough are all be disqualifiers for doing this work. Please don't put the people protecting you from this disease at greater risk.</p>
-		<p class="text">- Please separate your work space from any other potential contaminates including other people, food surfaces, bathrooms, pets, or any other part of your home/work that could in some way cause contamination.</p>
-		<p class="text">- In terms of sanitization there is no conclusion about how long the virus can survive on surfaces. There is a general consensus that it may survive on industrial surfaces up to 3 days but there are recorded cases of the virus surviving on surfaces for up to 17 days. That being said please sanitize any all equipment you use before and after each use with one of the following products: Diluted Bleach, 70% Alcohol Solution, Star San, or Odo Ban. DO NOT MANUFACTURE WITHOUT SANITIZATION SUPPLIES.</p>
-            <p class="text" style="text-indent: 2rem">- 3D Printing:</p>
-                <p class="text" style="text-indent: 4rem">- If your machine is clean the plastic should be heated enough to be considered clean once done.</p>
-                <p class="text" style="text-indent: 4rem">- After finishing the parts please deposit them in a clean plastic bag using tongs or gloves.</p>
-                <p class="text" style="text-indent: 4rem">- Do not attempt to sanitize yourself as home sanitizers are often ineffective at achieving sterilization. Hospitals will sanitize these parts using their own autoclaves.</p>
-            <p class="text" style="text-indent: 2rem">- For Sewing:</p>
-                <p class="text" style="text-indent: 4rem">- Store any masks hanging in a paper bag (one per bag) in a designated area labeled</p>
-		<p class="text">- Always act if you have been infected with COVID-19. Do not handle PPE that will one day be given to medical professionals without gloves and a mask. Do not put others at risk due to a lack of precaution.</p>
-		<p class="text">- Please make sure to only manufacture designs marked approved on our platform. Other designs marked not approved are currently in the process of being certified by medical professionals and the manufacturing community.</p>
-		<p class="text">- In utilizing the designs provided on <a href="http://www.resource19.org">www.resource19.org</a> you are voluntarily electing to make the objects described. As such, by participating in this effort, you are releasing, waiving, and discharging releases from any and all liability, claims demands, actions, and causes of action whatsoever arising out of or related to any loss, damage, or injury, including death, that may be sustained by any individual or organization, while participating in these activities.</p>
-		<p class="text">- Thank you for all your help. Let's get started making!</p>
+    <section class="body-content">
+      <h1>Best Practices</h1>
+      <p class="text">
+        - Before you begin making any of the listed designs we highly recommend
+        that you reach out to your local hospital before beginning to
+        manufacture these parts. Many locations may be unwilling or unfamiliar
+        with made parts and this could prevent you from being able to
+        effectively donate them. We recommend using this
+        <a href="https://getusppe.org/makers-create/sample_scripts/"
+          >helpful script</a
+        >
+        created by <a href="http://getusppe.org">getusppe.org</a>. Please make
+        sure you are respectful of the time of those at your local hospital as
+        every second counts for those fighting this pandemic.
+      </p>
+      <p class="text">
+        - The most important point to be made about this process is that you
+        SHOULD NOT attempt to manufacture PPE if you are feeling sick in any
+        way. A runny nose, a tickle in the throat, or a light cough are all be
+        disqualifiers for doing this work. Please don't put the people
+        protecting you from this disease at greater risk.
+      </p>
+      <p class="text">
+        - Please separate your work space from any other potential contaminates
+        including other people, food surfaces, bathrooms, pets, or any other
+        part of your home/work that could in some way cause contamination.
+      </p>
+      <p class="text">
+        - In terms of sanitization there is no conclusion about how long the
+        virus can survive on surfaces. There is a general consensus that it may
+        survive on industrial surfaces up to 3 days but there are recorded cases
+        of the virus surviving on surfaces for up to 17 days. That being said
+        please sanitize any all equipment you use before and after each use with
+        one of the following products: Diluted Bleach, 70% Alcohol Solution,
+        Star San, or Odo Ban. DO NOT MANUFACTURE WITHOUT SANITIZATION SUPPLIES.
+      </p>
+      <p class="text" style="text-indent: 2rem;">- 3D Printing:</p>
+      <p class="text" style="text-indent: 4rem;">
+        - If your machine is clean the plastic should be heated enough to be
+        considered clean once done.
+      </p>
+      <p class="text" style="text-indent: 4rem;">
+        - After finishing the parts please deposit them in a clean plastic bag
+        using tongs or gloves.
+      </p>
+      <p class="text" style="text-indent: 4rem;">
+        - Do not attempt to sanitize yourself as home sanitizers are often
+        ineffective at achieving sterilization. Hospitals will sanitize these
+        parts using their own autoclaves.
+      </p>
+      <p class="text" style="text-indent: 2rem;">- For Sewing:</p>
+      <p class="text" style="text-indent: 4rem;">
+        - Store any masks hanging in a paper bag (one per bag) in a designated
+        area labeled
+      </p>
+      <p class="text">
+        - Always act if you have been infected with COVID-19. Do not handle PPE
+        that will one day be given to medical professionals without gloves and a
+        mask. Do not put others at risk due to a lack of precaution.
+      </p>
+      <p class="text">
+        - Please make sure to only manufacture designs marked approved on our
+        platform. Other designs marked not approved are currently in the process
+        of being certified by medical professionals and the manufacturing
+        community.
+      </p>
+      <p class="text">
+        - In utilizing the designs provided on
+        <a href="http://www.resource19.org">www.resource19.org</a> you are
+        voluntarily electing to make the objects described. As such, by
+        participating in this effort, you are releasing, waiving, and
+        discharging releases from any and all liability, claims demands,
+        actions, and causes of action whatsoever arising out of or related to
+        any loss, damage, or injury, including death, that may be sustained by
+        any individual or organization, while participating in these activities.
+      </p>
+      <p class="text">
+        - Thank you for all your help. Let's get started making!
+      </p>
     </section>
-	<section class="body-content text-center">
-		<a href="./makerspace.html"><button class="btn design-button">Explore Available Designs</button></a>
-	</section>
-	<!-- JavaScript -->
-	<script>
-		// load html components
-		$("#navbar").load("../components/navbar.html");
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
-
+    <section class="body-content text-center">
+      <a href="./makerspace.html"
+        ><button class="btn design-button">Explore Available Designs</button></a
+      >
+    </section>
+    <!-- JavaScript -->
+    <script>
+      // load html components
+      $("#navbar").load("../components/navbar.html");
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -12,3 +12,4 @@ firebase-debug.log
 id_rsa*
 .firebase/*
 .firebase
+node_modules

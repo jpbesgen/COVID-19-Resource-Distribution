@@ -1,22 +1,14 @@
 class LoadingComponent extends Component {
-    constructor(id, props) {
-        super(id);
-        this.props = props;
+  constructor(id, props) {
+    super(id);
+    this.props = props;
+  }
 
+  update() {}
 
-    }
-
-    update() {
-
-    }
-
-    
-
-    render() {
-
-        let content = 
-        `
+  render() {
+    let content = `
         `;
-        return content;
-    }
+    return content;
+  }
 }
