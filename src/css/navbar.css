@@ -1,5 +1,8 @@
 .nav-link {
-  align-self: center;
+	align-self: center;
 }
 
+.landing-nav-item:hover {
+	text-decoration: underline;
+}
 /*# sourceMappingURL=navbar.css.map */

@@ -11,8 +11,9 @@
 	font-size: 2rem;
 	margin-left: 20px;
 	margin-right: 20px;
-	line-height: 75px;
+	line-height: 1.1;
 	display: inline;
+	margin-bottom: 0;
 }
 
 #carousel-large-block {
@@ -39,7 +40,6 @@
 	float: right;
 	background-color: #3b628b;
 	border-color: #3b628b;
-	margin-top: 10px;
 	height: 50px;
 	width: 100px;
 
@@ -297,4 +297,21 @@
 	min-height: 6rem;
 	height: auto;
 	font-size: 14px;
+}
+
+@media only screen and (max-width: 500px) {
+	#makerspace-carousel-name {
+		font-size: 1.5rem;
+		margin-left: 0;
+	}
+	#carousel-large-block {
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-bottom: 20px;
+	}
+	#donate-button {
+		font-size: 1rem;
+		height: 40px;
+		width: 80px;
+	}
 }

@@ -11,6 +11,7 @@ p {
 .modal-middle {
 	padding: 0;
 	border-radius: 0;
+	overflow-x: scroll;
 }
 .modal-bottom {
 	border-top: 2px solid #7a98af;
@@ -37,6 +38,7 @@ p {
 	max-width: 50vw;
 	width: auto;
 	object-fit: contain;
+	margin-top: 1rem;
 }
 
 /* CSS for buttons right under the image for description and comments */

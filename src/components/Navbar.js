@@ -65,16 +65,36 @@ class SiteNavbar extends React.Component {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="ml-auto">
 						<NavLink href="/" style={style.NavbarLink}>
-							<p style={style.NavItem}>Home</p>
+							<p
+								style={style.NavItem}
+								className="landing-nav-item"
+							>
+								Home
+							</p>
 						</NavLink>
 						<NavLink href="/hospitals" style={style.NavbarLink}>
-							<p style={style.NavItem}>Hospitals in Need</p>
+							<p
+								style={style.NavItem}
+								className="landing-nav-item"
+							>
+								Hospitals in Need
+							</p>
 						</NavLink>
 						<NavLink href="/makerspace" style={style.NavbarLink}>
-							<p style={style.NavItem}>Browse Designs</p>
+							<p
+								style={style.NavItem}
+								className="landing-nav-item"
+							>
+								Browse Designs
+							</p>
 						</NavLink>
 						<NavLink href="/about" style={style.NavbarLink}>
-							<p style={style.NavItem}>About</p>
+							<p
+								style={style.NavItem}
+								className="landing-nav-item"
+							>
+								About
+							</p>
 						</NavLink>
 
 						{this.state.loggedIn ? (
@@ -98,7 +118,12 @@ class SiteNavbar extends React.Component {
 										maxWidth: "50px",
 									}}
 								/>
-								Log Out
+								<p
+									style={style.NavItem}
+									className="landing-nav-item"
+								>
+									Log Out
+								</p>
 							</NavLink>
 						) : (
 							<NavLink
@@ -106,7 +131,12 @@ class SiteNavbar extends React.Component {
 								style={style.NavbarLink}
 								id="loginLink"
 							>
-								<p style={style.NavItem}>Login / Signup</p>
+								<p
+									style={style.NavItem}
+									className="landing-nav-item"
+								>
+									Login / Signup
+								</p>
 							</NavLink>
 						)}
 					</Nav>

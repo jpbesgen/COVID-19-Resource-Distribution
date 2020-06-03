@@ -55,10 +55,20 @@ class LandingNavbar extends React.Component {
 								style={style.NavbarLink}
 								className="mr-3"
 							>
-								<p style={style.NavItem}>Home</p>
+								<p
+									style={style.NavItem}
+									className="landing-nav-item"
+								>
+									Home
+								</p>
 							</Nav.Link>
 							<Nav.Link href="/about" style={style.NavbarLink}>
-								<p style={style.NavItem}>About</p>
+								<p
+									style={style.NavItem}
+									className="landing-nav-item"
+								>
+									About
+								</p>
 							</Nav.Link>
 
 							{this.state.loggedIn ? (
@@ -82,7 +92,12 @@ class LandingNavbar extends React.Component {
 											maxWidth: "50px",
 										}}
 									/>
-									<p style={style.NavItem}>Log Out</p>
+									<p
+										style={style.NavItem}
+										className="landing-nav-item"
+									>
+										Log Out
+									</p>
 								</Nav.Link>
 							) : (
 								<Nav.Link
@@ -91,7 +106,12 @@ class LandingNavbar extends React.Component {
 									className="ml-3"
 									id="loginLink"
 								>
-									<p style={style.NavItem}>Login / Signup</p>
+									<p
+										style={style.NavItem}
+										className="landing-nav-item"
+									>
+										Login / Signup
+									</p>
 								</Nav.Link>
 							)}
 						</Nav>

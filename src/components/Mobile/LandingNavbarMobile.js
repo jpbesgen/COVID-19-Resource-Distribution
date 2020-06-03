@@ -54,10 +54,15 @@ class LandindNavbarMobile extends React.Component {
 					background: "#F4F7FA",
 				}}
 			>
+				<img
+					src={LogoWithSubtitle}
+					alt="Resource-19 Logo"
+					style={style.HomepageLogo}
+				/>
 				<Navbar.Toggle
 					aria-controls="basic-navbar-nav"
 					className="ml-auto"
-					style={{ border: "none" }}
+					style={{ border: "none", width: "15%", marginTop: ".7rem" }}
 				/>
 				<Navbar.Collapse id="basic-navbar-nav" className="text-center">
 					<Nav>
@@ -115,11 +120,7 @@ class LandindNavbarMobile extends React.Component {
 						)}
 					</Nav>
 				</Navbar.Collapse>
-				<img
-					src={LogoWithSubtitle}
-					alt="Resource-19 Logo"
-					style={style.HomepageLogo}
-				/>
+
 				<img
 					src={ConnectionLeft}
 					alt="connection left"
@@ -144,22 +145,26 @@ const style = {
 		fontSize: "18px",
 		color: "#828282",
 		margin: "0",
+		zIndex: "3",
 	},
 	HomepageLogo: {
-		width: "100%",
-		padding: ".8rem 2.5% 0 2.5%",
+		width: "85%",
+		padding: "1.5rem 2.5% 0 2.5%",
+		zIndex: "5",
 	},
 	HeaderImgLeft: {
 		position: "absolute",
 		maxWidth: "85px",
 		left: "10%",
-		top: "0",
+		top: "-.6rem",
+		zIndex: "1",
 	},
 	HeaderImgRight: {
 		position: "absolute",
 		maxWidth: "103px",
-		right: "17%",
-		top: "0",
+		right: "9%",
+		top: "-10px",
+		zIndex: "1",
 	},
 };
 

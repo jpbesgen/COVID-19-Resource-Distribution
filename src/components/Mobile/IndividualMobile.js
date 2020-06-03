@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Individual = (props) => {
 	return (
@@ -15,13 +15,14 @@ const Individual = (props) => {
 
 let style = {
 	Container: {
-		display: 'flex',
-		alignItems: 'center',
+		display: "flex",
+		alignItems: "center",
+		marginBottom: ".6rem",
 	},
 	Text: {
-		fontSize: '17px',
-		fontWeight: '300',
-		color: 'black',
+		fontSize: "17px",
+		fontWeight: "300",
+		color: "black",
 	},
 };
 
