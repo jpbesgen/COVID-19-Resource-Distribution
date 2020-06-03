@@ -56,19 +56,27 @@ const MakerspaceCarousel = (props) => {
 
 	return (
 		<div id="carousel-large-block">
-			<div>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+					marginBottom: "1.2rem",
+					marginTop: "2rem",
+				}}
+			>
 				<h1 id="makerspace-carousel-name">
 					{props.category ? formatTitle(props.category) : "Designs"}
 				</h1>
 				{/* <span id="makerspace-viewall-button"> */}
-				<Link to="/makerspace" id="viewall-button">
-					{/* <Button id = "viewall-button"
+				{/* <Link to="/makerspace" id="viewall-button">
+					<Button id = "viewall-button"
 						onMouseEnter={setviewAllButtonHover}
 						onMouseLeave={unsetviewAllButtonHover}
 					>
 						<b>View All ></b>
-					</Button> */}
-				</Link>
+					</Button>
+				</Link> */}
 				<Link to="/hospitals">
 					<Button
 						id="donate-button"
@@ -78,8 +86,6 @@ const MakerspaceCarousel = (props) => {
 						<b>Donate</b>
 					</Button>
 				</Link>
-
-				{/* </span> */}
 			</div>
 
 			<Carousel

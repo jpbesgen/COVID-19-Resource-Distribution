@@ -1,10 +1,6 @@
 import React, { PureComponent } from "react";
 
 import Modal from "react-bootstrap/Modal";
-// import Button from "react-bootstrap/Button";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
 
 import Tags from "./Tags";
 import CheckmarkImage from "../img/check-mark.png";
@@ -147,14 +143,14 @@ export default class DesignCardModal extends PureComponent {
 						</div>
 					</div>
 				</Modal.Body>
-				<Modal.Footer className="modal-bottom">
-					{/* <Button className="modal-bottom-button">
+				{/* <Modal.Footer className="modal-bottom">
+					<Button className="modal-bottom-button">
 						<p>Get This Design</p>
 					</Button>
 					<Button className="modal-bottom-button">
 						<p>Donate This Design</p>
-					</Button> */}
-				</Modal.Footer>
+					</Button>
+				</Modal.Footer> */}
 			</Modal>
 		);
 	}

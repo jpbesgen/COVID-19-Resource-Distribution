@@ -1,12 +1,17 @@
 import React from "react";
 import Navbar from "./Navbar";
+import NavbarMobile from "./Mobile/NavbarMobile";
 
 import Container from "react-bootstrap/Container";
 
 const Hospitals = () => {
+	let NavInUse = Navbar;
+	if (window.matchMedia("(max-width: 767px)").matches) {
+		NavInUse = NavbarMobile;
+	}
 	return (
 		<div>
-			<Navbar />
+			<NavInUse />
 			<Container fluid style={{ padding: 0 }}>
 				<iframe
 					title="Hospital data"

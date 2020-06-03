@@ -6,11 +6,13 @@ import Button from "react-bootstrap/Button";
 
 const BestPractices = () => {
 	function setButtonHover(e) {
-		e.target.style.color = "black";
+		e.target.style.color = "white";
+		e.target.style.background = "#7A98AF";
 	}
 
 	function unsetButtonHover(e) {
-		e.target.style.color = "#3B628B";
+		e.target.style.color = "#7A98AF";
+		e.target.style.background = "transparent";
 	}
 
 	return (
@@ -111,7 +113,7 @@ let style = {
 		margin: "0 4.25% 1.5rem 4.25%",
 	},
 	BottomButton: {
-		marginBottom: "3rem",
+		margin: "2.5rem 0 1.5rem 0",
 	},
 	Header1: {
 		fontWeight: "300",
@@ -127,13 +129,13 @@ let style = {
 		color: "#3B628B",
 	},
 	Button: {
-		border: "1px solid #3B628B",
+		border: "0px solid #3B628B",
 		padding: "0.5rem 3.5rem",
 		maxWidth: "90%",
 		background: "transparent",
 		fontSize: "24px",
 		color: "#7A98AF",
-		boxShadow: "0px 2px 3px #888888",
+		boxShadow: "0px 2px 6px #888888",
 	},
 };
 

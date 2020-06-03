@@ -150,6 +150,8 @@ let style = {
 		fontSize: "18px",
 		color: "#3B628B",
 		padding: "0 19%",
+		marginTop: ".5rem",
+		marginBottom: "1.5rem",
 	},
 	HospitalFooter: {
 		backgroundColor: "transparent",

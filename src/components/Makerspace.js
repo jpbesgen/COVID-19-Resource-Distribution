@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
+import NavbarMobile from "./Mobile/NavbarMobile";
+
 // import DesignCard from "./DesignCard.js";
 // import Carousel from 'react-bootstrap/Carousel'
 // import PlaceholderImage from "../img/doctormaskcolored.png";
@@ -57,6 +59,10 @@ export default class Makerspace extends Component {
 	}
 
 	render() {
+		let NavInUse = Navbar;
+		if (window.matchMedia("(max-width: 767px)").matches) {
+			NavInUse = NavbarMobile;
+		}
 		let { carouselTypes } = this.state,
 			carousels = Object.keys(carouselTypes)
 				.sort()
@@ -72,9 +78,11 @@ export default class Makerspace extends Component {
 				});
 		return (
 			<div>
-				<Navbar />
+				<NavInUse />
 				{/* <Filter filters={this.state.filters} filterUpdate={this.filterUpdate}/> */}
-				<div style={{ padding: "20px" }}>{carousels}</div>
+				<div style={{ padding: "10px", paddingTop: "0" }}>
+					{carousels}
+				</div>
 			</div>
 		);
 	}
