@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import LandingNavbarMobile from "./LandingNavbarMobile";
 // import LandingCarouselMobile from "./LandingCarouselMobile";
 // import Footer from "../Footer";
+import LandingGraphic from "../../img/Mobile/landingGraphic.png";
 
 import Button from "react-bootstrap/Button";
 
@@ -50,6 +51,13 @@ const LandingMobile = () => {
 						<b>Go to the Makerspace</b>
 					</Button>
 				</Link>
+				<Link to="/makerspace">
+					<img
+						src={LandingGraphic}
+						alt="landing graphic"
+						style={style.Graphic}
+					/>
+				</Link>
 			</section>
 		</div>
 	);
@@ -72,6 +80,10 @@ let style = {
 		background: "transparent",
 		color: "#7A98AF",
 		boxShadow: "0px 2px 6px #888888",
+	},
+	Graphic: {
+		width: "80%",
+		marginTop: "2rem",
 	},
 };
 
